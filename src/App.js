@@ -1,21 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import Dashboard from './templates/dashboard';
+import Login from './layouts/Login';
+import { Route, Router } from 'react-router';
+import { createBrowserHistory } from 'history';
 
 function App() {
+  const history = createBrowserHistory();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router history={history}>
+        <Route path = "/" component = {Login}></Route>
+      </Router>
+      {/* <Dashboard></Dashboard> */}
     </div>
   );
 }
