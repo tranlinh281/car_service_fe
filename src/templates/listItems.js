@@ -14,11 +14,11 @@ import { Build } from "@material-ui/icons";
 
 export const mainListItems = (
   <div>
-    <ListItem button>
+    <ListItem button component={Link} to="/dashboard">
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <Link to="/dashboard">Tổng Quan</Link>
+      <ListItemText primary="Tổng quan" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
@@ -26,29 +26,23 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Dịch Vụ" />
     </ListItem>
-    <ListItem button>
+    <ListItem button to="/userlist" component={Link}>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <Link to="/userlist">Khách Hàng</Link>
+      <ListItemText primary="Khách hàng" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to="/accessories">
       <ListItemIcon>
-        <Build/>
+        <Build />
       </ListItemIcon>
-      <Link to="/accessories">Linh Kiện</Link>
+      <ListItemText primary="Link kiện" />
     </ListItem>
-    <ListItem button>
+    <ListItem button to="/report" component={Link}>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <Link to="/report">Báo Cáo</Link>
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
+      <ListItemText primary="Báo cáo" />
     </ListItem>
   </div>
 );
