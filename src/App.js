@@ -92,15 +92,17 @@ const useStyles = makeStyles((theme) => ({
 const drawerWidth = 240;
 
 function App() {
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>
@@ -143,12 +145,11 @@ function App() {
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
+      
       <main className={classes.content}>
         <Switch>
           <Route path="/login" component={Login} exact />
           <Route path="/dashboard" component={Dashboard} />
-          {/* <Route path="/shop" component={Shop} /> */}
-          {/* <Route component={Error} /> */}
         </Switch>
       </main>
 
