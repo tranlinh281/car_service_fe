@@ -10,6 +10,7 @@ import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import { Link } from "react-router-dom";
+import { Build } from "@material-ui/icons";
 
 export const mainListItems = (
   <div>
@@ -30,6 +31,12 @@ export const mainListItems = (
         <PeopleIcon />
       </ListItemIcon>
       <Link to="/userlist">Khách Hàng</Link>
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon>
+        <Build/>
+      </ListItemIcon>
+      <Link to="/accessories">Linh Kiện</Link>
     </ListItem>
     <ListItem button>
       <ListItemIcon>

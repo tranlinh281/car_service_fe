@@ -20,6 +20,7 @@ import { Route, Switch } from "react-router-dom";
 import Login from "./layouts/Login";
 import UserList from "./layouts/UserList";
 import Report from "./layouts/Report";
+import Accessories from "./layouts/Accessories";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -165,6 +166,7 @@ function App() {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/userlist" component={UserList} />
           <Route path="/report" component={Report} />
+          <Route path="/accessories" component={Accessories} />
         </Switch>
       </main>
     </div>
