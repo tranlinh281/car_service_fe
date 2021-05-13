@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Table from "../Table";
 
 const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -12,9 +13,9 @@ export default function EmployeeList() {
 
   return (
     <>
-      <div className={classes.appBarSpacer} />
-      <p>Staff list</p>
-      
-    </>
+    <p>nhân viên</p>
+    <div className={classes.appBarSpacer} />
+      <Table className={classes.paper}/>
+  </>
   );
 }

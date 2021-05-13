@@ -121,7 +121,7 @@ export default function Table() {
               columns={colDefs}
               options={{
                 pageSizeOptions: [5, 10],
-                exportButton: true,
+                exportButton:true,   
               }}
             />
           </Grid>
