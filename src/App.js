@@ -23,6 +23,8 @@ import Accessories from "./layouts/Accessories";
 import CustomerList from "./layouts/CustomerList";
 import EmployeeList from "./components/Employees/EmployeeList";
 import CreateEmployee from "./components/Employees/CreateEmployee";
+import Services from "./layouts/Services";
+import ViewCalender from "./layouts/ViewCalender";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -170,6 +172,8 @@ function App() {
           <Route path="/customer" component={CustomerList} />
           <Route path="/report" component={Report} />
           <Route path="/createemployee" component={CreateEmployee} />
+          <Route path="/services" component={Services} />
+          <Route path="/calender" component={ViewCalender} />
           <Route path="/accessories" component={Accessories} />
         </Switch>
       </main>

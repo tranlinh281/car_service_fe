@@ -10,6 +10,7 @@ import BarChartIcon from "@material-ui/icons/BarChart";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import { Link } from "react-router-dom";
 import { Build, GroupAddOutlined } from "@material-ui/icons";
+import ViewCalender from "../layouts/ViewCalender";
 
 export const mainListItems = (
   <div>
@@ -19,7 +20,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Tổng quan" />
     </ListItem>
-    <ListItem button>
+    <ListItem button to="/services" component={Link}>
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
@@ -61,7 +62,7 @@ export const mainListItems = (
 export const secondaryListItems = (
   <div>
     <ListSubheader inset>Saved reports</ListSubheader>
-    <ListItem button>
+    <ListItem button to="/calender" component={Link}>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>

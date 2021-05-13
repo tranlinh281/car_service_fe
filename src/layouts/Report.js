@@ -13,6 +13,7 @@ export default function Report() {
   return (
     <>
       <div className={classes.appBarSpacer} />
+      <p>báo cáo</p>
         <Table className={classes.paper}/>
     </>
   );
