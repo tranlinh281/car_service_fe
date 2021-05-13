@@ -20,9 +20,9 @@ import { Route, Switch } from "react-router-dom";
 import Login from "./layouts/Login";
 import Report from "./layouts/Report";
 import Accessories from "./layouts/Accessories";
-import EmployeeList from "./layouts/EmployeeList";
 import CustomerList from "./layouts/CustomerList";
-import CreateEmployee from "./layouts/CreateEmployee";
+import EmployeeList from "./components/Employees/EmployeeList";
+import CreateEmployee from "./components/Employees/CreateEmployee";
 
 const useStyles = makeStyles((theme) => ({
   root: {
