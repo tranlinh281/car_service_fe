@@ -1,111 +1,131 @@
-import React from "react";
+import React, { useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Button, Paper, IconButton } from "@material-ui/core";
 import MaterialTable from "material-table";
+import XLSX from 'xlsx'
+import PublishIcon from '@material-ui/icons/Publish';
+import { ArrowUpwardOutlined, CloudUpload } from "@material-ui/icons";
+
+const EXTENTIOS = ['xlsx', 'xls', 'csv']
 
 export default function Table() {
-  const dataTest = [
-    { name: "ahihi", age: 12 },
-    { name: "huhuh", age: 16 },
-    { name: "leuleu", age: 15 },
-    { name: "loa", age: 14 },
-    { name: "babab", age: 13 },
-  ];
+  const [colDefs, setColDefs] = useState();
+  const [data, setData] = useState();
 
-  const columns = [
-    { title: "Tên", field: "name" },
-    { title: "Tuổi", field: "age" },
-  ];
-  const drawerWidth = 240;
+  const getExention = (file) => {
+    const parts = file.name.split('.');
+    const extention = parts[parts.length - 1];
+    return EXTENTIOS.includes(extention) //return boolean
+  }
+
+  const convertToJSON = (headers, data) => {
+    const rows = [];
+    data.forEach(row => {
+      let rowData = {}
+      row.forEach((element, index) => {
+        rowData[headers[index]] = element
+      });
+      rows.push(rowData)
+    });
+    return rows;
+  }
+
+  const importExcel = (e) => {
+    const file = e.target.files[0]
+
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      //parse data
+
+      const bstr = event.target.result
+      const workBook = XLSX.read(bstr, { type: "binary" })
+
+      //get first sheet
+      const workSheetName = workBook.SheetNames[0]
+      const workSheet = workBook.Sheets[workSheetName]
+
+      //convert to array
+      const fileData = XLSX.utils.sheet_to_json(workSheet, { header: 1 })
+
+      const headers = fileData[0]
+      const heads = headers.map(head => ({ title: head, field: head }))
+      setColDefs(heads)
+
+      //removing header
+      fileData.splice(0, 1)
+
+      setData(convertToJSON(headers, fileData))
+    }
+
+    if (file) {
+      if (getExention(file)) {
+        reader.readAsBinaryString(file)
+      }
+      else {
+        alert("Invalid file input")
+      }
+    } else {
+      setData([])
+      setColDefs([])
+    }
+  }
 
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",
     },
-    toolbar: {
-      paddingRight: 24, // keep right padding when drawer closed
-    },
-    toolbarIcon: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "flex-end",
-      padding: "0 8px",
-      ...theme.mixins.toolbar,
-    },
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create(["width", "margin"], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-    },
-    appBarShift: {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
-      transition: theme.transitions.create(["width", "margin"], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    },
-    menuButton: {
-      marginRight: 36,
-    },
-    menuButtonHidden: {
-      display: "none",
-    },
-    title: {
-      flexGrow: 1,
-    },
-    drawerPaper: {
-      position: "relative",
-      whiteSpace: "nowrap",
-      width: drawerWidth,
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    },
-
     container: {
       paddingTop: theme.spacing(4),
       paddingBottom: theme.spacing(4),
     },
+    button: {
+      margin: theme.spacing(1),
+      zIndex: 1,
+      float: "right",
+      marginLeft: 0
+    },
     paper: {
       padding: theme.spacing(2),
-      display: "flex",
-      overflow: "auto",
-      flexDirection: "column",
-    },
-    fixedHeight: {
-      height: 240,
-    },
+      display: 'flex',
+      overflow: 'auto',
+      flexDirection: 'column',
+    }
   }));
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-
       <div className={classes.appBarSpacer} />
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
+            <label>
+              <IconButton className={classes.button} size="medium" component="span">
+                <CloudUpload fontSize="inherit" />
+              </IconButton>
+              <input
+                type="file"
+                onChange={importExcel}
+                title="Upload"
+                style={{ display: 'none' }}
+                id="upload-file"
+                name="upload-file"
+              />
+            </label>
             <MaterialTable
               title="Employee List"
-              data={dataTest}
-              columns={columns}
+              data={data}
+              columns={colDefs}
               options={{
                 pageSizeOptions: [5, 10],
-                exportButton:true,
-                    
+                exportButton: true,
               }}
             />
           </Grid>
         </Grid>
-        <Box pt={4}></Box>
       </Container>
     </div>
   );
