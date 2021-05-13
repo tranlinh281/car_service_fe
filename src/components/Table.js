@@ -99,8 +99,7 @@ export default function Table() {
               columns={columns}
               options={{
                 pageSizeOptions: [5, 10],
-                exportButton:true,
-                    
+                exportButton:true,   
               }}
             />
           </Grid>
