@@ -20,7 +20,6 @@ export default function CustomerList() {
   return (
     <>
       <div className={classes.appBarSpacer} />
-      <p>Customer list</p>
         <Table className={classes.paper}/>
     </>
   );
