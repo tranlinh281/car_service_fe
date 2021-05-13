@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UserList() {
+export default function CustomerList() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
@@ -93,6 +93,7 @@ export default function UserList() {
   return (
     <>
       <div className={classes.appBarSpacer} />
+      <p>Customer list</p>
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>
           <Grid item xs={12}>

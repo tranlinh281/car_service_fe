@@ -7,10 +7,9 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
-import LayersIcon from "@material-ui/icons/Layers";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import { Link } from "react-router-dom";
-import { Build } from "@material-ui/icons";
+import { Build, GroupAddOutlined } from "@material-ui/icons";
 
 export const mainListItems = (
   <div>
@@ -26,7 +25,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Dịch Vụ" />
     </ListItem>
-    <ListItem button to="/userlist" component={Link}>
+    <ListItem button to="/customer" component={Link}>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
@@ -43,6 +42,18 @@ export const mainListItems = (
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Báo cáo" />
+    </ListItem>
+    <ListItem button to="/employee" component={Link}>
+      <ListItemIcon>
+        <GroupAddOutlined />
+      </ListItemIcon>
+      <ListItemText primary="Nhân Viên" />
+    </ListItem>
+    <ListItem button to="/createemployee" component={Link}>
+      <ListItemIcon>
+        <GroupAddOutlined />
+      </ListItemIcon>
+      <ListItemText primary="Tạo Nhân Viên" />
     </ListItem>
   </div>
 );

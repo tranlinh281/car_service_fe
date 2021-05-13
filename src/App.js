@@ -18,9 +18,11 @@ import Dashboard from "./layouts/Dashboard";
 import { mainListItems, secondaryListItems } from "./templates/listItems";
 import { Route, Switch } from "react-router-dom";
 import Login from "./layouts/Login";
-import UserList from "./layouts/UserList";
 import Report from "./layouts/Report";
 import Accessories from "./layouts/Accessories";
+import EmployeeList from "./layouts/EmployeeList";
+import CustomerList from "./layouts/CustomerList";
+import CreateEmployee from "./layouts/CreateEmployee";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -164,8 +166,10 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} exact />
           <Route path="/dashboard" component={Dashboard} />
-          <Route path="/userlist" component={UserList} />
+          <Route path="/employee" component={EmployeeList} />
+          <Route path="/customer" component={CustomerList} />
           <Route path="/report" component={Report} />
+          <Route path="/createemployee" component={CreateEmployee} />
           <Route path="/accessories" component={Accessories} />
         </Switch>
       </main>
