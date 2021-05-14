@@ -13,7 +13,7 @@ import {
 import {
   AlertCircle as AlertCircleIcon,
   BarChart as BarChartIcon,
-  Lock as LockIcon,
+  BarChart2,
   Settings as SettingsIcon,
   ShoppingBag as ShoppingBagIcon,
   User as UserIcon,
@@ -33,32 +33,32 @@ const items = [
   {
     href: '/app/dashboard',
     icon: BarChartIcon,
-    title: constants.DASHBOARD_TITLE,
+    title: constants.DASHBOARD_TITLE
   },
   {
     href: '/app/customers',
     icon: UsersIcon,
-    title: constants.CUS_TITLE,
+    title: constants.CUS_TITLE
   },
   {
     href: '/app/products',
     icon: ShoppingBagIcon,
-    title: 'Products'
+    title: constants.ACCESSORIES_TITLE
   },
   {
-    href: '/app/account',
+    href: '/app/employee',
     icon: UserIcon,
-    title: 'Account'
+    title: constants.EMPLOYEE_TITLE
   },
   {
     href: '/app/settings',
     icon: SettingsIcon,
-    title: 'Settings'
+    title: constants.SETTING_TITLE
   },
   {
-    href: '/login',
-    icon: LockIcon,
-    title: 'Login'
+    href: '/report',
+    icon: BarChart2,
+    title: constants.REPORT_TITLE
   },
   {
     href: '/register',
@@ -107,16 +107,10 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
           }}
           to="/app/account"
         />
-        <Typography
-          color="textPrimary"
-          variant="h5"
-        >
+        <Typography color="textPrimary" variant="h5">
           {user.name}
         </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
+        <Typography color="textSecondary" variant="body2">
           {user.jobTitle}
         </Typography>
       </Box>
@@ -180,7 +174,7 @@ DashboardSidebar.propTypes = {
 };
 
 DashboardSidebar.defaultProps = {
-  onMobileClose: () => { },
+  onMobileClose: () => {},
   openMobile: false
 };
 
