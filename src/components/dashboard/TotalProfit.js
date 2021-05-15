@@ -6,7 +6,8 @@ import {
   Typography
 } from '@material-ui/core';
 import { indigo } from '@material-ui/core/colors';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import { DriveEta } from '@material-ui/icons';
+import * as constant from '../../utils/Constants';
 
 const TotalProfit = (props) => (
   <Card {...props}>
@@ -22,13 +23,13 @@ const TotalProfit = (props) => (
             gutterBottom
             variant="h6"
           >
-            TOTAL PROFIT
+            {constant.DASHBOARD_TITLE}
           </Typography>
           <Typography
             color="textPrimary"
             variant="h3"
           >
-            $23,200
+            {constant.NUMBER}
           </Typography>
         </Grid>
         <Grid item>
@@ -39,7 +40,7 @@ const TotalProfit = (props) => (
               width: 56
             }}
           >
-            <AttachMoneyIcon />
+            <DriveEta />
           </Avatar>
         </Grid>
       </Grid>
