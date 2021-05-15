@@ -11,13 +11,13 @@ import {
   Typography
 } from '@material-ui/core';
 import {
-  AlertCircle as AlertCircleIcon,
+  // AlertCircle as AlertCircleIcon,
   BarChart as BarChartIcon,
   BarChart2,
-  Settings as SettingsIcon,
+  // Settings as SettingsIcon,
   ShoppingBag as ShoppingBagIcon,
   User as UserIcon,
-  UserPlus as UserPlusIcon,
+  // UserPlus as UserPlusIcon,
   Users as UsersIcon
 } from 'react-feather';
 import NavItem from './NavItem';
@@ -36,6 +36,11 @@ const items = [
     title: constants.DASHBOARD_TITLE
   },
   {
+    href: '/app/employee',
+    icon: UserIcon,
+    title: constants.EMPLOYEE_TITLE
+  },
+  {
     href: '/app/customers',
     icon: UsersIcon,
     title: constants.CUS_TITLE
@@ -45,31 +50,27 @@ const items = [
     icon: ShoppingBagIcon,
     title: constants.ACCESSORIES_TITLE
   },
+
+  // {
+  //   href: '/app/settings',
+  //   icon: SettingsIcon,
+  //   title: constants.SETTING_TITLE
+  // },
   {
-    href: '/app/employee',
-    icon: UserIcon,
-    title: constants.EMPLOYEE_TITLE
-  },
-  {
-    href: '/app/settings',
-    icon: SettingsIcon,
-    title: constants.SETTING_TITLE
-  },
-  {
-    href: '/report',
+    href: '/app/report',
     icon: BarChart2,
     title: constants.REPORT_TITLE
   },
-  {
-    href: '/register',
-    icon: UserPlusIcon,
-    title: 'Register'
-  },
-  {
-    href: '/404',
-    icon: AlertCircleIcon,
-    title: 'Error'
-  }
+  // {
+  //   href: '/register',
+  //   icon: UserPlusIcon,
+  //   title: 'Register'
+  // },
+  // {
+  //   href: '/404',
+  //   icon: AlertCircleIcon,
+  //   title: 'Error'
+  // }
 ];
 
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {

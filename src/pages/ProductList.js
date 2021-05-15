@@ -8,11 +8,12 @@ import {
 import ProductListToolbar from 'src/components/product/ProductListToolbar';
 import ProductCard from 'src/components/product//ProductCard';
 import products from 'src/__mocks__/products';
+import * as constant from '../utils/Constants';
 
 const ProductList = () => (
   <>
     <Helmet>
-      <title>Products | Material Kit</title>
+      <title>{constant.ACCESSORIES_TITLE}</title>
     </Helmet>
     <Box
       sx={{
