@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet';
 import { Box, Container } from '@material-ui/core';
-import CustomerListResults from 'src/components/customer/CustomerListResults';
-import CustomerListToolbar from 'src/components/customer/CustomerListToolbar';
 import customers from 'src/__mocks__/customers';
+import EmployeeListToolbar from 'src/components/employee/EmployeeListToolbar';
+import EmployeeListResult from 'src/components/employee/EmployeeListResults';
 import * as constant from '../utils/Constants';
 
 const EmployeeList = () => (
@@ -18,9 +18,9 @@ const EmployeeList = () => (
       }}
     >
       <Container maxWidth={false}>
-        <CustomerListToolbar />
+        <EmployeeListToolbar />
         <Box sx={{ pt: 3 }}>
-          <CustomerListResults customers={customers} />
+          <EmployeeListResult customers={customers} />
         </Box>
       </Container>
     </Box>

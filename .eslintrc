@@ -39,6 +39,6 @@
     "react/jsx-closing-tag-location": "off",
     "react/self-closing-comp": "off",
     "react/destructuring-assignment": "off",
-    "arrow-body-style": ["error", "always"]
+    "arrow-body-style": "off"
   }
 }
