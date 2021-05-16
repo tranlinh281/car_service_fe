@@ -7,10 +7,16 @@ import {
 } from '@material-ui/core';
 import { indigo } from '@material-ui/core/colors';
 import { DriveEta } from '@material-ui/icons';
-import * as constant from '../../utils/Constants';
+// import * as constant from '../../utils/Constants';
+import PropTypes from 'prop-types';
 
-const TotalProfit = (props) => (
-  <Card {...props}>
+const TotalProfit = ({
+  title,
+  number,
+  icon,
+  ...rest
+}) => (
+  <Card {...rest}>
     <CardContent>
       <Grid
         container
@@ -23,13 +29,13 @@ const TotalProfit = (props) => (
             gutterBottom
             variant="h6"
           >
-            {constant.DASHBOARD_TITLE}
+            {title}
           </Typography>
           <Typography
             color="textPrimary"
             variant="h3"
           >
-            {constant.NUMBER}
+            {number}
           </Typography>
         </Grid>
         <Grid item>
@@ -47,5 +53,11 @@ const TotalProfit = (props) => (
     </CardContent>
   </Card>
 );
+
+TotalProfit.propTypes = {
+  number: PropTypes.number,
+  icon: PropTypes.elementType,
+  title: PropTypes.string
+};
 
 export default TotalProfit;
