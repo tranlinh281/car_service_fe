@@ -36,6 +36,9 @@
     "indent": "off",
     "no-tabs": 0,
     "react/jsx-indent":"off",
-    "react/jsx-closing-tag-location": "off"
+    "react/jsx-closing-tag-location": "off",
+    "react/self-closing-comp": "off",
+    "react/destructuring-assignment": "off",
+    "arrow-body-style": ["error", "always"]
   }
 }
