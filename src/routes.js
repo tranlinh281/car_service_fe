@@ -13,6 +13,16 @@ import Report from 'src/pages/Report';
 
 const routes = [
   {
+    path: '/',
+    element: <MainLayout />,
+    children: [
+      { path: 'login', element: <Login /> },
+      { path: '404', element: <NotFound /> },
+      { path: '/', element: <Navigate to="/login" /> },
+      { path: '*', element: <Navigate to="/404" /> }
+    ]
+  },
+  {
     path: 'app',
     element: <DashboardLayout />,
     children: [
@@ -23,16 +33,6 @@ const routes = [
       { path: 'settings', element: <Settings /> },
       { path: 'employee', element: <EmployeeList /> },
       { path: 'report', element: <Report /> },
-      { path: '*', element: <Navigate to="/404" /> }
-    ]
-  },
-  {
-    path: '/',
-    element: <MainLayout />,
-    children: [
-      { path: 'login', element: <Login /> },
-      { path: '404', element: <NotFound /> },
-      { path: '/', element: <Navigate to="/app/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   }
