@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import * as valid from '../utils/ValidConstants';
 
-const Login = () => {
+export default function Login() {
   const navigate = useNavigate();
 
   return (
@@ -106,6 +106,4 @@ const Login = () => {
       </Box>
     </>
   );
-};
-
-export default Login;
+}
