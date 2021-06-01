@@ -1,6 +1,6 @@
 {
-  "name": "react-material-dashboard",
-  "author": "DeviasIO",
+  "name": "car_service",
+  "author": "lalqTeam",
   "licence": "MIT",
   "version": "1.0.0",
   "private": false,
@@ -55,7 +55,6 @@
     "redux-thunk": "^2.3.0",
     "uuid": "^8.3.0",
     "yup": "^0.29.3"
-    
   },
   "devDependencies": {
     "eslint-config-airbnb": "^18.2.1"
