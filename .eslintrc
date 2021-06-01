@@ -43,5 +43,6 @@
     "react/jsx-indent-props":"off",
     "no-unused-vars":"off",
     "space-before-function-paren": ["error", "never"],
+    "no-underscore-dangle":  "off"
   }
 }
