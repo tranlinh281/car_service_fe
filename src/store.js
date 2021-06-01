@@ -2,7 +2,13 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { userLoginReducer } from './reducers/userReducer';
 
-const initialState = {};
+const initialState = {
+    userLogin: {
+        userInfo: localStorage.getItem("userInfo")
+          ? JSON.parse(localStorage.getItem("userInfo"))
+          : null,
+      },
+};
 const reducer = combineReducers({
  userLogin: userLoginReducer
 });
