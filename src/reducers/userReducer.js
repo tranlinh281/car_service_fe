@@ -22,9 +22,10 @@ export const userLoginReducer = (state = {}, action) => {
    return state;
  }
 };
-export const listEmployeeReducer = (state = { loading: true }, action) => {
+export const listEmployeeReducer = (state = {}, action) => {
  switch (action.type) {
   case EMPLOYEE_LIST_REQUEST:
+    console.log("logra")
    return { loading: true };
   case EMPLOYEE_LIST_SUCCESS:
    return { loading: false, employees: action.payload };

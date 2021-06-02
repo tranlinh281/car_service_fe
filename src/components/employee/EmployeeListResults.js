@@ -30,7 +30,8 @@ export default function EmployeeListResult ()  {
  useEffect(() => {
   dispatch(listEmployee());
 }, [dispatch]);
-console.log("testing");
+console.log("tesst");
+console.log(employees );
  const handleSelectAll = (event) => {
   let newSelectedCustomerIds;
 
@@ -103,7 +104,7 @@ console.log("testing");
         <TableCell>Loại người dùng</TableCell>
        </TableRow>
       </TableHead>
-      <TableBody>
+      {/* <TableBody>
        {employees.map((customer) => (
         <TableRow
          hover
@@ -137,11 +138,12 @@ console.log("testing");
          </TableCell>
         </TableRow>
        ))}
-      </TableBody>
+      </TableBody> */}
+     
      </Table>
     </Box>
    </PerfectScrollbar>
-   <TablePagination
+   {/* <TablePagination
     component="div"
     count={customers.length}
     onPageChange={handlePageChange}
@@ -149,7 +151,7 @@ console.log("testing");
     page={page}
     rowsPerPage={limit}
     rowsPerPageOptions={[5, 10, 25]}
-   />
+   /> */}
   </Card>
  );
 };
