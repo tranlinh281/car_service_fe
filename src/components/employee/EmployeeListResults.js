@@ -1,94 +1,81 @@
 import { listEmployee } from 'src/actions/userAction';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
- Avatar,
- Box,
- Card,
- Checkbox,
- Table,
- TableBody,
- TableCell,
- TableHead,
- TablePagination,
- TableRow,
- Typography
+    Box,
+    Card,
+    Pagination,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment';
 
 export default function EmployeeListResult() {
- const employeeList = useSelector((state) => state.employeeList);
- const { loading, error, employees } = employeeList;
- const dispatch = useDispatch();
- useEffect(() => {
-  dispatch(listEmployee());
- }, [dispatch]);
+    const employeeList = useSelector((state) => state.employeeList);
+    const { loading, error, employees, currentPage, totalPages, totalEmp } = employeeList;
 
- console.log('tesst');
- console.log(employees);
+    const [page, setPage] = useState(currentPage);
+    const dispatch = useDispatch();
 
- return (
-  <Card>
-   <PerfectScrollbar>
-    <Box sx={{ minWidth: 1050 }}>
-     <Table>
-      <TableHead>
-       <TableRow>
-        <TableCell padding="checkbox">
-         {/* <Checkbox
-          checked={selectedCustomerIds.length === customers.length}
-          color="primary"
-          indeterminate={
-           selectedCustomerIds.length > 0 &&
-           selectedCustomerIds.length < customers.length
-          }
-          onChange={handleSelectAll}
-         /> */}
-        </TableCell>
-        <TableCell>Tài Khoản</TableCell>
-        <TableCell>Họ tên</TableCell>
-        <TableCell>Email</TableCell>
-        <TableCell>Số Điện Thoại</TableCell>
-        <TableCell>Loại người dùng</TableCell>
-       </TableRow>
-      </TableHead>
-      <TableBody>
-       {employees?.map((customer) => (
-        <TableRow hover key={customer.taiKhoan}>
-         <TableCell padding="checkbox"></TableCell>
-         <TableCell>
-          <Box
-           sx={{
-            alignItems: 'center',
-            display: 'flex'
-           }}
-          >
-           <Typography color="textPrimary" variant="body1">
-            {customer.taiKhoan}
-           </Typography>
-          </Box>
-         </TableCell>
-         <TableCell>{customer.hoTen}</TableCell>
-         <TableCell>{customer.email}</TableCell>
-         <TableCell>{customer.soDt}</TableCell>
-         <TableCell>{customer.maLoaiNguoiDung}</TableCell>
-        </TableRow>
-       ))}
-      </TableBody>
-     </Table>
-    </Box>
-   </PerfectScrollbar>
-   {/* <TablePagination
-    component="div"
-    count={customers.length}
-    onPageChange={handlePageChange}
-    onRowsPerPageChange={handleLimitChange}
-    page={page}
-    rowsPerPage={limit}
-    rowsPerPageOptions={[5, 10, 25]}
-   /> */}
-  </Card>
- );
+    useEffect(() => {
+        dispatch(listEmployee(page));
+    }, [dispatch, page]);
+
+    const handlePageChange = (event, value) => {
+        setPage(value);
+    };
+
+    return (
+        <Card>
+            <PerfectScrollbar>
+                <Box sx={{ minWidth: 1050 }}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell padding="checkbox">
+                                </TableCell>
+                                <TableCell>Tài Khoản</TableCell>
+                                <TableCell>Họ tên</TableCell>
+                                <TableCell>Email</TableCell>
+                                <TableCell>Số Điện Thoại</TableCell>
+                                <TableCell>Loại người dùng</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {employees?.map((customer) => (
+                                <TableRow hover key={customer.taiKhoan}>
+                                    <TableCell padding="checkbox"></TableCell>
+                                    <TableCell>
+                                        {customer.taiKhoan}
+                                    </TableCell>
+                                    <TableCell>{customer.hoTen}</TableCell>
+                                    <TableCell>{customer.email}</TableCell>
+                                    <TableCell>{customer.soDt}</TableCell>
+                                    <TableCell>{customer.maLoaiNguoiDung}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Box>
+            </PerfectScrollbar>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    pt: 3
+                }}
+            >
+                <Pagination
+                    color="primary"
+                    count={totalPages}
+                    size="medium"
+                    onChange={handlePageChange}
+                />
+            </Box>
+        </Card>
+    );
 }
