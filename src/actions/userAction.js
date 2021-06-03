@@ -36,9 +36,8 @@ export const listEmployee = () => async (dispatch) => {
  try {
   console.log('thu di');
   const { data } = await Axios.get(
-   'https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDung'
+   'https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP06'
   );
-  console.log(data);
   dispatch({ type: EMPLOYEE_LIST_SUCCESS, payload: data });
  } catch (error) {
   console.log('chiem em ne');

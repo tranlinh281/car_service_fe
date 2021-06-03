@@ -22,16 +22,16 @@ export const userLoginReducer = (state = {}, action) => {
    return state;
  }
 };
-export const listEmployeeReducer = (state = {}, action) => {
- switch (action.type) {
-  case EMPLOYEE_LIST_REQUEST:
-    console.log("logra")
-   return { loading: true };
-  case EMPLOYEE_LIST_SUCCESS:
-   return { loading: false, employees: action.payload };
-  case EMPLOYEE_LIST_FAIL:
-   return { loading: false, error: action.payload };
-  default:
-   return state;
- }
+
+export const listEmployeeReducer = (state = { employees: [] }, action) => {
+  switch (action.type) {
+    case EMPLOYEE_LIST_REQUEST:
+      return { loading: true };
+    case EMPLOYEE_LIST_SUCCESS:
+      return { loading: false, employees: action.payload };
+    case EMPLOYEE_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
 };
