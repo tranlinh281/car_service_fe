@@ -36,9 +36,11 @@ export const listEmployee = () => async (dispatch) => {
  try {
   console.log('thu di');
   const { data } = await Axios.get(
-   'https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP06'
+   'https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=GP01&soTrang=1&soPhanTuTrenTrang=20'
   );
-  dispatch({ type: EMPLOYEE_LIST_SUCCESS, payload: data });
+  const reviewData=data.items;
+  console.log(reviewData);
+  dispatch({ type: EMPLOYEE_LIST_SUCCESS, payload: reviewData });
  } catch (error) {
   console.log('chiem em ne');
   const message =

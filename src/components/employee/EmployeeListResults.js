@@ -56,7 +56,7 @@ export default function EmployeeListResult() {
       </TableHead>
       <TableBody>
        {employees?.map((customer) => (
-        <TableRow hover key={customer.maLoaiNguoiDung}>
+        <TableRow hover key={customer.taiKhoan}>
          <TableCell padding="checkbox"></TableCell>
          <TableCell>
           <Box
