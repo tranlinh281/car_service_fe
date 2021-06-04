@@ -15,8 +15,8 @@ import { login } from "../actions/userAction";
 import * as valid from '../utils/ValidConstants';
 
 export default function Login(props) {
- const [taiKhoan, setTaiKhoan] = useState('');
- const [matKhau, setMatKhau] = useState('');
+ const [username, setUsername] = useState('');
+ const [password, setPassword] = useState('');
  const navigate = useNavigate();
 
 
@@ -28,7 +28,7 @@ export default function Login(props) {
 
  const submitHandler = (e) => {
   e.preventDefault();
-  dispatch(login(taiKhoan, matKhau));
+  dispatch(login(username, password));
  };
  useEffect(() => {
   if (userInfo) {
@@ -52,15 +52,15 @@ export default function Login(props) {
     <Container maxWidth="sm">
      <Formik
       initialValues={{
-      taiKhoan: 'demo@devias.io',
-       matKhau: 'Password123'
+        username: 'demo@devias.io',
+       password: 'Password123'
       }}
       validationSchema={Yup.object().shape({
-        taiKhoan: Yup.string()
+        username: Yup.string()
         .email(valid.VALID_EMAIL)
         .max(255)
         .required(valid.REQUIRED_EMAIL),
-        matKhau: Yup.string().max(255).required(valid.REQUIRED_PASSWORD)
+        password: Yup.string().max(255).required(valid.REQUIRED_PASSWORD)
       })}
 
      >
@@ -80,15 +80,15 @@ export default function Login(props) {
          </Typography>
         </Box>
         <TextField
-         error={Boolean(touched.taiKhoan && errors.taiKhoan)}
+         error={Boolean(touched.username && errors.username)}
          fullWidth
-         helperText={touched.taiKhoan && errors.taiKhoan}
+         helperText={touched.username && errors.username}
          label="Địa chỉ email"
          margin="normal"
-         name="taiKhoan"
+         name="username"
          onBlur={handleBlur}
-         onChange={(e) => setTaiKhoan(e.target.value)}
-         value={values.setTaiKhoan}
+         onChange={(e) => setUsername(e.target.value)}
+         value={values.setUsername}
          variant="outlined"
         />
         <TextField
@@ -97,11 +97,11 @@ export default function Login(props) {
          helperText={touched.matKhau && errors.matKhau}
          label="Mật khẩu"
          margin="normal"
-         name="matKhau"
+         name="password"
          onBlur={handleBlur}
-         onChange={(e) => setMatKhau(e.target.value)}
+         onChange={(e) => setPassword(e.target.value)}
          type="password"
-         value={values.setMatKhau}
+         value={values.setPassword}
          variant="outlined"
         />
         <Box sx={{ py: 2 }}>

@@ -16,9 +16,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function EmployeeListResult() {
     const employeeList = useSelector((state) => state.employeeList);
-    const { loading, error, employees, currentPage, totalPages, totalEmp } = employeeList;
+    const { loading, error, employees, currentPage, totalPages, totalEmp,keySearch } = employeeList;
 
-    const [page, setPage] = useState(currentPage);
+    const [page, setPage] = useState(keySearch,currentPage);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -28,6 +28,8 @@ export default function EmployeeListResult() {
     const handlePageChange = (event, value) => {
         setPage(value);
     };
+    console.log(keySearch);
+    console.log(currentPage);
 
     return (
         <Card>
