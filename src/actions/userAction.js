@@ -34,20 +34,20 @@ export const logout = () => (dispatch) => {
 };
 
 export const listEmployee =
- (keySearch, pageNo = 0) =>
+ (keySearch, pageNo = 1) =>
  async (dispatch) => {
   dispatch({ type: EMPLOYEE_LIST_REQUEST });
+  localStorage.removeItem('keySearch');
   try {
-   const { data } = (keySearch = ''
+   const { data } = ((keySearch == undefined || keySearch == '')
     ? await Axios.get(
        `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/TimKiemNguoiDungPhanTrang?MaNhom=GP01&soTrang=${pageNo}&soPhanTuTrenTrang=10`,
-       console.log('gi the nay')
       )
     : await Axios.get(
        `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/TimKiemNguoiDungPhanTrang?MaNhom=GP01&tuKhoa=${keySearch}&soTrang=${pageNo}&soPhanTuTrenTrang=10`,
-       console.log('gi the doan di nay')
       ));
    dispatch({ type: EMPLOYEE_LIST_SUCCESS, payload: data });
+   localStorage.setItem('keySearch', keySearch);
   } catch (error) {
    const message =
     error.response && error.response.data.message

@@ -37,7 +37,7 @@ export const listEmployeeReducer = (
     totalPages: action.payload.totalPages,
     currentPage: action.payload.currentPage,
     totalEmp: action.payload.totalCount,
-
+    
    };
   case EMPLOYEE_LIST_FAIL:
    return { loading: false, error: action.payload };

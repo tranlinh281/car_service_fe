@@ -16,20 +16,22 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function EmployeeListResult() {
     const employeeList = useSelector((state) => state.employeeList);
-    const { loading, error, employees, currentPage, totalPages, totalEmp,keySearch } = employeeList;
+    const { loading, error, employees, currentPage, totalPages, totalEmp} = employeeList;
 
-    const [page, setPage] = useState(keySearch,currentPage);
+    const [page, setPage] = useState(currentPage);
+    const [keySearch, setKeySearch] = useState(localStorage.getItem('keySearch'));
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(listEmployee(page));
-    }, [dispatch, page]);
+        dispatch(listEmployee(keySearch, page));
+    }, [dispatch, page, keySearch]);
 
     const handlePageChange = (event, value) => {
         setPage(value);
+        setKeySearch(localStorage.getItem('keySearch'))
     };
     console.log(keySearch);
-    console.log(currentPage);
+    console.log(page);
 
     return (
         <Card>
