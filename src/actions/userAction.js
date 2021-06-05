@@ -48,6 +48,8 @@ export const listEmployee =
       ));
    dispatch({ type: EMPLOYEE_LIST_SUCCESS, payload: data });
    localStorage.setItem('keySearch', keySearch);
+   localStorage.setItem('pageNo',pageNo);
+   localStorage.removeItem('keySearch');
   } catch (error) {
    const message =
     error.response && error.response.data.message
