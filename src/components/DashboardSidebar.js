@@ -80,6 +80,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }
+    localStorage.removeItem('keySearch');
   }, [location.pathname]);
 
   const content = (

@@ -25,6 +25,7 @@ export default function EmployeeListResult() {
 
  useEffect(() => {
   dispatch(listEmployee(keySearch, page));
+  setPage(localStorage.removeItem('pageNo'))
  }, [dispatch, page, keySearch]);
 
  const handlePageChange = (event, value) => {
