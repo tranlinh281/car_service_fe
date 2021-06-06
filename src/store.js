@@ -1,6 +1,11 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import { userLoginReducer, listEmployeeReducer } from './reducers/userReducer';
+import {
+ userLoginReducer,
+ listEmployeeReducer,
+ createEmployeeReducer,
+ reloadReducer
+} from './reducers/userReducer';
 
 const initialState = {
  userLogin: {
@@ -11,7 +16,9 @@ const initialState = {
 };
 const reducer = combineReducers({
  userLogin: userLoginReducer,
- employeeList: listEmployeeReducer
+ employeeList: listEmployeeReducer,
+ createEmp: createEmployeeReducer,
+ triggerReload: reloadReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

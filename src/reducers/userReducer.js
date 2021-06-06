@@ -1,7 +1,11 @@
 import {
+ CREATE_EMPLOYEE_FAIL,
+ CREATE_EMPLOYEE_REQUEST,
+ CREATE_EMPLOYEE_SUCCESS,
  EMPLOYEE_LIST_FAIL,
  EMPLOYEE_LIST_REQUEST,
  EMPLOYEE_LIST_SUCCESS,
+ TRIGGER_RELOAD,
  USER_LOGIN_FAIL,
  USER_LOGIN_REQUEST,
  USER_LOGIN_SUCCESS,
@@ -36,11 +40,32 @@ export const listEmployeeReducer = (
     employees: action.payload.items,
     totalPages: action.payload.totalPages,
     currentPage: action.payload.currentPage,
-    totalEmp: action.payload.totalCount,
-    
+    totalEmp: action.payload.totalCount
    };
   case EMPLOYEE_LIST_FAIL:
    return { loading: false, error: action.payload };
+  default:
+   return state;
+ }
+};
+
+export const createEmployeeReducer = (state = {}, action) => {
+ switch (action.type) {
+  case CREATE_EMPLOYEE_REQUEST:
+   return { loading: true };
+  case CREATE_EMPLOYEE_SUCCESS:
+   return { loading: false, success: action.payload };
+  case CREATE_EMPLOYEE_FAIL:
+   return { loading: false, error: action.payload };
+  default:
+   return state;
+ }
+};
+
+export const reloadReducer = (state = {}, action) => {
+ switch (action.type) {
+  case TRIGGER_RELOAD:
+   return { ...state };
   default:
    return state;
  }

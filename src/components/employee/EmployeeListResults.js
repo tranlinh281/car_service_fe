@@ -1,7 +1,3 @@
-import { listEmployee } from 'src/actions/userAction';
-import { useEffect, useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
  Box,
  Card,
@@ -12,29 +8,45 @@ import {
  TableHead,
  TableRow
 } from '@material-ui/core';
+import { useEffect, useMemo, useState } from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
+import { listEmployee } from 'src/actions/userAction';
 
 export default function EmployeeListResult() {
- const employeeList = useSelector((state) => state.employeeList);
+ const triggerReload = useSelector((state) => state.triggerReload);
+
  const { loading, error, employees, currentPage, totalPages, totalEmp } =
-  employeeList;
+  useSelector((state) => state.employeeList);
 
  const [page, setPage] = useState(currentPage);
  const [keySearch, setKeySearch] = useState(localStorage.getItem('keySearch'));
  const dispatch = useDispatch();
 
  useEffect(() => {
+  if (!page) return;
   dispatch(listEmployee(keySearch, page));
-  setPage(localStorage.removeItem('pageNo'))
- }, [dispatch, page, keySearch]);
+  setPage(localStorage.removeItem('pageNo'));
+ }, [dispatch, page, keySearch, triggerReload]);
 
  const handlePageChange = (event, value) => {
   setPage(value);
-  console.log(value, 'value ne');
-  setKeySearch(localStorage.getItem('keySearch'));
+  //   setKeySearch(localStorage.getItem('keySearch'));
  };
- console.log(keySearch);
- console.log(page, 'result page');
+
+ const renderedPagination = useMemo(() => {
+  console.log('debug renderedPagination');
+  return (
+   <Pagination
+    defaultPage={1}
+    default
+    color="primary"
+    count={totalPages}
+    size="medium"
+    onChange={handlePageChange}
+   />
+  );
+ }, [totalPages, handlePageChange, triggerReload]);
 
  return (
   <Card>
@@ -73,12 +85,7 @@ export default function EmployeeListResult() {
      pt: 3
     }}
    >
-    <Pagination
-     color="primary"
-     count={totalPages}
-     size="medium"
-     onChange={handlePageChange}
-    />
+    {renderedPagination}
    </Box>
   </Card>
  );

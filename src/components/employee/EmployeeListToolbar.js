@@ -1,17 +1,16 @@
 import {
  Box,
- Button,
  Card,
  CardContent,
- TextField,
  InputAdornment,
- SvgIcon
+ SvgIcon,
+ TextField
 } from '@material-ui/core';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Search as SearchIcon } from 'react-feather';
 import { useDispatch, useSelector } from 'react-redux';
-import { listEmployee } from 'src/actions/userAction';
-
+import { listEmployee, triggerReload } from 'src/actions/userAction';
+import CreateEmployee from './CreateEmployee';
 export default function EmployeeListToolbar(props) {
  const employeeList = useSelector((state) => state.employeeList);
  const { loading, error, currentPage } = employeeList;
@@ -19,27 +18,21 @@ export default function EmployeeListToolbar(props) {
  const [page, setPage] = useState(currentPage);
  const dispatch = useDispatch();
 
- console.log(keySearch, 'keySearch');
-
  useEffect(() => {
   dispatch(listEmployee(keySearch, page));
- }, [dispatch, keySearch,page]);
- console.log(page,"toolbar");
+ }, [dispatch, keySearch, page]);
+
+ const handleSearch = useCallback(
+  (e) => {
+   setKeySearch(e.target.value);
+   dispatch(triggerReload({}));
+  },
+  [setKeySearch]
+ );
 
  return (
   <Box {...props}>
-   <Box
-    sx={{
-     display: 'flex',
-     justifyContent: 'flex-end'
-    }}
-   >
-    <Button>Import</Button>
-    <Button sx={{ mx: 1 }}>Export</Button>
-    <Button color="primary" variant="contained">
-     Add employee
-    </Button>
-   </Box>
+   <CreateEmployee />
    <Box sx={{ mt: 3 }}>
     <Card>
      <CardContent>
@@ -56,10 +49,7 @@ export default function EmployeeListToolbar(props) {
          )
         }}
         name="keySearch"
-        onChange={(e) => {
-         setKeySearch(e.target.value);
-         setPage(1)
-        }}
+        onChange={handleSearch}
         placeholder="Search employee"
         variant="outlined"
        />
