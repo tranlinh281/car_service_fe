@@ -1,22 +1,20 @@
 import {
  Box,
- Button,
  Card,
  CardContent,
  TextField,
  InputAdornment,
  SvgIcon
 } from '@material-ui/core';
-import { useEffect, useState } from 'react';
 import { Search as SearchIcon } from 'react-feather';
-import { useDispatch, useSelector } from 'react-redux';
-import { listEmployee } from 'src/actions/userAction';
 import CreateEmployee from './CreateEmployee';
+import CreateEmployeeDialog from './CreateEmployeeDialog';
 
 export default function EmployeeListToolbar({ setPage, setKeySearch }) {
  return (
   <Box>
-   <CreateEmployee />
+   <CreateEmployeeDialog/>
+   {/* <CreateEmployee/> */}
    <Box sx={{ mt: 3 }}>
     <Card>
      <CardContent>

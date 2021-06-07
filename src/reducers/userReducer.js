@@ -2,6 +2,9 @@ import {
  CREATE_EMPLOYEE_FAIL,
  CREATE_EMPLOYEE_REQUEST,
  CREATE_EMPLOYEE_SUCCESS,
+ DELETE_EMPLOYEE_FAIL,
+ DELETE_EMPLOYEE_REQUEST,
+ DELETE_EMPLOYEE_SUCCESS,
  EMPLOYEE_LIST_FAIL,
  EMPLOYEE_LIST_REQUEST,
  EMPLOYEE_LIST_SUCCESS,
@@ -61,6 +64,19 @@ export const createEmployeeReducer = (state = {}, action) => {
    return state;
  }
 };
+
+export const deleteEmployeeReducer = (state = {}, action) => {
+  switch (action.type) {
+   case DELETE_EMPLOYEE_REQUEST:
+    return { loading: true };
+   case DELETE_EMPLOYEE_SUCCESS:
+    return { loading: false, success: action.payload };
+   case DELETE_EMPLOYEE_FAIL:
+    return { loading: false, error: action.payload };
+   default:
+    return state;
+  }
+ };
 
 export const reloadReducer = (state = {}, action) => {
  switch (action.type) {
