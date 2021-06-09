@@ -72,7 +72,7 @@ export default function CreateEmployeeDialog() {
                     Thêm nhân viên
       </Button>
             </Box>
-            <Dialog onBackdropClick="false" onClose={handleClose} aria-describedby="scroll-dialog-description" open={open} fullWidth={true} maxWidth={'md'}>
+            <Dialog onClose={handleClose} aria-describedby="scroll-dialog-description" open={open} fullWidth={true} maxWidth={'md'}>
                 <DialogTitle id="customized-dialog-title">
                     Thêm nhân viên
         </DialogTitle>

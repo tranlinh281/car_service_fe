@@ -4,7 +4,9 @@ import {
  userLoginReducer,
  listEmployeeReducer,
  createEmployeeReducer,
- reloadReducer
+ reloadReducer,
+ deleteEmployeeReducer,
+ updateEmployeeReducer
 } from './reducers/userReducer';
 
 const initialState = {
@@ -18,7 +20,9 @@ const reducer = combineReducers({
  userLogin: userLoginReducer,
  employeeList: listEmployeeReducer,
  createEmp: createEmployeeReducer,
- triggerReload: reloadReducer
+ triggerReload: reloadReducer,
+ employeeDelete: deleteEmployeeReducer,
+ editEmployee: updateEmployeeReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
