@@ -7,7 +7,6 @@ import {
  SvgIcon
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
-import CreateEmployee from './CreateEmployee';
 import CreateEmployeeDialog from './CreateEmployeeDialog';
 
 export default function EmployeeListToolbar({ setPage, setKeySearch }) {

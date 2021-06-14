@@ -23,10 +23,13 @@ import {
 import NavItem from './NavItem';
 import * as constants from '../utils/Constants';
 
+const userInfo = [];
+userInfo.push()
+console.log(localStorage.getItem('userInfo'))
 const user = {
   avatar: '/static/images/avatars/avatar_6.png',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith'
+  jobTitle: userInfo.role,
+  // name: userInfo.profile.Fullname
 };
 
 const items = [
