@@ -8,23 +8,7 @@ import { listManufacturer } from 'src/actions/manufacturerAction';
 
 const Manufacturer = () => {
     const manufacturerList = useSelector((state) => state.manufacturerList);
-    const { loading, error, manufacturers, currentPage, totalPages, totalEmp } =
-    manufacturerList;
-
-    const [page, setPage] = useState(1);    
-    const triggerReload = useSelector((state) => state.triggerReload);
-    //
-    const [keySearch, setKeySearch] = useState("");
-    const dispatch = useDispatch();
-    
-    useEffect(() => {
-        dispatch(listManufacturer(keySearch, page));
-    }, [dispatch, page, keySearch, triggerReload]);
-
-    const handlePageChange = (event, value) => {
-        setPage(value);
-        setKeySearch(keySearch);
-    };
+    const { loading, error, manufacturers} = manufacturerList;
 
     return (
         <>
@@ -39,12 +23,10 @@ const Manufacturer = () => {
                 }}
             >
                 <Container maxWidth={false}>
-                    <ManufacturerListResults setPage={setPage} setKeySearch={setKeySearch} />
                     <Box sx={{ pt: 3 }}>
                         <Card>
                             <ManufacturerListResults
-                                totalPages={totalPages}
-                                employees={manufacturers}
+                                manufacturers={manufacturers}
                             />
                             <Box
                                 sx={{
@@ -53,13 +35,6 @@ const Manufacturer = () => {
                                     pt: 2
                                 }}
                             >
-                                <Pagination
-                                    color="primary"
-                                    count={totalPages}
-                                    size="medium"
-                                    onChange={handlePageChange}
-                                    page={page}
-                                />
                             </Box>
                         </Card>
                     </Box>
