@@ -1,5 +1,6 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
+import { listManufacturerReducer } from './reducers/manufacturerReducer';
 import {
  userLoginReducer,
  listEmployeeReducer,
@@ -23,6 +24,7 @@ const reducer = combineReducers({
  triggerReload: reloadReducer,
  employeeDelete: deleteEmployeeReducer,
  editEmployee: updateEmployeeReducer,
+ manufacturerList: listManufacturerReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

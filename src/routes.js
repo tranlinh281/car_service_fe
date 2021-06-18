@@ -10,6 +10,7 @@ import ProductList from 'src/pages/ProductList';
 import Settings from 'src/pages/Settings';
 import EmployeeList from 'src/pages/EmployeeList';
 import Report from 'src/pages/Report';
+import Manufacturer from './pages/ManufacturerList';
 
 const routes = [
  {
@@ -28,6 +29,7 @@ const routes = [
   children: [
    { path: 'account', element: <Account /> },
    { path: 'customers', element: <CustomerList /> },
+   { path: 'manufacturer', element: <Manufacturer /> },
    { path: 'dashboard', element: <Dashboard /> },
    { path: 'products', element: <ProductList /> },
    { path: 'settings', element: <Settings /> },

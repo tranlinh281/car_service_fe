@@ -14,11 +14,10 @@ import Popup from '../Popup';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteEmployee, triggerReload } from 'src/actions/userAction';
-import EditEmployeeDialog from './EditEmployeeDialog';
 import { employeeHeader } from 'src/services/HeaderTitleTable';
 import { Skeleton } from '@material-ui/lab';
 
-export default function EmployeeListResult({ employees }) {
+export default function ManufacturerListResults({ manufacturers }) {
     const [openPopup, setOpenPopup] = useState(false);
 
     const employeeDelete = useSelector((state) => state.employeeDelete);
@@ -32,6 +31,7 @@ export default function EmployeeListResult({ employees }) {
             dispatch(triggerReload({}));
         }
     };
+    console.log(manufacturers);
 
     const test = (customer) => { };
 
@@ -57,18 +57,18 @@ export default function EmployeeListResult({ employees }) {
                         </TableHead>
                         
                         <TableBody>
-                            {employees?.map((employee) => (
-                                <TableRow hover key={employee.username}>
-                                    <TableCell>{employee.username}</TableCell>
-                                    <TableCell>{employee.fullname}</TableCell>
+                            {manufacturers?.map((manufacturer) => (
+                                <TableRow hover key={manufacturer}>
+                                    <TableCell>{manufacturer}</TableCell>
+                                    {/* <TableCell>{employee.fullname}</TableCell>
                                     <TableCell>{employee.phoneNumber}</TableCell>
-                                    <TableCell>{employee.phoneNumber}</TableCell>
+                                    <TableCell>{employee.phoneNumber}</TableCell> */}
                                     {/* <TableCell>{employee.status}</TableCell> */}
                                     {/* <TableCell>{employee.maLoaiNguoiDung}</TableCell> */}
                                     <TableCell>
-                                        <EditEmployeeDialog
+                                        {/* <EditEmployeeDialog
                                             dataFromParent={employee}
-                                        />
+                                        /> */}
                                     </TableCell>
                                 </TableRow>
                             ))}
