@@ -9,7 +9,6 @@ import {
 } from '@material-ui/core';
 import Popup from '../Popup';
 import { useDispatch, useSelector } from 'react-redux';
-i
 
 export default function ManufacturerListResults({ manufacturers }) {
 
