@@ -67,13 +67,13 @@ export const listEmployee = (keySearch) =>
           dispatch({ type: EMPLOYEE_LIST_SUCCESS, payload: res.data });
         })
       } else {
-        const arData = [];
+        // const arData = [];
         Axios.get(
           GET_EMPLOYEE_BY_USERNAME_URL + keySearch
         ).then(respo => {
-          arData.push(respo.data)
-          console.log(arData);
-          dispatch({ type: EMPLOYEE_LIST_SUCCESS, payload: arData });
+          // arData.push(respo.data)
+          // console.log(arData);
+          dispatch({ type: EMPLOYEE_LIST_SUCCESS, payload: respo.data });
         })
       }
       localStorage.setItem('keySearch', keySearch);
