@@ -52,8 +52,8 @@ export default function EditEmployeeDialog(props) {
     //   )
     // );
   };
-let str = dataFromParent.dateOfBirth.split("T",2);
-console.log(str[0])
+// let str = dataFromParent.dateOfBirth.split("T",2);
+// console.log(str[0])
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -165,7 +165,7 @@ console.log(str[0])
                     id="date"
                     label="Ngày sinh"
                     type="date"
-                    value={str[0]}
+                    // value={str[0]}
                     InputLabelProps={{
                       shrink: true,
                     }}

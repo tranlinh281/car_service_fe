@@ -77,6 +77,7 @@ export const listEmployee = (keySearch) =>
         })
       }
       localStorage.setItem('keySearch', keySearch);
+      console.log(data);
     } catch (error) {
       const message =
         error.response && error.response.data.message
