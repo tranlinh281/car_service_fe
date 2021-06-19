@@ -9,7 +9,14 @@ import { listManufacturer } from 'src/actions/manufacturerAction';
 const Manufacturer = () => {
     const manufacturerList = useSelector((state) => state.manufacturerList);
     const { loading, error, manufacturers} = manufacturerList;
+    const triggerReload = useSelector((state) => state.triggerReload);
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        dispatch(listManufacturer());
+    }, [dispatch, triggerReload]);
 
+  
     return (
         <>
             <Helmet>
