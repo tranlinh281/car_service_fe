@@ -15,10 +15,10 @@ import ConfirmDialog from '../dialog/dialogConfirm';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteEmployee, triggerReload } from 'src/actions/userAction';
 // import EditEmployeeDialog from './EditEmployeeDialog';
-import { customerHeader } from 'src/services/HeaderTitleTable';
+import { accessoryHeader } from 'src/services/HeaderTitleTable';
 import { Skeleton } from '@material-ui/lab';
 
-export default function CustomerListResults({ customers }) {
+export default function AccessoryListResults({ accessories }) {
  const [openPopup, setOpenPopup] = useState(false);
 
  // const employeeDelete = useSelector((state) => state.employeeDelete);
@@ -46,21 +46,21 @@ export default function CustomerListResults({ customers }) {
      <Table>
       <TableHead>
        <TableRow>
-        {customerHeader.map((headCell) => (
+        {accessoryHeader.map((headCell) => (
          <TableCell key={headCell.id}>{headCell.title}</TableCell>
         ))}
        </TableRow>
       </TableHead>
 
       <TableBody>
-       {customers?.map((customer) => (
-        <TableRow hover key={customer.username}>
-         <TableCell>{customer.username}</TableCell>
-         <TableCell>{customer.email}</TableCell>
-         <TableCell>{customer.fullname}</TableCell>
-         <TableCell>{customer.phoneNumber}</TableCell>
-         <TableCell>{customer.address}</TableCell>
-         <TableCell>{customer.accumulatedPoint}</TableCell>
+       {accessories?.map((accessory) => (
+        <TableRow hover key={accessory.username}>
+         <TableCell>{accessory.name}</TableCell>
+         <TableCell>{accessory.quantity}</TableCell>
+         <TableCell>{accessory.price}</TableCell>
+         <TableCell>{accessory.unit}</TableCell>
+         <TableCell>{accessory.type}</TableCell>
+         <TableCell>{accessory.manufacturer}</TableCell>
          {/* <TableCell>{employee.status}</TableCell> */}
          {/* <TableCell>{employee.maLoaiNguoiDung}</TableCell> */}
          <TableCell>

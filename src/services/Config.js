@@ -7,12 +7,14 @@ export const USERS = 'Users';
 export const CUSTOMER = 'Customers';
 export const EMPLOYEE = 'employees';
 export const MANUFACTURER = 'manufacturers';
+export const ACCESSORY = 'Accessories';
 export const OFFER = 'offer';
 export const PAGING = '/paging?PageNumber=';
 export const PAGESIZE = '&PageSize=';
 export const FORWARD_SLASH = '/';
 export const QUESTION_MARK = '?';
 export const SEARCH_VALUE = 'searchValue=';
+export const NAME_SEARCH = 'nameSearch=';
 export const INSERT_MANUFACTURER = '?manufacturer=';
 export const IMANUFACTURER_MODEL = '/models';
 export const FULLNAME_SEARCH = 'fullnameSearch=';
@@ -21,24 +23,29 @@ export const FULLNAME_SEARCH = 'fullnameSearch=';
 export const LOGIN_URL = BASE_URL + USERS;
 
 //Customer
-export const GET_CUSTOMER_LIST_URL = BASE_URL  + CUSTOMER;
+export const GET_CUSTOMER_LIST_URL = BASE_URL + CUSTOMER;
 
 export const GET_CUSTOMER_PAGING_URL = GET_CUSTOMER_LIST_URL + PAGING;
 
 export const GET_CUSTOMER_BY_USERNAME_URL =
-GET_CUSTOMER_LIST_URL  + QUESTION_MARK + FULLNAME_SEARCH;
-
+ GET_CUSTOMER_LIST_URL + QUESTION_MARK + FULLNAME_SEARCH;
 
 //Employee
-export const GET_EMPLOYEE_LIST_URL = BASE_URL + ADMIN ;
+export const GET_EMPLOYEE_LIST_URL = BASE_URL + ADMIN;
 
 export const GET_EMPLOYEE_BY_USERNAME_URL =
- GET_EMPLOYEE_LIST_URL  + QUESTION_MARK + SEARCH_VALUE;
+ GET_EMPLOYEE_LIST_URL + QUESTION_MARK + SEARCH_VALUE;
 
 export const POST_NEW_EMPLOYEE = GET_EMPLOYEE_LIST_URL;
+// Accessory
+export const GET_ACCESSORY_LIST_URL = BASE_URL + ACCESSORY;
+export const GET_ACCESSORY_PAGING_URL = GET_ACCESSORY_LIST_URL + PAGING;
+export const GET_ACCESSORY_BY_USERNAME_URL =
+GET_ACCESSORY_LIST_URL + QUESTION_MARK + NAME_SEARCH;
+
 
 //Manufacturer
-export const GET_MANUFACTURER_LIST_URL = BASE_URL  + MANUFACTURER;
+export const GET_MANUFACTURER_LIST_URL = BASE_URL + MANUFACTURER;
 
 export const GET_MANUFACTURER_BY_NAME_URL =
  GET_MANUFACTURER_LIST_URL + FORWARD_SLASH;

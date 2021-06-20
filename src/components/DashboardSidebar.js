@@ -49,7 +49,7 @@ const items = [
   title: constants.CUS_TITLE
  },
  {
-  href: '/app/products',
+  href: '/app/accessories',
   icon: ShoppingBagIcon,
   title: constants.ACCESSORIES_TITLE
  },

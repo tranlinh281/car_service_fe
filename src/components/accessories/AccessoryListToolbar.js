@@ -8,7 +8,7 @@ import {
  } from '@material-ui/core';
  import { Search as SearchIcon } from 'react-feather';
  
- export default function CustomerListToolbar({ setPage, setKeySearch }) {
+ export default function AccessoryListToolbar({ setPage, setKeySearch }) {
   return (
    <Box>
     {/* <CreateEmployeeDialog/> */}

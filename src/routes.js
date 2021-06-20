@@ -6,7 +6,7 @@ import CustomerList from 'src/pages/CustomerList';
 import Dashboard from 'src/pages/Dashboard';
 import Login from 'src/pages/Login';
 import NotFound from 'src/pages/NotFound';
-import ProductList from 'src/pages/ProductList';
+import AccessoryList from 'src/pages/AccessoryList';
 import Settings from 'src/pages/Settings';
 import EmployeeList from 'src/pages/EmployeeList';
 import Report from 'src/pages/Report';
@@ -31,7 +31,7 @@ const routes = [
    { path: 'customers', element: <CustomerList /> },
    { path: 'manufacturer', element: <Manufacturer /> },
    { path: 'dashboard', element: <Dashboard /> },
-   { path: 'products', element: <ProductList /> },
+   { path: 'accessories', element: <AccessoryList /> },
    { path: 'settings', element: <Settings /> },
    { path: 'employee', element: <EmployeeList /> },
    { path: 'report', element: <Report /> },

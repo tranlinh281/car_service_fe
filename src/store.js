@@ -1,5 +1,6 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
+import { listAccessoryReducer } from './reducers/accessoryReducer';
 import { listCustomerReducer } from './reducers/customerReducer';
 import { listManufacturerReducer } from './reducers/manufacturerReducer';
 import {
@@ -26,7 +27,8 @@ const reducer = combineReducers({
  employeeDelete: deleteEmployeeReducer,
  editEmployee: updateEmployeeReducer,
  manufacturerList: listManufacturerReducer,
- customerList: listCustomerReducer
+ customerList: listCustomerReducer,
+ accessoryList: listAccessoryReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
