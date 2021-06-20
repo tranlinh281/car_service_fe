@@ -7,6 +7,8 @@ import { listEmployee } from 'src/actions/userAction';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listCustomer } from 'src/actions/customerAction';
+import CustomerListToolbar from 'src/components/customer/CustomerListToolbar';
+import CustomerListResults from 'src/components/customer/CustomerListResults';
 
 const CustomerList = () => {
  const customerList = useSelector((state) => state.customerList);
@@ -41,10 +43,10 @@ const CustomerList = () => {
     }}
    >
     <Container maxWidth={false}>
-     <EmployeeListToolbar setPage={setPage} setKeySearch={setKeySearch} />
+     <CustomerListToolbar setPage={setPage} setKeySearch={setKeySearch} />
      <Box sx={{ pt: 3 }}>
       <Card>
-       <EmployeeListResult totalPages={totalPages} employees={customers} />
+       <CustomerListResults totalPages={totalPages} customers={customers} />
        <Box
         sx={{
          display: 'flex',
