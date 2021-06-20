@@ -2,9 +2,9 @@
 export const BASE_URL = 'https://carservicesystem.azurewebsites.net/api/';
 
 //Admin url
-export const ADMIN = 'Employees/';
+export const ADMIN = 'Employees';
 export const USERS = 'Users';
-export const CUSTOMER = 'customers';
+export const CUSTOMER = 'Customers';
 export const EMPLOYEE = 'employees';
 export const MANUFACTURER = 'manufacturers';
 export const OFFER = 'offer';
@@ -12,7 +12,7 @@ export const PAGING = '/paging?PageNumber=';
 export const PAGESIZE = '&PageSize=';
 export const FORWARD_SLASH = '/';
 export const QUESTION_MARK = '?';
-export const FULLNAME_SEARCH = 'fullnameSearch=';
+export const FULLNAME_SEARCH = 'searchValue=';
 export const INSERT_MANUFACTURER = '?manufacturer=';
 export const IMANUFACTURER_MODEL = '/models';
 
@@ -20,7 +20,7 @@ export const IMANUFACTURER_MODEL = '/models';
 export const LOGIN_URL = BASE_URL + USERS;
 
 //Customer
-export const GET_CUSTOMER_LIST_URL = BASE_URL + ADMIN + CUSTOMER;
+export const GET_CUSTOMER_LIST_URL = BASE_URL  + CUSTOMER;
 
 export const GET_CUSTOMER_PAGING_URL = GET_CUSTOMER_LIST_URL + PAGING;
 
@@ -28,7 +28,7 @@ export const GET_CUSTOMER_BY_USERNAME_URL =
  GET_CUSTOMER_LIST_URL + FORWARD_SLASH;
 
 //Employee
-export const GET_EMPLOYEE_LIST_URL = BASE_URL + ADMIN + EMPLOYEE;
+export const GET_EMPLOYEE_LIST_URL = BASE_URL + ADMIN ;
 
 export const GET_EMPLOYEE_BY_USERNAME_URL =
  GET_EMPLOYEE_LIST_URL  + QUESTION_MARK + FULLNAME_SEARCH;

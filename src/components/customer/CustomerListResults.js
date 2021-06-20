@@ -1,170 +1,86 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
-import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
-  Avatar,
-  Box,
-  Card,
-  Checkbox,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TablePagination,
-  TableRow,
-  Typography
+    Box,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow
 } from '@material-ui/core';
-import getInitials from 'src/utils/getInitials';
+import { Close, EditOutlined } from '@material-ui/icons';
+import ButtonAction from '../ButtonAction';
+import { useEffect, useState } from 'react';
+import Popup from '../Popup';
+import ConfirmDialog from '../dialog/dialogConfirm';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteEmployee, triggerReload } from 'src/actions/userAction';
+// import EditEmployeeDialog from './EditEmployeeDialog';
+import { employeeHeader } from 'src/services/HeaderTitleTable';
+import { Skeleton } from '@material-ui/lab';
 
-const CustomerListResults = ({ customers, ...rest }) => {
-  const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(0);
+export default function EmployeeListResult({ customers }) {
+    const [openPopup, setOpenPopup] = useState(false);
 
-  const handleSelectAll = (event) => {
-    let newSelectedCustomerIds;
+    // const employeeDelete = useSelector((state) => state.employeeDelete);
+    // const { success } = employeeDelete;
 
-    if (event.target.checked) {
-      newSelectedCustomerIds = customers.map((customer) => customer.id);
-    } else {
-      newSelectedCustomerIds = [];
-    }
+    const dispatch = useDispatch();
 
-    setSelectedCustomerIds(newSelectedCustomerIds);
-  };
+    // const deleteHandler = (customer) => {
+    //     if (window.confirm('Are you sure?')) {
+    //         dispatch(deleteEmployee(customer.taiKhoan));
+    //         dispatch(triggerReload({}));
+    //     }
+    // };
 
-  const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedCustomerIds.indexOf(id);
-    let newSelectedCustomerIds = [];
+    const test = (customer) => { };
 
-    if (selectedIndex === -1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds, id);
-    } else if (selectedIndex === 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(1));
-    } else if (selectedIndex === selectedCustomerIds.length - 1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds.slice(0, selectedIndex),
-        selectedCustomerIds.slice(selectedIndex + 1)
-      );
-    }
+    const openInPopup = (customer) => {
+        setOpenPopup(true);
+    };
 
-    setSelectedCustomerIds(newSelectedCustomerIds);
-  };
 
-  const handleLimitChange = (event) => {
-    setLimit(event.target.value);
-  };
-
-  const handlePageChange = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  return (
-    <Card {...rest}>
-      <PerfectScrollbar>
-        <Box sx={{ minWidth: 1050 }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectedCustomerIds.length === customers.length}
-                    color="primary"
-                    indeterminate={
-                      selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < customers.length
-                    }
-                    onChange={handleSelectAll}
-                  />
-                </TableCell>
-                <TableCell>
-                  Name
-                </TableCell>
-                <TableCell>
-                  Email
-                </TableCell>
-                <TableCell>
-                  Location
-                </TableCell>
-                <TableCell>
-                  Phone
-                </TableCell>
-                <TableCell>
-                  Registration date
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {customers.slice(0, limit).map((customer) => (
-                <TableRow
-                  hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
-                >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer.id)}
-                      value="true"
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Box
-                      sx={{
-                        alignItems: 'center',
-                        display: 'flex'
-                      }}
-                    >
-                      <Avatar
-                        src={customer.avatarUrl}
-                        sx={{ mr: 2 }}
-                      >
-                        {getInitials(customer.name)}
-                      </Avatar>
-                      <Typography
-                        color="textPrimary"
-                        variant="body1"
-                      >
-                        {customer.name}
-                      </Typography>
-                    </Box>
-                  </TableCell>
-                  <TableCell>
-                    {customer.email}
-                  </TableCell>
-                  <TableCell>
-                    {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`}
-                  </TableCell>
-                  <TableCell>
-                    {customer.phone}
-                  </TableCell>
-                  <TableCell>
-                    {moment(customer.createdAt).format('DD/MM/YYYY')}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Box>
-      </PerfectScrollbar>
-      <TablePagination
-        component="div"
-        count={customers.length}
-        onPageChange={handlePageChange}
-        onRowsPerPageChange={handleLimitChange}
-        page={page}
-        rowsPerPage={limit}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
-    </Card>
-  );
-};
-
-CustomerListResults.propTypes = {
-  customers: PropTypes.array.isRequired
-};
-
-export default CustomerListResults;
+    return (
+        <>
+            <PerfectScrollbar>
+                <Box sx={{ minWidth: 1050 }}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                {
+                                    employeeHeader.map(headCell => (
+                                        <TableCell key={headCell.id} >
+                                            {headCell.title}
+                                        </TableCell>))
+                                }
+                            </TableRow>
+                        </TableHead>
+                        
+                        <TableBody>
+                            {customers?.map((customer) => (
+                                <TableRow hover key={customer.username}>
+                                    <TableCell>{customer.username}</TableCell>
+                                    <TableCell>{customer.fullname}</TableCell>
+                                    <TableCell>{customer.phoneNumber}</TableCell>
+                                    <TableCell>{customer.phoneNumber}</TableCell>
+                                    {/* <TableCell>{employee.status}</TableCell> */}
+                                    {/* <TableCell>{employee.maLoaiNguoiDung}</TableCell> */}
+                                    <TableCell>
+                                        {/* <EditEmployeeDialog
+                                            dataFromParent={employee}
+                                        /> */}
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Box>
+            </PerfectScrollbar>
+            <Popup
+                title="Thông tin nhân viên"
+                openPopup={openPopup}
+                setOpenPopup={setOpenPopup}
+            ></Popup>
+        </>
+    );
+}
