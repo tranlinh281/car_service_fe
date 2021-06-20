@@ -12,9 +12,10 @@ export const PAGING = '/paging?PageNumber=';
 export const PAGESIZE = '&PageSize=';
 export const FORWARD_SLASH = '/';
 export const QUESTION_MARK = '?';
-export const FULLNAME_SEARCH = 'searchValue=';
+export const SEARCH_VALUE = 'searchValue=';
 export const INSERT_MANUFACTURER = '?manufacturer=';
 export const IMANUFACTURER_MODEL = '/models';
+export const FULLNAME_SEARCH = 'fullnameSearch=';
 
 //Login
 export const LOGIN_URL = BASE_URL + USERS;
@@ -25,13 +26,14 @@ export const GET_CUSTOMER_LIST_URL = BASE_URL  + CUSTOMER;
 export const GET_CUSTOMER_PAGING_URL = GET_CUSTOMER_LIST_URL + PAGING;
 
 export const GET_CUSTOMER_BY_USERNAME_URL =
- GET_CUSTOMER_LIST_URL + FORWARD_SLASH;
+GET_CUSTOMER_LIST_URL  + QUESTION_MARK + FULLNAME_SEARCH;
+
 
 //Employee
 export const GET_EMPLOYEE_LIST_URL = BASE_URL + ADMIN ;
 
 export const GET_EMPLOYEE_BY_USERNAME_URL =
- GET_EMPLOYEE_LIST_URL  + QUESTION_MARK + FULLNAME_SEARCH;
+ GET_EMPLOYEE_LIST_URL  + QUESTION_MARK + SEARCH_VALUE;
 
 export const POST_NEW_EMPLOYEE = GET_EMPLOYEE_LIST_URL;
 

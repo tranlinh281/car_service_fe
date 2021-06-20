@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { CUSTOMER_LIST_FAIL, CUSTOMER_LIST_REQUEST, CUSTOMER_LIST_SUCCESS } from 'src/constants/customerConstant';
-import { GET_CUSTOMER_LIST_URL } from 'src/services/Config';
+import { GET_CUSTOMER_BY_USERNAME_URL, GET_CUSTOMER_LIST_URL } from 'src/services/Config';
 const headers = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
@@ -23,7 +23,7 @@ const headers = {
       } else {
         // const arData = [];
         Axios.get(
-          GET_EMPLOYEE_BY_USERNAME_URL + keySearch
+            GET_CUSTOMER_BY_USERNAME_URL + keySearch
         ).then(respo => {
           // arData.push(respo.data)
           // console.log(arData);
