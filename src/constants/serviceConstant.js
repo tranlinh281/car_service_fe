@@ -1,0 +1,5 @@
+
+/* Service list*/
+export const SERVICE_LIST_REQUEST = 'SERVICE_LIST_REQUEST';
+export const SERVICE_LIST_SUCCESS = 'SERVICE_LIST_SUCCESS';
+export const SERVICE_LIST_FAIL = 'SERVICE_LIST_FAIL';

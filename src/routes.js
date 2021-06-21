@@ -11,6 +11,7 @@ import Settings from 'src/pages/Settings';
 import EmployeeList from 'src/pages/EmployeeList';
 import Report from 'src/pages/Report';
 import Manufacturer from './pages/ManufacturerList';
+import ServiceList from './pages/ServiceList';
 
 const routes = [
  {
@@ -32,6 +33,7 @@ const routes = [
    { path: 'manufacturer', element: <Manufacturer /> },
    { path: 'dashboard', element: <Dashboard /> },
    { path: 'accessories', element: <AccessoryList /> },
+   { path: 'service', element: <ServiceList /> },
    { path: 'settings', element: <Settings /> },
    { path: 'employee', element: <EmployeeList /> },
    { path: 'report', element: <Report /> },

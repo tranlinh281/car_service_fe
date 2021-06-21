@@ -54,6 +54,11 @@ const items = [
   title: constants.ACCESSORIES_TITLE
  },
  {
+    href: '/app/service',
+    icon: ShoppingBagIcon,
+    title: constants.SERVICE_TITLE
+   },
+ {
   href: '/app/manufacturer',
   icon: ShoppingBagIcon,
   title: constants.MANUFACTURER_TITLE

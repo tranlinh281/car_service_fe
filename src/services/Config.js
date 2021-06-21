@@ -8,6 +8,7 @@ export const CUSTOMER = 'Customers';
 export const EMPLOYEE = 'employees';
 export const MANUFACTURER = 'manufacturers';
 export const ACCESSORY = 'Accessories';
+export const SERVICE = 'Services';
 export const OFFER = 'offer';
 export const PAGING = '/paging?PageNumber=';
 export const PAGESIZE = '&PageSize=';
@@ -41,8 +42,7 @@ export const POST_NEW_EMPLOYEE = GET_EMPLOYEE_LIST_URL;
 export const GET_ACCESSORY_LIST_URL = BASE_URL + ACCESSORY;
 export const GET_ACCESSORY_PAGING_URL = GET_ACCESSORY_LIST_URL + PAGING;
 export const GET_ACCESSORY_BY_USERNAME_URL =
-GET_ACCESSORY_LIST_URL + QUESTION_MARK + NAME_SEARCH;
-
+ GET_ACCESSORY_LIST_URL + QUESTION_MARK + NAME_SEARCH;
 
 //Manufacturer
 export const GET_MANUFACTURER_LIST_URL = BASE_URL + MANUFACTURER;
@@ -55,6 +55,12 @@ export const POST_NEW_MANUFACTURER =
 
 export const POST_NEW_MANUFACTURER_WITH_MODELS =
  GET_MANUFACTURER_LIST_URL + INSERT_MANUFACTURER;
+//Service
+export const GET_SERVICE_LIST_URL = BASE_URL + SERVICE;
+export const GET_SERVICE_PAGING_URL = GET_SERVICE_LIST_URL + PAGING;
+export const GET_SERVICE_BY_USERNAME_URL =
+GET_SERVICE_LIST_URL + QUESTION_MARK + NAME_SEARCH;
+
 //Offer
 
 // {
