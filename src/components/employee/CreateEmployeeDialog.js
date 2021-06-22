@@ -125,23 +125,6 @@ export default function CreateEmployeeDialog() {
          variant="outlined"
          onChange={(e) => setAddress(e.target.value)}
         />
-
-        {/* <TextField
-                                    fullWidth
-                                    label="Địa chỉ"
-                                    margin="normal"
-                                    name="address"
-                                    variant="outlined"
-                                    onChange={(e) => setAddress(e.target.value)}
-                                />
-                                <TextField
-                                    fullWidth
-                                    label="Email"
-                                    margin="normal"
-                                    name="email"
-                                    variant="outlined"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                /> */}
        </Grid>
        <Grid item xs={6}>
         <TextField
@@ -153,14 +136,6 @@ export default function CreateEmployeeDialog() {
          onChange={(e) => setPhonenumber(e.target.value)}
         />
   
-
-        {/* <FormControl component="fieldset">
-                                    <FormLabel component="legend">Giới tính</FormLabel>
-                                    <RadioGroup aria-label="gender" name="gender1" value={gender} onChange={handleChange} row>
-                                        <FormControlLabel value="male" control={<Radio />} label="Nam" labelPlacement="end" />
-                                        <FormControlLabel value="female" control={<Radio />} label="Nữ" labelPlacement="end" />
-                                    </RadioGroup>
-                                </FormControl> */}
         <FormControl variant="outlined" margin="dense">
          <TextField
           id="date"

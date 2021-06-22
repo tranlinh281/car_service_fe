@@ -26,14 +26,6 @@ export default function EditEmployeeDialog(props) {
   const [open, setOpen] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
 
-  const [taiKhoan, setUsername] = useState(dataFromParent.taiKhoan);
-  const [matKhau, setPassword] = useState(dataFromParent.password);
-  const [email, setEmail] = useState(dataFromParent.email);
-  const [soDt, setPhone] = useState(dataFromParent.soDt);
-  const [maNhom, setGroup] = useState(dataFromParent.maNhom);
-  const [maLoaiNguoiDung, setType] = useState(dataFromParent.maLoaiNguoiDung);
-  const [hoTen, setName] = useState(dataFromParent.hoTen);
-
   const editEmployee = useSelector((state) => state.editEmployee);
   const { success, loading, error } = editEmployee;
 
@@ -91,16 +83,6 @@ export default function EditEmployeeDialog(props) {
                   variant="outlined"
                   disabled={true}
                 />
-                {/* <TextField
-                  fullWidth
-                  label="Mật khẩu"
-                  margin="normal"
-                  value={dataFromParent.password}
-                  name="password"
-                  type="password"
-                  variant="outlined"
-                  disabled={true}
-                /> */}
                 <TextField
                   fullWidth
                   label="Họ tên"
@@ -150,13 +132,13 @@ export default function EditEmployeeDialog(props) {
                   variant="outlined"
                   disabled={true}
                 />
-                
+
                 <FormControl variant="outlined" margin='dense'>
                   <TextField
                     id="date"
                     label="Ngày sinh"
                     type="date"
-                    value={dataFromParent.dateOfBirth}
+                    value={dataFromParent.dateOfBirth.split("T")[0]}
                     InputLabelProps={{
                       shrink: true,
                     }}
