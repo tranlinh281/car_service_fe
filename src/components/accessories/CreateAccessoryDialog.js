@@ -20,10 +20,14 @@ import {
 } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {  triggerReload } from 'src/actions/userAction';
+import { triggerReload } from 'src/actions/userAction';
 import { createAccessory } from 'src/actions/accessoryAction';
+import { listManufacturer } from 'src/actions/manufacturerAction';
 
 export default function CreateAccessoryDialog() {
+ const manufacturerList = useSelector((state) => state.manufacturerList);
+ const manufacturers = manufacturerList;
+ console.log(manufacturers, 'testing');
  const [open, setOpen] = useState(false);
  const [openConfirm, setOpenConfirm] = useState(false);
 
@@ -66,6 +70,7 @@ export default function CreateAccessoryDialog() {
  };
 
  useEffect(() => {
+  dispatch(listManufacturer());
   if (success) {
    console.log(success);
    alert('Thêm thành công');
@@ -152,17 +157,16 @@ export default function CreateAccessoryDialog() {
 
         {/* <FormControl variant="outlined" margin='dense'> */}
         <InputLabel>Hãng</InputLabel>
-        <Select
-         value={manufacturer}
-         onChange={(e) => setManufacturer(e.target.value)}
-         label="Hãng"
-        >
-         <MenuItem value="Honda">Honda</MenuItem>
-         <MenuItem value="Lexus">Lexus</MenuItem>
-         <MenuItem value="Mazda">Mazda</MenuItem>
-         <MenuItem value="Suzuki">Suzuki</MenuItem>
-         <MenuItem value="Toyota">Toyota</MenuItem>
-        </Select>
+        {manufacturers?.map((manufacturer) => (
+         <Select
+          value={manufacturer}
+          onChange={(e) => setManufacturer(e.target.value)}
+          label="Hãng"
+         >
+          <MenuItem value={manufacturer}>{manufacturer}</MenuItem>
+         </Select>
+        ))}
+
         {/* </FormControl> */}
        </Grid>
       </Grid>
