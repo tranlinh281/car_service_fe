@@ -62,7 +62,7 @@ export default function EmployeeListResult({ employees }) {
                                     <TableCell>{employee.username}</TableCell>
                                     <TableCell>{employee.fullname}</TableCell>
                                     <TableCell>{employee.phoneNumber}</TableCell>
-                                    <TableCell>{employee.phoneNumber}</TableCell>
+                                    {/* <TableCell>{{employee.role=="staff":"Kỹ Thuật Viên"?"Quản lý" }}</TableCell> */}
                                     {/* <TableCell>{employee.status}</TableCell> */}
                                     {/* <TableCell>{employee.maLoaiNguoiDung}</TableCell> */}
                                     <TableCell>
