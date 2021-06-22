@@ -1,6 +1,6 @@
 import Axios from 'axios';
-import { ACCESSORY_LIST_FAIL, ACCESSORY_LIST_REQUEST, ACCESSORY_LIST_SUCCESS } from 'src/constants/accessoryConstant';
-import { GET_ACCESSORY_BY_USERNAME_URL, GET_ACCESSORY_LIST_URL } from 'src/services/Config';
+import { ACCESSORY_LIST_FAIL, ACCESSORY_LIST_REQUEST, ACCESSORY_LIST_SUCCESS, CREATE_ACCESSORY_FAIL, CREATE_ACCESSORY_REQUEST, CREATE_ACCESSORY_SUCCESS } from 'src/constants/accessoryConstant';
+import { GET_ACCESSORY_BY_USERNAME_URL, GET_ACCESSORY_LIST_URL, POST_NEW_ACCESSORY } from 'src/services/Config';
 const headers = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
@@ -40,3 +40,27 @@ const headers = {
       dispatch({ type: ACCESSORY_LIST_FAIL, payload: message });
     }
   };
+
+  export const createAccessory =
+  (accessoryModels) =>
+    async (dispatch) => {
+      dispatch({
+        type: CREATE_ACCESSORY_REQUEST,
+        payload: { accessoryModels }
+      });
+      try {
+        const { data } = await Axios.post(
+          POST_NEW_ACCESSORY  ,
+          accessoryModels
+        );
+        dispatch({ type: CREATE_ACCESSORY_SUCCESS, payload: data });
+      } catch (error) {
+        dispatch({
+          type: CREATE_ACCESSORY_FAIL,
+          payload:
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message
+        });
+      }
+    };

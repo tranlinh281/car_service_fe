@@ -1,4 +1,4 @@
-import { ACCESSORY_LIST_FAIL, ACCESSORY_LIST_REQUEST, ACCESSORY_LIST_SUCCESS } from "src/constants/accessoryConstant";
+import { ACCESSORY_LIST_FAIL, ACCESSORY_LIST_REQUEST, ACCESSORY_LIST_SUCCESS, CREATE_ACCESSORY_FAIL, CREATE_ACCESSORY_REQUEST, CREATE_ACCESSORY_SUCCESS } from "src/constants/accessoryConstant";
 
 
 
@@ -15,6 +15,19 @@ export const listAccessoryReducer = (
           accessories: action.payload
         };
       case ACCESSORY_LIST_FAIL:
+        return { loading: false, error: action.payload };
+      default:
+        return state;
+    }
+  };
+
+  export const createAccessoryReducer = (state = {}, action) => {
+    switch (action.type) {
+      case CREATE_ACCESSORY_REQUEST:
+        return { loading: true };
+      case CREATE_ACCESSORY_SUCCESS:
+        return { loading: false, success: action.payload };
+      case CREATE_ACCESSORY_FAIL:
         return { loading: false, error: action.payload };
       default:
         return state;
