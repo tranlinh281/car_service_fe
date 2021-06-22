@@ -4,6 +4,7 @@ export const BASE_URL = 'https://carservicesystem.azurewebsites.net/api/';
 //Admin url
 export const ADMIN = 'Employees';
 export const USERS = 'Users';
+export const USERNAME = 'username=';
 export const CUSTOMER = 'Customers';
 export const EMPLOYEE = 'employees';
 export const MANUFACTURER = 'manufacturers';
@@ -38,13 +39,13 @@ export const GET_EMPLOYEE_BY_USERNAME_URL =
  GET_EMPLOYEE_LIST_URL + QUESTION_MARK + SEARCH_VALUE;
 
 export const POST_NEW_EMPLOYEE = GET_EMPLOYEE_LIST_URL;
+export const DELETE_EMPLOYEE = GET_EMPLOYEE_LIST_URL + QUESTION_MARK + USERNAME;
 // Accessory
 export const GET_ACCESSORY_LIST_URL = BASE_URL + ACCESSORY;
 export const GET_ACCESSORY_PAGING_URL = GET_ACCESSORY_LIST_URL + PAGING;
 export const GET_ACCESSORY_BY_USERNAME_URL =
  GET_ACCESSORY_LIST_URL + QUESTION_MARK + NAME_SEARCH;
- export const POST_NEW_ACCESSORY =
- GET_ACCESSORY_LIST_URL ;
+export const POST_NEW_ACCESSORY = GET_ACCESSORY_LIST_URL;
 
 //Manufacturer
 export const GET_MANUFACTURER_LIST_URL = BASE_URL + MANUFACTURER;
@@ -61,7 +62,7 @@ export const POST_NEW_MANUFACTURER_WITH_MODELS =
 export const GET_SERVICE_LIST_URL = BASE_URL + SERVICE;
 export const GET_SERVICE_PAGING_URL = GET_SERVICE_LIST_URL + PAGING;
 export const GET_SERVICE_BY_USERNAME_URL =
-GET_SERVICE_LIST_URL + QUESTION_MARK + NAME_SEARCH;
+ GET_SERVICE_LIST_URL + QUESTION_MARK + NAME_SEARCH;
 
 //Offer
 
