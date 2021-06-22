@@ -6,6 +6,7 @@ import * as constant from '../utils/Constants';
 import { listEmployee } from 'src/actions/userAction';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AlignCenter } from 'react-feather';
 
 const EmployeeList = () => {
     const employeeList = useSelector((state) => state.employeeList);
@@ -17,7 +18,7 @@ const EmployeeList = () => {
     //
     const [keySearch, setKeySearch] = useState("");
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         dispatch(listEmployee(keySearch, page));
     }, [dispatch, page, keySearch, triggerReload]);
@@ -42,8 +43,10 @@ const EmployeeList = () => {
                 <Container maxWidth={false}>
                     <EmployeeListToolbar setPage={setPage} setKeySearch={setKeySearch} />
                     <Box sx={{ pt: 3 }}>
+                     
                         <Card>
                             <EmployeeListResult
+                                loading={loading}
                                 totalPages={totalPages}
                                 employees={employees}
                             />
@@ -60,6 +63,7 @@ const EmployeeList = () => {
                                     size="medium"
                                     onChange={handlePageChange}
                                     page={page}
+                                    hidden={loading}
                                 />
                             </Box>
                         </Card>
