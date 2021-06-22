@@ -10,7 +10,7 @@ import {
   Button,
   Dialog,
   Typography,
-  DialogTitle,FormControl,Select, InputLabel,MenuItem
+  DialogTitle, FormControl, Select, InputLabel, MenuItem
 } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,22 +38,12 @@ export default function EditEmployeeDialog(props) {
   const { success, loading, error } = editEmployee;
 
   const dispatch = useDispatch();
+
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(
-    //   updateEmployee(
-    //     taiKhoan,
-    //     matKhau,
-    //     email,
-    //     soDt,
-    //     maNhom,
-    //     maLoaiNguoiDung,
-    //     hoTen
-    //   )
-    // );
+
   };
-// let str = dataFromParent.dateOfBirth.split("T",2);
-// console.log(str[0])
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -82,8 +72,8 @@ export default function EditEmployeeDialog(props) {
         onClose={handleClose}
         aria-describedby="scroll-dialog-description"
         open={open}
-        fullWidth={true}
-        maxWidth={'md'}
+        // fullWidth={true}
+        maxWidth={'sm'}
       >
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           Nhân viên <span><strong>{dataFromParent.username}</strong></span>
@@ -101,7 +91,7 @@ export default function EditEmployeeDialog(props) {
                   variant="outlined"
                   disabled={true}
                 />
-                <TextField
+                {/* <TextField
                   fullWidth
                   label="Mật khẩu"
                   margin="normal"
@@ -110,7 +100,7 @@ export default function EditEmployeeDialog(props) {
                   type="password"
                   variant="outlined"
                   disabled={true}
-                />
+                /> */}
                 <TextField
                   fullWidth
                   label="Họ tên"
@@ -119,27 +109,35 @@ export default function EditEmployeeDialog(props) {
                   name="fullname"
                   variant="outlined"
                   disabled={true}
-                  
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
 
-                {/* <TextField
-                                    fullWidth
-                                    label="Địa chỉ"
-                                    margin="normal"
-                                    value={dataFromParent}
-                                    name="address"
-                                    variant="outlined"
-                                    disabled={true}
-                                />
-                                <TextField
-                                    fullWidth
-                                    label="Email"
-                                    margin="normal"
-                                    value={dataFromParent}
-                                    name="email"
-                                    variant="outlined"
-                                    disabled={true}
-                                /> */}
+                <TextField
+                  fullWidth
+                  label="Địa chỉ"
+                  margin="normal"
+                  value={dataFromParent.address}
+                  name="address"
+                  variant="outlined"
+                  disabled={true}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                <TextField
+                  fullWidth
+                  label="Email"
+                  margin="normal"
+                  value={dataFromParent.email}
+                  name="email"
+                  variant="outlined"
+                  disabled={true}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
               </Grid>
               <Grid item xs={6}>
 
@@ -152,20 +150,13 @@ export default function EditEmployeeDialog(props) {
                   variant="outlined"
                   disabled={true}
                 />
-                {/* <FormControl component="fieldset">
-                                    <FormLabel component="legend">Giới tính</FormLabel>
-                                    value={dataFromParent}<RadioGroup aria-label="gender" 
-                                    name="gender1" value={gender} onChange={handleChange} row>
-                                        <FormControlLabel value="male" control={<Radio />} label="Nam" labelPlacement="end" />
-                                        <FormControlLabel value="female" control={<Radio />} label="Nữ" labelPlacement="end" />
-                                    </RadioGroup>
-                                </FormControl> */}
+                
                 <FormControl variant="outlined" margin='dense'>
                   <TextField
                     id="date"
                     label="Ngày sinh"
                     type="date"
-                    // value={str[0]}
+                    value={dataFromParent.dateOfBirth}
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -179,6 +170,7 @@ export default function EditEmployeeDialog(props) {
                   value={dataFromParent.role}
                   // disabled={true}
                   label="Vị trí"
+                  variant="outlined"
                 >
                   <MenuItem value='manager'>Quản lý</MenuItem>
                   <MenuItem value='staff'>Kỹ thuật viên</MenuItem>

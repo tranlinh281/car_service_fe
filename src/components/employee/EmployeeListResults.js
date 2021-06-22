@@ -7,7 +7,7 @@ import {
     TableHead,
     TableRow
 } from '@material-ui/core';
-import { Close, EditOutlined } from '@material-ui/icons';
+import { Close, EditOutlined, ShowerOutlined } from '@material-ui/icons';
 import ButtonAction from '../ButtonAction';
 import { useEffect, useState } from 'react';
 import Popup from '../Popup';
@@ -39,6 +39,11 @@ export default function EmployeeListResult({ employees }) {
         setOpenPopup(true);
     };
 
+    const showRole = (value) => {
+        if (value == 'staff') {
+            return 'Kỹ thuật viên'
+        } else return 'Quản lý'
+    };
 
     return (
         <>
@@ -55,16 +60,14 @@ export default function EmployeeListResult({ employees }) {
                                 }
                             </TableRow>
                         </TableHead>
-                        
+
                         <TableBody>
                             {employees?.map((employee) => (
                                 <TableRow hover key={employee.username}>
                                     <TableCell>{employee.username}</TableCell>
                                     <TableCell>{employee.fullname}</TableCell>
                                     <TableCell>{employee.phoneNumber}</TableCell>
-                                    {/* <TableCell>{{employee.role=="staff":"Kỹ Thuật Viên"?"Quản lý" }}</TableCell> */}
-                                    {/* <TableCell>{employee.status}</TableCell> */}
-                                    {/* <TableCell>{employee.maLoaiNguoiDung}</TableCell> */}
+                                    <TableCell>{showRole(employee.role)}</TableCell>
                                     <TableCell>
                                         <EditEmployeeDialog
                                             dataFromParent={employee}
