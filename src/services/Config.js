@@ -9,6 +9,7 @@ export const CUSTOMER = 'Customers';
 export const EMPLOYEE = 'employees';
 export const MANUFACTURER = 'manufacturers';
 export const ACCESSORY = 'Accessories';
+export const ACCESSORYID = 'accessoryId=';
 export const SERVICE = 'Services';
 export const OFFER = 'offer';
 export const PAGING = '/paging?PageNumber=';
@@ -43,6 +44,7 @@ export const DELETE_EMPLOYEE = GET_EMPLOYEE_LIST_URL + QUESTION_MARK + USERNAME;
 // Accessory
 export const GET_ACCESSORY_LIST_URL = BASE_URL + ACCESSORY;
 export const GET_ACCESSORY_PAGING_URL = GET_ACCESSORY_LIST_URL + PAGING;
+export const DELETE_ACCESSORY = GET_ACCESSORY_LIST_URL + QUESTION_MARK + ACCESSORYID;
 export const GET_ACCESSORY_BY_USERNAME_URL =
  GET_ACCESSORY_LIST_URL + QUESTION_MARK + NAME_SEARCH;
 export const POST_NEW_ACCESSORY = GET_ACCESSORY_LIST_URL;

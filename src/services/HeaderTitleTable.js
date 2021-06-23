@@ -4,7 +4,7 @@ export const employeeHeader = [
  { id: 3, title: 'Điện thoại' },
  { id: 4, title: 'Vị trí' },
  // {id: 5, title: "Trạng thái"},
- { id: 5, title: 'Chỉnh sửa' },
+ { id: 5, title: 'Chỉnh sửa' }
 ];
 
 export const customerHeader = [
@@ -37,7 +37,8 @@ export const accessoryHeader = [
  { id: 3, title: 'Đơn giá' },
  { id: 4, title: 'Đơn vị tính' },
  { id: 5, title: 'Loại' },
- { id: 6, title: 'Hãng' }
+ { id: 6, title: 'Hãng' },
+ { id: 7, title: 'Chỉnh sửa' }
 ];
 
 export const offerHeader = [

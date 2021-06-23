@@ -17,21 +17,28 @@ import { deleteEmployee, triggerReload } from 'src/actions/userAction';
 // import EditEmployeeDialog from './EditEmployeeDialog';
 import { accessoryHeader } from 'src/services/HeaderTitleTable';
 import { Skeleton } from '@material-ui/lab';
+import EditAccessoryDialog from './EditAccessoryDialog';
+import { deleteAccessory } from 'src/actions/accessoryAction';
 
 export default function AccessoryListResults({ accessories }) {
  const [openPopup, setOpenPopup] = useState(false);
 
- // const employeeDelete = useSelector((state) => state.employeeDelete);
- // const { success } = employeeDelete;
+ const accessoryDelete = useSelector((state) => state.accessoryDelete);
+ const { success } = accessoryDelete;
+ console.log('id', accessories);
 
  const dispatch = useDispatch();
 
- // const deleteHandler = (customer) => {
- //     if (window.confirm('Are you sure?')) {
- //         dispatch(deleteEmployee(customer.taiKhoan));
- //         dispatch(triggerReload({}));
- //     }
- // };
+ const deleteHandler = (accessory) => {
+  if (window.confirm('Are you sure?')) {
+   dispatch(deleteAccessory(accessory.id));
+  }
+ };
+ useEffect(() => {
+  if (success) {
+   dispatch(triggerReload({}));
+  }
+ }, [success]);
 
  const test = (customer) => {};
 
@@ -54,7 +61,7 @@ export default function AccessoryListResults({ accessories }) {
 
       <TableBody>
        {accessories?.map((accessory) => (
-        <TableRow hover key={accessory.username}>
+        <TableRow hover key={accessory.name}>
          <TableCell>{accessory.name}</TableCell>
          <TableCell>{accessory.quantity}</TableCell>
          <TableCell>{accessory.price}</TableCell>
@@ -64,9 +71,13 @@ export default function AccessoryListResults({ accessories }) {
          {/* <TableCell>{employee.status}</TableCell> */}
          {/* <TableCell>{employee.maLoaiNguoiDung}</TableCell> */}
          <TableCell>
-          {/* <EditEmployeeDialog
-                                            dataFromParent={employee}
-                                        /> */}
+          <EditAccessoryDialog dataFromParent={accessory} />
+          <ButtonAction
+           color="secondary"
+           onClick={() => deleteHandler(accessory)}
+          >
+           <Close fontSize="small" />
+          </ButtonAction>
          </TableCell>
         </TableRow>
        ))}

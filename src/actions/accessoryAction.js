@@ -1,6 +1,6 @@
 import Axios from 'axios';
-import { ACCESSORY_LIST_FAIL, ACCESSORY_LIST_REQUEST, ACCESSORY_LIST_SUCCESS, CREATE_ACCESSORY_FAIL, CREATE_ACCESSORY_REQUEST, CREATE_ACCESSORY_SUCCESS } from 'src/constants/accessoryConstant';
-import { GET_ACCESSORY_BY_USERNAME_URL, GET_ACCESSORY_LIST_URL, POST_NEW_ACCESSORY } from 'src/services/Config';
+import { ACCESSORY_LIST_FAIL, ACCESSORY_LIST_REQUEST, ACCESSORY_LIST_SUCCESS, CREATE_ACCESSORY_FAIL, CREATE_ACCESSORY_REQUEST, CREATE_ACCESSORY_SUCCESS, DELETE_ACCESSORY_FAIL, DELETE_ACCESSORY_REQUEST, DELETE_ACCESSORY_SUCCESS } from 'src/constants/accessoryConstant';
+import { DELETE_ACCESSORY, GET_ACCESSORY_BY_USERNAME_URL, GET_ACCESSORY_LIST_URL, POST_NEW_ACCESSORY } from 'src/services/Config';
 const headers = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
@@ -64,3 +64,24 @@ const headers = {
         });
       }
     };
+    export const deleteAccessory = (accessoryId) => async (dispatch) => {
+      dispatch({
+       type: DELETE_ACCESSORY_REQUEST,
+       payload: { accessoryId }
+      });
+      try {
+       const { data } = await Axios.delete(DELETE_ACCESSORY + accessoryId, {
+        headers: headers
+       });
+       dispatch({ type: DELETE_ACCESSORY_SUCCESS, payload: data });
+       console.log(data);
+      } catch (error) {
+       dispatch({
+        type: DELETE_ACCESSORY_FAIL,
+        payload:
+         error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+       });
+      }
+     };
