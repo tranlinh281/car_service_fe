@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import { ACCESSORY_LIST_FAIL, ACCESSORY_LIST_REQUEST, ACCESSORY_LIST_SUCCESS, CREATE_ACCESSORY_FAIL, CREATE_ACCESSORY_REQUEST, CREATE_ACCESSORY_SUCCESS, DELETE_ACCESSORY_FAIL, DELETE_ACCESSORY_REQUEST, DELETE_ACCESSORY_SUCCESS, EDIT_ACCESSORY_FAIL, EDIT_ACCESSORY_REQUEST, EDIT_ACCESSORY_SUCCESS } from 'src/constants/accessoryConstant';
 import { DELETE_ACCESSORY, GET_ACCESSORY_BY_USERNAME_URL, GET_ACCESSORY_LIST_URL, POST_NEW_ACCESSORY, UPDATE_ACCESSORY_URL } from 'src/services/Config';
+import { triggerReload } from './userAction';
 const headers = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
@@ -74,7 +75,6 @@ const headers = {
         headers: headers
        });
        dispatch({ type: DELETE_ACCESSORY_SUCCESS, payload: data });
-       console.log(data);
       } catch (error) {
        dispatch({
         type: DELETE_ACCESSORY_FAIL,
@@ -95,6 +95,7 @@ const headers = {
       try {
        const { data } = await Axios.put(UPDATE_ACCESSORY_URL ,accessoryModels);
        dispatch({ type: EDIT_ACCESSORY_SUCCESS, payload: data });
+       dispatch(triggerReload({}));
       } catch (error) {
        const message =
         error.response && error.response.data.message

@@ -39,9 +39,9 @@ export default function ConfirmDialog(props) {
     return (
         <Dialog open={confirmDialog.isOpen} classes={{ paper: classes.dialog }}>
             <DialogTitle className={classes.dialogTitle}>
-                <IconButton disableRipple className={classes.titleIcon}>
+                {/* <IconButton disableRipple className={classes.titleIcon}>
                     <NotListedLocationIcon />
-                </IconButton>
+                </IconButton> */}
             </DialogTitle>
             <DialogContent className={classes.dialogContent}>
                 <Typography variant="h6">

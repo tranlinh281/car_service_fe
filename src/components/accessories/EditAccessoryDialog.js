@@ -51,13 +51,14 @@ export default function EditAccessoryDialog(props) {
  };
 
  const editAccessory = useSelector((state) => state.editAccessory);
- const { success, loading, error } = editAccessory;
+ const { success, loading, error, test } = editAccessory;
 
  const dispatch = useDispatch();
 
  const submitHandler = (e) => {
   e.preventDefault();
   dispatch(updateAccessory(accessoryModels));
+
  };
 
  const handleClickOpen = () => {
@@ -68,14 +69,14 @@ export default function EditAccessoryDialog(props) {
   setOpen(false);
  };
 
- useEffect(() => {
-  if (success) {
-   console.log(success);
-   alert('Sửa thành công thành công');
-   setOpen(false);
-   dispatch(triggerReload({}));
-  }
- }, [success]);
+//  useEffect(() => {
+//   if (success) {
+//    console.log(success);
+// //    alert('Sửa thành công thành công');
+//    setOpen(false);
+// //    dispatch(triggerReload({}));
+//   }
+//  }, [success]);
 
  return (
   <>
