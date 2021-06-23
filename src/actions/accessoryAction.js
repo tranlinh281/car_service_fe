@@ -1,6 +1,6 @@
 import Axios from 'axios';
-import { ACCESSORY_LIST_FAIL, ACCESSORY_LIST_REQUEST, ACCESSORY_LIST_SUCCESS, CREATE_ACCESSORY_FAIL, CREATE_ACCESSORY_REQUEST, CREATE_ACCESSORY_SUCCESS, DELETE_ACCESSORY_FAIL, DELETE_ACCESSORY_REQUEST, DELETE_ACCESSORY_SUCCESS } from 'src/constants/accessoryConstant';
-import { DELETE_ACCESSORY, GET_ACCESSORY_BY_USERNAME_URL, GET_ACCESSORY_LIST_URL, POST_NEW_ACCESSORY } from 'src/services/Config';
+import { ACCESSORY_LIST_FAIL, ACCESSORY_LIST_REQUEST, ACCESSORY_LIST_SUCCESS, CREATE_ACCESSORY_FAIL, CREATE_ACCESSORY_REQUEST, CREATE_ACCESSORY_SUCCESS, DELETE_ACCESSORY_FAIL, DELETE_ACCESSORY_REQUEST, DELETE_ACCESSORY_SUCCESS, EDIT_ACCESSORY_FAIL, EDIT_ACCESSORY_REQUEST, EDIT_ACCESSORY_SUCCESS } from 'src/constants/accessoryConstant';
+import { DELETE_ACCESSORY, GET_ACCESSORY_BY_USERNAME_URL, GET_ACCESSORY_LIST_URL, POST_NEW_ACCESSORY, UPDATE_ACCESSORY_URL } from 'src/services/Config';
 const headers = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
@@ -85,3 +85,22 @@ const headers = {
        });
       }
      };
+
+     export const updateAccessory = (accessoryModels) => async (dispatch) => {
+      dispatch({
+       type: EDIT_ACCESSORY_REQUEST,
+       payload: {accessoryModels}
+      });
+     
+      try {
+       const { data } = await Axios.put(UPDATE_ACCESSORY_URL ,accessoryModels);
+       dispatch({ type: EDIT_ACCESSORY_SUCCESS, payload: data });
+      } catch (error) {
+       const message =
+        error.response && error.response.data.message
+         ? error.response.data.message
+         : error.message;
+       dispatch({ type: EDIT_ACCESSORY_FAIL, payload: message });
+      }
+     };
+     

@@ -21,30 +21,43 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateEmployee, triggerReload } from 'src/actions/userAction';
 import ButtonAction from '../ButtonAction';
 import { Edit, Close } from '@material-ui/icons';
+import { updateAccessory } from 'src/actions/accessoryAction';
 
 export default function EditAccessoryDialog(props) {
  const manufacturerList = useSelector((state) => state.manufacturerList);
  const { manufacturers } = manufacturerList;
- const [name, setName] = useState('');
- const [quantity, setQuantity] = useState(0);
- const [price, setPrice] = useState(0);
- const [unit, setUnit] = useState('');
- const [type, setType] = useState('');
- const [manufacturer, setManufacturer] = useState('');  
  const { dataFromParent } = props;
+
+ const [name, setName] = useState(dataFromParent.name);
+ const [id, setId] = useState(dataFromParent.id);
+ const [quantity, setQuantity] = useState(dataFromParent.quantity);
+ const [price, setPrice] = useState(dataFromParent.price);
+ const [unit, setUnit] = useState(dataFromParent.unit);
+ const [type, setType] = useState(dataFromParent.type);
+ const [manufacturer, setManufacturer] = useState(dataFromParent.manufacturer);
 
  const [open, setOpen] = useState(false);
  const [openConfirm, setOpenConfirm] = useState(false);
  const [role, setRole] = useState();
 
- const editEmployee = useSelector((state) => state.editEmployee);
- const { success, loading, error } = editEmployee;
+ const accessoryModels = {
+  id: id,
+  name: name,
+  quantity: quantity,
+  price: price,
+  unit: unit,
+  type: type,
+  manufacturer: manufacturer
+ };
+
+ const editAccessory = useSelector((state) => state.editAccessory);
+ const { success, loading, error } = editAccessory;
 
  const dispatch = useDispatch();
 
  const submitHandler = (e) => {
   e.preventDefault();
-  dispatch(updateEmployee(role));
+  dispatch(updateAccessory(accessoryModels));
  };
 
  const handleClickOpen = () => {
@@ -63,7 +76,6 @@ export default function EditAccessoryDialog(props) {
    dispatch(triggerReload({}));
   }
  }, [success]);
- console.log(dataFromParent.manufacturer, 'testing');
 
  return (
   <>
@@ -92,7 +104,7 @@ export default function EditAccessoryDialog(props) {
          fullWidth
          label="Tên Phụ Tùng"
          margin="normal"
-         value={dataFromParent.name}
+         value={name}
          onChange={(e) => setName(e.target.value)}
          name="username"
          variant="outlined"
@@ -101,7 +113,8 @@ export default function EditAccessoryDialog(props) {
          fullWidth
          label="Số Lượng"
          margin="normal"
-         value={dataFromParent.quantity}
+         value={quantity}
+         onChange={(e) => setQuantity(e.target.value)}
          name="fullname"
          variant="outlined"
          InputLabelProps={{
@@ -113,7 +126,8 @@ export default function EditAccessoryDialog(props) {
          fullWidth
          label="Đơn Giá"
          margin="normal"
-         value={dataFromParent.price}
+         value={price}
+         onChange={(e) => setPrice(e.target.value)}
          name="address"
          variant="outlined"
          InputLabelProps={{
@@ -126,7 +140,8 @@ export default function EditAccessoryDialog(props) {
          fullWidth
          label="Đơn vị tính"
          margin="normal"
-         value={dataFromParent.unit}
+         value={unit}
+         onChange={(e) => setUnit(e.target.value)}
          name="email"
          variant="outlined"
          InputLabelProps={{
@@ -137,7 +152,8 @@ export default function EditAccessoryDialog(props) {
          fullWidth
          label="Loại"
          margin="normal"
-         value={dataFromParent.type}
+         value={type}
+         onChange={(e) => setType(e.target.value)}
          name="phoneNumber"
          variant="outlined"
         />
@@ -145,7 +161,7 @@ export default function EditAccessoryDialog(props) {
         {/* <FormControl variant="outlined" margin='dense'> */}
         <InputLabel>Hãng</InputLabel>
         <Select
-         value={dataFromParent.manufacturer}
+         value={manufacturer}
          onChange={(e) => setManufacturer(e.target.value)}
          label="Hãng"
         >

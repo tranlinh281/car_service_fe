@@ -1,4 +1,4 @@
-import { ACCESSORY_LIST_FAIL, ACCESSORY_LIST_REQUEST, ACCESSORY_LIST_SUCCESS, CREATE_ACCESSORY_FAIL, CREATE_ACCESSORY_REQUEST, CREATE_ACCESSORY_SUCCESS, DELETE_ACCESSORY_FAIL, DELETE_ACCESSORY_REQUEST, DELETE_ACCESSORY_SUCCESS } from "src/constants/accessoryConstant";
+import { ACCESSORY_LIST_FAIL, ACCESSORY_LIST_REQUEST, ACCESSORY_LIST_SUCCESS, CREATE_ACCESSORY_FAIL, CREATE_ACCESSORY_REQUEST, CREATE_ACCESSORY_SUCCESS, DELETE_ACCESSORY_FAIL, DELETE_ACCESSORY_REQUEST, DELETE_ACCESSORY_SUCCESS, EDIT_ACCESSORY_FAIL, EDIT_ACCESSORY_REQUEST, EDIT_ACCESSORY_SUCCESS } from "src/constants/accessoryConstant";
 
 
 
@@ -41,6 +41,18 @@ export const listAccessoryReducer = (
       case DELETE_ACCESSORY_SUCCESS:
         return { loading: false, success: action.payload };
       case DELETE_ACCESSORY_FAIL:
+        return { loading: false, error: action.payload };
+      default:
+        return state;
+    }
+  };
+  export const updateAccessoryReducer = (state = {}, action) => {
+    switch (action.type) {
+      case EDIT_ACCESSORY_REQUEST:
+        return { loading: true };
+      case EDIT_ACCESSORY_SUCCESS:
+        return { loading: false, success: action.payload };
+      case EDIT_ACCESSORY_FAIL:
         return { loading: false, error: action.payload };
       default:
         return state;
