@@ -1,5 +1,4 @@
 import React from 'react';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import {
  DialogActions,
  DialogContent,
@@ -16,7 +15,10 @@ import {
  InputLabel,
  MenuItem
 } from '@material-ui/core';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
+import PopupDialog from '../dialog/dialogPopup';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateEmployee, triggerReload } from 'src/actions/userAction';
 import ButtonAction from '../ButtonAction';
@@ -24,9 +26,21 @@ import { Edit, Close } from '@material-ui/icons';
 import { updateAccessory } from 'src/actions/accessoryAction';
 
 export default function EditAccessoryDialog(props) {
+ toast.configure({
+  autoClose: 2000,
+  draggable: false,
+  position: toast.POSITION.BOTTOM_RIGHT
+ });
+ const notify = () => toast('Cập nhật Thành công!');
+ const errorNoti = () => toast('Cập nhật Thành công!');
  const manufacturerList = useSelector((state) => state.manufacturerList);
  const { manufacturers } = manufacturerList;
  const { dataFromParent } = props;
+ const [dialogPopup, setDialogPopup] = useState({
+  isOpen: false,
+  title: '',
+  subTitle: ''
+ });
 
  const [name, setName] = useState(dataFromParent.name);
  const [id, setId] = useState(dataFromParent.id);
@@ -58,7 +72,6 @@ export default function EditAccessoryDialog(props) {
  const submitHandler = (e) => {
   e.preventDefault();
   dispatch(updateAccessory(accessoryModels));
-
  };
 
  const handleClickOpen = () => {
@@ -69,14 +82,15 @@ export default function EditAccessoryDialog(props) {
   setOpen(false);
  };
 
-//  useEffect(() => {
-//   if (success) {
-//    console.log(success);
-// //    alert('Sửa thành công thành công');
-//    setOpen(false);
-// //    dispatch(triggerReload({}));
-//   }
-//  }, [success]);
+ useEffect(() => {
+  if (success) {
+   console.log(success);
+   setOpen(false);
+   notify(true);
+  } else if (error) {
+   errorNoti(true);
+  }
+ }, [success]);
 
  return (
   <>
@@ -184,6 +198,7 @@ export default function EditAccessoryDialog(props) {
      </Button>
     </DialogActions>
    </Dialog>
+   <PopupDialog dialogPopup={dialogPopup} setDialogPopup={setDialogPopup} />
   </>
  );
 }
