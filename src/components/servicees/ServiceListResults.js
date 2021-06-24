@@ -7,32 +7,51 @@ import {
  TableHead,
  TableRow
 } from '@material-ui/core';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Close, EditOutlined } from '@material-ui/icons';
 import ButtonAction from '../ButtonAction';
 import { useEffect, useState } from 'react';
 import Popup from '../Popup';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteEmployee, triggerReload } from 'src/actions/userAction';
+import { triggerReload } from 'src/actions/userAction';
 // import EditEmployeeDialog from './EditEmployeeDialog';
-import { accessoryHeader, serviceHeader } from 'src/services/HeaderTitleTable';
+import { serviceHeader } from 'src/services/HeaderTitleTable';
 import { Skeleton } from '@material-ui/lab';
+import EditServiceDialog from './EditServiceDialog';
+import { deleteService } from 'src/actions/serviceAction';
 
 export default function ServiceListResults({ services }) {
- const [openPopup, setOpenPopup] = useState(false);
+ toast.configure({
+  autoClose: 2000,
+  draggable: false,
+  position: toast.POSITION.BOTTOM_RIGHT
+ });
+ const notify = () => toast('Xóa Thành công!');
 
- // const employeeDelete = useSelector((state) => state.employeeDelete);
- // const { success } = employeeDelete;
+ const serviceDelete = useSelector((state) => state.serviceDelete);
+ const { success } = serviceDelete;
+
+ const [openPopup, setOpenPopup] = useState(false);
+ const [confirmDialog, setConfirmDialog] = useState({
+  isOpen: false,
+  title: '',
+  subTitle: ''
+ });
+
+ const deleteHandler = (service) => {
+  dispatch(deleteService(service.id));
+ };
 
  const dispatch = useDispatch();
 
- // const deleteHandler = (customer) => {
- //     if (window.confirm('Are you sure?')) {
- //         dispatch(deleteEmployee(customer.taiKhoan));
- //         dispatch(triggerReload({}));
- //     }
- // };
-
+ useEffect(() => {
+    if (success) {
+     dispatch(triggerReload({}));
+     notify(true);
+    }
+   }, [success]);
  const test = (customer) => {};
 
  const openInPopup = (customer) => {
@@ -61,9 +80,21 @@ export default function ServiceListResults({ services }) {
          {/* <TableCell>{employee.status}</TableCell> */}
          {/* <TableCell>{employee.maLoaiNguoiDung}</TableCell> */}
          <TableCell>
-          {/* <EditEmployeeDialog
-                                            dataFromParent={employee}
-                                        /> */}
+          <EditServiceDialog dataFromParent={service} />
+          <ButtonAction
+           color="secondary"
+           onClick={() => {
+            setConfirmDialog({
+             isOpen: true,
+             title: 'Bạn có chắc muốn xóa?',
+             onConfirm: () => {
+              deleteHandler(service), setConfirmDialog({ isOpen: false });
+             }
+            });
+           }}
+          >
+           <Close fontSize="small" />
+          </ButtonAction>
          </TableCell>
         </TableRow>
        ))}
@@ -76,6 +107,10 @@ export default function ServiceListResults({ services }) {
     openPopup={openPopup}
     setOpenPopup={setOpenPopup}
    ></Popup>
+   <ConfirmDialog
+    confirmDialog={confirmDialog}
+    setConfirmDialog={setConfirmDialog}
+   />
   </>
  );
 }

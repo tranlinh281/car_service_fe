@@ -7,12 +7,12 @@ import {
   SvgIcon
  } from '@material-ui/core';
  import { Search as SearchIcon } from 'react-feather';
+import CreateServiceDialog from './CreateServiceDialog';
  
  export default function ServiceListToolbar({ setPage, setKeySearch }) {
   return (
    <Box>
-    {/* <CreateEmployeeDialog/> */}
-    {/* <CreateEmployee/> */}
+   <CreateServiceDialog/>
     <Box sx={{ mt: 3 }}>
      <Card>
       <CardContent>

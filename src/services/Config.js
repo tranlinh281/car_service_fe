@@ -10,7 +10,9 @@ export const EMPLOYEE = 'employees';
 export const MANUFACTURER = 'manufacturers';
 export const ACCESSORY = 'Accessories';
 export const ACCESSORYID = 'accessoryId=';
+export const SERVICEID = 'serviceId=';
 export const SERVICE = 'Services';
+export const TYPE = 'types';
 export const OFFER = 'offer';
 export const PAGING = '/paging?PageNumber=';
 export const PAGESIZE = '&PageSize=';
@@ -43,7 +45,7 @@ export const POST_NEW_EMPLOYEE = GET_EMPLOYEE_LIST_URL;
 export const DELETE_EMPLOYEE = GET_EMPLOYEE_LIST_URL + QUESTION_MARK + USERNAME;
 // Accessory
 export const GET_ACCESSORY_LIST_URL = BASE_URL + ACCESSORY;
-export const UPDATE_ACCESSORY_URL = GET_ACCESSORY_LIST_URL ;
+export const UPDATE_ACCESSORY_URL = GET_ACCESSORY_LIST_URL;
 export const GET_ACCESSORY_PAGING_URL = GET_ACCESSORY_LIST_URL + PAGING;
 export const DELETE_ACCESSORY =
  GET_ACCESSORY_LIST_URL + QUESTION_MARK + ACCESSORYID;
@@ -64,9 +66,14 @@ export const POST_NEW_MANUFACTURER_WITH_MODELS =
  GET_MANUFACTURER_LIST_URL + INSERT_MANUFACTURER;
 //Service
 export const GET_SERVICE_LIST_URL = BASE_URL + SERVICE;
+export const UPDATE_SERVICE_URL = GET_SERVICE_LIST_URL;
+export const GET_SERVICE_TYPE_LIST_URL =
+ GET_SERVICE_LIST_URL + FORWARD_SLASH + TYPE;
 export const GET_SERVICE_PAGING_URL = GET_SERVICE_LIST_URL + PAGING;
 export const GET_SERVICE_BY_USERNAME_URL =
  GET_SERVICE_LIST_URL + QUESTION_MARK + NAME_SEARCH;
+export const POST_NEW_SERVICE = GET_SERVICE_LIST_URL;
+export const DELETE_SERVICE = GET_SERVICE_LIST_URL + QUESTION_MARK + SERVICEID;
 
 //Offer
 

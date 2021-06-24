@@ -19,8 +19,8 @@ export const customerHeader = [
 export const serviceHeader = [
  { id: 1, title: 'Tên dịch vụ' },
  { id: 2, title: 'Giá' },
- { id: 3, title: 'Loại' }
- // {id: 6, title: "Chỉnh sửa"},
+ { id: 3, title: 'Loại' },
+ {id: 4, title: "Chỉnh sửa"},
 ];
 
 export const manufacturerHeader = [

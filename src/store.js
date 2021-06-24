@@ -8,7 +8,13 @@ import {
 } from './reducers/accessoryReducer';
 import { listCustomerReducer } from './reducers/customerReducer';
 import { listManufacturerReducer } from './reducers/manufacturerReducer';
-import { listServiceReducer } from './reducers/serviceReducer';
+import {
+ createServiceReducer,
+ deleteServiceReducer,
+ listServiceReducer,
+ listServiceTypeReducer,
+ updateServiceReducer
+} from './reducers/serviceReducer';
 import {
  userLoginReducer,
  listEmployeeReducer,
@@ -38,7 +44,11 @@ const reducer = combineReducers({
  serviceList: listServiceReducer,
  createAccessories: createAccessoryReducer,
  accessoryDelete: deleteAccessoryReducer,
- editAccessory: updateAccessoryReducer
+ editAccessory: updateAccessoryReducer,
+ createServices: createServiceReducer,
+ typeList: listServiceTypeReducer,
+ serviceDelete: deleteServiceReducer,
+ editService:updateServiceReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
