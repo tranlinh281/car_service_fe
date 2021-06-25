@@ -35,6 +35,8 @@ export default function EditAccessoryDialog(props) {
  const errorNoti = () => toast('Cập nhật Thành công!');
  const manufacturerList = useSelector((state) => state.manufacturerList);
  const { manufacturers } = manufacturerList;
+ const accessoryTypeList = useSelector((state) => state.accessoryTypeList);
+ const { types } = accessoryTypeList;
  const { dataFromParent } = props;
  const [dialogPopup, setDialogPopup] = useState({
   isOpen: false,
@@ -163,28 +165,30 @@ export default function EditAccessoryDialog(props) {
           shrink: true
          }}
         />
-        <TextField
-         fullWidth
-         label="Loại"
-         margin="normal"
-         value={type}
-         onChange={(e) => setType(e.target.value)}
-         name="type"
-         variant="outlined"
-        />
-
-        {/* <FormControl variant="outlined" margin='dense'> */}
-        <InputLabel>Hãng</InputLabel>
-        <Select
-         value={manufacturer}
-         onChange={(e) => setManufacturer(e.target.value)}
-         label="Hãng"
-        >
-         {manufacturers?.map((manufacturer) => (
-          <MenuItem value={manufacturer}>{manufacturer}</MenuItem>
-         ))}
-        </Select>
-        {/* </FormControl> */}
+        <FormControl variant="outlined" margin="dense">
+         <InputLabel>Loai</InputLabel>
+         <Select
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+          label="Loại"
+         >
+          {types?.map((type) => (
+           <MenuItem value={type.name}>{type.name}</MenuItem>
+          ))}
+         </Select>
+        </FormControl>
+        <FormControl variant="outlined" margin="dense">
+         <InputLabel>Hãng</InputLabel>
+         <Select
+          value={manufacturer}
+          onChange={(e) => setManufacturer(e.target.value)}
+          label="Hãng"
+         >
+          {manufacturers?.map((manufacturer) => (
+           <MenuItem value={manufacturer.name}>{manufacturer.name}</MenuItem>
+          ))}
+         </Select>
+        </FormControl>
        </Grid>
       </Grid>
      </DialogContentText>

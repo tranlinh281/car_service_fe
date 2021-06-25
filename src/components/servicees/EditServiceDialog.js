@@ -50,16 +50,15 @@ export default function EditServiceDialog(props) {
  const [open, setOpen] = useState(false);
  const [openConfirm, setOpenConfirm] = useState(false);
 
-
  const serviceModels = {
   id: id,
   name: name,
   price: price,
-  type: type,
+  type: type
  };
 
  const editService = useSelector((state) => state.editService);
- const { success, loading, error, test } = editService;
+ const { success, loading, error } = editService;
 
  const dispatch = useDispatch();
 
@@ -124,7 +123,7 @@ export default function EditServiceDialog(props) {
          label="Đơn Giá"
          margin="normal"
          value={price}
-         onChange={(e) => setPrice(e.target.value)}
+         onChange={(e) => setPrice(parseFloat(e.target.value))}
          name="price"
          variant="outlined"
          InputLabelProps={{

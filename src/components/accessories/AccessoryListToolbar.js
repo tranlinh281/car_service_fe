@@ -8,10 +8,12 @@ import {
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
 import CreateAccessoryDialog from './CreateAccessoryDialog';
+import CreateAccessoryTypeDialog from './CreateAccessoryTypeDialog';
 
 export default function AccessoryListToolbar({ setPage, setKeySearch }) {
  return (
   <Box>
+   <CreateAccessoryTypeDialog />
    <CreateAccessoryDialog />
    {/* <CreateEmployee/> */}
    <Box sx={{ mt: 3 }}>

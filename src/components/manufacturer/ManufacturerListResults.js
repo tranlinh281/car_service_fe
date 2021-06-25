@@ -26,8 +26,9 @@ export default function ManufacturerListResults({ manufacturers }) {
 
                         <TableBody>
                             {manufacturers?.map((manufacturer) => (
-                                <TableRow hover key={manufacturer}>
-                                    <TableCell>{manufacturer}</TableCell>
+                                <TableRow hover key={manufacturer.name}>
+                                    <TableCell>{manufacturer.name}</TableCell>
+                                    <TableCell>{manufacturer.vehicleModels}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

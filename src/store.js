@@ -2,8 +2,10 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import {
  createAccessoryReducer,
+ createAccessoryTypeReducer,
  deleteAccessoryReducer,
  listAccessoryReducer,
+ listAccessoryTypeReducer,
  updateAccessoryReducer
 } from './reducers/accessoryReducer';
 import { listCustomerReducer } from './reducers/customerReducer';
@@ -48,7 +50,9 @@ const reducer = combineReducers({
  createServices: createServiceReducer,
  typeList: listServiceTypeReducer,
  serviceDelete: deleteServiceReducer,
- editService:updateServiceReducer
+ editService: updateServiceReducer,
+ accessoryTypeList: listAccessoryTypeReducer,
+ createAccessoryType: createAccessoryTypeReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
