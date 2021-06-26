@@ -41,11 +41,11 @@ export const listAccessoryReducer = (
 export const createAccessoryReducer = (state = {}, action) => {
  switch (action.type) {
   case CREATE_ACCESSORY_REQUEST:
-   return { loading: true };
+   return { ...state, loading: true };
   case CREATE_ACCESSORY_SUCCESS:
-   return { loading: false, success: action.payload };
+   return { ...state, loading: false, success: action.payload };
   case CREATE_ACCESSORY_FAIL:
-   return { loading: false, error: action.payload };
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }
@@ -54,11 +54,11 @@ export const createAccessoryReducer = (state = {}, action) => {
 export const deleteAccessoryReducer = (state = {}, action) => {
  switch (action.type) {
   case DELETE_ACCESSORY_REQUEST:
-   return { loading: true };
+   return { ...state, loading: true };
   case DELETE_ACCESSORY_SUCCESS:
-   return { loading: false, success: action.payload };
+   return { ...state, loading: false, success: action.payload };
   case DELETE_ACCESSORY_FAIL:
-   return { loading: false, error: action.payload };
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }
@@ -66,11 +66,14 @@ export const deleteAccessoryReducer = (state = {}, action) => {
 export const updateAccessoryReducer = (state = {}, action) => {
  switch (action.type) {
   case EDIT_ACCESSORY_REQUEST:
-   return { loading: true };
-  case EDIT_ACCESSORY_SUCCESS:
-   return { loading: false, success: action.payload, test: '123' };
+   return { ...state, loading: true };
+  case EDIT_ACCESSORY_SUCCESS: {
+   // Em nhớ state là immutable nên nên coi lại cái reducer
+   // (immutable là không nên thay đổi trực tiếp state mà nên copy ra 1 state mới)
+   return { ...state, loading: false, success: action.payload, test: '123' };
+  }
   case EDIT_ACCESSORY_FAIL:
-   return { loading: false, error: action.payload };
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }
@@ -98,11 +101,11 @@ export const listAccessoryTypeReducer = (
 export const createAccessoryTypeReducer = (state = {}, action) => {
  switch (action.type) {
   case CREATE_ACCESSORY_TYPE_REQUEST:
-   return { loading: true };
+   return { ...state, loading: true };
   case CREATE_ACCESSORY_TYPE_SUCCESS:
-   return { loading: false, success: action.payload };
+   return { ...state, loading: false, success: action.payload };
   case CREATE_ACCESSORY_TYPE_FAIL:
-   return { loading: false, error: action.payload };
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }

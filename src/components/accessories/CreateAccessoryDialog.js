@@ -151,7 +151,7 @@ export default function CreateAccessoryDialog() {
         />
         <InputLabel>Loại</InputLabel>
         <Select
-         value={types}
+         value={type}
          onChange={(e) => setType(e.target.value)}
          label="Hãng"
         >

@@ -1,4 +1,3 @@
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
  Box,
  Table,
@@ -7,20 +6,22 @@ import {
  TableHead,
  TableRow
 } from '@material-ui/core';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { Close, EditOutlined } from '@material-ui/icons';
-import ButtonAction from '../ButtonAction';
-import { useEffect, useState } from 'react';
-import Popup from '../Popup';
-import ConfirmDialog from '../dialog/dialogConfirm';
+import { Close, Edit } from '@material-ui/icons';
+import { useContext, useEffect, useState } from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteEmployee, triggerReload } from 'src/actions/userAction';
-// import EditEmployeeDialog from './EditEmployeeDialog';
-import { accessoryHeader } from 'src/services/HeaderTitleTable';
-import { Skeleton } from '@material-ui/lab';
-import EditAccessoryDialog from './EditAccessoryDialog';
+import { toast } from 'react-toastify';
 import { deleteAccessory } from 'src/actions/accessoryAction';
+import { triggerReload } from 'src/actions/userAction';
+import {
+ DELETE_ACCESSORY_SUCCESS,
+ EDIT_ACCESSORY_SUCCESS
+} from 'src/constants/accessoryConstant';
+import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
+import { accessoryHeader } from 'src/services/HeaderTitleTable';
+import ButtonAction from '../ButtonAction';
+import ConfirmDialog from '../dialog/dialogConfirm';
+import Popup from '../Popup';
 
 export default function AccessoryListResults({ accessories }) {
  const [openPopup, setOpenPopup] = useState(false);
@@ -29,34 +30,46 @@ export default function AccessoryListResults({ accessories }) {
   title: '',
   subTitle: ''
  });
- const accessoryDelete = useSelector((state) => state.accessoryDelete);
- const { success } = accessoryDelete;
- toast.configure({
-  autoClose: 2000,
-  draggable: false,
-  position: toast.POSITION.BOTTOM_RIGHT
- });
- const notify = () => toast('Xóa thành công!');
+ const { success: deleteSuccess } = useSelector(
+  (state) => state.accessoryDelete
+ );
+ const { success: updateSuccess } = useSelector((state) => state.editAccessory);
+
  console.log('id', accessories);
 
  const dispatch = useDispatch();
+ const { setShouldUpdateAccessoryDialogOpen, setUpdateAccessoryDefaultValue } =
+  useContext(DialogContext);
 
  const deleteHandler = (accessory) => {
-  // if (window.confirm('Are you sure?')) {
   dispatch(deleteAccessory(accessory.id));
-  // }
  };
- useEffect(() => {
-  if (success) {
-   dispatch(triggerReload({}));
-   notify(true);
-  }
- }, [success]);
 
- const test = (customer) => {};
+ useEffect(() => {
+  if (deleteSuccess) {
+   toast.success('Xóa thành công!');
+   // Should create action creator for this
+   dispatch({ type: DELETE_ACCESSORY_SUCCESS, payload: false });
+   dispatch(triggerReload({}));
+  }
+
+  if (updateSuccess) {
+   toast.success('Updated!');
+   // Should create action creator for this
+   dispatch({ type: EDIT_ACCESSORY_SUCCESS, payload: false });
+   dispatch(triggerReload({}));
+
+   setShouldUpdateAccessoryDialogOpen(false);
+  }
+ }, [deleteSuccess, updateSuccess]);
 
  const openInPopup = (customer) => {
   setOpenPopup(true);
+ };
+
+ const handleOpenEditDialog = (editData) => {
+  setShouldUpdateAccessoryDialogOpen(true);
+  setUpdateAccessoryDefaultValue(editData);
  };
 
  return (
@@ -84,7 +97,13 @@ export default function AccessoryListResults({ accessories }) {
          {/* <TableCell>{employee.status}</TableCell> */}
          {/* <TableCell>{employee.maLoaiNguoiDung}</TableCell> */}
          <TableCell>
-          <EditAccessoryDialog dataFromParent={accessory} />
+          <ButtonAction
+           variant="contained"
+           color="primary"
+           onClick={() => handleOpenEditDialog(accessory)}
+          >
+           <Edit fontSize="small" />
+          </ButtonAction>
           <ButtonAction
            color="secondary"
            onClick={() => {
