@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import { deleteAccessory } from 'src/actions/accessoryAction';
 import { triggerReload } from 'src/actions/userAction';
 import {
+ CREATE_ACCESSORY_SUCCESS,
  DELETE_ACCESSORY_SUCCESS,
  EDIT_ACCESSORY_SUCCESS
 } from 'src/constants/accessoryConstant';
@@ -35,11 +36,18 @@ export default function AccessoryListResults({ accessories }) {
  );
  const { success: updateSuccess } = useSelector((state) => state.editAccessory);
 
+ const { success: createSuccess } = useSelector(
+  (state) => state.createAccessories
+ );
+
  console.log('id', accessories);
 
  const dispatch = useDispatch();
- const { setShouldUpdateAccessoryDialogOpen, setUpdateAccessoryDefaultValue } =
-  useContext(DialogContext);
+ const {
+  setShouldUpdateAccessoryDialogOpen,
+  setUpdateAccessoryDefaultValue,
+  setShouldCreateAccessoryDialogOpen
+ } = useContext(DialogContext);
 
  const deleteHandler = (accessory) => {
   dispatch(deleteAccessory(accessory.id));
@@ -54,14 +62,23 @@ export default function AccessoryListResults({ accessories }) {
   }
 
   if (updateSuccess) {
-   toast.success('Updated!');
+   toast.success('Cập nhật thành công!');
    // Should create action creator for this
    dispatch({ type: EDIT_ACCESSORY_SUCCESS, payload: false });
    dispatch(triggerReload({}));
 
    setShouldUpdateAccessoryDialogOpen(false);
   }
- }, [deleteSuccess, updateSuccess]);
+  
+  if (createSuccess) {
+   toast.success('Thêm mới thành công!');
+   // Should create action creator for this
+   dispatch({ type: CREATE_ACCESSORY_SUCCESS, payload: false });
+   dispatch(triggerReload({}));
+
+   setShouldCreateAccessoryDialogOpen(false);
+  }
+ }, [deleteSuccess, updateSuccess, createSuccess]);
 
  const openInPopup = (customer) => {
   setOpenPopup(true);

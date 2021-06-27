@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listAccessory } from 'src/actions/accessoryAction';
 import AccessoryListResults from 'src/components/accessories/AccessoryListResults';
 import AccessoryListToolbar from 'src/components/accessories/AccessoryListToolbar';
-import EditAccessoryDialogHOC from 'src/components/_HOCProvider/EditAccessoryDialogHOC';
+import AccessoryDialogHOC from 'src/components/_HOCProvider/AccessoryDialogHOC';
 import * as constant from '../utils/Constants';
 
 const AccessoryList = () => {
@@ -28,47 +28,45 @@ const AccessoryList = () => {
  };
 
  return (
-  <>
-   <EditAccessoryDialogHOC>
-    <Helmet>
-     <title>{constant.ACCESSORIES_TITLE}</title>
-    </Helmet>
-    <Box
-     sx={{
-      backgroundColor: 'background.default',
-      minHeight: '100%',
-      py: 3
-     }}
-    >
-     <Container maxWidth={false}>
-      <AccessoryListToolbar setPage={setPage} setKeySearch={setKeySearch} />
-      <Box sx={{ pt: 3 }}>
-       <Card>
-        <AccessoryListResults
-         totalPages={totalPages}
-         accessories={accessories}
+  <AccessoryDialogHOC>
+   <Helmet>
+    <title>{constant.ACCESSORIES_TITLE}</title>
+   </Helmet>
+   <Box
+    sx={{
+     backgroundColor: 'background.default',
+     minHeight: '100%',
+     py: 3
+    }}
+   >
+    <Container maxWidth={false}>
+     <AccessoryListToolbar setPage={setPage} setKeySearch={setKeySearch} />
+     <Box sx={{ pt: 3 }}>
+      <Card>
+       <AccessoryListResults
+        totalPages={totalPages}
+        accessories={accessories}
+       />
+       <Box
+        sx={{
+         display: 'flex',
+         justifyContent: 'center',
+         pt: 2
+        }}
+       >
+        <Pagination
+         color="primary"
+         count={totalPages}
+         size="medium"
+         onChange={handlePageChange}
+         page={page}
         />
-        <Box
-         sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          pt: 2
-         }}
-        >
-         <Pagination
-          color="primary"
-          count={totalPages}
-          size="medium"
-          onChange={handlePageChange}
-          page={page}
-         />
-        </Box>
-       </Card>
-      </Box>
-     </Container>
-    </Box>
-   </EditAccessoryDialogHOC>
-  </>
+       </Box>
+      </Card>
+     </Box>
+    </Container>
+   </Box>
+  </AccessoryDialogHOC>
  );
 };
 

@@ -6,8 +6,9 @@ const DialogContextProvider = ({ children }) => {
  // Context State of update accessory dialog
  const [shouldUpdateAccessoryDialogOpen, setShouldUpdateAccessoryDialogOpen] =
   useState(false);
- const [updateAccessoryDefaultValue, setUpdateAccessoryDefaultValue] =
-  useState({});
+ const [updateAccessoryDefaultValue, setUpdateAccessoryDefaultValue] = useState(
+  {}
+ );
 
  const updateDialogAccessoryState = {
   shouldUpdateAccessoryDialogOpen,
@@ -17,9 +18,20 @@ const DialogContextProvider = ({ children }) => {
  };
 
  // -------------------------------------------------------------------------------
+ // Context State of create accessory dialog
+ const [shouldCreateAccessoryDialogOpen, setShouldCreateAccessoryDialogOpen] =
+  useState(false);
+
+ const createDialogAccessoryState = {
+  shouldCreateAccessoryDialogOpen,
+  setShouldCreateAccessoryDialogOpen
+ };
+
+ // -------------------------------------------------------------------------------
 
  const defaultProviderValue = {
-  ...updateDialogAccessoryState
+  ...updateDialogAccessoryState,
+  ...createDialogAccessoryState
  };
 
  return (

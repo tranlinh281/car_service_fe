@@ -68,8 +68,6 @@ export const updateAccessoryReducer = (state = {}, action) => {
   case EDIT_ACCESSORY_REQUEST:
    return { ...state, loading: true };
   case EDIT_ACCESSORY_SUCCESS: {
-   // Em nhớ state là immutable nên nên coi lại cái reducer
-   // (immutable là không nên thay đổi trực tiếp state mà nên copy ra 1 state mới)
    return { ...state, loading: false, success: action.payload, test: '123' };
   }
   case EDIT_ACCESSORY_FAIL:
@@ -85,14 +83,11 @@ export const listAccessoryTypeReducer = (
 ) => {
  switch (action.type) {
   case ACCESSORY_TYPE_LIST_REQUEST:
-   return { loading: true };
+   return { ...state, loading: true };
   case ACCESSORY_TYPE_LIST_SUCCESS:
-   return {
-    loading: false,
-    types: action.payload
-   };
+   return { ...state, loading: false, types: action.payload };
   case ACCESSORY_TYPE_LIST_FAIL:
-   return { loading: false, error: action.payload };
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }

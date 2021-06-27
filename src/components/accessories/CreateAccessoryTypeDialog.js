@@ -17,7 +17,6 @@ import { createTypeAccessory } from 'src/actions/accessoryAction';
 
 export default function CreateAccessoryTypeDialog() {
  const [open, setOpen] = useState(false);
- const [openConfirm, setOpenConfirm] = useState(false);
 
  const [name, setName] = useState('');
 
@@ -49,8 +48,6 @@ export default function CreateAccessoryTypeDialog() {
 
  useEffect(() => {
   if (success) {
-   console.log(success);
-   alert('Thêm thành công');
    setOpen(false);
    dispatch(triggerReload({}));
   }

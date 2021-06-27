@@ -4,17 +4,29 @@ import {
  CardContent,
  TextField,
  InputAdornment,
+ Button,
  SvgIcon
 } from '@material-ui/core';
+import { useContext } from 'react';
 import { Search as SearchIcon } from 'react-feather';
+import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
+import DialogCreateAccessory from '../dialog/dialogCreateAccessory';
 import CreateAccessoryDialog from './CreateAccessoryDialog';
 import CreateAccessoryTypeDialog from './CreateAccessoryTypeDialog';
 
 export default function AccessoryListToolbar({ setPage, setKeySearch }) {
+ const { setShouldCreateAccessoryDialogOpen } = useContext(DialogContext);
+ const handleOpenCreateDialog = () => {
+  setShouldCreateAccessoryDialogOpen(true);
+ };
+ //see that?? nó là component cũ nhé
  return (
   <Box>
+   {/* <CreateAccessoryDialog /> */}
    <CreateAccessoryTypeDialog />
-   <CreateAccessoryDialog />
+   <Button variant="contained" color="primary" onClick={handleOpenCreateDialog}>
+    Thêm Phụ Tùng
+   </Button>
    {/* <CreateEmployee/> */}
    <Box sx={{ mt: 3 }}>
     <Card>

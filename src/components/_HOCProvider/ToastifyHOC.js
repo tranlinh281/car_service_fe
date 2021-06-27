@@ -22,3 +22,6 @@ const ToastifyHOC = ({ children }) => {
 };
 
 export default memo(ToastifyHOC);
+
+// ------
+

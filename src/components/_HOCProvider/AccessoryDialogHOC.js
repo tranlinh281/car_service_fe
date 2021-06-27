@@ -1,12 +1,15 @@
 import { memo, useContext, useState } from 'react';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
+import DialogCreateAccessory from '../dialog/dialogCreateAccessory';
 import DialogUpdateAccessory from '../dialog/dialogUpdateAccessory';
 
-const EditAccessoryDialogHOC = ({ children }) => {
+const AccessoryDialogHOC = ({ children }) => {
  const {
   shouldUpdateAccessoryDialogOpen,
   setShouldUpdateAccessoryDialogOpen,
-  updateAccessoryDefaultValue
+  updateAccessoryDefaultValue,
+  shouldCreateAccessoryDialogOpen,
+  setShouldCreateAccessoryDialogOpen
  } = useContext(DialogContext);
 
  return (
@@ -17,8 +20,15 @@ const EditAccessoryDialogHOC = ({ children }) => {
     open={shouldUpdateAccessoryDialogOpen}
     onClose={() => setShouldUpdateAccessoryDialogOpen(false)}
    />
+
+   <DialogCreateAccessory
+    open={shouldCreateAccessoryDialogOpen}
+    onClose={() => setShouldCreateAccessoryDialogOpen(false)}
+   />
+
+   {/* là chỗ này nè */}
   </>
  );
 };
 
-export default memo(EditAccessoryDialogHOC);
+export default memo(AccessoryDialogHOC);

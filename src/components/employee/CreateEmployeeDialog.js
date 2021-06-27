@@ -21,6 +21,8 @@ import {
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createEmployee, triggerReload } from 'src/actions/userAction';
+import { CREATE_EMPLOYEE_SUCCESS } from 'src/constants/userConstant';
+import { toast } from 'react-toastify';
 
 export default function CreateEmployeeDialog() {
  const [open, setOpen] = useState(false);
@@ -66,12 +68,13 @@ export default function CreateEmployeeDialog() {
  };
 
  useEffect(() => {
+  //  chỗ này khi mà component này đucợ render lại cái nó chạy useffect nè
   if (success) {
    console.log(success);
-   alert('Thêm thành công');
    setOpen(false);
-
+   toast.success('Thêm mới thành công!');
    dispatch(triggerReload({}));
+   dispatch({ type: CREATE_EMPLOYEE_SUCCESS, payload: false });
    //  window.location.reload();
   }
  }, [success]);
@@ -117,7 +120,7 @@ export default function CreateEmployeeDialog() {
          variant="outlined"
          onChange={(e) => setEmail(e.target.value)}
         />
-          <TextField
+        <TextField
          fullWidth
          label="Địa chỉ"
          margin="normal"
@@ -135,7 +138,7 @@ export default function CreateEmployeeDialog() {
          variant="outlined"
          onChange={(e) => setPhonenumber(e.target.value)}
         />
-  
+
         <FormControl variant="outlined" margin="dense">
          <TextField
           id="date"
