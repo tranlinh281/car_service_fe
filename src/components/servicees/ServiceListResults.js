@@ -9,27 +9,24 @@ import {
 } from '@material-ui/core';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Close, EditOutlined } from '@material-ui/icons';
+import { Close, EditOutlined, Edit } from '@material-ui/icons';
 import ButtonAction from '../ButtonAction';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Popup from '../Popup';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import { useDispatch, useSelector } from 'react-redux';
 import { triggerReload } from 'src/actions/userAction';
 // import EditEmployeeDialog from './EditEmployeeDialog';
 import { serviceHeader } from 'src/services/HeaderTitleTable';
-import { Skeleton } from '@material-ui/lab';
-import EditServiceDialog from './EditServiceDialog';
 import { deleteService } from 'src/actions/serviceAction';
+import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
+import {
+ CREATE_SERVICE_SUCCESS,
+ DELETE_SERVICE_SUCCESS,
+ EDIT_SERVICE_SUCCESS
+} from 'src/constants/serviceConstant';
 
 export default function ServiceListResults({ services }) {
- toast.configure({
-  autoClose: 2000,
-  draggable: false,
-  position: toast.POSITION.BOTTOM_RIGHT
- });
- const notify = () => toast('Xóa Thành công!');
-
  const serviceDelete = useSelector((state) => state.serviceDelete);
  const { success } = serviceDelete;
 
@@ -39,6 +36,11 @@ export default function ServiceListResults({ services }) {
   title: '',
   subTitle: ''
  });
+ const { success: deleteSuccess } = useSelector((state) => state.serviceDelete);
+ const { success: updateSuccess } = useSelector((state) => state.editService);
+ const { success: createSuccess } = useSelector(
+  (state) => state.createServices
+ );
 
  const deleteHandler = (service) => {
   dispatch(deleteService(service.id));
@@ -46,16 +48,40 @@ export default function ServiceListResults({ services }) {
 
  const dispatch = useDispatch();
 
- useEffect(() => {
-    if (success) {
-     dispatch(triggerReload({}));
-     notify(true);
-    }
-   }, [success]);
- const test = (customer) => {};
+ const {
+  setShouldUpdateServiceDialogOpen,
+  setUpdateServiceDefaultValue,
+  setShouldCreateServiceDialogOpen
+ } = useContext(DialogContext);
 
- const openInPopup = (customer) => {
-  setOpenPopup(true);
+ useEffect(() => {
+  if (deleteSuccess) {
+   toast.success('Xóa thành công!');
+   // Should create action creator for this
+   dispatch({ type: DELETE_SERVICE_SUCCESS, payload: false });
+   dispatch(triggerReload({}));
+  }
+
+  if (updateSuccess) {
+   toast.success('Cập nhật thành công!');
+   // Should create action creator for this
+   dispatch({ type: EDIT_SERVICE_SUCCESS, payload: false });
+   dispatch(triggerReload({}));
+
+   setShouldUpdateServiceDialogOpen(false);
+  }
+
+  if (createSuccess) {
+   toast.success('Thêm mới thành công!');
+   // Should create action creator for this
+   dispatch({ type: CREATE_SERVICE_SUCCESS, payload: false });
+   dispatch(triggerReload({}));
+   setShouldCreateServiceDialogOpen(false);
+  }
+ }, [deleteSuccess, updateSuccess, createSuccess]);
+ const handleOpenEditDialog = (editData) => {
+  setShouldUpdateServiceDialogOpen(true);
+  setUpdateServiceDefaultValue(editData);
  };
 
  return (
@@ -80,7 +106,13 @@ export default function ServiceListResults({ services }) {
          {/* <TableCell>{employee.status}</TableCell> */}
          {/* <TableCell>{employee.maLoaiNguoiDung}</TableCell> */}
          <TableCell>
-          <EditServiceDialog dataFromParent={service} />
+          <ButtonAction
+           variant="contained"
+           color="primary"
+           onClick={() => handleOpenEditDialog(service)}
+          >
+           <Edit fontSize="small" />
+          </ButtonAction>
           <ButtonAction
            color="secondary"
            onClick={() => {
@@ -102,11 +134,6 @@ export default function ServiceListResults({ services }) {
      </Table>
     </Box>
    </PerfectScrollbar>
-   <Popup
-    title="Thông tin nhân viên"
-    openPopup={openPopup}
-    setOpenPopup={setOpenPopup}
-   ></Popup>
    <ConfirmDialog
     confirmDialog={confirmDialog}
     setConfirmDialog={setConfirmDialog}

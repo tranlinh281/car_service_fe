@@ -11,7 +11,6 @@ import { useContext } from 'react';
 import { Search as SearchIcon } from 'react-feather';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import DialogCreateAccessory from '../dialog/dialogCreateAccessory';
-import CreateAccessoryDialog from './CreateAccessoryDialog';
 import CreateAccessoryTypeDialog from './CreateAccessoryTypeDialog';
 
 export default function AccessoryListToolbar({ setPage, setKeySearch }) {
@@ -19,10 +18,8 @@ export default function AccessoryListToolbar({ setPage, setKeySearch }) {
  const handleOpenCreateDialog = () => {
   setShouldCreateAccessoryDialogOpen(true);
  };
- //see that?? nó là component cũ nhé
  return (
   <Box>
-   {/* <CreateAccessoryDialog /> */}
    <CreateAccessoryTypeDialog />
    <Button variant="contained" color="primary" onClick={handleOpenCreateDialog}>
     Thêm Phụ Tùng

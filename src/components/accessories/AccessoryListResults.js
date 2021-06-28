@@ -80,9 +80,6 @@ export default function AccessoryListResults({ accessories }) {
   }
  }, [deleteSuccess, updateSuccess, createSuccess]);
 
- const openInPopup = (customer) => {
-  setOpenPopup(true);
- };
 
  const handleOpenEditDialog = (editData) => {
   setShouldUpdateAccessoryDialogOpen(true);
@@ -111,8 +108,6 @@ export default function AccessoryListResults({ accessories }) {
          <TableCell>{accessory.unit}</TableCell>
          <TableCell>{accessory.type}</TableCell>
          <TableCell>{accessory.manufacturer}</TableCell>
-         {/* <TableCell>{employee.status}</TableCell> */}
-         {/* <TableCell>{employee.maLoaiNguoiDung}</TableCell> */}
          <TableCell>
           <ButtonAction
            variant="contained"

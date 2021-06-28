@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import {
@@ -24,81 +24,68 @@ import { createEmployee, triggerReload } from 'src/actions/userAction';
 import { CREATE_EMPLOYEE_SUCCESS } from 'src/constants/userConstant';
 import { toast } from 'react-toastify';
 
-export default function CreateEmployeeDialog() {
- const [open, setOpen] = useState(false);
+const CreateEmployeeDialog = ({ data, open, onClose }) => {
  const [openConfirm, setOpenConfirm] = useState(false);
 
  const [role, setRole] = useState('');
  const [fullname, setFullname] = useState('');
- const [phoneNumber, setPhonenumber] = useState('');
+ const [phoneNumber, setPhoneNumber] = useState('');
  const [dateOfBirth, setDateOfBirth] = useState('');
  const [email, setEmail] = useState('');
  const [address, setAddress] = useState('');
- const [gender, setGender] = useState('');
+ const [employeeModels, setEmployeeModels] = useState();
 
- const employeeModels = {
-  role: role,
-  fullname: fullname,
-  email: email,
-  address: address,
-  phoneNumber: phoneNumber,
-  dateOfBirth: dateOfBirth
+ const setForm = ({
+  fullname,
+  phoneNumber,
+  dateOfBirth,
+  email,
+  address,
+  role
+ }) => {
+  setFullname(fullname);
+  setRole(role);
+  setPhoneNumber(phoneNumber);
+  setDateOfBirth(dateOfBirth);
+  setEmail(email);
+  setAddress(address);
  };
-
- const createEmp = useSelector((state) => state.createEmp);
- const { success, loading, error } = createEmp;
+ useEffect(() => {
+  setEmployeeModels((prev) => ({
+   ...prev,
+   fullname,
+   phoneNumber,
+   dateOfBirth,
+   email,
+   address,
+   role
+  }));
+ }, [fullname, phoneNumber, dateOfBirth, email, address, role]);
+ useEffect(() => {
+  if (data && open) {
+   setForm(data);
+   setEmployeeModels(data);
+  }
+ }, [data, open]);
 
  const dispatch = useDispatch();
 
  const submitHandler = (e) => {
   e.preventDefault();
-  console.log(employeeModels);
   dispatch(createEmployee(employeeModels));
  };
 
- const handleClickOpen = () => {
-  setOpen(true);
- };
- const handleClose = () => {
-  setOpen(false);
- };
-
- const handleChange = (event) => {
-  setGender(event.target.value);
- };
-
- useEffect(() => {
-  //  chỗ này khi mà component này đucợ render lại cái nó chạy useffect nè
-  if (success) {
-   console.log(success);
-   setOpen(false);
-   toast.success('Thêm mới thành công!');
-   dispatch(triggerReload({}));
-   dispatch({ type: CREATE_EMPLOYEE_SUCCESS, payload: false });
-   //  window.location.reload();
-  }
- }, [success]);
-
  return (
   <>
-   <Box
-    sx={{
-     display: 'flex',
-     justifyContent: 'flex-end'
-    }}
-   >
-    <Button variant="contained" color="primary" onClick={handleClickOpen}>
-     Thêm nhân viên
-    </Button>
-   </Box>
    <Dialog
-    onClose={handleClose}
+    onClose={onClose}
     aria-describedby="scroll-dialog-description"
     open={open}
-    fullWidth={true}
-    maxWidth={'md'}
+    maxWidth={'sm'}
    >
-    <DialogTitle id="customized-dialog-title">Thêm nhân viên</DialogTitle>
+    <DialogTitle id="customized-dialog-title" onClose={onClose}>
+     Thêm mới Nhân viên
+    </DialogTitle>
     <DialogContent dividers>
      <DialogContentText>
       <Grid container spacing={3}>
@@ -136,7 +123,7 @@ export default function CreateEmployeeDialog() {
          margin="normal"
          name="phoneNumber"
          variant="outlined"
-         onChange={(e) => setPhonenumber(e.target.value)}
+         onChange={(e) => setPhoneNumber(e.target.value)}
         />
 
         <FormControl variant="outlined" margin="dense">
@@ -161,21 +148,20 @@ export default function CreateEmployeeDialog() {
          <MenuItem value="manager">Quản lý</MenuItem>
          <MenuItem value="staff">Kỹ thuật viên</MenuItem>
         </Select>
-        {/* </FormControl> */}
        </Grid>
       </Grid>
-      {/* </Form> */}
      </DialogContentText>
     </DialogContent>
     <DialogActions>
-     <Button autoFocus onClick={submitHandler} color="primary">
+     <Button autoFocus onClick={submitHandler} color="primary" left>
       Lưu
      </Button>
-     <Button autoFocus onClick={handleClose} color="secondary">
+     <Button autoFocus onClick={onClose} color="secondary">
       Hủy
      </Button>
     </DialogActions>
    </Dialog>
   </>
  );
-}
+};
+export default memo(CreateEmployeeDialog);

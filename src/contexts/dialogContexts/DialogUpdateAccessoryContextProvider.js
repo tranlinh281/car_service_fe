@@ -28,10 +28,56 @@ const DialogContextProvider = ({ children }) => {
  };
 
  // -------------------------------------------------------------------------------
+ // Context State of update service dialog
+ const [shouldUpdateServiceDialogOpen, setShouldUpdateServiceDialogOpen] =
+  useState(false);
+ const [updateServiceDefaultValue, setUpdateServiceDefaultValue] = useState({});
+
+ const updateDialogServiceState = {
+  shouldUpdateServiceDialogOpen,
+  setShouldUpdateServiceDialogOpen,
+  updateServiceDefaultValue,
+  setUpdateServiceDefaultValue
+ };
+ // --------------------------------------
+ // Context State of create accessory dialog
+ const [shouldCreateServiceDialogOpen, setShouldCreateServiceDialogOpen] =
+  useState(false);
+
+ const createDialogServiceState = {
+  shouldCreateServiceDialogOpen,
+  setShouldCreateServiceDialogOpen
+ };
+ // ---------------------------
+ // Context State of update employee dialog
+ const [shouldUpdateEmployeeDialogOpen, setShouldUpdateEmployeeDialogOpen] =
+  useState(false);
+ const [updateEmployeeDefaultValue, setUpdateEmployeeDefaultValue] = useState(
+  {}
+ );
+ const updateDialogEmployeeState = {
+  shouldUpdateEmployeeDialogOpen,
+  setShouldUpdateEmployeeDialogOpen,
+  updateEmployeeDefaultValue,
+  setUpdateEmployeeDefaultValue
+ };
+ // --------------------------------------
+ // Context State of create employee dialog
+ const [shouldCreateEmployeeDialogOpen, setShouldCreateEmployeeDialogOpen] =
+  useState(false);
+
+ const createDialogEmployeeState = {
+  shouldCreateEmployeeDialogOpen,
+  setShouldCreateEmployeeDialogOpen
+ };
 
  const defaultProviderValue = {
   ...updateDialogAccessoryState,
-  ...createDialogAccessoryState
+  ...createDialogAccessoryState,
+  ...updateDialogServiceState,
+  ...createDialogServiceState,
+  ...updateDialogEmployeeState,
+  ...createDialogEmployeeState
  };
 
  return (

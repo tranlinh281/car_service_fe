@@ -8,12 +8,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listService } from 'src/actions/serviceAction';
 import ServiceListToolbar from 'src/components/servicees/ServiceListToolbar';
 import ServiceListResults from 'src/components/servicees/ServiceListResults';
+import ServiceDialogHOC from 'src/components/_HOCProvider/ServiceDialogHOC';
 
 
 const ServiceList = () => {
  const serviceList = useSelector((state) => state.serviceList);
  const { loading, error, services, currentPage, totalPages, totalEmp } =
- serviceList;
+  serviceList;
 
  const [page, setPage] = useState(1);
  const triggerReload = useSelector((state) => state.triggerReload);
@@ -32,40 +33,42 @@ const ServiceList = () => {
 
  return (
   <>
-   <Helmet>
-    <title>{constant.SERVICE_TITLE}</title>
-   </Helmet>
-   <Box
-    sx={{
-     backgroundColor: 'background.default',
-     minHeight: '100%',
-     py: 3
-    }}
-   >
-    <Container maxWidth={false}>
-     <ServiceListToolbar setPage={setPage} setKeySearch={setKeySearch} />
-     <Box sx={{ pt: 3 }}>
-      <Card>
-       <ServiceListResults totalPages={totalPages} services={services} />
-       <Box
-        sx={{
-         display: 'flex',
-         justifyContent: 'center',
-         pt: 2
-        }}
-       >
-        <Pagination
-         color="primary"
-         count={totalPages}
-         size="medium"
-         onChange={handlePageChange}
-         page={page}
-        />
-       </Box>
-      </Card>
-     </Box>
-    </Container>
-   </Box>
+   <ServiceDialogHOC>
+    <Helmet>
+     <title>{constant.SERVICE_TITLE}</title>
+    </Helmet>
+    <Box
+     sx={{
+      backgroundColor: 'background.default',
+      minHeight: '100%',
+      py: 3
+     }}
+    >
+     <Container maxWidth={false}>
+      <ServiceListToolbar setPage={setPage} setKeySearch={setKeySearch} />
+      <Box sx={{ pt: 3 }}>
+       <Card>
+        <ServiceListResults totalPages={totalPages} services={services} />
+        <Box
+         sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          pt: 2
+         }}
+        >
+         <Pagination
+          color="primary"
+          count={totalPages}
+          size="medium"
+          onChange={handlePageChange}
+          page={page}
+         />
+        </Box>
+       </Card>
+      </Box>
+     </Container>
+    </Box>
+   </ServiceDialogHOC>
   </>
  );
 };

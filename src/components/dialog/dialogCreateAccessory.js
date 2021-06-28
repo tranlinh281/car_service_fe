@@ -25,17 +25,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
  const dispatch = useDispatch();
  const { manufacturers } = useSelector((state) => state.manufacturerList);
  const { types } = useSelector((state) => state.accessoryTypeList);
- // Thật ra cái này nó log vậy đúng ròi tại cái manu với cái type nó lấy từ API, nên khi mà nó có data thì component này được render lại nên log lại
- // ok vậy ổn hử? ổn cái log ở ngoài này thì chỉ là khi component nó render lại nó log thôi nên bình thường, khi nào nó chạy gì đó trong useeffect nhiều
- // Thì lúc đó mới có vấn đề
- //ok vậy bỏ qua. Nãy lúc anh làm thì anh k vẫn gọi cái component create accessory cũ, k phải cái dialog, nhưng mà nó hết thông báo lặp, thì như vậy là ntn?
- // là nó chỉ log 1 lần thôi hả hay sao
- // đúng rồi popup success lên là 1 lần rồi thôi out ra vào lại k có hiện, tại sao nhỉ?
- // là sao ta chưa hình dung ra đây để ah mẫu cho :v
  
- console.log(types, 'debug types');
- console.log(manufacturers, 'debug manufacturers');
-
  const [name, setName] = useState();
  const [id, setId] = useState();
  const [quantity, setQuantity] = useState();

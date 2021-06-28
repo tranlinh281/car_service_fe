@@ -36,7 +36,7 @@ const initialState = {
 const reducer = combineReducers({
  userLogin: userLoginReducer,
  employeeList: listEmployeeReducer,
- createEmp: createEmployeeReducer,
+ createEmployee: createEmployeeReducer,
  triggerReload: reloadReducer,
  employeeDelete: deleteEmployeeReducer,
  editEmployee: updateEmployeeReducer,

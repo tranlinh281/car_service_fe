@@ -1,19 +1,26 @@
 import {
  Box,
+ Button,
  Card,
  CardContent,
- TextField,
  InputAdornment,
- SvgIcon
+ SvgIcon,
+ TextField
 } from '@material-ui/core';
+import { useContext } from 'react';
 import { Search as SearchIcon } from 'react-feather';
-import CreateEmployeeDialog from './CreateEmployeeDialog';
+import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 
 export default function EmployeeListToolbar({ setPage, setKeySearch }) {
+ const { setShouldCreateEmployeeDialogOpen } = useContext(DialogContext);
+ const handleOpenCreateDialog = () => {
+  setShouldCreateEmployeeDialogOpen(true);
+ };
  return (
   <Box>
-   <CreateEmployeeDialog/>
-   {/* <CreateEmployee/> */}
+   <Button variant="contained" color="primary" onClick={handleOpenCreateDialog}>
+    Thêm Nhân viên
+   </Button>
    <Box sx={{ mt: 3 }}>
     <Card>
      <CardContent>

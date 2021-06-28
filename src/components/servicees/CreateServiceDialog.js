@@ -26,28 +26,20 @@ import { triggerReload } from 'src/actions/userAction';
 
 import { createService, listServiceType } from 'src/actions/serviceAction';
 
-export default function CreateServiceDialog() {
- toast.configure({
-  autoClose: 2000,
-  draggable: false,
-  position: toast.POSITION.BOTTOM_RIGHT
- });
- const notify = () => toast('Thêm dịch vụ thành công!');
-
- const typeList = useSelector((state) => state.typeList);
- const { types } = typeList;
- console.log(types, 'list type');
- const [open, setOpen] = useState(false);
- const [openConfirm, setOpenConfirm] = useState(false);
+export default function CreateServiceDialog({ data, open, onClose }) {
+ const { types } = useSelector((state) => state.typeList);
 
  const [name, setName] = useState('');
+ const [id, setId] = useState('');
  const [price, setPrice] = useState(0);
- const [type, setType] = useState('');
+ const [type, setType] = useState();
+ const [serviceModels, setServiceModels] = useState();
 
- const serviceModels = {
-  name: name,
-  type: type,
-  price: price
+ const setForm = ({ id, name, price, type }) => {
+  setName(name);
+  setId(id);
+  setPrice(price);
+  setType(type);
  };
 
  const createServices = useSelector((state) => state.createServices);
@@ -57,49 +49,37 @@ export default function CreateServiceDialog() {
 
  const submitHandler = (e) => {
   e.preventDefault();
-  console.log(serviceModels);
-  dispatch(createSservice(serviceModels));
+  dispatch(createService(serviceModels));
  };
-
- const handleClickOpen = () => {
-  setOpen(true);
- };
- const handleClose = () => {
-  setOpen(false);
- };
-
 
  useEffect(() => {
   dispatch(listServiceType());
-  if (success) {
-   console.log(success);
-   notify(true);
-   setOpen(false);
-   dispatch(triggerReload({}));
-   //  window.location.reload();
+  setServiceModels((prev) => ({
+   ...prev,
+   id,
+   name,
+   price,
+   type
+  }));
+ }, [id, name, price, type]);
+ useEffect(() => {
+  if (data && open) {
+   setForm(data);
+   setAccessoryModels(data);
   }
- }, [success]);
+ }, [data, open]);
 
  return (
   <>
-   <Box
-    sx={{
-     display: 'flex',
-     justifyContent: 'flex-end'
-    }}
-   >
-    <Button variant="contained" color="primary" onClick={handleClickOpen}>
-     Thêm Dịch Vụ
-    </Button>
-   </Box>
    <Dialog
-    onClose={handleClose}
+    onClose={onClose}
     aria-describedby="scroll-dialog-description"
     open={open}
-    fullWidth={true}
-    maxWidth={'md'}
+    maxWidth={'sm'}
    >
-    <DialogTitle id="customized-dialog-title">Thêm Dịch Vụ</DialogTitle>
+    <DialogTitle id="customized-dialog-title" onClose={onClose}>
+     Thêm mới dịch vụ
+    </DialogTitle>
     <DialogContent dividers>
      <DialogContentText>
       <Grid container spacing={3}>
@@ -125,9 +105,6 @@ export default function CreateServiceDialog() {
         />
        </Grid>
        <Grid item xs={6}>
-        {/* <FormControl variant="outlined" margin='dense'> */}
-        <InputLabel>Loại</InputLabel>
-
         <Select
          value={type}
          onChange={(e) => setType(e.target.value)}
@@ -137,18 +114,15 @@ export default function CreateServiceDialog() {
           <MenuItem value={type.name}>{type.name}</MenuItem>
          ))}
         </Select>
-
-        {/* </FormControl> */}
        </Grid>
       </Grid>
-      {/* </Form> */}
      </DialogContentText>
     </DialogContent>
     <DialogActions>
-     <Button autoFocus onClick={submitHandler} color="primary">
+     <Button autoFocus onClick={submitHandler} color="primary" left>
       Lưu
      </Button>
-     <Button autoFocus onClick={handleClose} color="secondary">
+     <Button autoFocus onClick={onClose} color="secondary">
       Hủy
      </Button>
     </DialogActions>
