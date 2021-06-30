@@ -1,7 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
-import * as Yup from 'yup';
-import { Formik } from 'formik';
 import {
  Box,
  Button,
@@ -9,32 +5,47 @@ import {
  TextField,
  Typography
 } from '@material-ui/core';
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../actions/userAction";
-import * as valid from '../utils/ValidConstants';
+import { Form, Formik } from 'formik';
+import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { USER_LOGIN_FAIL } from 'src/constants/userConstant';
+import * as Yup from 'yup';
+import { login, triggerReload } from '../actions/userAction';
+
+const DisplayingErrorMessagesSchema = Yup.object().shape({
+ username: Yup.string()
+  .min(3, 'Tài khoản phải trên 3 ký tự!')
+  .max(50, 'Tài khoản phải dưới 50 ký tự!')
+  .required('Không được bỏ trống'),
+ password: Yup.string().required('Không được bỏ trốn')
+});
 
 export default function Login(props) {
- const [username, setUsername] = useState('');
- const [password, setPassword] = useState('');
  const navigate = useNavigate();
-
-
 
  const userLogin = useSelector((state) => state.userLogin);
  const { userInfo, loading, error } = userLogin;
 
  const dispatch = useDispatch();
 
- const submitHandler = (e) => {
-  e.preventDefault();
+ const submitHandler = ({ username, password }) => {
+  console.log('debug', username, password);
   dispatch(login(username, password));
  };
+
  useEffect(() => {
   if (userInfo) {
-    navigate('/app/dashboard', { replace: true });
+   navigate('/app/dashboard', { replace: true });
   }
-}, [navigate, userInfo]);
+  if (error) {
+   toast.error('Có lỗi khi đăng nhập, vui lòng thử lại');
+   dispatch({ type: USER_LOGIN_FAIL, payload: false });
+  }
+ }, [navigate, userInfo, error, triggerReload]);
+
  return (
   <>
    <Helmet>
@@ -52,62 +63,57 @@ export default function Login(props) {
     <Container maxWidth="sm">
      <Formik
       initialValues={{
-        username: 'demo@devias.io',
-       password: 'Password123'
+       username: '',
+       password: ''
       }}
-      validationSchema={Yup.object().shape({
-        username: Yup.string()
-        .email(valid.VALID_EMAIL)
-        .max(255)
-        .required(valid.REQUIRED_EMAIL),
-        password: Yup.string().max(255).required(valid.REQUIRED_PASSWORD)
-      })}
-
+      validationSchema={DisplayingErrorMessagesSchema}
+      onSubmit={submitHandler}
+      validateOnChange
+      validateOnBlur
      >
       {({
        errors,
        handleBlur,
-       handleChange,
-       handleSubmit,
        isSubmitting,
        touched,
-       values
+       values,
+       handleChange
       }) => (
-       <form onSubmit={submitHandler}>
+       <Form>
         <Box sx={{ mb: 3 }}>
          <Typography color="textPrimary" variant="h2" align="center">
           Car Service
          </Typography>
         </Box>
         <TextField
-         error={Boolean(touched.username && errors.username)}
-         fullWidth
-         helperText={touched.username && errors.username}
-         label="Địa chỉ email"
-         margin="normal"
          name="username"
+         error={!!errors.username}
+         helperText={errors.username}
+         fullWidth
+         label="Tài khoản"
+         margin="normal"
          onBlur={handleBlur}
-         onChange={(e) => setUsername(e.target.value)}
-         value={values.setUsername}
+         onChange={handleChange}
+         value={values.username}
          variant="outlined"
         />
         <TextField
-         error={Boolean(touched.matKhau && errors.matKhau)}
+         name="password"
+         error={!!errors.password}
+         helperText={errors.password}
          fullWidth
-         helperText={touched.matKhau && errors.matKhau}
          label="Mật khẩu"
          margin="normal"
-         name="password"
          onBlur={handleBlur}
-         onChange={(e) => setPassword(e.target.value)}
+         onChange={handleChange}
+         value={values.password}
          type="password"
-         value={values.setPassword}
          variant="outlined"
         />
         <Box sx={{ py: 2 }}>
          <Button
           color="primary"
-          disabled={isSubmitting}
+          disabled={error && isSubmitting}
           fullWidth
           size="large"
           type="submit"
@@ -116,7 +122,7 @@ export default function Login(props) {
           Đăng nhập
          </Button>
         </Box>
-       </form>
+       </Form>
       )}
      </Formik>
     </Container>
