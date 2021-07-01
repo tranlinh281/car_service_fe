@@ -12,16 +12,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { USER_LOGIN_FAIL } from 'src/constants/userConstant';
-import * as Yup from 'yup';
+import { DisplayingErrorMessagesLoginSchema } from 'src/services/ValidConstants';
 import { login, triggerReload } from '../actions/userAction';
-
-const DisplayingErrorMessagesSchema = Yup.object().shape({
- username: Yup.string()
-  .min(3, 'Tài khoản phải trên 3 ký tự!')
-  .max(50, 'Tài khoản phải dưới 50 ký tự!')
-  .required('Không được bỏ trống'),
- password: Yup.string().required('Không được bỏ trống')
-});
 
 export default function Login(props) {
  const navigate = useNavigate();
@@ -66,7 +58,7 @@ export default function Login(props) {
        username: '',
        password: ''
       }}
-      validationSchema={DisplayingErrorMessagesSchema}
+      validationSchema={DisplayingErrorMessagesLoginSchema}
       onSubmit={submitHandler}
       validateOnChange
       validateOnBlur

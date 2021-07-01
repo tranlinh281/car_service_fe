@@ -1,32 +1,24 @@
-import React, { memo } from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
 import {
- Box,
  DialogActions,
  DialogContent,
  DialogContentText,
  DialogTitle,
- Grid,
- TextField,
- Radio,
- RadioGroup,
- FormControlLabel,
- FormLabel,
  FormControl,
+ Grid,
  InputLabel,
  MenuItem,
- Select
+ Select,
+ TextField
 } from '@material-ui/core';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createEmployee, triggerReload } from 'src/actions/userAction';
-import { CREATE_EMPLOYEE_SUCCESS } from 'src/constants/userConstant';
-import { toast } from 'react-toastify';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import { Form, Formik } from 'formik';
+import React, { memo, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createEmployee } from 'src/actions/userAction';
+import { DisplayingErrorMessagesCreateEmployeeSchema } from 'src/services/ValidConstants';
 
 const CreateEmployeeDialog = ({ data, open, onClose }) => {
- const [openConfirm, setOpenConfirm] = useState(false);
-
  const [role, setRole] = useState('');
  const [fullname, setFullname] = useState('');
  const [phoneNumber, setPhoneNumber] = useState('');
@@ -50,6 +42,7 @@ const CreateEmployeeDialog = ({ data, open, onClose }) => {
   setEmail(email);
   setAddress(address);
  };
+
  useEffect(() => {
   setEmployeeModels((prev) => ({
    ...prev,
@@ -61,6 +54,7 @@ const CreateEmployeeDialog = ({ data, open, onClose }) => {
    role
   }));
  }, [fullname, phoneNumber, dateOfBirth, email, address, role]);
+
  useEffect(() => {
   if (data && open) {
    setForm(data);
@@ -70,98 +64,136 @@ const CreateEmployeeDialog = ({ data, open, onClose }) => {
 
  const dispatch = useDispatch();
 
- const submitHandler = (e) => {
-  e.preventDefault();
-  dispatch(createEmployee(employeeModels));
+ const submitHandler = (data) => {
+  console.log(data);
+  dispatch(createEmployee(data));
  };
 
  return (
-  <>
-   <Dialog
-    onClose={onClose}
-    aria-describedby="scroll-dialog-description"
-    open={open}
-    maxWidth={'sm'}
-   >
-    <DialogTitle id="customized-dialog-title" onClose={onClose}>
-     Thêm mới Nhân viên
-    </DialogTitle>
-    <DialogContent dividers>
-     <DialogContentText>
-      <Grid container spacing={3}>
-       <Grid item xs={12} sm={6}>
-        <TextField
-         fullWidth
-         label="Họ tên"
-         margin="normal"
-         name="fullname"
-         variant="outlined"
-         onChange={(e) => setFullname(e.target.value)}
-        />
-        <TextField
-         fullWidth
-         label="Email"
-         margin="normal"
-         name="email"
-         type="email"
-         variant="outlined"
-         onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField
-         fullWidth
-         label="Địa chỉ"
-         margin="normal"
-         name="address"
-         variant="outlined"
-         onChange={(e) => setAddress(e.target.value)}
-        />
-       </Grid>
-       <Grid item xs={6}>
-        <TextField
-         fullWidth
-         label="Số điện thoại"
-         margin="normal"
-         name="phoneNumber"
-         variant="outlined"
-         onChange={(e) => setPhoneNumber(e.target.value)}
-        />
+  <Formik
+   initialValues={{
+    fullname: '',
+    email: '',
+    address: '',
+    phoneNumber: '',
+    dateOfBirth: '',
+    role: ''
+   }}
+   validationSchema={DisplayingErrorMessagesCreateEmployeeSchema}
+   validateOnChange
+   validateOnBlur
+   onSubmit={submitHandler}
+  >
+   {({ errors, handleBlur, handleChange, values }) => (
+    <Dialog
+     onClose={onClose}
+     aria-describedby="scroll-dialog-description"
+     open={open}
+     maxWidth={'sm'}
+    >
+     <Form>
+      <DialogTitle id="customized-dialog-title" onClose={onClose}>
+       Thêm mới Nhân viên
+      </DialogTitle>
 
-        <FormControl variant="outlined" margin="dense">
-         <TextField
-          id="date"
-          label="Ngày sinh"
-          type="date"
-          InputLabelProps={{
-           shrink: true
-          }}
-          onChange={(e) => setDateOfBirth(e.target.value)}
-         />
-        </FormControl>
+      <DialogContent dividers>
+       <DialogContentText>
+        <Grid container spacing={3}>
+         <Grid item xs={12} sm={6}>
+          <TextField
+           fullWidth
+           label="Họ tên"
+           error={!!errors.fullname}
+           helperText={errors.fullname}
+           margin="normal"
+           name="fullname"
+           variant="outlined"
+           value={values.fullname}
+           onBlur={handleBlur}
+           onChange={handleChange}
+          />
+          <TextField
+           fullWidth
+           label="Email"
+           margin="normal"
+           error={!!errors.email}
+           helperText={errors.email}
+           onBlur={handleBlur}
+           onChange={handleChange}
+           name="email"
+           type="email"
+           variant="outlined"
+           value={values.email}
+          />
+          <TextField
+           fullWidth
+           label="Địa chỉ"
+           error={!!errors.address}
+           helperText={errors.address}
+           onBlur={handleBlur}
+           onChange={handleChange}
+           margin="normal"
+           name="address"
+           variant="outlined"
+           value={values.address}
+          />
+         </Grid>
+         <Grid item xs={6}>
+          <TextField
+           fullWidth
+           label="Số điện thoại"
+           error={!!errors.phoneNumber}
+           helperText={errors.phoneNumber}
+           onBlur={handleBlur}
+           onChange={handleChange}
+           margin="normal"
+           type="tel"
+           name="phoneNumber"
+           variant="outlined"
+           value={values.phoneNumber}
+          />
 
-        {/* <FormControl variant="outlined" margin='dense'> */}
-        <InputLabel>Vị trí</InputLabel>
-        <Select
-         value={role}
-         onChange={(e) => setRole(e.target.value)}
-         label="Vị trí"
-        >
-         <MenuItem value="manager">Quản lý</MenuItem>
-         <MenuItem value="staff">Kỹ thuật viên</MenuItem>
-        </Select>
-       </Grid>
-      </Grid>
-     </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-     <Button autoFocus onClick={submitHandler} color="primary" left>
-      Lưu
-     </Button>
-     <Button autoFocus onClick={onClose} color="secondary">
-      Hủy
-     </Button>
-    </DialogActions>
-   </Dialog>
-  </>
+          <FormControl variant="outlined" margin="dense">
+           <TextField
+            id="date"
+            name="dateOfBirth"
+            label="Ngày sinh"
+            type="date"
+            InputLabelProps={{
+             shrink: true
+            }}
+            value={values.dateOfBirth}
+            onChange={handleChange}
+           />
+          </FormControl>
+
+          {/* <FormControl variant="outlined" margin='dense'> */}
+          <InputLabel>Vị trí</InputLabel>
+          <Select
+           name="role"
+           value={values.role}
+           onChange={handleChange}
+           label="Vị trí"
+          >
+           <MenuItem value="manager">Quản lý</MenuItem>
+           <MenuItem value="staff">Kỹ thuật viên</MenuItem>
+          </Select>
+         </Grid>
+        </Grid>
+       </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+       <Button type="submit" color="primary" left>
+        Lưu
+       </Button>
+       <Button onClick={onClose} color="secondary">
+        Hủy
+       </Button>
+      </DialogActions>
+     </Form>
+    </Dialog>
+   )}
+  </Formik>
  );
 };
 export default memo(CreateEmployeeDialog);
