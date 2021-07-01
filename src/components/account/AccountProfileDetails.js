@@ -50,8 +50,8 @@ const AccountProfileDetails = (props) => {
     >
       <Card>
         <CardHeader
-          subheader="The information can be edited"
-          title="Profile"
+          subheader="Chỉnh sửa thông tin"
+          title="Thông tin"
         />
         <Divider />
         <CardContent>
@@ -66,9 +66,9 @@ const AccountProfileDetails = (props) => {
             >
               <TextField
                 fullWidth
-                helperText="Please specify the first name"
-                label="First name"
-                name="firstName"
+                helperText="Nhập tên của mình"
+                label="Họ và tên"
+                name="name"
                 onChange={handleChange}
                 required
                 value={values.firstName}
@@ -82,8 +82,8 @@ const AccountProfileDetails = (props) => {
             >
               <TextField
                 fullWidth
-                label="Last name"
-                name="lastName"
+                label="Ngày tháng năm sinh"
+                name="dateOfBirth"
                 onChange={handleChange}
                 required
                 value={values.lastName}
@@ -97,7 +97,7 @@ const AccountProfileDetails = (props) => {
             >
               <TextField
                 fullWidth
-                label="Email Address"
+                label="Địa chỉ email"
                 name="email"
                 onChange={handleChange}
                 required
@@ -112,8 +112,8 @@ const AccountProfileDetails = (props) => {
             >
               <TextField
                 fullWidth
-                label="Phone Number"
-                name="phone"
+                label="Số điện thoại"
+                name="phoneNumber"
                 onChange={handleChange}
                 type="number"
                 value={values.phone}
@@ -124,16 +124,7 @@ const AccountProfileDetails = (props) => {
               item
               md={6}
               xs={12}
-            >
-              <TextField
-                fullWidth
-                label="Country"
-                name="country"
-                onChange={handleChange}
-                required
-                value={values.country}
-                variant="outlined"
-              />
+            > 
             </Grid>
             <Grid
               item

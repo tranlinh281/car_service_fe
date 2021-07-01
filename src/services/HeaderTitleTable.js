@@ -32,13 +32,14 @@ export const manufacturerHeader = [
  { id: 6, title: 'Chỉnh sửa' }
 ];
 export const accessoryHeader = [
- { id: 1, title: 'Tên phụ tùng' },
- { id: 2, title: 'Số lượng' },
- { id: 3, title: 'Đơn giá' },
- { id: 4, title: 'Đơn vị tính' },
- { id: 5, title: 'Loại' },
- { id: 6, title: 'Hãng' },
- { id: 7, title: 'Chỉnh sửa' }
+ { id: 1, title: 'Hình ảnh' },
+ { id: 2, title: 'Tên phụ tùng' },
+ { id: 3, title: 'Số lượng' },
+ { id: 4, title: 'Đơn giá' },
+ { id: 5, title: 'Đơn vị tính' },
+ { id: 6, title: 'Loại' },
+ { id: 7, title: 'Hãng' },
+ { id: 8, title: 'Chỉnh sửa' }
 ];
 
 export const offerHeader = [

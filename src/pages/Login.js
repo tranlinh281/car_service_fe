@@ -20,7 +20,7 @@ const DisplayingErrorMessagesSchema = Yup.object().shape({
   .min(3, 'Tài khoản phải trên 3 ký tự!')
   .max(50, 'Tài khoản phải dưới 50 ký tự!')
   .required('Không được bỏ trống'),
- password: Yup.string().required('Không được bỏ trốn')
+ password: Yup.string().required('Không được bỏ trống')
 });
 
 export default function Login(props) {
@@ -41,7 +41,7 @@ export default function Login(props) {
    navigate('/app/dashboard', { replace: true });
   }
   if (error) {
-   toast.error('Có lỗi khi đăng nhập, vui lòng thử lại');
+   toast.error('Sai tài khoản hoặc mật khẩu, vui lòng thử lại');
    dispatch({ type: USER_LOGIN_FAIL, payload: false });
   }
  }, [navigate, userInfo, error, triggerReload]);

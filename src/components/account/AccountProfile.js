@@ -29,7 +29,7 @@ const AccountProfile = (props) => (
           flexDirection: 'column'
         }}
       >
-        <Avatar
+        <c
           src={user.avatar}
           sx={{
             height: 100,

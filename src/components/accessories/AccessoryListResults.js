@@ -4,9 +4,10 @@ import {
  TableBody,
  TableCell,
  TableHead,
- TableRow
+ TableRow,
+ Avatar
 } from '@material-ui/core';
-import { Close, Edit } from '@material-ui/icons';
+import { Close, Edit, Image } from '@material-ui/icons';
 import { useContext, useEffect, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,6 +25,14 @@ import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import Popup from '../Popup';
 
+const user = {
+ avatar: '/static/images/avatars/avatar_6.png',
+ city: 'Los Angeles',
+ country: 'USA',
+ jobTitle: 'Senior Developer',
+ name: 'Katarina Smith',
+ timezone: 'GTM-7'
+};
 export default function AccessoryListResults({ accessories }) {
  const [openPopup, setOpenPopup] = useState(false);
  const [confirmDialog, setConfirmDialog] = useState({
@@ -69,7 +78,7 @@ export default function AccessoryListResults({ accessories }) {
 
    setShouldUpdateAccessoryDialogOpen(false);
   }
-  
+
   if (createSuccess) {
    toast.success('Thêm mới thành công!');
    // Should create action creator for this
@@ -79,7 +88,6 @@ export default function AccessoryListResults({ accessories }) {
    setShouldCreateAccessoryDialogOpen(false);
   }
  }, [deleteSuccess, updateSuccess, createSuccess]);
-
 
  const handleOpenEditDialog = (editData) => {
   setShouldUpdateAccessoryDialogOpen(true);
@@ -102,6 +110,15 @@ export default function AccessoryListResults({ accessories }) {
       <TableBody>
        {accessories?.map((accessory) => (
         <TableRow hover key={accessory.name}>
+         <TableCell>
+          <Image
+           src={'/static/images/avatars/avatar_3.png'}
+           sx={{
+            height: 100,
+            width: 100
+           }}
+          />
+         </TableCell>
          <TableCell>{accessory.name}</TableCell>
          <TableCell>{accessory.quantity}</TableCell>
          <TableCell>{accessory.price}</TableCell>
