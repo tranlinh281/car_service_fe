@@ -113,9 +113,9 @@ export default function AccessoryListResults({ accessories }) {
          <TableCell>
           <img
            src={'/static/images/avatars/avatar_3.png'}
-           sx={{
-            height: 100,
-            width: 100
+           style={{
+            height: 50,
+            width: 50
            }}
           />
          </TableCell>
