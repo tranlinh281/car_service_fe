@@ -111,7 +111,7 @@ export default function AccessoryListResults({ accessories }) {
        {accessories?.map((accessory) => (
         <TableRow hover key={accessory.name}>
          <TableCell>
-          <Image
+          <img
            src={'/static/images/avatars/avatar_3.png'}
            sx={{
             height: 100,
