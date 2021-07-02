@@ -1,7 +1,6 @@
 import * as Yup from 'yup';
 
 export const DisplayingErrorMessagesLoginSchema = Yup.object().shape({
-<<<<<<< HEAD
   username: Yup.string()
     .min(3, 'Tài khoản phải trên 3 ký tự!')
     .max(50, 'Tài khoản phải dưới 20 ký tự!')
@@ -45,8 +44,7 @@ export const DisplayingErrorMessagesCreateEmployeeSchema = Yup.object().shape({
   dateOfBirth: Yup.string()
     //  .format('DD-MM-YYYY')
     .max(10, 'Ngày tháng không hợp lệ')
-    .required('Không được bỏ trống')
-=======
+    .required('Không được bỏ trống'),
  username: Yup.string()
   .min(3, 'Tài khoản phải trên 3 ký tự!')
   .max(20, 'Tài khoản phải dưới 20 ký tự!')
@@ -90,7 +88,6 @@ export const DisplayingErrorMessagesCreateEmployeeSchema = Yup.object().shape({
   .required('Không được bỏ trống'),
  role: Yup.string().required('Không được bỏ trống'),
  dateOfBirth: Yup.string().required('Không được bỏ trống')
->>>>>>> 5d6c37f1d35be590cffd8f97c3087f49c43fef3d
 });
 
 export const DisplayingErrorMessagesCreateTypeSchema = Yup.object().shape({
