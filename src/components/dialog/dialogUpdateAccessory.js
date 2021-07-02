@@ -23,19 +23,19 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
  const { manufacturers } = useSelector((state) => state.manufacturerList);
  const { types } = useSelector((state) => state.accessoryTypeList);
 
- const [name, setName] = useState();
+ const [name, setName] = useState(data.name);
  const [id, setId] = useState();
- const [quantity, setQuantity] = useState();
- const [price, setPrice] = useState();
- const [unit, setUnit] = useState();
- const [type, setType] = useState();
- const [manufacturer, setManufacturer] = useState();
+ const [quantity, setQuantity] = useState(data.quantity);
+ const [price, setPrice] = useState(data.price);
+ const [unit, setUnit] = useState(data.unit);
+ const [type, setType] = useState(data.type);
+ const [manufacturer, setManufacturer] = useState(data.manufacturer);
  const [accessoryModels, setAccessoryModels] = useState();
 
  const setForm = ({ id, name, quantity, price, unit, type, manufacturer }) => {
   setName(name);
   setId(id);
-  setQuantity(quantity);
+  setQuantity(parseInt(quantity));
   setPrice(price);
   setUnit(unit);
   setType(type);
@@ -70,19 +70,20 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
  return (
   <Formik
    initialValues={{
-    name: '',
-    quantity: '',
-    price: '',
-    unit: '',
-    type: '',
-    manufacturer: ''
+    name: name,
+    quantity: parseInt(quantity),
+    price: parseFloat(price),
+    unit: unit,
+    type: type,
+    manufacturer: manufacturer
    }}
+   enableReinitialize
    validationSchema={DisplayingErrorMessagesCreateAccessorySchema}
    validateOnChange
    validateOnBlur
    onSubmit={submitHandler}
   >
-   {({ errors, handleBlur, handleChange, values }) => (
+   {props => (
     <Dialog
      onClose={onClose}
      aria-describedby="scroll-dialog-description"
@@ -95,6 +96,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
        <span>
         <strong>{data.name || ''}</strong>
        </span>
+       {console.log(props.values.manufacturer)}
       </DialogTitle>
       <DialogContent dividers>
        <DialogContentText>
@@ -104,12 +106,11 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
            fullWidth
            label="Tên Phụ Tùng"
            margin="normal"
-           error={!!errors.name}
-           helperText={errors.name}
-           value={values.name}
-           onBlur={handleBlur}
-           onChange={handleChange}
-           defaultValue={data.name}
+           error={!!props.errors.name}
+           helperText={props.errors.name}
+           value={props.values.name}
+           onBlur={props.handleBlur}
+           onChange={props.handleChange}
            name="name"
            variant="outlined"
           />
@@ -117,12 +118,11 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
            fullWidth
            label="Số Lượng"
            margin="normal"
-           error={!!errors.quantity}
-           helperText={errors.quantity}
-           value={values.quantity}
-           onBlur={handleBlur}
-           onChange={handleChange}
-           defaultValue={data.quantity}
+           error={!!props.errors.quantity}
+           helperText={props.errors.quantity}
+           value={parseInt(props.values.quantity)}
+           onBlur={props.handleBlur}
+           onChange={props.handleChange}
            name="quantity"
            variant="outlined"
            InputLabelProps={{
@@ -134,12 +134,11 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
            fullWidth
            label="Đơn Giá"
            margin="normal"
-           error={!!errors.price}
-           helperText={errors.price}
-           value={values.price}
-           onBlur={handleBlur}
-           onChange={handleChange}
-           defaultValue={data.price}
+           error={!!props.errors.price}
+           helperText={props.errors.price}
+           value={parseFloat(props.values.price)}
+           onBlur={props.handleBlur}
+           onChange={props.handleChange}
            name="price"
            variant="outlined"
            InputLabelProps={{
@@ -152,12 +151,11 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
            fullWidth
            label="Đơn vị tính"
            margin="normal"
-           error={!!errors.unit}
-           helperText={errors.unit}
-           value={values.unit}
-           onBlur={handleBlur}
-           onChange={handleChange}
-           defaultValue={data.unit}
+           error={!!props.errors.unit}
+           helperText={props.errors.unit}
+           value={props.values.unit}
+           onBlur={props.handleBlur}
+           onChange={props.handleChange}
            name="unit"
            variant="outlined"
            InputLabelProps={{
@@ -165,11 +163,11 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
            }}
           />
           <FormControl variant="outlined" margin="dense">
-           <InputLabel>Loai</InputLabel>
+           <InputLabel>Loại</InputLabel>
            <Select
             name="type"
-            value={values.type}
-            onChange={handleChange}
+            value={props.values.type}
+            onChange={props.handleChange}
             defaultValue={data.type}
             label="Loại"
            >
@@ -182,8 +180,8 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
            <InputLabel>Hãng</InputLabel>
            <Select
            name="manufacturer"
-           value={values.manufacturer}
-           onChange={handleChange}
+           value={props.values.manufacturer}
+           onChange={props.handleChange}
             defaultValue={data.manufacturer}
             label="Hãng"
            >
