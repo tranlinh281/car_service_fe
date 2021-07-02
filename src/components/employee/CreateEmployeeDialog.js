@@ -164,6 +164,9 @@ const CreateEmployeeDialog = ({ data, open, onClose }) => {
             }}
             value={values.dateOfBirth}
             onChange={handleChange}
+            error={!!errors.dateOfBirth}
+            helperText={errors.dateOfBirth}
+            onBlur={handleBlur}
            />
           </FormControl>
 
