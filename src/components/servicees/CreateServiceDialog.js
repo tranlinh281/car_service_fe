@@ -18,6 +18,7 @@ import {
  MenuItem,
  Select
 } from '@material-ui/core';
+import { Form, Formik } from 'formik';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
@@ -25,6 +26,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { triggerReload } from 'src/actions/userAction';
 
 import { createService, listServiceType } from 'src/actions/serviceAction';
+import { DisplayingErrorMessagesCreateServiceSchema } from 'src/services/ValidConstants';
 
 export default function CreateServiceDialog({ data, open, onClose }) {
  const { types } = useSelector((state) => state.typeList);
@@ -47,9 +49,9 @@ export default function CreateServiceDialog({ data, open, onClose }) {
 
  const dispatch = useDispatch();
 
- const submitHandler = (e) => {
-  e.preventDefault();
-  dispatch(createService(serviceModels));
+ const submitHandler = (data) => {
+  console.log(data);
+  dispatch(createService(data));
  };
 
  useEffect(() => {
@@ -71,62 +73,87 @@ export default function CreateServiceDialog({ data, open, onClose }) {
 
  return (
   <>
-   <Dialog
-    onClose={onClose}
-    aria-describedby="scroll-dialog-description"
-    open={open}
-    maxWidth={'sm'}
+   <Formik
+    initialValues={{
+     name: '',
+     price: '',
+     type: ''
+    }}
+    validationSchema={DisplayingErrorMessagesCreateServiceSchema}
+    validateOnChange
+    validateOnBlur
+    onSubmit={submitHandler}
    >
-    <DialogTitle id="customized-dialog-title" onClose={onClose}>
-     Thêm mới dịch vụ
-    </DialogTitle>
-    <DialogContent dividers>
-     <DialogContentText>
-      <Grid container spacing={3}>
-       <Grid item xs={12} sm={6}>
-        <TextField
-         fullWidth
-         label="Tên Dịch Vụ"
-         margin="normal"
-         name="name"
-         variant="outlined"
-         required
-         onChange={(e) => setName(e.target.value)}
-        />
-        <TextField
-         fullWidth
-         label="Giá "
-         margin="normal"
-         name="price"
-         type="number"
-         required
-         variant="outlined"
-         onChange={(e) => setPrice(parseFloat(e.target.value))}
-        />
-       </Grid>
-       <Grid item xs={6}>
-        <Select
-         value={type}
-         onChange={(e) => setType(e.target.value)}
-         label="Loại"
-        >
-         {types?.map((type) => (
-          <MenuItem value={type.name}>{type.name}</MenuItem>
-         ))}
-        </Select>
-       </Grid>
-      </Grid>
-     </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-     <Button autoFocus onClick={submitHandler} color="primary" left>
-      Lưu
-     </Button>
-     <Button autoFocus onClick={onClose} color="secondary">
-      Hủy
-     </Button>
-    </DialogActions>
-   </Dialog>
+    {({ errors, handleBlur, handleChange, values }) => (
+     <Dialog
+      onClose={onClose}
+      aria-describedby="scroll-dialog-description"
+      open={open}
+      maxWidth={'sm'}
+     >
+      <Form>
+       <DialogTitle id="customized-dialog-title" onClose={onClose}>
+        Thêm mới dịch vụ
+       </DialogTitle>
+       <DialogContent dividers>
+        <DialogContentText>
+         <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+           <TextField
+            fullWidth
+            label="Tên Dịch Vụ"
+            error={!!errors.name}
+            helperText={errors.name}
+            value={values.name}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            margin="normal"
+            name="name"
+            variant="outlined"
+            required
+           />
+           <TextField
+            fullWidth
+            label="Giá "
+            error={!!errors.price}
+            helperText={errors.price}
+            value={values.price}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            margin="normal"
+            name="price"
+            type="number"
+            required
+            variant="outlined"
+           />
+          </Grid>
+          <Grid item xs={6}>
+           <Select
+            name="type"
+            value={values.type}
+            onChange={handleChange}
+            label="Loại"
+           >
+            {types?.map((type) => (
+             <MenuItem value={type.name}>{type.name}</MenuItem>
+            ))}
+           </Select>
+          </Grid>
+         </Grid>
+        </DialogContentText>
+       </DialogContent>
+       <DialogActions>
+        <Button autoFocus type="submit" color="primary" left>
+         Lưu
+        </Button>
+        <Button autoFocus onClick={onClose} color="secondary">
+         Hủy
+        </Button>
+       </DialogActions>
+      </Form>
+     </Dialog>
+    )}
+   </Formik>
   </>
  );
 }
