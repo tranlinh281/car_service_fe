@@ -1,30 +1,29 @@
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
- Box,
- Table,
- TableBody,
- TableCell,
- TableHead,
- TableRow
+    Box,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow
 } from '@material-ui/core';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { Close, EditOutlined, Edit } from '@material-ui/icons';
-import ButtonAction from '../ButtonAction';
+import { Close, Edit } from '@material-ui/icons';
 import { useContext, useEffect, useState } from 'react';
-import Popup from '../Popup';
-import ConfirmDialog from '../dialog/dialogConfirm';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { deleteService } from 'src/actions/serviceAction';
 import { triggerReload } from 'src/actions/userAction';
+import {
+    CREATE_SERVICE_SUCCESS,
+    DELETE_SERVICE_SUCCESS,
+    EDIT_SERVICE_SUCCESS
+} from 'src/constants/serviceConstant';
+import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 // import EditEmployeeDialog from './EditEmployeeDialog';
 import { serviceHeader } from 'src/services/HeaderTitleTable';
-import { deleteService } from 'src/actions/serviceAction';
-import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
-import {
- CREATE_SERVICE_SUCCESS,
- DELETE_SERVICE_SUCCESS,
- EDIT_SERVICE_SUCCESS
-} from 'src/constants/serviceConstant';
+import ButtonAction from '../ButtonAction';
+import ConfirmDialog from '../dialog/dialogConfirm';
 
 export default function ServiceListResults({ services }) {
  const serviceDelete = useSelector((state) => state.serviceDelete);

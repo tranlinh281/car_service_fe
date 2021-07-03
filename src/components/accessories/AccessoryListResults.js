@@ -16,6 +16,7 @@ import { deleteAccessory } from 'src/actions/accessoryAction';
 import { triggerReload } from 'src/actions/userAction';
 import {
  CREATE_ACCESSORY_SUCCESS,
+ CREATE_ACCESSORY_TYPE_SUCCESS,
  DELETE_ACCESSORY_SUCCESS,
  EDIT_ACCESSORY_SUCCESS
 } from 'src/constants/accessoryConstant';
@@ -44,12 +45,15 @@ export default function AccessoryListResults({ accessories }) {
   (state) => state.accessoryDelete
  );
  const { success: updateSuccess } = useSelector((state) => state.editAccessory);
+ const { success: createTypeSuccess } = useSelector(
+  (state) => state.createAccessoryType
+ );
 
  const { success: createSuccess } = useSelector(
   (state) => state.createAccessories
  );
 
- console.log('id', accessories);
+
 
  const dispatch = useDispatch();
  const {
@@ -87,7 +91,14 @@ export default function AccessoryListResults({ accessories }) {
 
    setShouldCreateAccessoryDialogOpen(false);
   }
- }, [deleteSuccess, updateSuccess, createSuccess]);
+  if (createTypeSuccess) {
+   toast.success('Thêm mới thành công!');
+   // Should create action creator for this
+   dispatch({ type: CREATE_ACCESSORY_TYPE_SUCCESS, payload: false });
+   dispatch(triggerReload({}));
+   setShouldCreateAccessoryDialogOpen(false);
+  }
+ }, [deleteSuccess, updateSuccess, createSuccess, createTypeSuccess]);
 
  const handleOpenEditDialog = (editData) => {
   setShouldUpdateAccessoryDialogOpen(true);

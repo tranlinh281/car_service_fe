@@ -115,7 +115,7 @@ const DialogUpdateEmployee = ({ data, open, onClose }) => {
         id="date"
         label="Ngày sinh"
         type="date"
-        value={data.dateOfBirth}
+        value={data.dateOfBirth?.split('T')[0] || ''}
         disabled
         name="dateOfBirth"
         variant="outlined"

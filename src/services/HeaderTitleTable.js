@@ -42,11 +42,4 @@ export const accessoryHeader = [
  { id: 8, title: 'Chỉnh sửa' }
 ];
 
-export const offerHeader = [
- { id: 1, title: 'Tên khuyến mãi' },
- { id: 2, title: 'Dịch vụ' },
- { id: 3, title: 'Điểm' },
- { id: 4, title: '' },
- { id: 5, title: '' },
- { id: 6, title: '' }
-];
+

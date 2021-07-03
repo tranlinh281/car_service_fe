@@ -54,7 +54,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
    {({ resetForm, ...props }) => {
     useEffect(() => {
      if (open) {
-      resetForm();
+      resetForm();  
      }
     }, [open]);
 

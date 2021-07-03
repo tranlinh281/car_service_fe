@@ -1,29 +1,27 @@
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
- Box,
- Table,
- TableBody,
- TableCell,
- TableHead,
- TableRow
+    Box,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow
 } from '@material-ui/core';
 import { Close, Edit } from '@material-ui/icons';
-import ButtonAction from '../ButtonAction';
 import { memo, useContext, useEffect, useState } from 'react';
-import Popup from '../Popup';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { deleteEmployee, triggerReload } from 'src/actions/userAction';
-import EditEmployeeDialog from './EditEmployeeDialog';
-import { employeeHeader } from 'src/services/HeaderTitleTable';
-import * as errorEmp from '../../utils/Constants';
 import {
- CREATE_EMPLOYEE_SUCCESS,
- DELETE_EMPLOYEE_SUCCESS,
- EDIT_EMPLOYEE_SUCCESS
+    CREATE_EMPLOYEE_SUCCESS,
+    DELETE_EMPLOYEE_SUCCESS,
+    EDIT_EMPLOYEE_SUCCESS
 } from 'src/constants/userConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
+import { employeeHeader } from 'src/services/HeaderTitleTable';
+import * as errorEmp from '../../utils/Constants';
+import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
-import { toast } from 'react-toastify';
 
 const EmployeeListResult = ({ loading, employees }) => {
  const [confirmDialog, setConfirmDialog] = useState({
