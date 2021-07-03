@@ -1,14 +1,13 @@
 import { memo, useContext, useState } from 'react';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
-import DialogUpdateService from '../dialog/dialogUpdateService';
 import CreateEmployeeDialog from '../employee/CreateEmployeeDialog';
-import CreateServiceDialog from '../servicees/CreateServiceDialog';
+import EditEmployeeDialog from '../employee/EditEmployeeDialog';
 
 const EmployeeDialogHOC = ({ children }) => {
  const {
-  shouldUpdateServiceDialogOpen,
-  setShouldUpdateServiceDialogOpen,
-  updateServiceDefaultValue,
+  updateEmployeeDefaultValue,
+  shouldUpdateEmployeeDialogOpen,
+  setShouldUpdateEmployeeDialogOpen,
   setShouldCreateEmployeeDialogOpen,
   shouldCreateEmployeeDialogOpen
  } = useContext(DialogContext);
@@ -16,10 +15,10 @@ const EmployeeDialogHOC = ({ children }) => {
  return (
   <>
    {children}
-   <DialogUpdateService
-    data={updateServiceDefaultValue}
-    open={shouldUpdateServiceDialogOpen}
-    onClose={() => setShouldUpdateServiceDialogOpen(false)}
+   <EditEmployeeDialog
+    data={updateEmployeeDefaultValue}
+    open={shouldUpdateEmployeeDialogOpen}
+    onClose={() => setShouldUpdateEmployeeDialogOpen(false)}
    />
    <CreateEmployeeDialog
     open={shouldCreateEmployeeDialogOpen}

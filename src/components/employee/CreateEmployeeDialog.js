@@ -169,8 +169,6 @@ const CreateEmployeeDialog = ({ data, open, onClose }) => {
             onBlur={handleBlur}
            />
           </FormControl>
-
-          {/* <FormControl variant="outlined" margin='dense'> */}
           <InputLabel>Vị trí</InputLabel>
           <Select
            name="role"

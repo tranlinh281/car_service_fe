@@ -6,9 +6,6 @@ import {
  EMPLOYEE_LIST_FAIL,
  EMPLOYEE_LIST_REQUEST,
  EMPLOYEE_LIST_SUCCESS,
- EMPLOYEE_SEARCH_FAIL,
- EMPLOYEE_SEARCH_REQUEST,
- EMPLOYEE_SEARCH_SUCCESS,
  USER_LOGIN_FAIL,
  USER_LOGIN_REQUEST,
  USER_LOGIN_SUCCESS,
@@ -27,7 +24,8 @@ import {
  GET_EMPLOYEE_BY_USERNAME_URL,
  GET_EMPLOYEE_LIST_URL,
  LOGIN_URL,
- POST_NEW_EMPLOYEE
+ POST_NEW_EMPLOYEE,
+ UPDATE_EMPLOYEE_URL
 } from 'src/services/Config';
 
 const headers = {
@@ -128,15 +126,16 @@ export const deleteEmployee = (username) => async (dispatch) => {
  }
 };
 
-export const updateEmployee = (username, positon) => async (dispatch) => {
+export const updateEmployee = (employeeModels) => async (dispatch) => {
  dispatch({
   type: EDIT_EMPLOYEE_REQUEST,
-  payload: { username, positon }
+  payload: { employeeModels }
  });
 
  try {
-  const { data } = await Axios.put({ headers: headers });
+  const { data } = await Axios.put(UPDATE_EMPLOYEE_URL, employeeModels);
   dispatch({ type: EDIT_EMPLOYEE_SUCCESS, payload: data });
+  dispatch(triggerReload({}));
  } catch (error) {
   const message =
    error.response && error.response.data.message

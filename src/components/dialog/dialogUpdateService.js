@@ -50,6 +50,7 @@ const DialogUpdateService = ({ data, open, onClose }) => {
 
  const submitHandler = (e) => {
   e.preventDefault();
+  console.log(e,"service");
   dispatch(updateService(serviceModels));
  };
 
