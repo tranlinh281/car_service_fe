@@ -95,7 +95,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
             margin="normal"
             error={!!props.errors.quantity}
             helperText={props.errors.quantity}
-            value={parseInt(props.values.quantity)}
+            value={props.values.quantity}
             onBlur={props.handleBlur}
             onChange={props.handleChange}
             name="quantity"
@@ -111,7 +111,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
             margin="normal"
             error={!!props.errors.price}
             helperText={props.errors.price}
-            value={parseFloat(props.values.price)}
+            value={props.values.price}
             onBlur={props.handleBlur}
             onChange={props.handleChange}
             name="price"
