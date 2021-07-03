@@ -71,6 +71,9 @@ export default function CreateServiceDialog({ data, open, onClose }) {
   }
  }, [data, open]);
 
+
+ const handleReset = () => {};
+
  return (
   <>
    <Formik
@@ -82,7 +85,9 @@ export default function CreateServiceDialog({ data, open, onClose }) {
     validationSchema={DisplayingErrorMessagesCreateServiceSchema}
     validateOnChange
     validateOnBlur
+    enableReinitialize
     onSubmit={submitHandler}
+    onReset={handleReset}
    >
     {({ errors, handleBlur, handleChange, values }) => (
      <Dialog
@@ -92,7 +97,7 @@ export default function CreateServiceDialog({ data, open, onClose }) {
       maxWidth={'sm'}
      >
       <Form>
-       <DialogTitle id="customized-dialog-title" onClose={onClose}>
+       <DialogTitle id="customized-dialog-title" >
         Thêm mới dịch vụ
        </DialogTitle>
        <DialogContent dividers>
@@ -146,7 +151,7 @@ export default function CreateServiceDialog({ data, open, onClose }) {
         <Button autoFocus type="submit" color="primary" left>
          Lưu
         </Button>
-        <Button autoFocus onClick={onClose} color="secondary">
+        <Button autoFocus type="reset" onClick={onClose} color="secondary">
          Hủy
         </Button>
        </DialogActions>

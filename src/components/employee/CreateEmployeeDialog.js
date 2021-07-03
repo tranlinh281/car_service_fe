@@ -65,9 +65,10 @@ const CreateEmployeeDialog = ({ data, open, onClose }) => {
  const dispatch = useDispatch();
 
  const submitHandler = (data) => {
-  console.log(data);
   dispatch(createEmployee(data));
  };
+
+const handleReset=()=>{};
 
  return (
   <Formik
@@ -83,6 +84,7 @@ const CreateEmployeeDialog = ({ data, open, onClose }) => {
    validateOnChange
    validateOnBlur
    onSubmit={submitHandler}
+   onReset={handleReset}
   >
    {({ errors, handleBlur, handleChange, values }) => (
     <Dialog
@@ -189,7 +191,7 @@ const CreateEmployeeDialog = ({ data, open, onClose }) => {
        <Button type="submit" color="primary" left>
         Lưu
        </Button>
-       <Button onClick={onClose} color="secondary">
+       <Button onClick={onClose} type="reset" color="secondary">
         Hủy
        </Button>
       </DialogActions>
