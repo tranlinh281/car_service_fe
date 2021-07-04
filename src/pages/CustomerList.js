@@ -11,18 +11,18 @@ import CustomerListToolbar from 'src/components/customer/CustomerListToolbar';
 import CustomerListResults from 'src/components/customer/CustomerListResults';
 
 const CustomerList = () => {
- const customerList = useSelector((state) => state.customerList);
- const { loading, error, customers, currentPage, totalPages, totalEmp } =
-  customerList;
+ const { data } = useSelector((state) => state.customerList);
 
- const [page, setPage] = useState(1);
+ console.log('debug CustomerList', data);
+
+ const [page, setPage] = useState(data.currentPage || 1);
  const triggerReload = useSelector((state) => state.triggerReload);
- //
  const [keySearch, setKeySearch] = useState('');
  const dispatch = useDispatch();
 
  useEffect(() => {
   dispatch(listCustomer(keySearch, page));
+  console.log('debug dispatch');
  }, [dispatch, page, keySearch, triggerReload]);
 
  const handlePageChange = (event, value) => {
@@ -46,7 +46,10 @@ const CustomerList = () => {
      <CustomerListToolbar setPage={setPage} setKeySearch={setKeySearch} />
      <Box sx={{ pt: 3 }}>
       <Card>
-       <CustomerListResults totalPages={totalPages} customers={customers} />
+       <CustomerListResults
+        totalPages={data.totalPages || 0}
+        customers={data.itemsList || []}
+       />
        <Box
         sx={{
          display: 'flex',
@@ -56,7 +59,7 @@ const CustomerList = () => {
        >
         <Pagination
          color="primary"
-         count={totalPages}
+         count={data.totalPages || 0}
          size="medium"
          onChange={handlePageChange}
          page={page}

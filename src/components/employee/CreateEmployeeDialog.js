@@ -13,63 +13,19 @@ import {
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import { Form, Formik } from 'formik';
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { createEmployee } from 'src/actions/userAction';
 import { DisplayingErrorMessagesCreateEmployeeSchema } from 'src/services/ValidConstants';
 
-const CreateEmployeeDialog = ({ data, open, onClose }) => {
- const [role, setRole] = useState('');
- const [fullname, setFullname] = useState('');
- const [phoneNumber, setPhoneNumber] = useState('');
- const [dateOfBirth, setDateOfBirth] = useState('');
- const [email, setEmail] = useState('');
- const [address, setAddress] = useState('');
- const [employeeModels, setEmployeeModels] = useState();
-
- const setForm = ({
-  fullname,
-  phoneNumber,
-  dateOfBirth,
-  email,
-  address,
-  role
- }) => {
-  setFullname(fullname);
-  setRole(role);
-  setPhoneNumber(phoneNumber);
-  setDateOfBirth(dateOfBirth);
-  setEmail(email);
-  setAddress(address);
- };
-
- useEffect(() => {
-  setEmployeeModels((prev) => ({
-   ...prev,
-   fullname,
-   phoneNumber,
-   dateOfBirth,
-   email,
-   address,
-   role
-  }));
- }, [fullname, phoneNumber, dateOfBirth, email, address, role]);
-
- useEffect(() => {
-  if (data && open) {
-   setForm(data);
-   setEmployeeModels(data);
-  }
- }, [data, open]);
-
+const CreateEmployeeDialog = ({ open, onClose }) => {
  const dispatch = useDispatch();
 
  const submitHandler = (data) => {
-     console.log(data,"debug create employee");
   dispatch(createEmployee(data));
  };
 
-const handleReset=()=>{};
+ const handleReset = () => {};
 
  return (
   <Formik

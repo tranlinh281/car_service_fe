@@ -14,11 +14,12 @@ export const SERVICEID = 'serviceId=';
 export const SERVICE = 'Services';
 export const TYPE = 'types';
 export const OFFER = 'offer';
-export const PAGING = '/page?PageNumber=';
-export const PAGESIZE = '&PageSize=';
+export const PAGING = '/page?';
+export const PAGENUMBER = 'pageNumber=';
+export const PAGESIZE = '&pageSize=10';
 export const FORWARD_SLASH = '/';
 export const QUESTION_MARK = '?';
-export const SEARCH_VALUE = 'searchValue=10';
+export const SEARCH_VALUE = '&searchValue=';
 export const NAME = 'name=';
 export const NAME_SEARCH = 'nameSearch=';
 export const INSERT_MANUFACTURER = '?manufacturer=';
@@ -31,7 +32,11 @@ export const LOGIN_URL = BASE_URL + USERS;
 //Customer
 export const GET_CUSTOMER_LIST_URL = BASE_URL + CUSTOMER;
 
-export const GET_CUSTOMER_PAGING_URL = GET_CUSTOMER_LIST_URL + PAGING;
+export const GET_CUSTOMER_PAGING_URL =
+ GET_CUSTOMER_LIST_URL + PAGING + PAGENUMBER + PAGESIZE + SEARCH_VALUE;
+
+export const getCustomerPagingURL = (page = 1) =>
+ GET_CUSTOMER_LIST_URL + PAGING + PAGENUMBER + page + PAGESIZE + SEARCH_VALUE;
 
 export const GET_CUSTOMER_BY_USERNAME_URL =
  GET_CUSTOMER_LIST_URL + QUESTION_MARK + FULLNAME_SEARCH;
