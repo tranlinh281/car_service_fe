@@ -65,6 +65,7 @@ const CreateEmployeeDialog = ({ data, open, onClose }) => {
  const dispatch = useDispatch();
 
  const submitHandler = (data) => {
+     console.log(data,"debug create employee");
   dispatch(createEmployee(data));
  };
 
