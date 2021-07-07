@@ -38,7 +38,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
    quantity: parseInt(data.quantity),
    price: parseFloat(data.price)
   };
-  
+
   dispatch(updateAccessory(parsedData));
  };
 
@@ -54,7 +54,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
    {({ resetForm, ...props }) => {
     useEffect(() => {
      if (open) {
-      resetForm();  
+      resetForm();
      }
     }, [open]);
 
@@ -138,34 +138,32 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
              shrink: true
             }}
            />
-           <FormControl variant="outlined" margin="dense">
-            <InputLabel>Loại</InputLabel>
-            <Select
-             name="type"
-             value={props.values.type}
-             onChange={props.handleChange}
-             defaultValue={data.type}
-             label="Loại"
-            >
-             {types?.map((type) => (
-              <MenuItem value={type.name}>{type.name}</MenuItem>
-             ))}
-            </Select>
-           </FormControl>
-           <FormControl variant="outlined" margin="dense">
-            <InputLabel>Hãng</InputLabel>
-            <Select
-             name="manufacturer"
-             value={props.values.manufacturer}
-             onChange={props.handleChange}
-             defaultValue={data.manufacturer}
-             label="Hãng"
-            >
-             {manufacturers?.map((manufacturer) => (
-              <MenuItem value={manufacturer.name}>{manufacturer.name}</MenuItem>
-             ))}
-            </Select>
-           </FormControl>
+
+           <InputLabel>Loại</InputLabel>
+           <Select
+            name="type"
+            value={props.values.type}
+            onChange={props.handleChange}
+            defaultValue={data.type}
+            label="Loại"
+           >
+            {types?.map((type) => (
+             <MenuItem value={type.name}>{type.name}</MenuItem>
+            ))}
+           </Select>
+
+           <InputLabel>Hãng</InputLabel>
+           <Select
+            name="manufacturer"
+            value={props.values.manufacturer}
+            onChange={props.handleChange}
+            defaultValue={data.manufacturer}
+            label="Hãng"
+           >
+            {manufacturers?.map((manufacturer) => (
+             <MenuItem value={manufacturer.name}>{manufacturer.name}</MenuItem>
+            ))}
+           </Select>
           </Grid>
          </Grid>
         </DialogContentText>

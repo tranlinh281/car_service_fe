@@ -3,6 +3,9 @@ import {
  CREATE_SERVICE_FAIL,
  CREATE_SERVICE_REQUEST,
  CREATE_SERVICE_SUCCESS,
+ CREATE_SERVICE_TYPE_FAIL,
+ CREATE_SERVICE_TYPE_REQUEST,
+ CREATE_SERVICE_TYPE_SUCCESS,
  DELETE_SERVICE_FAIL,
  DELETE_SERVICE_REQUEST,
  DELETE_SERVICE_SUCCESS,
@@ -22,6 +25,7 @@ import {
  GET_SERVICE_LIST_URL,
  GET_SERVICE_TYPE_LIST_URL,
  POST_NEW_SERVICE,
+ POST_NEW_SERVICE_TYPE,
  UPDATE_SERVICE_URL
 } from 'src/services/Config';
 const headers = {
@@ -136,5 +140,24 @@ export const updateService = (serviceModels) => async (dispatch) => {
     ? error.response.data.message
     : error.message;
   dispatch({ type: EDIT_SERVICE_FAIL, payload: message });
+ }
+};
+
+export const createTypeService = (name) => async (dispatch) => {
+ dispatch({
+  type: CREATE_SERVICE_TYPE_REQUEST,
+  payload: { name }
+ });
+ try {
+  const { data } = await Axios.post(POST_NEW_SERVICE_TYPE + name);
+  dispatch({ type: CREATE_SERVICE_TYPE_SUCCESS, payload: data });
+ } catch (error) {
+  dispatch({
+   type: CREATE_SERVICE_TYPE_FAIL,
+   payload:
+    error.response && error.response.data.message
+     ? error.response.data.message
+     : error.message
+  });
  }
 };

@@ -34,19 +34,21 @@ export const userLoginReducer = (state = {}, action) => {
 };
 
 export const listEmployeeReducer = (
- state = { loading: true, employees: [] },
+ state = { loading: true, data: [] },
  action
 ) => {
  switch (action.type) {
   case EMPLOYEE_LIST_REQUEST:
-   return { loading: true };
+   return { ...state, loading: true };
   case EMPLOYEE_LIST_SUCCESS:
    return {
+    ...state,
     loading: false,
-    employees: action.payload
+    data: action.payload
    };
   case EMPLOYEE_LIST_FAIL:
-   return { loading: false, error: action.payload };
+    console.log('debug', action.payload);
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }

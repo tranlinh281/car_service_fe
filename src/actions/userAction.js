@@ -20,7 +20,7 @@ import {
 } from 'src/constants/userConstant';
 import {
  DELETE_EMPLOYEE,
- GET_CUSTOMER_BY_USERNAME_URL,
+ getEmployeePagingURL,
  GET_EMPLOYEE_BY_USERNAME_URL,
  GET_EMPLOYEE_LIST_URL,
  LOGIN_URL,
@@ -57,15 +57,15 @@ export const logout = () => (dispatch) => {
  dispatch({ type: USER_LOGOUT });
 };
 
-export const listEmployee = (keySearch) => (dispatch) => {
+export const listEmployee = (keySearch, page) => (dispatch) => {
  dispatch({ type: EMPLOYEE_LIST_REQUEST });
  try {
   if (keySearch == undefined || keySearch == '') {
-   Axios.get(GET_EMPLOYEE_LIST_URL).then((res) => {
+   Axios.get(getEmployeePagingURL(page)).then((res) => {
     dispatch({ type: EMPLOYEE_LIST_SUCCESS, payload: res.data });
    });
   } else {
-   Axios.get(GET_EMPLOYEE_BY_USERNAME_URL + keySearch).then((respo) => {
+   Axios.get(getEmployeePagingURL(page) + keySearch).then((respo) => {
     dispatch({ type: EMPLOYEE_LIST_SUCCESS, payload: respo.data });
    });
   }

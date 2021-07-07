@@ -26,14 +26,6 @@ import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import Popup from '../Popup';
 
-const user = {
- avatar: '/static/images/avatars/avatar_6.png',
- city: 'Los Angeles',
- country: 'USA',
- jobTitle: 'Senior Developer',
- name: 'Katarina Smith',
- timezone: 'GTM-7'
-};
 export default function AccessoryListResults({ accessories }) {
  const [openPopup, setOpenPopup] = useState(false);
  const [confirmDialog, setConfirmDialog] = useState({

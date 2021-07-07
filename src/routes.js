@@ -9,10 +9,9 @@ import NotFound from 'src/pages/NotFound';
 import AccessoryList from 'src/pages/AccessoryList';
 import Settings from 'src/pages/Settings';
 import EmployeeList from 'src/pages/EmployeeList';
-import Report from 'src/pages/Report';
 import Manufacturer from './pages/ManufacturerList';
 import ServiceList from './pages/ServiceList';
-
+import Report from './pages/Report'
 const routes = [
  {
   path: '/',

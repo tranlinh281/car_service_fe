@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import {
@@ -13,23 +13,22 @@ import {
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { triggerReload } from 'src/actions/userAction';
-import { createTypeAccessory } from 'src/actions/accessoryAction';
+import { createTypeService } from 'src/actions/serviceAction';
 
-export default function CreateAccessoryTypeDialog() {
+const CreateServiceTypeDialog = () => {
  const [open, setOpen] = useState(false);
 
  const [name, setName] = useState('');
 
-
- const createAccessoryType = useSelector((state) => state.createAccessoryType);
- const { success, loading, error } = createAccessoryType;
+ const createServiceType = useSelector((state) => state.createServiceType);
+ const { success, loading, error } = createServiceType;
 
  const dispatch = useDispatch();
 
  const submitHandler = (e) => {
   e.preventDefault();
   console.log(name);
-  dispatch(createTypeAccessory(name));
+  dispatch(createTypeService(name));
  };
 
  const handleClickOpen = () => {
@@ -56,7 +55,7 @@ export default function CreateAccessoryTypeDialog() {
     }}
    >
     <Button variant="contained" color="primary" onClick={handleClickOpen}>
-     Thêm loại Phụ Tùng
+     Thêm loại Dịch vụ
     </Button>
    </Box>
    <Dialog
@@ -66,13 +65,13 @@ export default function CreateAccessoryTypeDialog() {
     fullWidth={true}
     maxWidth={'md'}
    >
-    <DialogTitle id="customized-dialog-title">Thêm Loại Phụ tùng</DialogTitle>
+    <DialogTitle id="customized-dialog-title">Thêm Loại Dịch vụ</DialogTitle>
     <DialogContent dividers>
      <DialogContentText>
       <Grid container spacing={3}>
        <TextField
         fullWidth
-        label="Tên Loại phụ tùng"
+        label="Tên Loại Dịch vụ"
         margin="normal"
         name="name"
         variant="outlined"
@@ -93,4 +92,5 @@ export default function CreateAccessoryTypeDialog() {
    </Dialog>
   </>
  );
-}
+};
+export default memo(CreateServiceTypeDialog);

@@ -16,12 +16,14 @@ import {
  BarChart2,
  // Settings as SettingsIcon,
  ShoppingBag as ShoppingBagIcon,
+ StopCircle,
  User as UserIcon,
  // UserPlus as UserPlusIcon,
  Users as UsersIcon
 } from 'react-feather';
 import NavItem from './NavItem';
 import * as constants from '../utils/Constants';
+import { Build } from '@material-ui/icons';
 
 const userInfo = [];
 userInfo.push();
@@ -50,7 +52,7 @@ const items = [
  },
  {
   href: '/app/accessories',
-  icon: ShoppingBagIcon,
+  icon:  Build,
   title: constants.ACCESSORIES_TITLE
  },
  {
@@ -60,7 +62,7 @@ const items = [
    },
  {
   href: '/app/manufacturer',
-  icon: ShoppingBagIcon,
+  icon: StopCircle,
   title: constants.MANUFACTURER_TITLE
  },
 

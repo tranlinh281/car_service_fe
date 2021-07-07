@@ -10,7 +10,7 @@ import {
 import { useContext } from 'react';
 import { Search as SearchIcon } from 'react-feather';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
-import CreateServiceDialog from './CreateServiceDialog';
+import CreateServiceTypeDialog from './CreateServiceTypeDialog';
 
 export default function ServiceListToolbar({ setPage, setKeySearch }) {
     const { setShouldCreateServiceDialogOpen } = useContext(DialogContext);
@@ -19,11 +19,11 @@ export default function ServiceListToolbar({ setPage, setKeySearch }) {
     };
     return (
         <Box>
-            <Box sx={{display: 'flex', justifyContent:'flex-end'}}>
-                <Button variant="contained" color="primary" onClick={handleOpenCreateDialog}>
+          <Box sx={{display: 'flex', justifyContent:'flex-end'}}>
+                <Button variant="contained" color="primary" onClick={handleOpenCreateDialog} sx={{margin: '0 5px'}}>
                     Thêm Dịch vụ
                 </Button>
-                <CreateServiceDialog />
+                <CreateServiceTypeDialog/>
             </Box>
 
             <Box sx={{ mt: 3 }}>

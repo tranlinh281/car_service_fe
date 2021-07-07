@@ -2,6 +2,9 @@ import {
  CREATE_SERVICE_FAIL,
  CREATE_SERVICE_REQUEST,
  CREATE_SERVICE_SUCCESS,
+ CREATE_SERVICE_TYPE_FAIL,
+ CREATE_SERVICE_TYPE_REQUEST,
+ CREATE_SERVICE_TYPE_SUCCESS,
  DELETE_SERVICE_FAIL,
  DELETE_SERVICE_REQUEST,
  DELETE_SERVICE_SUCCESS,
@@ -22,14 +25,15 @@ export const listServiceReducer = (
 ) => {
  switch (action.type) {
   case SERVICE_LIST_REQUEST:
-   return { loading: true };
+   return { ...state, loading: true };
   case SERVICE_LIST_SUCCESS:
    return {
+    ...state,
     loading: false,
     services: action.payload
    };
   case SERVICE_LIST_FAIL:
-   return { loading: false, error: action.payload };
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }
@@ -41,14 +45,11 @@ export const listServiceTypeReducer = (
 ) => {
  switch (action.type) {
   case SERVICE_TYPE_LIST_REQUEST:
-   return { loading: true };
+   return { ...state, loading: true };
   case SERVICE_TYPE_LIST_SUCCESS:
-   return {
-    loading: false,
-    types: action.payload
-   };
+   return { ...state, loading: false, types: action.payload };
   case SERVICE_TYPE_LIST_FAIL:
-   return { loading: false, error: action.payload };
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }
@@ -56,11 +57,11 @@ export const listServiceTypeReducer = (
 export const createServiceReducer = (state = {}, action) => {
  switch (action.type) {
   case CREATE_SERVICE_REQUEST:
-   return { loading: true };
+   return { ...state, loading: true };
   case CREATE_SERVICE_SUCCESS:
-   return { loading: false, success: action.payload };
+   return { ...state, loading: false, success: action.payload };
   case CREATE_SERVICE_FAIL:
-   return { loading: false, error: action.payload };
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }
@@ -68,11 +69,11 @@ export const createServiceReducer = (state = {}, action) => {
 export const deleteServiceReducer = (state = {}, action) => {
  switch (action.type) {
   case DELETE_SERVICE_REQUEST:
-   return { loading: true };
+   return { ...state, loading: true };
   case DELETE_SERVICE_SUCCESS:
-   return { loading: false, success: action.payload };
+   return { ...state, loading: false, success: action.payload };
   case DELETE_SERVICE_FAIL:
-   return { loading: false, error: action.payload };
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }
@@ -80,11 +81,24 @@ export const deleteServiceReducer = (state = {}, action) => {
 export const updateServiceReducer = (state = {}, action) => {
  switch (action.type) {
   case EDIT_SERVICE_REQUEST:
-   return { loading: true };
+   return { ...state, loading: true };
   case EDIT_SERVICE_SUCCESS:
-   return { loading: false, success: action.payload };
+   return { ...state, loading: false, success: action.payload };
   case EDIT_SERVICE_FAIL:
-   return { loading: false, error: action.payload };
+   return { ...state, loading: false, error: action.payload };
+  default:
+   return state;
+ }
+};
+
+export const createServiceTypeReducer = (state = {}, action) => {
+ switch (action.type) {
+  case CREATE_SERVICE_TYPE_REQUEST:
+   return { ...state, loading: true };
+  case CREATE_SERVICE_TYPE_SUCCESS:
+   return { ...state, loading: false, success: action.payload };
+  case CREATE_SERVICE_TYPE_FAIL:
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }

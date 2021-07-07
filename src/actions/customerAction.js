@@ -6,9 +6,6 @@ import {
 } from 'src/constants/customerConstant';
 import {
  getCustomerPagingURL,
- GET_CUSTOMER_BY_USERNAME_URL,
- GET_CUSTOMER_LIST_URL,
- GET_CUSTOMER_PAGING_URL
 } from 'src/services/Config';
 const headers = {
  'Content-Type': 'application/json',

@@ -2,18 +2,12 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import {
- Box,
  DialogActions,
  DialogContent,
  DialogContentText,
  DialogTitle,
  Grid,
  TextField,
- Radio,
- RadioGroup,
- FormControlLabel,
- FormLabel,
- FormControl,
  InputLabel,
  MenuItem,
  Select
@@ -71,7 +65,6 @@ export default function CreateServiceDialog({ data, open, onClose }) {
   }
  }, [data, open]);
 
-
  const handleReset = () => {};
 
  return (
@@ -97,9 +90,7 @@ export default function CreateServiceDialog({ data, open, onClose }) {
       maxWidth={'sm'}
      >
       <Form>
-       <DialogTitle id="customized-dialog-title" >
-        Thêm mới dịch vụ
-       </DialogTitle>
+       <DialogTitle id="customized-dialog-title">Thêm mới dịch vụ</DialogTitle>
        <DialogContent dividers>
         <DialogContentText>
          <Grid container spacing={3}>
@@ -117,6 +108,19 @@ export default function CreateServiceDialog({ data, open, onClose }) {
             variant="outlined"
             required
            />
+           <InputLabel>Loại</InputLabel>
+           <Select
+            name="type"
+            value={values.type}
+            onChange={handleChange}
+            label="Loại"
+           >
+            {types?.map((type) => (
+             <MenuItem value={type.name}>{type.name}</MenuItem>
+            ))}
+           </Select>
+          </Grid>
+          <Grid item xs={6}>
            <TextField
             fullWidth
             label="Giá "
@@ -131,18 +135,6 @@ export default function CreateServiceDialog({ data, open, onClose }) {
             required
             variant="outlined"
            />
-          </Grid>
-          <Grid item xs={6}>
-           <Select
-            name="type"
-            value={values.type}
-            onChange={handleChange}
-            label="Loại"
-           >
-            {types?.map((type) => (
-             <MenuItem value={type.name}>{type.name}</MenuItem>
-            ))}
-           </Select>
           </Grid>
          </Grid>
         </DialogContentText>

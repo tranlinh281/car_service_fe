@@ -10,11 +10,8 @@ import { AlignCenter } from 'react-feather';
 import EmployeeDialogHOC from 'src/components/_HOCProvider/EmployeeDialogHOC';
 
 const EmployeeList = () => {
- const employeeList = useSelector((state) => state.employeeList);
- const { loading, error, employees, currentPage, totalPages, totalEmp } =
-  employeeList;
-
- const [page, setPage] = useState(1);
+ const { data } = useSelector((state) => state.employeeList);
+ const [page, setPage] = useState(data.currentPage || 1);
  const triggerReload = useSelector((state) => state.triggerReload);
  //
  const [keySearch, setKeySearch] = useState('');
@@ -22,9 +19,10 @@ const EmployeeList = () => {
 
  useEffect(() => {
   dispatch(listEmployee(keySearch, page));
+
  }, [dispatch, page, keySearch, triggerReload]);
 
- const handlePageChange = (event, value) => {
+ const handlePageChange = (value) => {  
   setPage(value);
   setKeySearch(keySearch);
  };
@@ -47,9 +45,8 @@ const EmployeeList = () => {
       <Box sx={{ pt: 3 }}>
        <Card>
         <EmployeeListResult
-         loading={loading}
-         totalPages={totalPages}
-         employees={employees}
+         totalPages={data.totalPages || 0}
+         employees={data.itemsList || []}
         />
         <Box
          sx={{
@@ -60,11 +57,10 @@ const EmployeeList = () => {
         >
          <Pagination
           color="primary"
-          count={totalPages}
+          count={data.totalPages || 0}
           size="medium"
           onChange={handlePageChange}
           page={page}
-          hidden={loading}
          />
         </Box>
        </Card>

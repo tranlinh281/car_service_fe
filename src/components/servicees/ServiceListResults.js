@@ -1,10 +1,10 @@
 import {
-    Box,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow
+ Box,
+ Table,
+ TableBody,
+ TableCell,
+ TableHead,
+ TableRow
 } from '@material-ui/core';
 import { Close, Edit } from '@material-ui/icons';
 import { useContext, useEffect, useState } from 'react';
@@ -15,9 +15,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { deleteService } from 'src/actions/serviceAction';
 import { triggerReload } from 'src/actions/userAction';
 import {
-    CREATE_SERVICE_SUCCESS,
-    DELETE_SERVICE_SUCCESS,
-    EDIT_SERVICE_SUCCESS
+ CREATE_SERVICE_SUCCESS,
+ CREATE_SERVICE_TYPE_SUCCESS,
+ DELETE_SERVICE_SUCCESS,
+ EDIT_SERVICE_SUCCESS
 } from 'src/constants/serviceConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 // import EditEmployeeDialog from './EditEmployeeDialog';
@@ -39,6 +40,9 @@ export default function ServiceListResults({ services }) {
  const { success: updateSuccess } = useSelector((state) => state.editService);
  const { success: createSuccess } = useSelector(
   (state) => state.createServices
+ );
+ const { success: createTypeSuccess } = useSelector(
+  (state) => state.createServiceType
  );
 
  const deleteHandler = (service) => {
@@ -77,7 +81,14 @@ export default function ServiceListResults({ services }) {
    dispatch(triggerReload({}));
    setShouldCreateServiceDialogOpen(false);
   }
- }, [deleteSuccess, updateSuccess, createSuccess]);
+  if (createTypeSuccess) {
+   toast.success('Thêm mới thành công!');
+   // Should create action creator for this
+   dispatch({ type: CREATE_SERVICE_TYPE_SUCCESS, payload: false });
+   dispatch(triggerReload({}));
+   setShouldCreateServiceDialogOpen(false);
+  }
+ }, [deleteSuccess, updateSuccess, createSuccess, createTypeSuccess]);
  const handleOpenEditDialog = (editData) => {
   setShouldUpdateServiceDialogOpen(true);
   setUpdateServiceDefaultValue(editData);
