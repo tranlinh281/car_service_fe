@@ -17,10 +17,8 @@ export const listCustomerReducer = (
     loading: false,
     data: action.payload
    };
-  case CUSTOMER_LIST_FAIL: {
-   console.log('debug', action.payload);
+  case CUSTOMER_LIST_FAIL:
    return { ...state, loading: false, error: action.payload };
-  }
   default:
    return state;
  }

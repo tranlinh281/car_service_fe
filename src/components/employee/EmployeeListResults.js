@@ -1,10 +1,10 @@
 import {
-    Box,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow
+ Box,
+ Table,
+ TableBody,
+ TableCell,
+ TableHead,
+ TableRow
 } from '@material-ui/core';
 import { Close, Edit } from '@material-ui/icons';
 import { memo, useContext, useEffect, useState } from 'react';
@@ -13,9 +13,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { deleteEmployee, triggerReload } from 'src/actions/userAction';
 import {
-    CREATE_EMPLOYEE_SUCCESS,
-    DELETE_EMPLOYEE_SUCCESS,
-    EDIT_EMPLOYEE_SUCCESS
+ CREATE_EMPLOYEE_SUCCESS,
+ DELETE_EMPLOYEE_SUCCESS,
+ EDIT_EMPLOYEE_SUCCESS
 } from 'src/constants/userConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import { employeeHeader } from 'src/services/HeaderTitleTable';
@@ -23,7 +23,7 @@ import * as errorEmp from '../../utils/Constants';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
 
-const EmployeeListResult = ({ loading, employees }) => {
+const EmployeeListResult = ({ loading, employees, errorMessage }) => {
  const [confirmDialog, setConfirmDialog] = useState({
   isOpen: false,
   title: '',
@@ -83,7 +83,6 @@ const EmployeeListResult = ({ loading, employees }) => {
   } else return 'Quản lý';
  };
  const deleteHandler = (employee) => {
-  console.log(employee.username);
   dispatch(deleteEmployee(employee.username));
  };
 
@@ -105,37 +104,39 @@ const EmployeeListResult = ({ loading, employees }) => {
         </TableRow>
        </TableHead>
        <TableBody>
-        {employees?.map((employee) => (
-         <TableRow hover key={employee.username}>
-          <TableCell>{employee.username}</TableCell>
-          <TableCell>{employee.fullname}</TableCell>
-          <TableCell>{employee.phoneNumber}</TableCell>
-          <TableCell>{showRole(employee.role)}</TableCell>
-          <TableCell>
-           <ButtonAction
-            variant="contained"
-            color="primary"
-            onClick={() => handleOpenEditDialog(employee)}
-           >
-            <Edit fontSize="small" />
-           </ButtonAction>
-           <ButtonAction
-            color="secondary"
-            onClick={() => {
-             setConfirmDialog({
-              isOpen: true,
-              title: 'Bạn có chắc muốn xóa?',
-              onConfirm: () => {
-               deleteHandler(employee), setConfirmDialog({ isOpen: false });
-              }
-             });
-            }}
-           >
-            <Close fontSize="small" />
-           </ButtonAction>
-          </TableCell>
-         </TableRow>
-        ))}
+        {(employees?.length &&
+         employees?.map((employee) => (
+          <TableRow hover key={employee.username}>
+           <TableCell>{employee.username}</TableCell>
+           <TableCell>{employee.fullname}</TableCell>
+           <TableCell>{employee.phoneNumber}</TableCell>
+           <TableCell>{showRole(employee.role)}</TableCell>
+           <TableCell>
+            <ButtonAction
+             variant="contained"
+             color="primary"
+             onClick={() => handleOpenEditDialog(employee)}
+            >
+             <Edit fontSize="small" />
+            </ButtonAction>
+            <ButtonAction
+             color="secondary"
+             onClick={() => {
+              setConfirmDialog({
+               isOpen: true,
+               title: 'Bạn có chắc muốn xóa?',
+               onConfirm: () => {
+                deleteHandler(employee), setConfirmDialog({ isOpen: false });
+               }
+              });
+             }}
+            >
+             <Close fontSize="small" />
+            </ButtonAction>
+           </TableCell>
+          </TableRow>
+         ))) ||
+         errorMessage}
        </TableBody>
       </Table>
      </Box>

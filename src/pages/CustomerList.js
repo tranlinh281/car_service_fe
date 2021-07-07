@@ -12,21 +12,17 @@ import CustomerListResults from 'src/components/customer/CustomerListResults';
 
 const CustomerList = () => {
  const { data } = useSelector((state) => state.customerList);
-
- console.log('debug CustomerList', data);
-
- const [page, setPage] = useState(data.currentPage || 1);
+ const [page, setPage] = useState(1);
  const triggerReload = useSelector((state) => state.triggerReload);
  const [keySearch, setKeySearch] = useState('');
  const dispatch = useDispatch();
 
  useEffect(() => {
   dispatch(listCustomer(keySearch, page));
-  console.log('debug dispatch');
  }, [dispatch, page, keySearch, triggerReload]);
 
- const handlePageChange = (event, value) => {
-  setPage(value);
+ const handlePageChange = (_, page) => {
+  setPage(page);
   setKeySearch(keySearch);
  };
 

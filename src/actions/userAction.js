@@ -57,23 +57,19 @@ export const logout = () => (dispatch) => {
  dispatch({ type: USER_LOGOUT });
 };
 
-export const listEmployee = (keySearch, page) => (dispatch) => {
+export const listEmployee = (keySearch, page) => async (dispatch) => {
  dispatch({ type: EMPLOYEE_LIST_REQUEST });
  try {
   if (keySearch == undefined || keySearch == '') {
-   Axios.get(getEmployeePagingURL(page)).then((res) => {
-    dispatch({ type: EMPLOYEE_LIST_SUCCESS, payload: res.data });
-   });
+   const { data } = await Axios.get(getEmployeePagingURL(page));
+   dispatch({ type: EMPLOYEE_LIST_SUCCESS, payload: data });
+   dispatch({ type: EMPLOYEE_LIST_FAIL, payload: '' });
   } else {
-   Axios.get(getEmployeePagingURL(page) + keySearch).then((respo) => {
-    dispatch({ type: EMPLOYEE_LIST_SUCCESS, payload: respo.data });
-   });
+   const { data } = await Axios.get(getEmployeePagingURL(page) + keySearch);
+   dispatch({ type: EMPLOYEE_LIST_SUCCESS, payload: data });
   }
  } catch (error) {
-  const message =
-   error.response && error.response.data.message
-    ? error.response.data.message
-    : error.message;
+  const message = error.response.data;
   dispatch({ type: EMPLOYEE_LIST_FAIL, payload: message });
  }
 };

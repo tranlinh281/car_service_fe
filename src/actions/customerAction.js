@@ -4,9 +4,7 @@ import {
  CUSTOMER_LIST_REQUEST,
  CUSTOMER_LIST_SUCCESS
 } from 'src/constants/customerConstant';
-import {
- getCustomerPagingURL,
-} from 'src/services/Config';
+import { getCustomerPagingURL } from 'src/services/Config';
 const headers = {
  'Content-Type': 'application/json',
  'Access-Control-Allow-Origin': '*',

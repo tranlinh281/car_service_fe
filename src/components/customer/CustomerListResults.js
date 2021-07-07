@@ -7,16 +7,11 @@ import {
  TableHead,
  TableRow
 } from '@material-ui/core';
-import { Close, EditOutlined } from '@material-ui/icons';
-import ButtonAction from '../ButtonAction';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Popup from '../Popup';
-import ConfirmDialog from '../dialog/dialogConfirm';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteEmployee, triggerReload } from 'src/actions/userAction';
-// import EditEmployeeDialog from './EditEmployeeDialog';   
+import { useDispatch } from 'react-redux';
+// import EditEmployeeDialog from './EditEmployeeDialog';
 import { customerHeader } from 'src/services/HeaderTitleTable';
-import { Skeleton } from '@material-ui/lab';
 
 export default function CustomerListResults({ customers }) {
  const [openPopup, setOpenPopup] = useState(false);

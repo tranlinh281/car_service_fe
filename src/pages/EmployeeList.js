@@ -1,29 +1,26 @@
-import { Helmet } from 'react-helmet';
-import { Box, Container, Card, Pagination } from '@material-ui/core';
-import EmployeeListToolbar from 'src/components/employee/EmployeeListToolbar';
-import EmployeeListResult from 'src/components/employee/EmployeeListResults';
-import * as constant from '../utils/Constants';
-import { listEmployee } from 'src/actions/userAction';
+import { Box, Card, Container, Pagination } from '@material-ui/core';
 import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
-import { AlignCenter } from 'react-feather';
+import { listEmployee } from 'src/actions/userAction';
+import EmployeeListResult from 'src/components/employee/EmployeeListResults';
+import EmployeeListToolbar from 'src/components/employee/EmployeeListToolbar';
 import EmployeeDialogHOC from 'src/components/_HOCProvider/EmployeeDialogHOC';
+import * as constant from '../utils/Constants';
 
 const EmployeeList = () => {
- const { data } = useSelector((state) => state.employeeList);
- const [page, setPage] = useState(data.currentPage || 1);
+ const { data, error, loading } = useSelector((state) => state.employeeList);
+ const [page, setPage] = useState(1);
  const triggerReload = useSelector((state) => state.triggerReload);
- //
  const [keySearch, setKeySearch] = useState('');
  const dispatch = useDispatch();
 
  useEffect(() => {
   dispatch(listEmployee(keySearch, page));
-
  }, [dispatch, page, keySearch, triggerReload]);
 
- const handlePageChange = (value) => {  
-  setPage(value);
+ const handlePageChange = (_, page) => {
+  setPage(page);
   setKeySearch(keySearch);
  };
 
@@ -45,8 +42,9 @@ const EmployeeList = () => {
       <Box sx={{ pt: 3 }}>
        <Card>
         <EmployeeListResult
-         totalPages={data.totalPages || 0}
-         employees={data.itemsList || []}
+         employees={!error ? data.itemsList : []}
+         errorMessage={error}
+         loading={loading}
         />
         <Box
          sx={{
