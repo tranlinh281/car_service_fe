@@ -24,9 +24,9 @@ import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessory
 import { accessoryHeader } from 'src/services/HeaderTitleTable';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
-import Popup from '../Popup';
+import LoadingBox from 'src/components/LoadingBox';
 
-export default function AccessoryListResults({ accessories }) {
+export default function AccessoryListResults({ loading, accessories }) {
  const [openPopup, setOpenPopup] = useState(false);
  const [confirmDialog, setConfirmDialog] = useState({
   isOpen: false,
@@ -44,8 +44,6 @@ export default function AccessoryListResults({ accessories }) {
  const { success: createSuccess } = useSelector(
   (state) => state.createAccessories
  );
-
-
 
  const dispatch = useDispatch();
  const {
@@ -99,69 +97,68 @@ export default function AccessoryListResults({ accessories }) {
 
  return (
   <>
-   <PerfectScrollbar>
-    <Box sx={{ minWidth: 1050 }}>
-     <Table>
-      <TableHead>
-       <TableRow>
-        {accessoryHeader.map((headCell) => (
-         <TableCell key={headCell.id}>{headCell.title}</TableCell>
-        ))}
-       </TableRow>
-      </TableHead>
-
-      <TableBody>
-       {accessories?.map((accessory) => (
-        <TableRow hover key={accessory.name}>
-         <TableCell>
-          <img
-           src={'/static/images/avatars/avatar_3.png'}
-           style={{
-            height: 50,
-            width: 50
-           }}
-          />
-         </TableCell>
-         <TableCell>{accessory.name}</TableCell>
-         <TableCell>{accessory.quantity}</TableCell>
-         <TableCell>{accessory.price}</TableCell>
-         <TableCell>{accessory.unit}</TableCell>
-         <TableCell>{accessory.type}</TableCell>
-         <TableCell>{accessory.manufacturer}</TableCell>
-         <TableCell>
-          <ButtonAction
-           variant="contained"
-           color="primary"
-           onClick={() => handleOpenEditDialog(accessory)}
-          >
-           <Edit fontSize="small" />
-          </ButtonAction>
-          <ButtonAction
-           color="secondary"
-           onClick={() => {
-            setConfirmDialog({
-             isOpen: true,
-             title: 'Bạn có chắc muốn xóa?',
-             onConfirm: () => {
-              deleteHandler(accessory), setConfirmDialog({ isOpen: false });
-             }
-            });
-           }}
-          >
-           <Close fontSize="small" />
-          </ButtonAction>
-         </TableCell>
+   {loading ? (
+    <LoadingBox></LoadingBox>
+   ) : (
+    <PerfectScrollbar>
+     <Box sx={{ minWidth: 1050 }}>
+      <Table>
+       <TableHead>
+        <TableRow>
+         {accessoryHeader.map((headCell) => (
+          <TableCell key={headCell.id}>{headCell.title}</TableCell>
+         ))}
         </TableRow>
-       ))}
-      </TableBody>
-     </Table>
-    </Box>
-   </PerfectScrollbar>
-   <Popup
-    title="Thông tin nhân viên"
-    openPopup={openPopup}
-    setOpenPopup={setOpenPopup}
-   ></Popup>
+       </TableHead>
+
+       <TableBody>
+        {accessories?.map((accessory) => (
+         <TableRow hover key={accessory.name}>
+          <TableCell>
+           <img
+            src={'/static/images/avatars/avatar_3.png'}
+            style={{
+             height: 50,
+             width: 50
+            }}
+           />
+          </TableCell>
+          <TableCell>{accessory.name}</TableCell>
+          <TableCell>{accessory.quantity}</TableCell>
+          <TableCell>{accessory.price}</TableCell>
+          <TableCell>{accessory.unit}</TableCell>
+          <TableCell>{accessory.type}</TableCell>
+          <TableCell>{accessory.manufacturer}</TableCell>
+          <TableCell>
+           <ButtonAction
+            variant="contained"
+            color="primary"
+            onClick={() => handleOpenEditDialog(accessory)}
+           >
+            <Edit fontSize="small" />
+           </ButtonAction>
+           <ButtonAction
+            color="secondary"
+            onClick={() => {
+             setConfirmDialog({
+              isOpen: true,
+              title: 'Bạn có chắc muốn xóa?',
+              onConfirm: () => {
+               deleteHandler(accessory), setConfirmDialog({ isOpen: false });
+              }
+             });
+            }}
+           >
+            <Close fontSize="small" />
+           </ButtonAction>
+          </TableCell>
+         </TableRow>
+        ))}
+       </TableBody>
+      </Table>
+     </Box>
+    </PerfectScrollbar>
+   )}
    <ConfirmDialog
     confirmDialog={confirmDialog}
     setConfirmDialog={setConfirmDialog}

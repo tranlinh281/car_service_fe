@@ -20,7 +20,7 @@ import {
 } from 'src/constants/accessoryConstant';
 
 export const listAccessoryReducer = (
- state = { loading: true, accessories: [] },
+ state = { loading: true, accessories: [], error: '' },
  action
 ) => {
  switch (action.type) {

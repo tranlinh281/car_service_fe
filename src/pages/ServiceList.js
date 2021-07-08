@@ -10,7 +10,6 @@ import ServiceListToolbar from 'src/components/servicees/ServiceListToolbar';
 import ServiceListResults from 'src/components/servicees/ServiceListResults';
 import ServiceDialogHOC from 'src/components/_HOCProvider/ServiceDialogHOC';
 
-
 const ServiceList = () => {
  const serviceList = useSelector((state) => state.serviceList);
  const { loading, error, services, currentPage, totalPages, totalEmp } =
@@ -48,7 +47,11 @@ const ServiceList = () => {
       <ServiceListToolbar setPage={setPage} setKeySearch={setKeySearch} />
       <Box sx={{ pt: 3 }}>
        <Card>
-        <ServiceListResults totalPages={totalPages} services={services} />
+        <ServiceListResults
+         totalPages={totalPages}
+         services={services}
+         loading={loading}
+        />
         <Box
          sx={{
           display: 'flex',

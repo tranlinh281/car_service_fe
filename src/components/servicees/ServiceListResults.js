@@ -25,10 +25,10 @@ import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessory
 import { serviceHeader } from 'src/services/HeaderTitleTable';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
+import LoadingBox from '../LoadingBox';
 
-export default function ServiceListResults({ services }) {
+export default function ServiceListResults({ loading, services }) {
  const serviceDelete = useSelector((state) => state.serviceDelete);
- const { success } = serviceDelete;
 
  const [openPopup, setOpenPopup] = useState(false);
  const [confirmDialog, setConfirmDialog] = useState({
@@ -96,54 +96,57 @@ export default function ServiceListResults({ services }) {
 
  return (
   <>
-   <PerfectScrollbar>
-    <Box sx={{ minWidth: 1050 }}>
-     <Table>
-      <TableHead>
-       <TableRow>
-        {serviceHeader.map((headCell) => (
-         <TableCell key={headCell.id}>{headCell.title}</TableCell>
-        ))}
-       </TableRow>
-      </TableHead>
-
-      <TableBody>
-       {services?.map((service) => (
-        <TableRow hover key={service.name}>
-         <TableCell>{service.name}</TableCell>
-         <TableCell>{service.price}</TableCell>
-         <TableCell>{service.type}</TableCell>
-         {/* <TableCell>{employee.status}</TableCell> */}
-         {/* <TableCell>{employee.maLoaiNguoiDung}</TableCell> */}
-         <TableCell>
-          <ButtonAction
-           variant="contained"
-           color="primary"
-           onClick={() => handleOpenEditDialog(service)}
-          >
-           <Edit fontSize="small" />
-          </ButtonAction>
-          <ButtonAction
-           color="secondary"
-           onClick={() => {
-            setConfirmDialog({
-             isOpen: true,
-             title: 'Bạn có chắc muốn xóa?',
-             onConfirm: () => {
-              deleteHandler(service), setConfirmDialog({ isOpen: false });
-             }
-            });
-           }}
-          >
-           <Close fontSize="small" />
-          </ButtonAction>
-         </TableCell>
+   {loading ? (
+    <LoadingBox></LoadingBox>
+   ) : (
+    <PerfectScrollbar>
+     <Box sx={{ minWidth: 1050 }}>
+      <Table>
+       <TableHead>
+        <TableRow>
+         {serviceHeader.map((headCell) => (
+          <TableCell key={headCell.id}>{headCell.title}</TableCell>
+         ))}
         </TableRow>
-       ))}
-      </TableBody>
-     </Table>
-    </Box>
-   </PerfectScrollbar>
+       </TableHead>
+
+       <TableBody>
+        {services?.map((service) => (
+         <TableRow hover key={service.name}>
+          <TableCell>{service.name}</TableCell>
+          <TableCell>{service.price}</TableCell>
+          <TableCell>{service.type}</TableCell>
+
+          <TableCell>
+           <ButtonAction
+            variant="contained"
+            color="primary"
+            onClick={() => handleOpenEditDialog(service)}
+           >
+            <Edit fontSize="small" />
+           </ButtonAction>
+           <ButtonAction
+            color="secondary"
+            onClick={() => {
+             setConfirmDialog({
+              isOpen: true,
+              title: 'Bạn có chắc muốn xóa?',
+              onConfirm: () => {
+               deleteHandler(service), setConfirmDialog({ isOpen: false });
+              }
+             });
+            }}
+           >
+            <Close fontSize="small" />
+           </ButtonAction>
+          </TableCell>
+         </TableRow>
+        ))}
+       </TableBody>
+      </Table>
+     </Box>
+    </PerfectScrollbar>
+   )}
    <ConfirmDialog
     confirmDialog={confirmDialog}
     setConfirmDialog={setConfirmDialog}

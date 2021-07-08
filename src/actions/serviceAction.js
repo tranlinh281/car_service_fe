@@ -37,16 +37,16 @@ const headers = {
  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMTExMTEyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUXVhblRyaSIsIm5iZiI6MTYyMzA4MDI2MSwiZXhwIjoxNjIzMDgzODYxfQ.kJxGYbJzRjCCg4qy3OO0XjglTcuIOhoeY6ynmmxmwUo'
 };
 
-export const listService = (keySearch) => (dispatch) => {
+export const listService = (keySearch) => async (dispatch) => {
  dispatch({ type: SERVICE_LIST_REQUEST });
  try {
   if (keySearch == undefined || keySearch == '') {
-   Axios.get(GET_SERVICE_LIST_URL).then((res) => {
+   await Axios.get(GET_SERVICE_LIST_URL).then((res) => {
     dispatch({ type: SERVICE_LIST_SUCCESS, payload: res.data });
    });
   } else {
    // const arData = [];
-   Axios.get(GET_SERVICE_BY_USERNAME_URL + keySearch).then((respo) => {
+   await Axios.get(GET_SERVICE_BY_USERNAME_URL + keySearch).then((respo) => {
     // arData.push(respo.data)
     // console.log(arData);
     dispatch({ type: SERVICE_LIST_SUCCESS, payload: respo.data });
@@ -81,15 +81,15 @@ export const createService = (serviceModels) => async (dispatch) => {
  }
 };
 
-export const listServiceType = (keySearch) => (dispatch) => {
+export const listServiceType = (keySearch) => async (dispatch) => {
  dispatch({ type: SERVICE_TYPE_LIST_REQUEST });
  try {
   if (keySearch == undefined || keySearch == '') {
-   Axios.get(GET_SERVICE_TYPE_LIST_URL).then((res) => {
+   await Axios.get(GET_SERVICE_TYPE_LIST_URL).then((res) => {
     dispatch({ type: SERVICE_TYPE_LIST_SUCCESS, payload: res.data });
    });
   } else {
-   Axios.get(GET_SERVICE_TYPE_LIST_URL + keySearch).then((respo) => {
+   await Axios.get(GET_SERVICE_TYPE_LIST_URL + keySearch).then((respo) => {
     dispatch({ type: SERVICE_TYPE_LIST_SUCCESS, payload: respo.data });
    });
   }

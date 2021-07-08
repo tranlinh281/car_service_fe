@@ -19,7 +19,7 @@ import {
 } from 'src/constants/userConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import { employeeHeader } from 'src/services/HeaderTitleTable';
-import * as errorEmp from '../../utils/Constants';
+import LoadingBox from 'src/components/LoadingBox';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
 
@@ -71,7 +71,10 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
 
    setShouldCreateEmployeeDialogOpen(false);
   }
- }, [deleteSuccess, updateSuccess, createSuccess]);
+  if (errorMessage) {
+   const errMessage = 'Không tìm thấy nhân viên';
+  }
+ }, [deleteSuccess, updateSuccess, createSuccess, errorMessage]);
  const handleOpenEditDialog = (editData) => {
   setShouldUpdateEmployeeDialogOpen(true);
   setUpdateEmployeeDefaultValue(editData);
@@ -89,9 +92,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
  return (
   <>
    {loading ? (
-    <p style={{ textAlign: 'center', fontSize: '1.3rem', fontWeight: 'bold' }}>
-     {errorEmp.NOT_EXITS_EMP}
-    </p>
+    <LoadingBox></LoadingBox>
    ) : (
     <PerfectScrollbar>
      <Box sx={{ minWidth: 1050 }}>
@@ -136,7 +137,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
            </TableCell>
           </TableRow>
          ))) ||
-         errorMessage}
+         errMessage}
        </TableBody>
       </Table>
      </Box>

@@ -21,6 +21,7 @@ import {
 } from 'src/constants/accessoryConstant';
 import {
  DELETE_ACCESSORY,
+ getAccessoryPagingURL,
  GET_ACCESSORY_BY_USERNAME_URL,
  GET_ACCESSORY_LIST_URL,
  GET_ACCESSORY_TYPE_LIST_BY_USERNAME_URL,
@@ -39,18 +40,17 @@ const headers = {
  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMTExMTEyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUXVhblRyaSIsIm5iZiI6MTYyMzA4MDI2MSwiZXhwIjoxNjIzMDgzODYxfQ.kJxGYbJzRjCCg4qy3OO0XjglTcuIOhoeY6ynmmxmwUo'
 };
 
-export const listAccessory = (keySearch) => (dispatch) => {
+export const listAccessory = (keySearch, page) => async (dispatch) => {
  dispatch({ type: ACCESSORY_LIST_REQUEST });
  try {
   if (keySearch == undefined || keySearch == '') {
-   Axios.get(GET_ACCESSORY_LIST_URL).then((res) => {
+   await Axios.get(getAccessoryPagingURL(page)).then((res) => {
     dispatch({ type: ACCESSORY_LIST_SUCCESS, payload: res.data });
    });
   } else {
    // const arData = [];
-   Axios.get(GET_ACCESSORY_BY_USERNAME_URL + keySearch).then((respo) => {
-    // arData.push(respo.data)
-    // console.log(arData);
+   await Axios.get(getAccessoryPagingURL(page) + keySearch).then((respo) => {
+    console.log(respo.data, 'action debug accesory');
     dispatch({ type: ACCESSORY_LIST_SUCCESS, payload: respo.data });
    });
   }
@@ -123,16 +123,16 @@ export const updateAccessory = (accessoryModels) => async (dispatch) => {
  }
 };
 
-export const listTypeAccessory = (keySearch) => (dispatch) => {
+export const listTypeAccessory = (keySearch) => async (dispatch) => {
  dispatch({ type: ACCESSORY_TYPE_LIST_REQUEST });
  try {
   if (keySearch == undefined || keySearch == '') {
-   Axios.get(GET_ACCESSORY_TYPE_LIST_URL).then((res) => {
+   await Axios.get(GET_ACCESSORY_TYPE_LIST_URL).then((res) => {
     dispatch({ type: ACCESSORY_TYPE_LIST_SUCCESS, payload: res.data });
    });
   } else {
    // const arData = [];
-   Axios.get(GET_ACCESSORY_TYPE_LIST_BY_USERNAME_URL + keySearch).then(
+   await Axios.get(GET_ACCESSORY_TYPE_LIST_BY_USERNAME_URL + keySearch).then(
     (respo) => {
      // arData.push(respo.data)
      // console.log(arData);

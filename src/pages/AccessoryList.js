@@ -21,7 +21,7 @@ const AccessoryList = () => {
  useEffect(() => {
   dispatch(listAccessory(keySearch, page));
  }, [dispatch, page, keySearch, triggerReload]);
-
+ console.log(accessoryList, 'accesory list debug');
  const handlePageChange = (event, value) => {
   setPage(value);
   setKeySearch(keySearch);
@@ -46,6 +46,7 @@ const AccessoryList = () => {
        <AccessoryListResults
         totalPages={totalPages}
         accessories={accessories}
+        loading={loading}
        />
        <Box
         sx={{

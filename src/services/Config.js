@@ -55,6 +55,8 @@ export const POST_NEW_EMPLOYEE = GET_EMPLOYEE_LIST_URL;
 export const DELETE_EMPLOYEE = GET_EMPLOYEE_LIST_URL + QUESTION_MARK + USERNAME;
 // Accessory
 export const GET_ACCESSORY_LIST_URL = BASE_URL + ACCESSORY;
+export const getAccessoryPagingURL = (page = 1) =>
+ BASE_URL + 'Accessories' + QUESTION_MARK + 'page=' + page + '&nameSearch=';
 export const GET_ACCESSORY_TYPE_LIST_URL =
  GET_ACCESSORY_LIST_URL + FORWARD_SLASH + TYPE;
 export const GET_ACCESSORY_TYPE_LIST_BY_USERNAME_URL =

@@ -11,7 +11,7 @@ import CustomerListToolbar from 'src/components/customer/CustomerListToolbar';
 import CustomerListResults from 'src/components/customer/CustomerListResults';
 
 const CustomerList = () => {
- const { data } = useSelector((state) => state.customerList);
+ const { data, error, loading } = useSelector((state) => state.customerList);
  const [page, setPage] = useState(1);
  const triggerReload = useSelector((state) => state.triggerReload);
  const [keySearch, setKeySearch] = useState('');
@@ -45,6 +45,7 @@ const CustomerList = () => {
        <CustomerListResults
         totalPages={data.totalPages || 0}
         customers={data.itemsList || []}
+        loading={loading}
        />
        <Box
         sx={{
