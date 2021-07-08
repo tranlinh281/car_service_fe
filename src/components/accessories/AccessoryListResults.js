@@ -113,7 +113,7 @@ export default function AccessoryListResults({ loading, accessories }) {
 
        <TableBody>
         {accessories?.map((accessory) => (
-         <TableRow hover key={accessory.name}>
+         <TableRow hover key={accessory.id}>
           <TableCell>
            <img
             src={'/static/images/avatars/avatar_3.png'}

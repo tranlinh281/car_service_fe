@@ -63,7 +63,8 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
       onClose={onClose}
       aria-describedby="scroll-dialog-description"
       open={open}
-      maxWidth={'sm'}
+      maxWidth={'md'}
+      fullWidth={true}
      >
       <Form>
        <DialogTitle id="customized-dialog-title" onClose={onClose}>

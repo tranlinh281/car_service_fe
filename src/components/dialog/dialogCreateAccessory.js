@@ -96,7 +96,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
      onClose={onClose}
      aria-describedby="scroll-dialog-description"
      open={open}
-     maxWidth={'sm'}
+     maxWidth={'md'}
     >
      <Form>
       {' '}
