@@ -56,11 +56,11 @@ export const listEmployeeReducer = (
 export const createEmployeeReducer = (state = {}, action) => {
  switch (action.type) {
   case CREATE_EMPLOYEE_REQUEST:
-   return { loading: true };
+   return { ...state, loading: true };
   case CREATE_EMPLOYEE_SUCCESS:
-   return { loading: false, success: action.payload };
+   return { ...state, loading: false, success: action.payload };
   case CREATE_EMPLOYEE_FAIL:
-   return { loading: false, error: action.payload };
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }
@@ -69,11 +69,11 @@ export const createEmployeeReducer = (state = {}, action) => {
 export const deleteEmployeeReducer = (state = {}, action) => {
  switch (action.type) {
   case DELETE_EMPLOYEE_REQUEST:
-   return { loading: true };
+   return { ...state, loading: true };
   case DELETE_EMPLOYEE_SUCCESS:
-   return { loading: false, success: action.payload };
+   return { ...state, loading: false, success: action.payload };
   case DELETE_EMPLOYEE_FAIL:
-   return { loading: false, error: action.payload };
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }
@@ -82,11 +82,11 @@ export const deleteEmployeeReducer = (state = {}, action) => {
 export const updateEmployeeReducer = (state = {}, action) => {
  switch (action.type) {
   case EDIT_EMPLOYEE_REQUEST:
-   return { loading: true };
+   return { ...state, loading: true };
   case EDIT_EMPLOYEE_SUCCESS:
-   return { loading: false, success: action.payload };
+   return { ...state, loading: false, success: action.payload };
   case EDIT_EMPLOYEE_FAIL:
-   return { loading: false, error: action.payload };
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }

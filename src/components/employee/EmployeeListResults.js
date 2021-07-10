@@ -71,10 +71,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
 
    setShouldCreateEmployeeDialogOpen(false);
   }
-  if (errorMessage) {
-   const errMessage = 'Không tìm thấy nhân viên';
-  }
- }, [deleteSuccess, updateSuccess, createSuccess, errorMessage]);
+ }, [deleteSuccess, updateSuccess, createSuccess]);
  const handleOpenEditDialog = (editData) => {
   setShouldUpdateEmployeeDialogOpen(true);
   setUpdateEmployeeDefaultValue(editData);
@@ -137,7 +134,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
            </TableCell>
           </TableRow>
          ))) ||
-         errMessage}
+         errorMessage}
        </TableBody>
       </Table>
      </Box>

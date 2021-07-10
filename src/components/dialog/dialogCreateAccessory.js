@@ -5,6 +5,7 @@ import {
  DialogContent,
  DialogContentText,
  DialogTitle,
+ FormControl,
  Grid,
  InputLabel,
  MenuItem,
@@ -96,7 +97,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
      onClose={onClose}
      aria-describedby="scroll-dialog-description"
      open={open}
-     maxWidth={'md'}
+     maxWidth={'sm'}
     >
      <Form>
       {' '}
@@ -106,7 +107,8 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
       <DialogContent dividers>
        <DialogContentText>
         <Grid container spacing={3}>
-         <Grid item xs={12} sm={6}>
+         <Grid item xs={12} sm={6}></Grid>
+         <Grid item xs={6}>
           <TextField
            fullWidth
            error={!!errors.name}
@@ -134,7 +136,6 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
            name="quantity"
            variant="outlined"
           />
-
           <TextField
            fullWidth
            label="Đơn Giá"
@@ -148,8 +149,6 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
            name="price"
            variant="outlined"
           />
-         </Grid>
-         <Grid item xs={6}>
           <TextField
            fullWidth
            label="Đơn vị tính"
@@ -162,28 +161,41 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
            name="unit"
            variant="outlined"
           />
-          <InputLabel>Loai</InputLabel>
-          <Select
-           name="type"
-           value={values.type}
-           onChange={handleChange}
-           label="Loại"
-          >
-           {types?.map((type) => (
-            <MenuItem value={type.name}>{type.name}</MenuItem>
-           ))}
-          </Select>
-          <InputLabel>Hãng</InputLabel>
-          <Select
-           name="manufacturer"
-           value={values.manufacturer}
-           onChange={handleChange}
-           label="Hãng"
-          >
-           {manufacturers?.map((manufacturer) => (
-            <MenuItem value={manufacturer.name}>{manufacturer.name}</MenuItem>
-           ))}
-          </Select>
+          <Grid item container spacing={2}>
+           <Grid item xs={6} sm={6}>
+            <FormControl variant="outlined" margin="normal" fullWidth>
+             <InputLabel>Loai</InputLabel>
+             <Select
+              name="type"
+              value={values.type}
+              onChange={handleChange}
+              label="Loại"
+             >
+              {types?.map((type) => (
+               <MenuItem value={type.name}>{type.name}</MenuItem>
+              ))}
+             </Select>
+            </FormControl>
+           </Grid>
+
+           <Grid item xs={6} sm={6}>
+            <FormControl variant="outlined" margin="normal" fullWidth>
+             <InputLabel>Hãng</InputLabel>
+             <Select
+              name="manufacturer"
+              value={values.manufacturer}
+              onChange={handleChange}
+              label="Hãng"
+             >
+              {manufacturers?.map((manufacturer) => (
+               <MenuItem value={manufacturer.name}>
+                {manufacturer.name}
+               </MenuItem>
+              ))}
+             </Select>
+            </FormControl>
+           </Grid>
+          </Grid>
          </Grid>
         </Grid>
        </DialogContentText>
