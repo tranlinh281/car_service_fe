@@ -42,7 +42,7 @@ export const login = (username, password) => async (dispatch) => {
  try {
   const { data } = await Axios.post(LOGIN_URL, { username, password });
   dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
-  localStorage.setItem('userInfo', JSON.stringify(data));
+  localStorage.setItem('userInfo', JSON.stringify(data.jwt));
  } catch (error) {
   const message =
    error.respone && error.respone.data.message
