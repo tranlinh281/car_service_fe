@@ -44,18 +44,13 @@ export const listAccessory = (keySearch, page) => async (dispatch) => {
  dispatch({ type: ACCESSORY_LIST_REQUEST });
  try {
   if (keySearch == undefined || keySearch == '') {
-   await Axios.get(getAccessoryPagingURL(page)).then((res) => {
-    dispatch({ type: ACCESSORY_LIST_SUCCESS, payload: res.data });
-   });
+   const { data } = await Axios.get(getAccessoryPagingURL(page));
+   dispatch({ type: ACCESSORY_LIST_SUCCESS, payload: data });
+   dispatch({ type: ACCESSORY_LIST_FAIL, payload: '' });
   } else {
-   // const arData = [];
-   await Axios.get(getAccessoryPagingURL(page) + keySearch).then((respo) => {
-    console.log(respo.data, 'action debug accesory');
-    dispatch({ type: ACCESSORY_LIST_SUCCESS, payload: respo.data });
-   });
+   const { data } = await Axios.get(getAccessoryPagingURL(page) + keySearch);
+   dispatch({ type: ACCESSORY_LIST_SUCCESS, payload: data });
   }
-  localStorage.setItem('keySearch', keySearch);
-  console.log(data);
  } catch (error) {
   const message =
    error.response && error.response.data.message

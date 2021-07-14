@@ -141,7 +141,13 @@ const CreateEmployeeDialog = ({ open, onClose }) => {
           <Select
            name="role"
            value={values.role}
+           error={!!errors.role}
+           helperText={errors.role}
            onChange={handleChange}
+           InputLabelProps={{
+            shrink: true
+           }}
+           onBlur={handleBlur}
            label="Vị trí"
           >
            <MenuItem value="manager">Quản lý</MenuItem>

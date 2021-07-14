@@ -9,10 +9,7 @@ import AccessoryDialogHOC from 'src/components/_HOCProvider/AccessoryDialogHOC';
 import * as constant from '../utils/Constants';
 
 const AccessoryList = () => {
- const accessoryList = useSelector((state) => state.accessoryList);
- const { loading, error, accessories, currentPage, totalPages, totalEmp } =
-  accessoryList;
-
+ const { data, error, loading } = useSelector((state) => state.accessoryList);
  const [page, setPage] = useState(1);
  const triggerReload = useSelector((state) => state.triggerReload);
  const [keySearch, setKeySearch] = useState('');
@@ -21,8 +18,8 @@ const AccessoryList = () => {
  useEffect(() => {
   dispatch(listAccessory(keySearch, page));
  }, [dispatch, page, keySearch, triggerReload]);
- console.log(accessoryList, 'accesory list debug');
- const handlePageChange = (event, value) => {
+ console.log(data, 'accesory list debug');
+ const handlePageChange = (_, value) => {
   setPage(value);
   setKeySearch(keySearch);
  };
@@ -44,8 +41,8 @@ const AccessoryList = () => {
      <Box sx={{ pt: 3 }}>
       <Card>
        <AccessoryListResults
-        totalPages={totalPages}
-        accessories={accessories}
+        totalPages={data.totalPages || 0}
+        accessories={data.itemsList || []}
         loading={loading}
        />
        <Box
@@ -57,7 +54,7 @@ const AccessoryList = () => {
        >
         <Pagination
          color="primary"
-         count={totalPages}
+         count={data.totalPages}
          size="medium"
          onChange={handlePageChange}
          page={page}

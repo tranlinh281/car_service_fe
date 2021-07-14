@@ -12,26 +12,25 @@ export const DisplayingErrorMessagesCreateEmployeeSchema = Yup.object().shape({
  fullname: Yup.string()
   .min(3, 'Họ và tên trên 3 ký tự!')
   .max(50, 'Họ và Tên phải dưới 50 ký tự!')
-  .required('Không được bỏ trống'),
+  .required('Không được bỏ trống họ và tên'),
  email: Yup.string()
   .min(3, 'Email trên 3 ký tự!')
-  .max(50, 'Email phải dưới 50 ký tự!')
-  .email('Phải đúng định dạng @abc.com')
-  .required('Không được bỏ trống'),
+  .max(30, 'Email phải dưới 30 ký tự!')
+  .email('Email không hợp lệ')
+  .required('Không được bỏ trống Email'),
  address: Yup.string()
   .min(3, 'Địa chỉ trên 3 ký tự!')
   .max(100, 'Địa chỉ phải dưới 100 ký tự!')
-  .required('Không được bỏ trống'),
+  .required('Không được bỏ trống địa chỉ'),
  phoneNumber: Yup.string()
   .matches(/[0-9]+/, 'Must only be number')
   .min(10, 'Số điện thoại phải ít nhất 10 ký tự!')
   .max(11, 'Số điện thoại phải dưới 11 ký tự!')
-  .required('Không được bỏ trống'),
- role: Yup.string().required('Không được bỏ trống'),
+  .required('Không được bỏ trống số điện thoại'),
+ role: Yup.string().required('Không được bỏ trống chức vụ'),
  dateOfBirth: Yup.string()
-  //  .format('DD-MM-YYYY')
   .max(10, 'Ngày tháng không hợp lệ')
-  .required('Không được bỏ trống')
+  .required('Không được bỏ trống ngày tháng năm sinh')
 });
 
 export const DisplayingErrorMessagesCreateAccessorySchema = Yup.object().shape({

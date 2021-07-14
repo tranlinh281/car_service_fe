@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingBox from '../LoadingBox';
+import { manufacturerHeader } from 'src/services/HeaderTitleTable';
 
 export default function ManufacturerListResults({ loading, manufacturers }) {
  return (
@@ -21,8 +22,9 @@ export default function ManufacturerListResults({ loading, manufacturers }) {
       <Table>
        <TableHead>
         <TableRow>
-         <TableCell>Tên</TableCell>
-         <TableCell>Chỉnh sửa</TableCell>
+         {manufacturerHeader.map((headCell) => (
+          <TableCell key={headCell.id}>{headCell.title}</TableCell>
+         ))}
         </TableRow>
        </TableHead>
 

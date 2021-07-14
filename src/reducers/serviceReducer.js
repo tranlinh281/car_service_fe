@@ -20,7 +20,7 @@ import {
 } from 'src/constants/serviceConstant';
 
 export const listServiceReducer = (
- state = { loading: true, services: [] },
+ state = { loading: true, data: [] },
  action
 ) => {
  switch (action.type) {
@@ -30,7 +30,7 @@ export const listServiceReducer = (
    return {
     ...state,
     loading: false,
-    services: action.payload
+    data: action.payload
    };
   case SERVICE_LIST_FAIL:
    return { ...state, loading: false, error: action.payload };

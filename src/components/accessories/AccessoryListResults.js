@@ -21,13 +21,12 @@ import {
  EDIT_ACCESSORY_SUCCESS
 } from 'src/constants/accessoryConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
-import { accessoryHeader } from 'src/services/HeaderTitleTable';
+import { accessoryHeader, manufacturerHeader } from 'src/services/HeaderTitleTable';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import LoadingBox from 'src/components/LoadingBox';
 
 export default function AccessoryListResults({ loading, accessories }) {
- const [openPopup, setOpenPopup] = useState(false);
  const [confirmDialog, setConfirmDialog] = useState({
   isOpen: false,
   title: '',

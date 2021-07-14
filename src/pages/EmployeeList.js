@@ -23,6 +23,7 @@ const EmployeeList = () => {
   setPage(page);
   setKeySearch(keySearch);
  };
+ console.log(keySearch, 'debug list');
 
  return (
   <>

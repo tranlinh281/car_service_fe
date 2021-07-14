@@ -75,7 +75,19 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
        </DialogTitle>
        <DialogContent dividers>
         <Grid container spacing={3}>
-         <Grid item xs={12} sm={6}></Grid>
+         <Grid item xs={12} sm={6}>
+          <img
+           src={'/static/images/avatars/avatar_3.png'}
+           style={{
+            margin: 40,
+            height: 200,
+            width: 200
+           }}
+          />
+          <Button variant="contained" color="primary" sx={{ margin: '5 10px' }}>
+           Thêm hình ảnh
+          </Button>
+         </Grid>
          <Grid item xs={6}>
           <TextField
            fullWidth

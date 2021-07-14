@@ -20,14 +20,14 @@ import {
 } from 'src/constants/accessoryConstant';
 
 export const listAccessoryReducer = (
- state = { loading: true, accessories: [], error: '' },
+ state = { loading: true, data: [], error: '' },
  action
 ) => {
  switch (action.type) {
   case ACCESSORY_LIST_REQUEST:
    return { ...state, loading: true };
   case ACCESSORY_LIST_SUCCESS:
-   return { ...state, loading: false, accessories: action.payload };
+   return { ...state, loading: false, data: action.payload };
   case ACCESSORY_LIST_FAIL:
    return { ...state, loading: false, error: action.payload };
   default:

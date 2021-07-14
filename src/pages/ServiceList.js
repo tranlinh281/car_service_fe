@@ -11,13 +11,10 @@ import ServiceListResults from 'src/components/servicees/ServiceListResults';
 import ServiceDialogHOC from 'src/components/_HOCProvider/ServiceDialogHOC';
 
 const ServiceList = () => {
- const serviceList = useSelector((state) => state.serviceList);
- const { loading, error, services, currentPage, totalPages, totalEmp } =
-  serviceList;
-
+ const { data, error, loading } = useSelector((state) => state.serviceList);
  const [page, setPage] = useState(1);
  const triggerReload = useSelector((state) => state.triggerReload);
- //
+
  const [keySearch, setKeySearch] = useState('');
  const dispatch = useDispatch();
 
@@ -25,10 +22,11 @@ const ServiceList = () => {
   dispatch(listService(keySearch, page));
  }, [dispatch, page, keySearch, triggerReload]);
 
- const handlePageChange = (event, value) => {
+ const handlePageChange = (_, value) => {
   setPage(value);
   setKeySearch(keySearch);
  };
+ console.log(keySearch, 'debug list');
 
  return (
   <>
@@ -48,8 +46,8 @@ const ServiceList = () => {
       <Box sx={{ pt: 3 }}>
        <Card>
         <ServiceListResults
-         totalPages={totalPages}
-         services={services}
+         totalPages={data.totalPages || 0}
+         services={data.itemsList || []}
          loading={loading}
         />
         <Box
@@ -61,7 +59,7 @@ const ServiceList = () => {
         >
          <Pagination
           color="primary"
-          count={totalPages}
+          count={data.totalPages}
           size="medium"
           onChange={handlePageChange}
           page={page}

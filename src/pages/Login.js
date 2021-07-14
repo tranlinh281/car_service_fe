@@ -24,13 +24,17 @@ export default function Login(props) {
  const dispatch = useDispatch();
 
  const submitHandler = ({ username, password }) => {
-  console.log('debug', username, password);
   dispatch(login(username, password));
  };
 
  useEffect(() => {
   if (userInfo) {
-   navigate('/app/dashboard', { replace: true });
+   if (userInfo.role === 'admin') {
+    navigate('/app/dashboard', { replace: true });
+   } else {
+    toast.error('Tài khoản không có quyền truy cập');
+    localStorage.removeItem('userInfo');
+   }
   }
   if (error) {
    toast.error('Sai tài khoản hoặc mật khẩu, vui lòng thử lại');

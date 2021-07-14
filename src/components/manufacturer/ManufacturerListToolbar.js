@@ -4,18 +4,17 @@ import {
  CardContent,
  TextField,
  InputAdornment,
- SvgIcon,
- Button
+ Button,
+ SvgIcon
 } from '@material-ui/core';
 import { useContext } from 'react';
 import { Search as SearchIcon } from 'react-feather';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
-import CreateServiceTypeDialog from './CreateServiceTypeDialog';
 
-export default function ServiceListToolbar({ setPage, setKeySearch }) {
- const { setShouldCreateServiceDialogOpen } = useContext(DialogContext);
+export default function ManufacturerListToolbar({ setPage, setKeySearch }) {
+ const { setShouldCreateAccessoryDialogOpen } = useContext(DialogContext);
  const handleOpenCreateDialog = () => {
-  setShouldCreateServiceDialogOpen(true);
+  setShouldCreateAccessoryDialogOpen(true);
  };
  return (
   <Box>
@@ -26,9 +25,8 @@ export default function ServiceListToolbar({ setPage, setKeySearch }) {
      onClick={handleOpenCreateDialog}
      sx={{ margin: '0 5px' }}
     >
-     Thêm Dịch vụ
+     Thêm hãng xe
     </Button>
-    <CreateServiceTypeDialog />
    </Box>
 
    <Box sx={{ mt: 3 }}>
@@ -41,7 +39,7 @@ export default function ServiceListToolbar({ setPage, setKeySearch }) {
          startAdornment: (
           <InputAdornment position="start">
            <SvgIcon fontSize="small" color="action">
-        <SearchIcon />
+            <SearchIcon />
            </SvgIcon>
           </InputAdornment>
          )
@@ -49,9 +47,8 @@ export default function ServiceListToolbar({ setPage, setKeySearch }) {
         name="keySearch"
         onChange={(e) => {
          setKeySearch(e.target.value);
-         setPage(1);
         }}
-        placeholder="Tìm kiếm Dịch vụ"
+        placeholder="Tìm kiếm Hãng xe"
         variant="outlined"
        />
       </Box>

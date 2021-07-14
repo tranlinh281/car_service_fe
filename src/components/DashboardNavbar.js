@@ -3,7 +3,6 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
  AppBar,
- Badge,
  Box,
  Hidden,
  IconButton,
