@@ -40,7 +40,7 @@ const DialogContextProvider = ({ children }) => {
   setUpdateServiceDefaultValue
  };
  // --------------------------------------
- // Context State of create accessory dialog
+ // Context State of create service dialog
  const [shouldCreateServiceDialogOpen, setShouldCreateServiceDialogOpen] =
   useState(false);
 
@@ -70,6 +70,14 @@ const DialogContextProvider = ({ children }) => {
   shouldCreateEmployeeDialogOpen,
   setShouldCreateEmployeeDialogOpen
  };
+ // Context State of create accessory dialog
+ const [shouldCreatePackageDialogOpen, setShouldCreatePackageDialogOpen] =
+  useState(false);
+
+ const createDialogPackageState = {
+  shouldCreatePackageDialogOpen,
+  setShouldCreatePackageDialogOpen
+ };
 
  const defaultProviderValue = {
   ...updateDialogAccessoryState,
@@ -77,7 +85,8 @@ const DialogContextProvider = ({ children }) => {
   ...updateDialogServiceState,
   ...createDialogServiceState,
   ...updateDialogEmployeeState,
-  ...createDialogEmployeeState
+  ...createDialogEmployeeState,
+  ...createDialogPackageState
  };
 
  return (

@@ -25,7 +25,8 @@ import {
  GET_SERVICE_TYPE_LIST_URL,
  POST_NEW_SERVICE,
  POST_NEW_SERVICE_TYPE,
- UPDATE_SERVICE_URL
+ UPDATE_SERVICE_URL,
+ GET_SERVICE_LIST_URL
 } from 'src/services/Config';
 const headers = {
  'Content-Type': 'application/json',
@@ -152,5 +153,19 @@ export const createTypeService = (name) => async (dispatch) => {
      ? error.response.data.message
      : error.message
   });
+ }
+};
+export const listAllService = () => async (dispatch) => {
+ dispatch({ type: SERVICE_LIST_REQUEST });
+ try {
+  const { data } = await Axios.get(GET_SERVICE_LIST_URL);
+  dispatch({ type: SERVICE_LIST_SUCCESS, payload: data });
+  dispatch({ type: SERVICE_LIST_FAIL, payload: '' });
+ } catch (error) {
+  const message =
+   error.response && error.response.data.message
+    ? error.response.data.message
+    : error.message;
+  dispatch({ type: SERVICE_LIST_FAIL, payload: message });
  }
 };

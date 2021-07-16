@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 export const DisplayingErrorMessagesLoginSchema = Yup.object().shape({
  username: Yup.string()
   .min(3, 'Tài khoản phải trên 3 ký tự!')
-  .max(50, 'Tài khoản phải dưới 20 ký tự!')
+  .max(20, 'Tài khoản phải dưới 20 ký tự!')
   .required('Không được bỏ trống'),
  password: Yup.string().required('Không được bỏ trống')
 });
@@ -61,4 +61,15 @@ export const DisplayingErrorMessagesCreateServiceSchema = Yup.object().shape({
   .required('Không được bỏ trống'),
  price: Yup.string().required('Không được bỏ trống'),
  type: Yup.string().required('Không được bỏ trống')
+});
+export const DisplayingErrorMessagesPackageSchema = Yup.object().shape({
+ name: Yup.string()
+  .min(3, 'Tên dịch vụ phải trên 3 ký tự')
+  .max(50, 'Tên dịch vụ phải dưới 50 ký tự!')
+  .required('Không được bỏ trống'),
+ description: Yup.string()
+  .required('Không được bỏ trống')
+  .min(3, 'Mô tả dịch vụ phải trên 3 ký tự')
+  .max(500, 'Tên dịch vụ phải dưới 500 ký tự!'),
+ services: Yup.array().required('Không được bỏ trống')
 });

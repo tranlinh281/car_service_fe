@@ -23,7 +23,6 @@ const PackageList = () => {
   setPage(page);
   setKeySearch(keySearch);
  };
- console.log(data, 'debug list');
 
  return (
   <>

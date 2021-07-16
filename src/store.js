@@ -14,11 +14,15 @@ import {
  createServiceReducer,
  createServiceTypeReducer,
  deleteServiceReducer,
+ listAllServiceReducer,
  listServiceReducer,
  listServiceTypeReducer,
  updateServiceReducer
 } from './reducers/serviceReducer';
-import { listPackageReducer } from './reducers/packageReducer';
+import {
+ createPackageReducer,
+ listPackageReducer
+} from './reducers/packageReducer';
 import {
  userLoginReducer,
  listEmployeeReducer,
@@ -56,7 +60,9 @@ const reducer = combineReducers({
  accessoryTypeList: listAccessoryTypeReducer,
  createAccessoryType: createAccessoryTypeReducer,
  createServiceType: createServiceTypeReducer,
- packageList: listPackageReducer
+ packageList: listPackageReducer,
+ createPackage: createPackageReducer,
+ serviceListAll: listAllServiceReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

@@ -1,6 +1,9 @@
 import Axios from 'axios';
-import { GET_PACKAGE_LIST_URL } from './../services/Config';
+import { GET_PACKAGE_LIST_URL, POST_NEW_PACKAGE } from './../services/Config';
 import {
+ CREATE_PACKAGE_SUCCESS,
+ CREATE_PACKAGE_REQUEST,
+ CREATE_PACKAGE_FAIL,
  PACKAGE_LIST_FAIL,
  PACKAGE_LIST_REQUEST,
  PACKAGE_LIST_SUCCESS
@@ -32,5 +35,25 @@ export const listPackage = (keySearch, page) => async (dispatch) => {
     ? error.response.data.message
     : error.message;
   dispatch({ type: PACKAGE_LIST_FAIL, payload: message });
+ }
+};
+
+export const createPackage = (mappedData) => async (dispatch) => {
+ dispatch({
+  type: CREATE_PACKAGE_REQUEST,
+  payload: { mappedData }
+ });
+ try {
+  const { data } = await Axios.post(POST_NEW_PACKAGE, mappedData);
+  dispatch({ type: CREATE_PACKAGE_SUCCESS, payload: data });
+  dispatch(triggerReload({}));
+ } catch (error) {
+  dispatch({
+   type: CREATE_PACKAGE_FAIL,
+   payload:
+    error.response && error.response.data.message
+     ? error.response.data.message
+     : error.message
+  });
  }
 };

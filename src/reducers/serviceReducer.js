@@ -20,7 +20,7 @@ import {
 } from 'src/constants/serviceConstant';
 
 export const listServiceReducer = (
- state = { loading: true, data: [] },
+ state = { loading: true, data: {} },
  action
 ) => {
  switch (action.type) {
@@ -98,6 +98,26 @@ export const createServiceTypeReducer = (state = {}, action) => {
   case CREATE_SERVICE_TYPE_SUCCESS:
    return { ...state, loading: false, success: action.payload };
   case CREATE_SERVICE_TYPE_FAIL:
+   return { ...state, loading: false, error: action.payload };
+  default:
+   return state;
+ }
+};
+
+export const listAllServiceReducer = (
+ state = { loading: true, data: {} },
+ action
+) => {
+ switch (action.type) {
+  case SERVICE_LIST_REQUEST:
+   return { ...state, loading: true };
+  case SERVICE_LIST_SUCCESS:
+   return {
+    ...state,
+    loading: false,
+    data: action.payload
+   };
+  case SERVICE_LIST_FAIL:
    return { ...state, loading: false, error: action.payload };
   default:
    return state;

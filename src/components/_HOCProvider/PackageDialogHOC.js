@@ -1,15 +1,15 @@
 import { memo, useContext, useState } from 'react';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
-import CreateEmployeeDialog from '../employee/CreateEmployeeDialog';
 import EditEmployeeDialog from '../employee/EditEmployeeDialog';
+import CreatePackageDialog from '../packages/CreatePackageDialog';
 
 const PackageDialogHOC = ({ children }) => {
  const {
+  shouldCreatePackageDialogOpen,
+  setShouldCreatePackageDialogOpen,
   updateEmployeeDefaultValue,
   shouldUpdateEmployeeDialogOpen,
   setShouldUpdateEmployeeDialogOpen,
-  setShouldCreateEmployeeDialogOpen,
-  shouldCreateEmployeeDialogOpen
  } = useContext(DialogContext);
 
  return (
@@ -20,9 +20,9 @@ const PackageDialogHOC = ({ children }) => {
     open={shouldUpdateEmployeeDialogOpen}
     onClose={() => setShouldUpdateEmployeeDialogOpen(false)}
    />
-   <CreateEmployeeDialog
-    open={shouldCreateEmployeeDialogOpen}
-    onClose={() => setShouldCreateEmployeeDialogOpen(false)}
+   <CreatePackageDialog
+    open={shouldCreatePackageDialogOpen}
+    onClose={() => setShouldCreatePackageDialogOpen(false)}
    />
   </>
  );

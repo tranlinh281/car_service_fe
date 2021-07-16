@@ -12,9 +12,9 @@ import { Search as SearchIcon } from 'react-feather';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 
 export default function PackageListToolbar({ setPage, setKeySearch }) {
- const { setShouldCreateEmployeeDialogOpen } = useContext(DialogContext);
+ const { setShouldCreatePackageDialogOpen } = useContext(DialogContext);
  const handleOpenCreateDialog = () => {
-  setShouldCreateEmployeeDialogOpen(true);
+  setShouldCreatePackageDialogOpen(true);
  };
  return (
   <Box>

@@ -22,6 +22,7 @@ import { packageHeader } from 'src/services/HeaderTitleTable';
 import LoadingBox from 'src/components/LoadingBox';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
+import { CREATE_PACKAGE_SUCCESS } from 'src/constants/packageConstant';
 
 const PackageListResult = ({ loading, packages, errorMessage }) => {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -35,13 +36,11 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
  );
  const { success: updateSuccess } = useSelector((state) => state.editEmployee);
 
- const { success: createSuccess } = useSelector(
-  (state) => state.createEmployee
- );
+ const { success: createSuccess } = useSelector((state) => state.createPackage);
 
  const dispatch = useDispatch();
  const {
-  setShouldCreateEmployeeDialogOpen,
+  setShouldCreatePackageDialogOpen,
   setShouldUpdateEmployeeDialogOpen,
   setUpdateEmployeeDefaultValue
  } = useContext(DialogContext);
@@ -66,10 +65,10 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
   if (createSuccess) {
    toast.success('Thêm mới thành công!');
    // Should create action creator for this
-   dispatch({ type: CREATE_EMPLOYEE_SUCCESS, payload: false });
+   dispatch({ type: CREATE_PACKAGE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
 
-   setShouldCreateEmployeeDialogOpen(false);
+   setShouldCreatePackageDialogOpen(false);
   }
  }, [deleteSuccess, updateSuccess, createSuccess]);
  const handleOpenEditDialog = (editData) => {
@@ -77,15 +76,10 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
   setUpdateEmployeeDefaultValue(editData);
  };
 
- const showRole = (value) => {
-  if (value == 'staff') {
-   return 'Kỹ thuật viên';
-  } else return 'Quản lý';
- };
  //  const deleteHandler = (package) => {
  //   dispatch(deleteEmployee(package.username));
  //  };
- console.log(packages, 'debug result');
+
  return (
   <>
    {loading ? (
