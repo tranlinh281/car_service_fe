@@ -1,5 +1,6 @@
 export const DASHBOARD_TITLE = 'Tổng Quan';
 export const SERVICE_TITLE = 'Dịch vụ';
+export const PACKAGE_SERVICE_TITLE = 'Gói Dịch vụ';
 export const CUS_TITLE = 'Khách Hàng';
 export const ACCESSORIES_TITLE = 'Phụ Tùng';
 export const MANUFACTURER_TITLE = 'Hãng Xe';

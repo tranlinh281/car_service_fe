@@ -16,6 +16,7 @@ import {
  BarChart2,
  // Settings as SettingsIcon,
  ShoppingBag as ShoppingBagIcon,
+ Package as PackageIcon,
  StopCircle,
  User as UserIcon,
  // UserPlus as UserPlusIcon,
@@ -52,14 +53,19 @@ const items = [
  },
  {
   href: '/app/accessories',
-  icon:  Build,
+  icon: Build,
   title: constants.ACCESSORIES_TITLE
  },
  {
-    href: '/app/service',
-    icon: ShoppingBagIcon,
-    title: constants.SERVICE_TITLE
-   },
+  href: '/app/service',
+  icon: ShoppingBagIcon,
+  title: constants.SERVICE_TITLE
+ },
+ {
+  href: '/app/packages',
+  icon: PackageIcon,
+  title: constants.PACKAGE_SERVICE_TITLE
+ },
  {
   href: '/app/manufacturer',
   icon: StopCircle,

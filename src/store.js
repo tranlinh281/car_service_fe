@@ -18,6 +18,7 @@ import {
  listServiceTypeReducer,
  updateServiceReducer
 } from './reducers/serviceReducer';
+import { listPackageReducer } from './reducers/packageReducer';
 import {
  userLoginReducer,
  listEmployeeReducer,
@@ -54,7 +55,8 @@ const reducer = combineReducers({
  editService: updateServiceReducer,
  accessoryTypeList: listAccessoryTypeReducer,
  createAccessoryType: createAccessoryTypeReducer,
- createServiceType: createServiceTypeReducer
+ createServiceType: createServiceTypeReducer,
+ packageList: listPackageReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

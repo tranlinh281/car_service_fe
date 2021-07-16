@@ -37,3 +37,8 @@ export const manufacturerHeader = [
  { id: 1, title: 'Hãng' },
  { id: 2, title: 'Loại xe' }
 ];
+export const packageHeader = [
+ { id: 1, title: 'Tên gói dịch vụ' },
+ { id: 2, title: 'Mô tả' },
+ { id: 3, title: 'Giá' }
+];

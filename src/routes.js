@@ -12,6 +12,7 @@ import EmployeeList from 'src/pages/EmployeeList';
 import Manufacturer from './pages/ManufacturerList';
 import ServiceList from './pages/ServiceList';
 import Report from './pages/Report'
+import PackageList from './pages/PackageList';
 const routes = [
  {
   path: '/',
@@ -33,7 +34,7 @@ const routes = [
    { path: 'dashboard', element: <Dashboard /> },
    { path: 'accessories', element: <AccessoryList /> },
    { path: 'service', element: <ServiceList /> },
-   { path: 'settings', element: <Settings /> },
+   { path: 'packages', element: <PackageList/> },
    { path: 'employee', element: <EmployeeList /> },
    { path: 'report', element: <Report /> },
    { path: '*', element: <Navigate to="/404" /> }

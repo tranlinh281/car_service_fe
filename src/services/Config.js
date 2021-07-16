@@ -7,6 +7,7 @@ export const USERS = 'Users';
 export const USERNAME = 'username=';
 export const CUSTOMER = 'Customers';
 export const EMPLOYEE = 'employees';
+export const PACKAGES = 'packages';
 export const MANUFACTURER = 'manufacturers';
 export const ACCESSORY = 'Accessories';
 export const ACCESSORYID = 'accessoryId=';
@@ -102,22 +103,5 @@ export const POST_NEW_SERVICE_TYPE =
  GET_SERVICE_TYPE_LIST_URL + QUESTION_MARK + NAME;
 export const DELETE_SERVICE = GET_SERVICE_LIST_URL + QUESTION_MARK + SERVICEID;
 
-//Offer
-
-// {
-//     "username": "tranlinh",
-//         "password": "",
-//             "role": "string",
-//                 "fullname": "string",
-//                     "phoneNumber": "string",
-//                         "dateOfBirth": "2021-06-12T07:14:21.651Z"
-// }
-
-// https://carservicesystem.azurewebsites.net/api/Users
-
-// {
-//     "manufacturerName": "Toyota",
-//     "models": [
-//       "Toyota 1997, Toyota 2012"
-//     ]
-//   }
+// Packages
+export const GET_PACKAGE_LIST_URL = BASE_URL + PACKAGES;

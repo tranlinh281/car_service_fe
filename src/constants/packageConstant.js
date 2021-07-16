@@ -1,0 +1,4 @@
+/* Manufacturer list*/
+export const PACKAGE_LIST_REQUEST = 'PACKAGE_LIST_REQUEST';
+export const PACKAGE_LIST_SUCCESS = 'PACKAGE_LIST_SUCCESS';
+export const PACKAGE_LIST_FAIL = 'PACKAGE_LIST_FAIL';
