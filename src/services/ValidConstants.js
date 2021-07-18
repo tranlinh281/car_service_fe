@@ -11,7 +11,7 @@ export const DisplayingErrorMessagesLoginSchema = Yup.object().shape({
 export const DisplayingErrorMessagesCreateEmployeeSchema = Yup.object().shape({
  fullname: Yup.string()
   .min(3, 'Họ và tên trên 3 ký tự!')
-  .max(50, 'Họ và Tên phải dưới 50 ký tự!')
+  .max(20, 'Họ và Tên phải dưới 20 ký tự!')
   .required('Không được bỏ trống họ và tên'),
  email: Yup.string()
   .min(3, 'Email trên 3 ký tự!')
