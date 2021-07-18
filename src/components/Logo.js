@@ -1,5 +1,5 @@
 const Logo = (props) => (
-  <img
+  <img style={{height: '50px'}}
     alt="Logo"
     src="/static/logo.svg"
     {...props}
