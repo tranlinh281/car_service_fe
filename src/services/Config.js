@@ -5,6 +5,7 @@ export const BASE_URL = 'https://carservicesystem.azurewebsites.net/api/';
 export const ADMIN = 'Employees';
 export const USERS = 'Users';
 export const USERNAME = 'username=';
+export const PACKAGEID = 'id=';
 export const CUSTOMER = 'Customers';
 export const EMPLOYEE = 'employees';
 export const PACKAGES = 'packages';
@@ -106,3 +107,4 @@ export const DELETE_SERVICE = GET_SERVICE_LIST_URL + QUESTION_MARK + SERVICEID;
 // Packages
 export const GET_PACKAGE_LIST_URL = BASE_URL + PACKAGES;
 export const POST_NEW_PACKAGE = GET_PACKAGE_LIST_URL;
+export const DELETE_PACKAGE = GET_PACKAGE_LIST_URL + QUESTION_MARK + PACKAGEID;

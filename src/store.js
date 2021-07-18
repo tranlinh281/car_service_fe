@@ -21,6 +21,7 @@ import {
 } from './reducers/serviceReducer';
 import {
  createPackageReducer,
+ deletePackageReducer,
  listPackageReducer
 } from './reducers/packageReducer';
 import {
@@ -62,7 +63,8 @@ const reducer = combineReducers({
  createServiceType: createServiceTypeReducer,
  packageList: listPackageReducer,
  createPackage: createPackageReducer,
- serviceListAll: listAllServiceReducer
+ serviceListAll: listAllServiceReducer,
+ packageDelete: deletePackageReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

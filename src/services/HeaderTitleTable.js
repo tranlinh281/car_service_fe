@@ -40,5 +40,6 @@ export const manufacturerHeader = [
 export const packageHeader = [
  { id: 1, title: 'Tên gói dịch vụ' },
  { id: 2, title: 'Mô tả' },
- { id: 3, title: 'Giá' }
+ { id: 3, title: 'Giá' },
+ { id: 4, title: 'Chỉnh sửa' }
 ];

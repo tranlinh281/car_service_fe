@@ -1,12 +1,19 @@
 import Axios from 'axios';
-import { GET_PACKAGE_LIST_URL, POST_NEW_PACKAGE } from './../services/Config';
+import {
+ DELETE_PACKAGE,
+ GET_PACKAGE_LIST_URL,
+ POST_NEW_PACKAGE
+} from './../services/Config';
 import {
  CREATE_PACKAGE_SUCCESS,
  CREATE_PACKAGE_REQUEST,
  CREATE_PACKAGE_FAIL,
  PACKAGE_LIST_FAIL,
  PACKAGE_LIST_REQUEST,
- PACKAGE_LIST_SUCCESS
+ PACKAGE_LIST_SUCCESS,
+ DELETE_PACKAGE_REQUEST,
+ DELETE_PACKAGE_SUCCESS,
+ DELETE_PACKAGE_FAIL
 } from 'src/constants/packageConstant';
 
 const headers = {
@@ -50,6 +57,27 @@ export const createPackage = (mappedData) => async (dispatch) => {
  } catch (error) {
   dispatch({
    type: CREATE_PACKAGE_FAIL,
+   payload:
+    error.response && error.response.data.message
+     ? error.response.data.message
+     : error.message
+  });
+ }
+};
+export const deletePackage = (id) => async (dispatch) => {
+ dispatch({
+  type: DELETE_PACKAGE_REQUEST,
+  payload: { id }
+ });
+ try {
+  const { data } = await Axios.delete(DELETE_PACKAGE + id, {
+   headers: headers
+  });
+  dispatch({ type: DELETE_PACKAGE_SUCCESS, payload: data });
+  console.log(data);
+ } catch (error) {
+  dispatch({
+   type: DELETE_PACKAGE_FAIL,
    payload:
     error.response && error.response.data.message
      ? error.response.data.message
