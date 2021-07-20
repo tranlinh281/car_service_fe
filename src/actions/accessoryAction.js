@@ -118,7 +118,7 @@ export const updateAccessory = (accessoryModels) => async (dispatch) => {
  }
 };
 
-export const listTypeAccessory = (keySearch) => async (dispatch) => {
+export const  listTypeAccessory = (keySearch) => async (dispatch) => {
  dispatch({ type: ACCESSORY_TYPE_LIST_REQUEST });
  try {
   if (keySearch == undefined || keySearch == '') {

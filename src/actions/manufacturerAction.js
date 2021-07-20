@@ -1,4 +1,7 @@
 import {
+ MANUFACTURER_LIST_ALL_FAIL,
+ MANUFACTURER_LIST_ALL_REQUEST,
+ MANUFACTURER_LIST_ALL_SUCCESS,
  MANUFACTURER_LIST_FAIL,
  MANUFACTURER_LIST_REQUEST,
  MANUFACTURER_LIST_SUCCESS
@@ -37,5 +40,20 @@ export const listManufacturer = (keySearch, page) => async (dispatch) => {
     ? error.response.data.message
     : error.message;
   dispatch({ type: MANUFACTURER_LIST_FAIL, payload: message });
+ }
+};
+
+export const listAllManufacturer = () => async (dispatch) => {
+ dispatch({ type: MANUFACTURER_LIST_ALL_REQUEST });
+ try {
+  const { data } = await Axios.get(GET_MANUFACTURER_LIST_URL);
+  dispatch({ type: MANUFACTURER_LIST_ALL_SUCCESS, payload: data });
+  console.log(data, 'debug action');
+ } catch (error) {
+  const message =
+   error.response && error.response.data.message
+    ? error.response.data.message
+    : error.message;
+  dispatch({ type: MANUFACTURER_LIST_ALL_FAIL, payload: message });
  }
 };

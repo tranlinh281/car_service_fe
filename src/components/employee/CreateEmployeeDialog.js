@@ -4,6 +4,7 @@ import {
  DialogContentText,
  DialogTitle,
  FormControl,
+ FormHelperText,
  Grid,
  InputLabel,
  MenuItem,
@@ -136,23 +137,28 @@ const CreateEmployeeDialog = ({ open, onClose }) => {
          />
         </Grid>
         <Grid item xs={6} sm={6}>
-         <FormControl variant="outlined" margin="normal" fullWidth>
+         <FormControl
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          error={!!errors.role}
+         >
           <InputLabel>Vị trí</InputLabel>
           <Select
            name="role"
            value={values.role}
            error={!!errors.role}
-           helperText={errors.role}
+           onBlur={handleBlur}
            onChange={handleChange}
            InputLabelProps={{
             shrink: true
            }}
-           onBlur={handleBlur}
            label="Vị trí"
           >
            <MenuItem value="manager">Quản lý</MenuItem>
            <MenuItem value="staff">Kỹ thuật viên</MenuItem>
           </Select>
+          <FormHelperText>{errors.role}</FormHelperText>
          </FormControl>
         </Grid>
        </Grid>

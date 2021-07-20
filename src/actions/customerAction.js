@@ -27,7 +27,6 @@ export const listCustomer = (keySearch, page) => async (dispatch) => {
    });
   }
   localStorage.setItem('keySearch', keySearch);
-  console.log(data);
  } catch (error) {
   const message =
    error.response && error.response.data.message

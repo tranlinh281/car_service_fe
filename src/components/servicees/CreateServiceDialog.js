@@ -10,7 +10,9 @@ import {
  TextField,
  InputLabel,
  MenuItem,
- Select
+ Select,
+ FormHelperText,
+ FormControl
 } from '@material-ui/core';
 import { Form, Formik } from 'formik';
 import { ToastContainer, toast } from 'react-toastify';
@@ -87,7 +89,7 @@ export default function CreateServiceDialog({ data, open, onClose }) {
       onClose={onClose}
       aria-describedby="scroll-dialog-description"
       open={open}
-      maxWidth={'md'}
+      maxWidth={'sm'}
       fullWidth={true}
      >
       <Form>
@@ -125,17 +127,29 @@ export default function CreateServiceDialog({ data, open, onClose }) {
            />
           </Grid>
           <Grid item xs={6}>
-           <InputLabel>Loại</InputLabel>
-           <Select
-            name="type"
-            value={values.type}
-            onChange={handleChange}
-            label="Loại"
+           <FormControl
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            error={!!errors.type}
            >
-            {types?.map((type) => (
-             <MenuItem value={type.name}>{type.name}</MenuItem>
-            ))}
-           </Select>
+            <InputLabel>Loại</InputLabel>
+            <Select
+             name="type"
+             error={!!errors.type}
+             helperText={errors.type}
+             value={values.type}
+             onBlur={handleBlur}
+             onChange={handleChange}
+             required
+             label="Loại"
+            >
+             {types?.map((type) => (
+              <MenuItem value={type.name}>{type.name}</MenuItem>
+             ))}
+            </Select>
+            <FormHelperText>{errors.type}</FormHelperText>
+           </FormControl>
           </Grid>
          </Grid>
         </DialogContentText>

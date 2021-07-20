@@ -9,7 +9,10 @@ import {
  updateAccessoryReducer
 } from './reducers/accessoryReducer';
 import { listCustomerReducer } from './reducers/customerReducer';
-import { listManufacturerReducer } from './reducers/manufacturerReducer';
+import {
+ listAllManufacturerReducer,
+ listManufacturerReducer
+} from './reducers/manufacturerReducer';
 import {
  createServiceReducer,
  createServiceTypeReducer,
@@ -64,7 +67,8 @@ const reducer = combineReducers({
  packageList: listPackageReducer,
  createPackage: createPackageReducer,
  serviceListAll: listAllServiceReducer,
- packageDelete: deletePackageReducer
+ packageDelete: deletePackageReducer,
+ manufacturerListAll: listAllManufacturerReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

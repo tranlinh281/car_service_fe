@@ -6,6 +6,7 @@ import {
  DialogContentText,
  DialogTitle,
  FormControl,
+ FormHelperText,
  Grid,
  InputLabel,
  MenuItem,
@@ -19,12 +20,12 @@ import {
  listTypeAccessory
 } from 'src/actions/accessoryAction';
 import { Form, Formik } from 'formik';
-import { listManufacturer } from 'src/actions/manufacturerAction';
+import { listAllManufacturer } from 'src/actions/manufacturerAction';
 import { DisplayingErrorMessagesCreateAccessorySchema } from 'src/services/ValidConstants';
 
 const DialogCreateAccessory = ({ data, open, onClose }) => {
  const dispatch = useDispatch();
- const { manufacturers } = useSelector((state) => state.manufacturerList);
+ const { manufacturers } = useSelector((state) => state.manufacturerListAll);
  const { types } = useSelector((state) => state.accessoryTypeList);
 
  const [name, setName] = useState();
@@ -48,7 +49,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
  };
 
  useEffect(() => {
-  dispatch(listManufacturer());
+  dispatch(listAllManufacturer());
   dispatch(listTypeAccessory());
   setAccessoryModels((prev) => ({
    ...prev,
@@ -163,7 +164,12 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
           />
           <Grid item container spacing={2}>
            <Grid item xs={6} sm={6}>
-            <FormControl variant="outlined" margin="normal" fullWidth>
+            <FormControl
+             variant="outlined"
+             margin="normal"
+             fullWidth
+             error={!!errors.type}
+            >
              <InputLabel>Loai</InputLabel>
              <Select
               name="type"
@@ -175,11 +181,18 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
                <MenuItem value={type.name}>{type.name}</MenuItem>
               ))}
              </Select>
+
+             <FormHelperText>{errors.type}</FormHelperText>
             </FormControl>
            </Grid>
 
            <Grid item xs={6} sm={6}>
-            <FormControl variant="outlined" margin="normal" fullWidth>
+            <FormControl
+             variant="outlined"
+             margin="normal"
+             fullWidth
+             error={!!errors.manufacturer}
+            >
              <InputLabel>Hãng</InputLabel>
              <Select
               name="manufacturer"
@@ -193,6 +206,8 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
                </MenuItem>
               ))}
              </Select>
+
+             <FormHelperText>{errors.manufacturer}</FormHelperText>
             </FormControl>
            </Grid>
           </Grid>

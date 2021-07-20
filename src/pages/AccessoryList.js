@@ -18,7 +18,6 @@ const AccessoryList = () => {
  useEffect(() => {
   dispatch(listAccessory(keySearch, page));
  }, [dispatch, page, keySearch, triggerReload]);
- console.log(data, 'accesory list debug');
  const handlePageChange = (_, value) => {
   setPage(value);
   setKeySearch(keySearch);

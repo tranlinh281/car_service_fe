@@ -36,7 +36,7 @@ export const createPackageReducer = (state = {}, action) => {
   default:
    return state;
  }
-};  
+};    
 export const deletePackageReducer = (state = {}, action) => {
  switch (action.type) {
   case DELETE_PACKAGE_REQUEST:
