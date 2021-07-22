@@ -97,7 +97,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
        <TableHead>
         <TableRow>
          {employeeHeader.map((headCell) => (
-          <TableCell key={headCell.id}>{headCell.title}</TableCell>
+          <TableCell key={headCell.id} style={{justifyContent: 'center'}}>{headCell.title}</TableCell>
          ))}
         </TableRow>
        </TableHead>
@@ -115,7 +115,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
              color="primary"
              onClick={() => handleOpenEditDialog(employee)}
             >
-             <Edit fontSize="small" />
+             <Edit fontSize="small" color="primary" justifyContent="left"/>
             </ButtonAction>
             <ButtonAction
              color="secondary"
@@ -129,7 +129,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
               });
              }}
             >
-             <Close fontSize="small" />
+             <Close fontSize="small" color="secondary"/>
             </ButtonAction>
            </TableCell>
           </TableRow>

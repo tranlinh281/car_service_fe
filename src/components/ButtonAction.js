@@ -1,11 +1,11 @@
 import React from 'react'
-import { Button, makeStyles } from '@material-ui/core';
+import { Button, IconButton, makeStyles } from '@material-ui/core';
 
 
 const useStyles = makeStyles(theme => ({
     root: {
         minWidth: 0,
-        margin: theme.spacing(0.5)
+        margin: 0,
     },
     secondary: {
         backgroundColor: theme.palette.secondary.light,
@@ -27,10 +27,10 @@ export default function ButtonAction(props) {
     const classes = useStyles();
 
     return (
-        <Button
+        <IconButton
             className={`${classes.root} ${classes[color]}`}
             onClick={onClick}>
             {children}
-        </Button>
+        </IconButton>
     )
 }

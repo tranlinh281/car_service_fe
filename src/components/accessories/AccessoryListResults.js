@@ -134,7 +134,7 @@ export default function AccessoryListResults({ loading, accessories }) {
             color="primary"
             onClick={() => handleOpenEditDialog(accessory)}
            >
-            <Edit fontSize="small" />
+            <Edit fontSize="small" color="primary"/>
            </ButtonAction>
            <ButtonAction
             color="secondary"
@@ -148,7 +148,7 @@ export default function AccessoryListResults({ loading, accessories }) {
              });
             }}
            >
-            <Close fontSize="small" />
+            <Close fontSize="small" color="secondary"/>
            </ButtonAction>
           </TableCell>
          </TableRow>
