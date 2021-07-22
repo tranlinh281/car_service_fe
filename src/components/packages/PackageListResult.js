@@ -11,18 +11,18 @@ import { memo, useContext, useEffect, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { deleteEmployee, triggerReload } from 'src/actions/userAction';
-import {
- CREATE_EMPLOYEE_SUCCESS,
- DELETE_EMPLOYEE_SUCCESS,
- EDIT_EMPLOYEE_SUCCESS
-} from 'src/constants/userConstant';
+import { triggerReload } from 'src/actions/userAction';
+import { EDIT_EMPLOYEE_SUCCESS } from 'src/constants/userConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import { packageHeader } from 'src/services/HeaderTitleTable';
 import LoadingBox from 'src/components/LoadingBox';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
-import { CREATE_PACKAGE_SUCCESS } from 'src/constants/packageConstant';
+import {
+ CREATE_PACKAGE_SUCCESS,
+ DELETE_PACKAGE_SUCCESS
+} from 'src/constants/packageConstant';
+import { deletePackage } from 'src/actions/packageAction';
 
 const PackageListResult = ({ loading, packages, errorMessage }) => {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -31,9 +31,7 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
   subTitle: ''
  });
 
- const { success: deleteSuccess } = useSelector(
-  (state) => state.employeeDelete
- );
+ const { success: deleteSuccess } = useSelector((state) => state.packageDelete);
  const { success: updateSuccess } = useSelector((state) => state.editEmployee);
 
  const { success: createSuccess } = useSelector((state) => state.createPackage);
@@ -49,7 +47,7 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
   if (deleteSuccess) {
    toast.success('Xóa thành công!');
    // Should create action creator for this
-   dispatch({ type: DELETE_EMPLOYEE_SUCCESS, payload: false });
+   dispatch({ type: DELETE_PACKAGE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
   }
 
@@ -76,9 +74,9 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
   setUpdateEmployeeDefaultValue(editData);
  };
 
- //  const deleteHandler = (package) => {
- //   dispatch(deleteEmployee(package.username));
- //  };
+ const deleteHandler = (packagee) => {
+  dispatch(deletePackage(packagee.id));
+ };
 
  return (
   <>
@@ -103,7 +101,22 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
            <TableCell>{packagee.description}</TableCell>
            <TableCell>{packagee.price}</TableCell>
            {/* <TableCell>{package.phoneNumber}</TableCell> */}
-           <TableCell></TableCell>
+           <TableCell>
+            <ButtonAction
+             color="secondary"
+             onClick={() => {
+              setConfirmDialog({
+               isOpen: true,
+               title: 'Bạn có chắc muốn xóa?',
+               onConfirm: () => {
+                deleteHandler(packagee), setConfirmDialog({ isOpen: false });
+               }
+              });
+             }}
+            >
+             <Close fontSize="small" />
+            </ButtonAction>
+           </TableCell>
           </TableRow>
          ))) ||
          errorMessage}

@@ -23,6 +23,7 @@ export const PAGESIZE = '&pageSize=10';
 export const FORWARD_SLASH = '/';
 export const QUESTION_MARK = '?';
 export const SEARCH_VALUE = '&searchValue=';
+export const MODELS = 'models';
 export const NAME = 'name=';
 export const NAME_SEARCH = 'nameSearch=';
 export const INSERT_MANUFACTURER = '?manufacturer=';
@@ -80,7 +81,8 @@ export const GET_MANUFACTURER_BY_NAME_URL =
  GET_MANUFACTURER_LIST_URL + QUESTION_MARK + NAME_SEARCH;
 
 export const POST_NEW_MANUFACTURER =
- GET_MANUFACTURER_LIST_URL + INSERT_MANUFACTURER;
+ GET_MANUFACTURER_LIST_URL + FORWARD_SLASH + MODELS;
+GET_MANUFACTURER_LIST_URL + INSERT_MANUFACTURER;
 export const getManufacturerPagingURL = (page = 1) =>
  GET_MANUFACTURER_LIST_URL +
  PAGINGS +
