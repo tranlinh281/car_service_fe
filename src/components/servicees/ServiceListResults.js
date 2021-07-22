@@ -123,7 +123,7 @@ export default function ServiceListResults({ loading, services }) {
             color="primary"
             onClick={() => handleOpenEditDialog(service)}
            >
-            <Edit fontSize="small" />
+            <Edit fontSize="small" color="primary"/>
            </ButtonAction>
            <ButtonAction
             color="secondary"
@@ -137,7 +137,7 @@ export default function ServiceListResults({ loading, services }) {
              });
             }}
            >
-            <Close fontSize="small" />
+            <Close fontSize="small" color="secondary"/>
            </ButtonAction>
           </TableCell>
          </TableRow>
