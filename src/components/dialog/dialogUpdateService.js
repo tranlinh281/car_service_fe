@@ -5,6 +5,7 @@ import {
  DialogContent,
  DialogContentText,
  DialogTitle,
+ FormControl,
  Grid,
  InputLabel,
  MenuItem,
@@ -50,7 +51,7 @@ const DialogUpdateService = ({ data, open, onClose }) => {
 
  const submitHandler = (e) => {
   e.preventDefault();
-  console.log(e,"service");
+  console.log(e, 'service');
   dispatch(updateService(serviceModels));
  };
 
@@ -59,43 +60,41 @@ const DialogUpdateService = ({ data, open, onClose }) => {
    onClose={onClose}
    aria-describedby="scroll-dialog-description"
    open={open}
-   maxWidth={'md'}
+   maxWidth={'xs'}
    fullWidth={true}
   >
    <DialogTitle id="customized-dialog-title" onClose={onClose}>
-    Dịch vụ: 
+    Dịch vụ:
     <span>
      <strong>{data.name}</strong>
     </span>
    </DialogTitle>
    <DialogContent dividers>
     <DialogContentText>
-     <Grid container spacing={3}>
-      <Grid item xs={12} sm={6}>
-       <TextField
-        fullWidth
-        label="Tên Phụ Tùng"
-        margin="normal"
-        defaultValue={data.name}
-        onChange={(e) => setName(e.target.value)}
-        name="name"
-        variant="outlined"
-       />
+     <Grid item>
+      <TextField
+       fullWidth
+       label="Tên Dịch vụ"
+       margin="normal"
+       defaultValue={data.name}
+       onChange={(e) => setName(e.target.value)}
+       name="name"
+       variant="outlined"
+      />
 
-       <TextField
-        fullWidth
-        label="Đơn Giá"
-        margin="normal"
-        defaultValue={data.price}
-        onChange={(e) => setPrice(parseFloat(e.target.value))}
-        name="price"
-        variant="outlined"
-        InputLabelProps={{
-         shrink: true
-        }}
-       />
-      </Grid>
-      <Grid item xs={6}>
+      <TextField
+       fullWidth
+       label="Đơn Giá"
+       margin="normal"
+       defaultValue={data.price}
+       onChange={(e) => setPrice(parseFloat(e.target.value))}
+       name="price"
+       variant="outlined"
+       InputLabelProps={{
+        shrink: true
+       }}
+      />
+      <FormControl variant="outlined" margin="normal" fullWidth>
        <InputLabel>Loại</InputLabel>
 
        <Select
@@ -107,8 +106,7 @@ const DialogUpdateService = ({ data, open, onClose }) => {
          <MenuItem value={type.name}>{type.name}</MenuItem>
         ))}
        </Select>
-       {/* </FormControl> */}
-      </Grid>
+      </FormControl>
      </Grid>
     </DialogContentText>
    </DialogContent>

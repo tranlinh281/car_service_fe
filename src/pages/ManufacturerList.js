@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ManufacturerListResults from 'src/components/manufacturer/ManufacturerListResults';
 import { listManufacturer } from 'src/actions/manufacturerAction';
 import ManufacturerListToolbar from './../components/manufacturer/ManufacturerListToolbar';
+import ManufacturerDialogHOC from 'src/components/_HOCProvider/ManufacturerDialogHOC';
 
 const Manufacturer = () => {
  const manufacturerList = useSelector((state) => state.manufacturerList);
@@ -22,47 +23,48 @@ const Manufacturer = () => {
   setPage(value);
   setKeySearch(keySearch);
  };
- console.log(keySearch, 'debug manufacturer list');
  return (
   <>
-   <Helmet>
-    <title>{constant.MANUFACTURER_TITLE}</title>
-   </Helmet>
-   <Box
-    sx={{
-     backgroundColor: 'background.default',
-     minHeight: '100%',
-     py: 3
-    }}
-   >
-    <Container maxWidth={false}>
-     <ManufacturerListToolbar setPage={setPage} setKeySearch={setKeySearch} />
-     <Box sx={{ pt: 3 }}>
-      <Card>
-       <ManufacturerListResults
-        totalPages={data.totalPages || 0}
-        manufacturers={data.itemsList || []}
-        loading={loading}
-       />
-       <Box
-        sx={{
-         display: 'flex',
-         justifyContent: 'center',
-         pt: 2
-        }}
-       >
-        <Pagination
-         color="primary"
-         count={data.totalPages}
-         size="medium"
-         onChange={handlePageChange}
-         page={page}
+   <ManufacturerDialogHOC>
+    <Helmet>
+     <title>{constant.MANUFACTURER_TITLE}</title>
+    </Helmet>
+    <Box
+     sx={{
+      backgroundColor: 'background.default',
+      minHeight: '100%',
+      py: 3
+     }}
+    >
+     <Container maxWidth={false}>
+      <ManufacturerListToolbar setPage={setPage} setKeySearch={setKeySearch} />
+      <Box sx={{ pt: 3 }}>
+       <Card>
+        <ManufacturerListResults
+         totalPages={data.totalPages || 0}
+         manufacturers={data.itemsList || []}
+         loading={loading}
         />
-       </Box>
-      </Card>
-     </Box>
-    </Container>
-   </Box>
+        <Box
+         sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          pt: 2
+         }}
+        >
+         <Pagination
+          color="primary"
+          count={data.totalPages}
+          size="medium"
+          onChange={handlePageChange}
+          page={page}
+         />
+        </Box>
+       </Card>
+      </Box>
+     </Container>
+    </Box>
+   </ManufacturerDialogHOC>
   </>
  );
 };

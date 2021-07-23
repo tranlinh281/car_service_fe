@@ -78,6 +78,17 @@ const DialogContextProvider = ({ children }) => {
   shouldCreatePackageDialogOpen,
   setShouldCreatePackageDialogOpen
  };
+ // --------------------------------------
+ // Context State of create manufacturer dialog
+ const [
+  shouldCreateManufacturerDialogOpen,
+  setShouldCreateManufacturerDialogOpen
+ ] = useState(false);
+
+ const createDialogManufacturerState = {
+  shouldCreateManufacturerDialogOpen,
+  setShouldCreateManufacturerDialogOpen
+ };
 
  const defaultProviderValue = {
   ...updateDialogAccessoryState,
@@ -86,7 +97,8 @@ const DialogContextProvider = ({ children }) => {
   ...createDialogServiceState,
   ...updateDialogEmployeeState,
   ...createDialogEmployeeState,
-  ...createDialogPackageState
+  ...createDialogPackageState,
+  ...createDialogManufacturerState
  };
 
  return (

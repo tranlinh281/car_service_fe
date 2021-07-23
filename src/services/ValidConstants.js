@@ -76,3 +76,10 @@ export const DisplayingErrorMessagesPackageSchema = Yup.object().shape({
  services: Yup.array().required('Không được bỏ trống các dịch vụ'),
  price: Yup.string().required('Không được bỏ trống giá tiền')
 });
+
+export const DisplayingErrorMessagesManufacturerSchema = Yup.object().shape({
+ manufacturer: Yup.string()
+  .min(3, 'Tên hãng xe phải trên 3 ký tự')
+  .max(50, 'Tên hãng xe phải dưới 50 ký tự!')
+  .required('Không được bỏ trống tên của hãng xe')
+});

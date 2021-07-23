@@ -89,68 +89,64 @@ export default function CreateServiceDialog({ data, open, onClose }) {
       onClose={onClose}
       aria-describedby="scroll-dialog-description"
       open={open}
-      maxWidth={'sm'}
+      maxWidth={'xs'}
       fullWidth={true}
      >
       <Form>
        <DialogTitle id="customized-dialog-title">Thêm mới dịch vụ</DialogTitle>
        <DialogContent dividers>
         <DialogContentText>
-         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-           <TextField
-            fullWidth
-            label="Tên Dịch Vụ"
-            error={!!errors.name}
-            helperText={errors.name}
-            value={values.name}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            margin="normal"
-            name="name"
-            variant="outlined"
-            required
-           />
-           <TextField
-            fullWidth
-            label="Giá "
-            error={!!errors.price}
-            helperText={errors.price}
-            value={values.price}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            margin="normal"
-            name="price"
-            type="number"
-            required
-            variant="outlined"
-           />
-          </Grid>
-          <Grid item xs={6}>
-           <FormControl
-            variant="outlined"
-            margin="normal"
-            fullWidth
+         <Grid item>
+          <TextField
+           fullWidth
+           label="Tên Dịch Vụ"
+           error={!!errors.name}
+           helperText={errors.name}
+           value={values.name}
+           onBlur={handleBlur}
+           onChange={handleChange}
+           margin="normal"
+           name="name"
+           variant="outlined"
+           required
+          />
+          <TextField
+           fullWidth
+           label="Giá "
+           error={!!errors.price}
+           helperText={errors.price}
+           value={values.price}
+           onBlur={handleBlur}
+           onChange={handleChange}
+           margin="normal"
+           name="price"
+           type="number"
+           required
+           variant="outlined"
+          />
+          <FormControl
+           variant="outlined"
+           margin="normal"
+           fullWidth
+           error={!!errors.type}
+          >
+           <InputLabel>Loại</InputLabel>
+           <Select
+            name="type"
             error={!!errors.type}
+            helperText={errors.type}
+            value={values.type}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            required
+            label="Loại"
            >
-            <InputLabel>Loại</InputLabel>
-            <Select
-             name="type"
-             error={!!errors.type}
-             helperText={errors.type}
-             value={values.type}
-             onBlur={handleBlur}
-             onChange={handleChange}
-             required
-             label="Loại"
-            >
-             {types?.map((type) => (
-              <MenuItem value={type.name}>{type.name}</MenuItem>
-             ))}
-            </Select>
-            <FormHelperText>{errors.type}</FormHelperText>
-           </FormControl>
-          </Grid>
+            {types?.map((type) => (
+             <MenuItem value={type.name}>{type.name}</MenuItem>
+            ))}
+           </Select>
+           <FormHelperText>{errors.type}</FormHelperText>
+          </FormControl>
          </Grid>
         </DialogContentText>
        </DialogContent>

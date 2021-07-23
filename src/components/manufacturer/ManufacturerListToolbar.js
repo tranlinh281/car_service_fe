@@ -12,9 +12,10 @@ import { Search as SearchIcon } from 'react-feather';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 
 export default function ManufacturerListToolbar({ setPage, setKeySearch }) {
- const { setShouldCreateAccessoryDialogOpen } = useContext(DialogContext);
+    
+ const { setShouldCreateManufacturerDialogOpen } = useContext(DialogContext);
  const handleOpenCreateDialog = () => {
-  setShouldCreateAccessoryDialogOpen(true);
+  setShouldCreateManufacturerDialogOpen(true);
  };
  return (
   <Box>

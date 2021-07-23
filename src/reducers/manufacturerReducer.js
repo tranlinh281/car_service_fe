@@ -1,4 +1,7 @@
 import {
+ CREATE_MANUFACTURER_FAIL,
+ CREATE_MANUFACTURER_REQUEST,
+ CREATE_MANUFACTURER_SUCCESS,
  MANUFACTURER_LIST_ALL_FAIL,
  MANUFACTURER_LIST_ALL_REQUEST,
  MANUFACTURER_LIST_ALL_SUCCESS,
@@ -32,6 +35,19 @@ export const listAllManufacturerReducer = (
   case MANUFACTURER_LIST_ALL_SUCCESS:
    return { ...state, loading: false, manufacturers: action.payload };
   case MANUFACTURER_LIST_ALL_FAIL:
+   return { ...state, loading: false, error: action.payload };
+  default:
+   return state;
+ }
+};
+
+export const createManufacturerReducer = (state = {}, action) => {
+ switch (action.type) {
+  case CREATE_MANUFACTURER_REQUEST:
+   return { ...state, loading: true };
+  case CREATE_MANUFACTURER_SUCCESS:
+   return { ...state, loading: false, success: action.payload };
+  case CREATE_MANUFACTURER_FAIL:
    return { ...state, loading: false, error: action.payload };
   default:
    return state;
