@@ -20,7 +20,13 @@ export default function ManufacturerListResults({ loading, manufacturers }) {
  const { success: createSuccess } = useSelector(
   (state) => state.createManufacture
  );
- const { setShouldCreateManufacturerDialogOpen } = useContext(DialogContext);
+ const { success: createModelSuccess } = useSelector(
+  (state) => state.createModel
+ );
+ const {
+  setShouldCreateModelDialogOpen,
+  setShouldCreateManufacturerDialogOpen
+ } = useContext(DialogContext);
  const dispatch = useDispatch();
  useEffect(() => {
   if (createSuccess) {
@@ -31,7 +37,15 @@ export default function ManufacturerListResults({ loading, manufacturers }) {
 
    setShouldCreateManufacturerDialogOpen(false);
   }
- }, [createSuccess]);
+  if (createModelSuccess) {
+   toast.success('Thêm mới thành công!');
+   // Should create action creator for this
+   dispatch({ type: CREATE_MODEL_SUCCESS, payload: false });
+   dispatch(triggerReload({}));
+
+   setShouldCreateModelDialogOpen(false);
+  }
+ }, [createSuccess, createModelSuccess]);
  return (
   <>
    {loading ? (

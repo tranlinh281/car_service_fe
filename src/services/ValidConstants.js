@@ -83,3 +83,11 @@ export const DisplayingErrorMessagesManufacturerSchema = Yup.object().shape({
   .max(50, 'Tên hãng xe phải dưới 50 ký tự!')
   .required('Không được bỏ trống tên của hãng xe')
 });
+
+export const DisplayingErrorMessagesModelSchema = Yup.object().shape({
+ manufacturerName: Yup.string().required('Không được bỏ trống tên của hãng xe'),
+ models: Yup.string()
+  .min(3, 'Tên loại  xe phải trên 3 ký tự')
+  .max(50, 'Tên loại xe phải dưới 50 ký tự!')
+  .required('Không được bỏ trống tên của loại xe')
+});

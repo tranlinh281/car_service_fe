@@ -89,6 +89,15 @@ const DialogContextProvider = ({ children }) => {
   shouldCreateManufacturerDialogOpen,
   setShouldCreateManufacturerDialogOpen
  };
+ // --------------------------------------
+ // Context State of create vehicleModel dialog
+ const [shouldCreateModelDialogOpen, setShouldCreateModelDialogOpen] =
+  useState(false);
+
+ const createDialogModelState = {
+  shouldCreateModelDialogOpen,
+  setShouldCreateModelDialogOpen
+ };
 
  const defaultProviderValue = {
   ...updateDialogAccessoryState,
@@ -98,7 +107,8 @@ const DialogContextProvider = ({ children }) => {
   ...updateDialogEmployeeState,
   ...createDialogEmployeeState,
   ...createDialogPackageState,
-  ...createDialogManufacturerState
+  ...createDialogManufacturerState,
+  ...createDialogModelState
  };
 
  return (

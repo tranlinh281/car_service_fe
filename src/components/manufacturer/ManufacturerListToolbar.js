@@ -12,10 +12,15 @@ import { Search as SearchIcon } from 'react-feather';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 
 export default function ManufacturerListToolbar({ setPage, setKeySearch }) {
-    
- const { setShouldCreateManufacturerDialogOpen } = useContext(DialogContext);
+ const {
+  setShouldCreateManufacturerDialogOpen,
+  setShouldCreateModelDialogOpen
+ } = useContext(DialogContext);
  const handleOpenCreateDialog = () => {
   setShouldCreateManufacturerDialogOpen(true);
+ };
+ const handleOpenCreateModelDialog = () => {
+  setShouldCreateModelDialogOpen(true);
  };
  return (
   <Box>
@@ -27,6 +32,14 @@ export default function ManufacturerListToolbar({ setPage, setKeySearch }) {
      sx={{ margin: '0 5px' }}
     >
      Thêm hãng xe
+    </Button>
+    <Button
+     variant="contained"
+     color="primary"
+     onClick={handleOpenCreateModelDialog}
+     sx={{ margin: '0 5px' }}
+    >
+     Thêm loại xe
     </Button>
    </Box>
 

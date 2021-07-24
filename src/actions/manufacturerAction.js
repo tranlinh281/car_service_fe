@@ -2,6 +2,9 @@ import {
  CREATE_MANUFACTURER_FAIL,
  CREATE_MANUFACTURER_REQUEST,
  CREATE_MANUFACTURER_SUCCESS,
+ CREATE_MODEL_FAIL,
+ CREATE_MODEL_REQUEST,
+ CREATE_MODEL_SUCCESS,
  MANUFACTURER_LIST_ALL_FAIL,
  MANUFACTURER_LIST_ALL_REQUEST,
  MANUFACTURER_LIST_ALL_SUCCESS,
@@ -13,7 +16,8 @@ import {
  getManufacturerPagingURL,
  GET_MANUFACTURER_BY_NAME_URL,
  GET_MANUFACTURER_LIST_URL,
- POST_NEW_MANUFACTURER
+ POST_NEW_MANUFACTURER,
+ POST_NEW_MODELS
 } from 'src/services/Config';
 import Axios from 'axios';
 
@@ -73,6 +77,25 @@ export const createManufacturer = (manufacturer) => async (dispatch) => {
  } catch (error) {
   dispatch({
    type: CREATE_MANUFACTURER_FAIL,
+   payload:
+    error.response && error.response.data.message
+     ? error.response.data.message
+     : error.message
+  });
+ }
+};
+
+export const createModel = (manufacturerName, models) => async (dispatch) => {
+ dispatch({
+  type: CREATE_MODEL_REQUEST,
+  payload: { manufacturerName, models }
+ });
+ try {
+  const { data } = await Axios.post(POST_NEW_MODELS);
+  dispatch({ type: CREATE_MODEL_SUCCESS, payload: data });
+ } catch (error) {
+  dispatch({
+   type: CREATE_MODEL_FAIL,
    payload:
     error.response && error.response.data.message
      ? error.response.data.message

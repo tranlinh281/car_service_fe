@@ -11,6 +11,7 @@ import {
 import { listCustomerReducer } from './reducers/customerReducer';
 import {
  createManufacturerReducer,
+ createModelReducer,
  listAllManufacturerReducer,
  listManufacturerReducer
 } from './reducers/manufacturerReducer';
@@ -70,7 +71,8 @@ const reducer = combineReducers({
  serviceListAll: listAllServiceReducer,
  packageDelete: deletePackageReducer,
  manufacturerListAll: listAllManufacturerReducer,
- createManufacture: createManufacturerReducer
+ createManufacture: createManufacturerReducer,
+ createModel: createModelReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
