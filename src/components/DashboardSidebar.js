@@ -30,7 +30,7 @@ const userInfo = [];
 userInfo.push();
 console.log(localStorage.getItem('userInfo'));
 const user = {
- avatar: '/static/images/avatars/avatar_6.png',
+ avatar: '/static/css_logo.png',
  jobTitle: userInfo.role
  // name: userInfo.profile.Fullname
 };
