@@ -18,10 +18,10 @@ import { listAllService } from './../../actions/serviceAction';
 const CreatePackageDialog = ({ open, onClose }) => {
  const [totalPrice, setTotalPrice] = useState(0);
 
- const { data } = useSelector((state) => state.serviceListAll);
+ const { services } = useSelector((state) => state.serviceListAll);
  const triggerReload = useSelector((state) => state.triggerReload);
  const dispatch = useDispatch();
-
+ console.log(services, 'debug package');
  useEffect(() => {
   dispatch(listAllService());
  }, [dispatch, triggerReload]);
@@ -112,7 +112,7 @@ const CreatePackageDialog = ({ open, onClose }) => {
          <Autocomplete
           multiple
           id="tags-outlined"
-          options={data || []}
+          options={services || []}
           getOptionLabel={(option) => option.name}
           onChange={(_, value) => {
            setFieldValue('services', value);

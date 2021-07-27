@@ -49,7 +49,7 @@ const CreateManufacturerDialog = ({ open, onClose }) => {
     >
      <Form>
       <DialogTitle id="customized-dialog-title" onClose={onClose}>
-       Thêm mới loại xe
+       Thêm mới Hãng xe
       </DialogTitle>
 
       <DialogContent dividers>
