@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet';
-import { Box, Container, Card, Pagination } from '@material-ui/core';
+import { Box, Container, Card, Pagination, Grid } from '@material-ui/core';
 import * as constant from '../utils/Constants';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,17 +39,19 @@ const Manufacturer = () => {
      <Container maxWidth={false}>
       <ManufacturerListToolbar setPage={setPage} setKeySearch={setKeySearch} />
       <Box sx={{ pt: 3 }}>
-       <Card>
+       {/* <Card> */}
+       
         <ManufacturerListResults
          totalPages={data.totalPages || 0}
          manufacturers={data.itemsList || []}
          loading={loading}
         />
+        </Box>
         <Box
          sx={{
           display: 'flex',
           justifyContent: 'center',
-          pt: 2
+          pt: 3
          }}
         >
          <Pagination
@@ -60,8 +62,8 @@ const Manufacturer = () => {
           page={page}
          />
         </Box>
-       </Card>
-      </Box>
+       {/* </Card> */}
+      {/* </Box> */}
      </Container>
     </Box>
    </ManufacturerDialogHOC>
