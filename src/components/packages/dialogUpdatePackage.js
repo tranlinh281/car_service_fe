@@ -11,19 +11,22 @@ import Dialog from '@material-ui/core/Dialog';
 import { Form, Formik } from 'formik';
 import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPackage } from 'src/actions/packageAction';
+import { createPackage, PackageID } from 'src/actions/packageAction';
 import { DisplayingErrorMessagesPackageSchema } from 'src/services/ValidConstants';
 import { listAllService } from './../../actions/serviceAction';
 
-const CreatePackageDialog = ({ open, onClose }) => {
+const DialogUpdatePackage = ({ data, open, onClose }) => {
  const [totalPrice, setTotalPrice] = useState(0);
 
- const { data } = useSelector((state) => state.serviceListAll);
+ const { services } = useSelector((state) => state.serviceListAll);
+ const { servicesID } = useSelector((state) => state.packageID);
+ console.log(data, 'debug service in package');
  const triggerReload = useSelector((state) => state.triggerReload);
  const dispatch = useDispatch();
 
  useEffect(() => {
   dispatch(listAllService());
+  dispatch(PackageID(data));
  }, [dispatch, triggerReload]);
 
  const submitHandler = ({ name, description, price, services }) => {
@@ -75,7 +78,7 @@ const CreatePackageDialog = ({ open, onClose }) => {
      >
       <Form>
        <DialogTitle id="customized-dialog-title" onClose={onClose}>
-        Thêm mới Gói dịch vụ
+        Gói Dịch vụ:
        </DialogTitle>
 
        <DialogContent dividers>
@@ -83,12 +86,12 @@ const CreatePackageDialog = ({ open, onClose }) => {
          <TextField
           fullWidth
           label="Tên gói dịch vụ"
+          defaultValue={data.name}
           error={!!errors.name}
           helperText={errors.name}
           margin="normal"
           name="name"
           variant="outlined"
-          value={values.name}
           onBlur={handleBlur}
           onChange={handleChange}
          />
@@ -99,20 +102,20 @@ const CreatePackageDialog = ({ open, onClose }) => {
           fullWidth
           label="Mô tả"
           margin="normal"
+          defaultValue={data.description}
           error={!!errors.description}
           helperText={errors.description}
           onBlur={handleBlur}
           onChange={handleChange}
           name="description"
           variant="outlined"
-          value={values.description}
          />
         </Grid>
         <Grid item>
          <Autocomplete
           multiple
           id="tags-outlined"
-          options={data || []}
+          options={services || []}
           getOptionLabel={(option) => option.name}
           onChange={(_, value) => {
            setFieldValue('services', value);
@@ -125,6 +128,7 @@ const CreatePackageDialog = ({ open, onClose }) => {
             variant="outlined"
             label="Dịch vụ"
             name="services"
+            defaultValue={data.services}
             error={!!errors.services}
             helperText={errors.services}
            />
@@ -164,4 +168,4 @@ const CreatePackageDialog = ({ open, onClose }) => {
   </Formik>
  );
 };
-export default memo(CreatePackageDialog);
+export default memo(DialogUpdatePackage);

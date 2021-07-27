@@ -105,7 +105,7 @@ export const createServiceTypeReducer = (state = {}, action) => {
 };
 
 export const listAllServiceReducer = (
- state = { loading: true, data: {} },
+ state = { loading: true, services: {} },
  action
 ) => {
  switch (action.type) {
@@ -115,7 +115,7 @@ export const listAllServiceReducer = (
    return {
     ...state,
     loading: false,
-    data: action.payload
+    services: action.payload
    };
   case SERVICE_LIST_FAIL:
    return { ...state, loading: false, error: action.payload };

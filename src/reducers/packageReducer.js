@@ -7,7 +7,13 @@ import {
  CREATE_PACKAGE_SUCCESS,
  DELETE_PACKAGE_REQUEST,
  DELETE_PACKAGE_SUCCESS,
- DELETE_PACKAGE_FAIL
+ DELETE_PACKAGE_FAIL,
+ EDIT_PACKAGE_REQUEST,
+ EDIT_PACKAGE_SUCCESS,
+ EDIT_PACKAGE_FAIL,
+ PACKAGE_ID_FAIL,
+ PACKAGE_ID_SUCCESS,
+ PACKAGE_ID_REQUEST
 } from './../constants/packageConstant';
 
 export const listPackageReducer = (
@@ -36,7 +42,7 @@ export const createPackageReducer = (state = {}, action) => {
   default:
    return state;
  }
-};    
+};
 export const deletePackageReducer = (state = {}, action) => {
  switch (action.type) {
   case DELETE_PACKAGE_REQUEST:
@@ -44,6 +50,35 @@ export const deletePackageReducer = (state = {}, action) => {
   case DELETE_PACKAGE_SUCCESS:
    return { ...state, loading: false, success: action.payload };
   case DELETE_PACKAGE_FAIL:
+   return { ...state, loading: false, error: action.payload };
+  default:
+   return state;
+ }
+};
+
+export const updatePackageReducer = (state = {}, action) => {
+ switch (action.type) {
+  case EDIT_PACKAGE_REQUEST:
+   return { ...state, loading: true };
+  case EDIT_PACKAGE_SUCCESS:
+   return { ...state, loading: false, success: action.payload };
+  case EDIT_PACKAGE_FAIL:
+   return { ...state, loading: false, error: action.payload };
+  default:
+   return state;
+ }
+};
+
+export const PackageIDReducer = (
+ state = { loading: true, servicesID: [] },
+ action
+) => {
+ switch (action.type) {
+  case PACKAGE_ID_REQUEST:
+   return { ...state, loading: true };
+  case PACKAGE_ID_SUCCESS:
+   return { ...state, loading: false, servicesID: action.payload };
+  case PACKAGE_ID_FAIL:
    return { ...state, loading: false, error: action.payload };
   default:
    return state;

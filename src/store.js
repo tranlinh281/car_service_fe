@@ -27,7 +27,9 @@ import {
 import {
  createPackageReducer,
  deletePackageReducer,
- listPackageReducer
+ listPackageReducer,
+ PackageIDReducer,
+ updatePackageReducer
 } from './reducers/packageReducer';
 import {
  userLoginReducer,
@@ -72,7 +74,9 @@ const reducer = combineReducers({
  packageDelete: deletePackageReducer,
  manufacturerListAll: listAllManufacturerReducer,
  createManufacture: createManufacturerReducer,
- createModel: createModelReducer
+ createModel: createModelReducer,
+ editPackage: updatePackageReducer,
+ packageID: PackageIDReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

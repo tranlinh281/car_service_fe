@@ -32,15 +32,15 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
  });
 
  const { success: deleteSuccess } = useSelector((state) => state.packageDelete);
- const { success: updateSuccess } = useSelector((state) => state.editEmployee);
+ const { success: updateSuccess } = useSelector((state) => state.editPackage);
 
  const { success: createSuccess } = useSelector((state) => state.createPackage);
 
  const dispatch = useDispatch();
  const {
   setShouldCreatePackageDialogOpen,
-  setShouldUpdateEmployeeDialogOpen,
-  setUpdateEmployeeDefaultValue
+  setShouldUpdatePackageDialogOpen,
+  setUpdatePackageDefaultValue
  } = useContext(DialogContext);
 
  useEffect(() => {
@@ -54,10 +54,10 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
   if (updateSuccess) {
    toast.success('Cập nhật thành công!');
    // Should create action creator for this
-   dispatch({ type: EDIT_EMPLOYEE_SUCCESS, payload: false });
+   dispatch({ type: EDIT_PACKAGE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
 
-   setShouldUpdateEmployeeDialogOpen(false);
+   setShouldUpdatePackageDialogOpen(false);
   }
 
   if (createSuccess) {
@@ -70,8 +70,8 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
   }
  }, [deleteSuccess, updateSuccess, createSuccess]);
  const handleOpenEditDialog = (editData) => {
-  setShouldUpdateEmployeeDialogOpen(true);
-  setUpdateEmployeeDefaultValue(editData);
+  setShouldUpdatePackageDialogOpen(true);
+  setUpdatePackageDefaultValue(editData);
  };
 
  const deleteHandler = (packagee) => {
@@ -103,6 +103,13 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
            {/* <TableCell>{package.phoneNumber}</TableCell> */}
            <TableCell>
             <ButtonAction
+             variant="contained"
+             color="primary"
+             onClick={() => handleOpenEditDialog(packagee.id)}
+            >
+             <Edit fontSize="small" color="primary" />
+            </ButtonAction>
+            <ButtonAction
              color="secondary"
              onClick={() => {
               setConfirmDialog({
@@ -114,7 +121,7 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
               });
              }}
             >
-             <Close fontSize="small" />
+             <Close fontSize="small" color="secondary" />
             </ButtonAction>
            </TableCell>
           </TableRow>

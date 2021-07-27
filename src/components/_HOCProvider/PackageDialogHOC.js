@@ -1,24 +1,24 @@
-import { memo, useContext, useState } from 'react';
+import { memo, useContext } from 'react';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
-import EditEmployeeDialog from '../employee/EditEmployeeDialog';
 import CreatePackageDialog from '../packages/CreatePackageDialog';
+import DialogUpdatePackage from '../packages/dialogUpdatePackage';
 
 const PackageDialogHOC = ({ children }) => {
  const {
   shouldCreatePackageDialogOpen,
   setShouldCreatePackageDialogOpen,
-  updateEmployeeDefaultValue,
-  shouldUpdateEmployeeDialogOpen,
-  setShouldUpdateEmployeeDialogOpen,
+  updatePackageDefaultValue,
+  shouldUpdatePackageDialogOpen,
+  setShouldUpdatePackageDialogOpen
  } = useContext(DialogContext);
 
  return (
   <>
    {children}
-   <EditEmployeeDialog
-    data={updateEmployeeDefaultValue}
-    open={shouldUpdateEmployeeDialogOpen}
-    onClose={() => setShouldUpdateEmployeeDialogOpen(false)}
+   <DialogUpdatePackage
+    data={updatePackageDefaultValue}
+    open={shouldUpdatePackageDialogOpen}
+    onClose={() => setShouldUpdatePackageDialogOpen(false)}
    />
    <CreatePackageDialog
     open={shouldCreatePackageDialogOpen}

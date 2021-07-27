@@ -1,8 +1,10 @@
 import Axios from 'axios';
 import {
  DELETE_PACKAGE,
+ GET_PACKAGE_BY_ID,
  GET_PACKAGE_LIST_URL,
- POST_NEW_PACKAGE
+ POST_NEW_PACKAGE,
+ UPDATE_PACKAGE_URL
 } from './../services/Config';
 import {
  CREATE_PACKAGE_SUCCESS,
@@ -13,7 +15,13 @@ import {
  PACKAGE_LIST_SUCCESS,
  DELETE_PACKAGE_REQUEST,
  DELETE_PACKAGE_SUCCESS,
- DELETE_PACKAGE_FAIL
+ DELETE_PACKAGE_FAIL,
+ EDIT_PACKAGE_REQUEST,
+ EDIT_PACKAGE_FAIL,
+ EDIT_PACKAGE_SUCCESS,
+ PACKAGE_ID_REQUEST,
+ PACKAGE_ID_SUCCESS,
+ PACKAGE_ID_FAIL
 } from 'src/constants/packageConstant';
 
 const headers = {
@@ -83,5 +91,40 @@ export const deletePackage = (id) => async (dispatch) => {
      ? error.response.data.message
      : error.message
   });
+ }
+};
+
+export const updatePackage = (packageModels) => async (dispatch) => {
+ dispatch({
+  type: EDIT_PACKAGE_REQUEST,
+  payload: { packageModels }
+ });
+
+ try {
+  const { data } = await Axios.put(UPDATE_PACKAGE_URL, packageModels);
+  dispatch({ type: EDIT_PACKAGE_SUCCESS, payload: data });
+  dispatch(triggerReload({}));
+ } catch (error) {
+  const message =
+   error.response && error.response.data.message
+    ? error.response.data.message
+    : error.message;
+  dispatch({ type: EDIT_PACKAGE_FAIL, payload: message });
+ }
+};
+
+export const PackageID = (id) => async (dispatch) => {
+ dispatch({ type: PACKAGE_ID_REQUEST });
+ try {
+  const { data } = await Axios.get(GET_PACKAGE_BY_ID + id);
+  dispatch({ type: PACKAGE_ID_SUCCESS, payload: data });
+
+  console.log(data, 'debug action get packageID');
+ } catch (error) {
+  const message =
+   error.response && error.response.data.message
+    ? error.response.data.message
+    : error.message;
+  dispatch({ type: PACKAGE_ID_FAIL, payload: message });
  }
 };
