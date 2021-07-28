@@ -11,7 +11,11 @@ import Dialog from '@material-ui/core/Dialog';
 import { Form, Formik } from 'formik';
 import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPackage, PackageID } from 'src/actions/packageAction';
+import {
+ createPackage,
+ PackageID,
+ updatePackage
+} from 'src/actions/packageAction';
 import { DisplayingErrorMessagesPackageSchema } from 'src/services/ValidConstants';
 import { listAllService } from './../../actions/serviceAction';
 
@@ -19,15 +23,12 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
  const [totalPrice, setTotalPrice] = useState(0);
 
  const { services } = useSelector((state) => state.serviceListAll);
- const { servicesID } = useSelector((state) => state.packageID);
- console.log(data.services, 'debug service in package');
- console.log(data , 'debug service ');
+
  const triggerReload = useSelector((state) => state.triggerReload);
  const dispatch = useDispatch();
 
  useEffect(() => {
   dispatch(listAllService());
-  dispatch(PackageID(data));
  }, [dispatch, triggerReload]);
 
  const submitHandler = ({ name, description, price, services }) => {
@@ -37,7 +38,8 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
    price,
    serviceIdList: services.map((service) => service.id)
   };
-  dispatch(createPackage(mappedData));
+  console.log(mappedData, 'debug');
+  //   dispatch(updatePackage(mappedData));
   onClose();
  };
 
@@ -118,8 +120,9 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
           id="tags-outlined"
           options={services || []}
           getOptionLabel={(option) => option.name}
+          defaultValue={data.services?.map((ser) => ser)}
           onChange={(_, value) => {
-           setFieldValue('services', value);
+           setFieldValue('services update', value);
            setCalculatedTotal(value);
           }}
           filterSelectedOptions
@@ -127,10 +130,8 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
            <TextField
             {...params}
             variant="outlined"
-            defaultValue={services.name}
             label="Dịch vụ"
             name="services"
-            defaultValue={data.services}
             error={!!errors.services}
             helperText={errors.services}
            />
@@ -147,6 +148,7 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
           onBlur={handleBlur}
           onChange={handleChange}
           defaultValue={data.price}
+          value={values.price}
           name="price"
           variant="outlined"
           InputProps={{

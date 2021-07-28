@@ -61,7 +61,7 @@ const ManufacturerCard = (props) => {
                             color="textSecondary"
                             display="inline"
                             sx={{ pl: 1 }}
-                            variant="body2"
+                            variant="body2" 
                             key={i}
                         >
                             {model.name}
