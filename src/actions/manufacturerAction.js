@@ -41,7 +41,6 @@ export const listManufacturer = (keySearch, page) => async (dispatch) => {
    const { data } = await Axios.get(getManufacturerPagingURL(page) + keySearch);
    dispatch({ type: MANUFACTURER_LIST_SUCCESS, payload: data });
   }
-  console.log(keySearch, 'debug action');
  } catch (error) {
   const message =
    error.response && error.response.data.message
@@ -56,7 +55,6 @@ export const listAllManufacturer = () => async (dispatch) => {
  try {
   const { data } = await Axios.get(GET_MANUFACTURER_LIST_URL);
   dispatch({ type: MANUFACTURER_LIST_ALL_SUCCESS, payload: data });
-  console.log(data, 'debug action');
  } catch (error) {
   const message =
    error.response && error.response.data.message

@@ -15,10 +15,7 @@ import { manufacturerHeader } from 'src/services/HeaderTitleTable';
 
 const ManufacturerCard = (props) => {
     const { manufacturer } = props;
-    console.log(manufacturer.vehicleModels.map((e) => {
-        e
-    }))
-    const value = manufacturer.vehicleModels
+    console.log(manufacturer);
     return (
         <Card
             sx={{
@@ -37,8 +34,9 @@ const ManufacturerCard = (props) => {
                 >
                     <Avatar
                         alt="Product"
-                        src='/static/images/cards/contemplative-reptile.jpg'
+                        src={manufacturer.imageUrl}
                         variant="square"
+                        
                     />
                 </Box>
                 <Typography
@@ -58,33 +56,17 @@ const ManufacturerCard = (props) => {
                     spacing={2}
                     sx={{ justifyContent: 'space-between' }}
                 >
-                    {value.map((element) => {
-                        <Typography
+                    {manufacturer.vehicleModels.map(function (model, i) {
+                        return <Typography
                             color="textSecondary"
                             display="inline"
                             sx={{ pl: 1 }}
                             variant="body2"
+                            key={i}
                         >
-                            {element}
+                            {model.name}
                         </Typography>
                     })}
-                    <Typography
-                        color="textSecondary"
-                        display="inline"
-                        sx={{ pl: 1 }}
-                        variant="body2"
-                    >
-                        {manufacturer.vehicleModels[0]}
-                    </Typography>
-
-                    <Typography
-                        color="textSecondary"
-                        display="inline"
-                        sx={{ pl: 1 }}
-                        variant="body2"
-                    >
-                        {manufacturer.vehicleModels[1]}
-                    </Typography>
                 </Grid>
             </Box>
         </Card>
