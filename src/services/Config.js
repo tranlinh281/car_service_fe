@@ -19,6 +19,7 @@ export const OFFER = 'offer';
 export const PAGING = '/page?';
 export const PAGINGS = '/paging?';
 export const PAGENUMBER = 'pageNumber=';
+export const CONTENT = 'content';
 export const PAGESIZE = '&pageSize=10';
 export const FORWARD_SLASH = '/';
 export const QUESTION_MARK = '?';
@@ -111,3 +112,5 @@ export const POST_NEW_PACKAGE = GET_PACKAGE_LIST_URL;
 export const DELETE_PACKAGE = GET_PACKAGE_LIST_URL + QUESTION_MARK + PACKAGEID;
 export const UPDATE_PACKAGE_URL = GET_PACKAGE_LIST_URL;
 export const GET_PACKAGE_BY_ID = GET_PACKAGE_LIST_URL + FORWARD_SLASH;
+export const GET_PACKAGE_CONTENT =
+ GET_PACKAGE_LIST_URL + FORWARD_SLASH + CONTENT;

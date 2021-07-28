@@ -20,7 +20,8 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
 
  const { services } = useSelector((state) => state.serviceListAll);
  const { servicesID } = useSelector((state) => state.packageID);
- console.log(data, 'debug service in package');
+ console.log(data.services, 'debug service in package');
+ console.log(data , 'debug service ');
  const triggerReload = useSelector((state) => state.triggerReload);
  const dispatch = useDispatch();
 
@@ -126,6 +127,7 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
            <TextField
             {...params}
             variant="outlined"
+            defaultValue={services.name}
             label="Dịch vụ"
             name="services"
             defaultValue={data.services}
@@ -144,9 +146,9 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
           helperText={errors.price}
           onBlur={handleBlur}
           onChange={handleChange}
+          defaultValue={data.price}
           name="price"
           variant="outlined"
-          value={values.price}
           InputProps={{
            readOnly: true
           }}

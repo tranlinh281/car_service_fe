@@ -105,7 +105,7 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
             <ButtonAction
              variant="contained"
              color="primary"
-             onClick={() => handleOpenEditDialog(packagee.id)}
+             onClick={() => handleOpenEditDialog(packagee)}
             >
              <Edit fontSize="small" color="primary" />
             </ButtonAction>
