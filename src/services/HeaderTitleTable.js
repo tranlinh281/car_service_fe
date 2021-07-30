@@ -19,7 +19,7 @@ export const customerHeader = [
 export const serviceHeader = [
  { id: 1, title: 'Tên dịch vụ' },
  { id: 2, title: 'Giá' },
- { id: 3, title: 'Loại' },
+ { id: 3, title: 'Phân Loại' },
  { id: 4, title: 'Chỉnh sửa' }
 ];
 
@@ -29,7 +29,7 @@ export const accessoryHeader = [
  { id: 3, title: 'Số lượng' },
  { id: 4, title: 'Đơn giá' },
  { id: 5, title: 'Đơn vị tính' },
- { id: 6, title: 'Loại' },
+ { id: 6, title: 'Phân Loại' },
  { id: 7, title: 'Hãng' },
  { id: 8, title: 'Chỉnh sửa' }
 ];

@@ -26,7 +26,8 @@ import {
  POST_NEW_SERVICE,
  POST_NEW_SERVICE_TYPE,
  UPDATE_SERVICE_URL,
- GET_SERVICE_LIST_URL
+ GET_SERVICE_LIST_URL,
+ GET_TYPE_LIST_URL
 } from 'src/services/Config';
 const headers = {
  'Content-Type': 'application/json',
@@ -79,11 +80,11 @@ export const listServiceType = (keySearch) => async (dispatch) => {
  dispatch({ type: SERVICE_TYPE_LIST_REQUEST });
  try {
   if (keySearch == undefined || keySearch == '') {
-   await Axios.get(GET_SERVICE_TYPE_LIST_URL).then((res) => {
+   await Axios.get(GET_TYPE_LIST_URL).then((res) => {
     dispatch({ type: SERVICE_TYPE_LIST_SUCCESS, payload: res.data });
    });
   } else {
-   await Axios.get(GET_SERVICE_TYPE_LIST_URL + keySearch).then((respo) => {
+   await Axios.get(GET_TYPE_LIST_URL + keySearch).then((respo) => {
     dispatch({ type: SERVICE_TYPE_LIST_SUCCESS, payload: respo.data });
    });
   }

@@ -21,7 +21,6 @@ const CreatePackageDialog = ({ open, onClose }) => {
  const { services } = useSelector((state) => state.serviceListAll);
  const triggerReload = useSelector((state) => state.triggerReload);
  const dispatch = useDispatch();
- console.log(services, 'debug package');
  useEffect(() => {
   dispatch(listAllService());
  }, [dispatch, triggerReload]);

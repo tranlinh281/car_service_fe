@@ -21,6 +21,7 @@ export const PAGINGS = '/paging?';
 export const PAGENUMBER = 'pageNumber=';
 export const CONTENT = 'content';
 export const PAGESIZE = '&pageSize=10';
+export const PAGESIZEMAN = '&pageSize=9';
 export const FORWARD_SLASH = '/';
 export const QUESTION_MARK = '?';
 export const SEARCH_VALUE = '&searchValue=';
@@ -89,7 +90,7 @@ export const getManufacturerPagingURL = (page = 1) =>
  PAGINGS +
  PAGENUMBER +
  page +
- PAGESIZE +
+ PAGESIZEMAN +
  SEARCH_VALUE;
 
 //Service
@@ -102,8 +103,7 @@ export const getServicePagingURL = (page = 1) =>
 export const GET_SERVICE_BY_USERNAME_URL =
  GET_SERVICE_LIST_URL + QUESTION_MARK + NAME_SEARCH;
 export const POST_NEW_SERVICE = GET_SERVICE_LIST_URL;
-export const POST_NEW_SERVICE_TYPE =
- GET_SERVICE_TYPE_LIST_URL + QUESTION_MARK + NAME;
+
 export const DELETE_SERVICE = GET_SERVICE_LIST_URL + QUESTION_MARK + SERVICEID;
 
 // Packages
@@ -114,3 +114,8 @@ export const UPDATE_PACKAGE_URL = GET_PACKAGE_LIST_URL;
 export const GET_PACKAGE_BY_ID = GET_PACKAGE_LIST_URL + FORWARD_SLASH;
 export const GET_PACKAGE_CONTENT =
  GET_PACKAGE_LIST_URL + FORWARD_SLASH + CONTENT;
+
+//Types
+export const GET_TYPE_LIST_URL = BASE_URL + TYPE;
+export const POST_NEW_SERVICE_TYPE =
+GET_TYPE_LIST_URL + QUESTION_MARK + NAME;

@@ -38,7 +38,6 @@ const CreateServiceTypeDialog = () => {
   setOpen(false);
  };
 
-
  useEffect(() => {
   if (success) {
    setOpen(false);
@@ -63,7 +62,7 @@ const CreateServiceTypeDialog = () => {
     aria-describedby="scroll-dialog-description"
     open={open}
     fullWidth={true}
-    maxWidth={'md'}
+    maxWidth={'xs'}
    >
     <DialogTitle id="customized-dialog-title">Thêm Loại Dịch vụ</DialogTitle>
     <DialogContent dividers>

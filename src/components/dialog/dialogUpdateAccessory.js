@@ -21,8 +21,8 @@ import { DisplayingErrorMessagesCreateAccessorySchema } from 'src/services/Valid
 const DialogUpdateAccessory = ({ data, open, onClose }) => {
  const dispatch = useDispatch();
 
- const { manufacturers } = useSelector((state) => state.manufacturerList);
- const { types } = useSelector((state) => state.accessoryTypeList);
+ const { manufacturers } = useSelector((state) => state.manufacturerListAll);
+ const { types } = useSelector((state) => state.typeList);
 
  const [initialFormikValues, setInitialFormikValues] = useState({});
 
@@ -68,7 +68,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
      >
       <Form>
        <DialogTitle id="customized-dialog-title" onClose={onClose}>
-        Phụ Tùng{' '}
+        Phụ Tùng
         <span>
          <strong>{data.name || ''}</strong>
         </span>
