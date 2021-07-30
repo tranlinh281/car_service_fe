@@ -38,12 +38,12 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
    price,
    serviceIdList: services.map((service) => service.id)
   };
-
-  //   dispatch(updatePackage(mappedData));
+  console.log(mappedData, 'debug');
+  dispatch(updatePackage(mappedData));
   onClose();
  };
 
- const handleReset = () => {};  
+ const handleReset = () => {};
  const setCalculatedTotal = (services) => {
   const total = services.reduce((accumulator, currentValue) => {
    return (accumulator += currentValue.price);
@@ -54,18 +54,19 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
 
  return (
   <Formik
+   enableReinitialize
    initialValues={{
     name: '',
     description: '',
     services: []
    }}
    //    validationSchema={DisplayingErrorMessagesPackageSchema}
-   //    validateOnChange
-   //    validateOnBlur
+   validateOnChange
+   validateOnBlur
    onSubmit={submitHandler}
    onReset={handleReset}
   >
-   {({ errors, handleBlur, handleChange, values, setFieldValue }) => {
+   {({ errors, handleBlur, handleChange, values, setFieldValue, ...props }) => {
     useEffect(() => {
      setFieldValue('price', totalPrice);
     }, [totalPrice, setFieldValue]);
@@ -88,7 +89,7 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
          <TextField
           fullWidth
           label="Tên gói dịch vụ"
-          defaultValue={data.name || values.name}
+          defaultValue={data.name}
           //   error={!!errors.name}
           //   helperText={errors.name}
           margin="normal"
@@ -104,7 +105,7 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
           fullWidth
           label="Mô tả"
           margin="normal"
-          defaultValue={data.description || values.description}
+          defaultValue={data.description}
           //   error={!!errors.description}
           //   helperText={errors.description}
           onBlur={handleBlur}
@@ -120,6 +121,7 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
           options={services || []}
           getOptionLabel={(option) => option.name}
           defaultValue={data.services?.map((ser) => ser)}
+          getOptionSelected={(option, value) => option.name === value.name}
           onChange={(_, value) => {
            setFieldValue('services', value);
            setCalculatedTotal(value);

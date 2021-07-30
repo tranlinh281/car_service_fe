@@ -20,7 +20,8 @@ import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import {
  CREATE_PACKAGE_SUCCESS,
- DELETE_PACKAGE_SUCCESS
+ DELETE_PACKAGE_SUCCESS,
+ EDIT_PACKAGE_SUCCESS
 } from 'src/constants/packageConstant';
 import { deletePackage } from 'src/actions/packageAction';
 
