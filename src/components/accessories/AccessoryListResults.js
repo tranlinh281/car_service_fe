@@ -21,7 +21,10 @@ import {
  EDIT_ACCESSORY_SUCCESS
 } from 'src/constants/accessoryConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
-import { accessoryHeader, manufacturerHeader } from 'src/services/HeaderTitleTable';
+import {
+ accessoryHeader,
+ manufacturerHeader
+} from 'src/services/HeaderTitleTable';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import LoadingBox from 'src/components/LoadingBox';
@@ -115,7 +118,7 @@ export default function AccessoryListResults({ loading, accessories }) {
          <TableRow hover key={accessory.id}>
           <TableCell>
            <img
-            src={'/static/images/avatars/avatar_3.png'}
+            src={accessory.imageUrl}
             style={{
              height: 50,
              width: 50
@@ -134,7 +137,7 @@ export default function AccessoryListResults({ loading, accessories }) {
             color="primary"
             onClick={() => handleOpenEditDialog(accessory)}
            >
-            <Edit fontSize="small" color="primary"/>
+            <Edit fontSize="small" color="primary" />
            </ButtonAction>
            <ButtonAction
             color="secondary"
@@ -148,7 +151,7 @@ export default function AccessoryListResults({ loading, accessories }) {
              });
             }}
            >
-            <Close fontSize="small" color="secondary"/>
+            <Close fontSize="small" color="secondary" />
            </ButtonAction>
           </TableCell>
          </TableRow>

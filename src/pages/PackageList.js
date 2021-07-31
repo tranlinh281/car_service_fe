@@ -42,7 +42,8 @@ const PackageList = () => {
       <Box sx={{ pt: 3 }}>
        <Card>
         <PackageListResult
-         packages={data || []}
+         packages={data.itemsList || []}
+         totalPages={data.totalPages || 0}
          errorMessage={error}
          loading={loading}
         />

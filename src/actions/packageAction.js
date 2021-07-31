@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import {
  DELETE_PACKAGE,
+ getPackagePagingURL,
  GET_PACKAGE_BY_ID,
  GET_PACKAGE_CONTENT,
  GET_PACKAGE_LIST_URL,
@@ -38,10 +39,10 @@ export const listPackage = (keySearch, page) => async (dispatch) => {
  dispatch({ type: PACKAGE_LIST_REQUEST });
  try {
   if (keySearch == undefined || keySearch == '') {
-   const { data } = await Axios.get(GET_PACKAGE_CONTENT);
+   const { data } = await Axios.get(getPackagePagingURL(page));
    dispatch({ type: PACKAGE_LIST_SUCCESS, payload: data });
   } else {
-   const { data } = await Axios.get(GET_PACKAGE_CONTENT + keySearch);
+   const { data } = await Axios.get(getPackagePagingURL(page) + keySearch);
    dispatch({ type: PACKAGE_LIST_SUCCESS, payload: data });
   }
   console.log(keySearch, 'debug action');
