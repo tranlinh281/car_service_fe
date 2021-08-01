@@ -2,6 +2,7 @@ import {
   Button,
   Card,
   CardContent,
+  CardHeader,
   CardMedia,
   Dialog,
   DialogActions,
@@ -26,6 +27,7 @@ import { listAllManufacturer } from 'src/actions/manufacturerAction';
 import { listServiceType } from 'src/actions/serviceAction';
 import { DisplayingErrorMessagesCreateAccessorySchema } from 'src/services/ValidConstants';
 import { storage } from '../../firebase/index';
+import Resizer from 'react-image-file-resizer'
 
 const DialogCreateAccessory = ({ data, open, onClose }) => {
   const dispatch = useDispatch();
@@ -45,7 +47,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
   const [url, setURL] = useState('');
   const [progress, setProgress] = useState(0);
   const [errorImage, setErrorImage] = useState('');
-  const [imageUrl, setImageUrl] = useState();
+  const [imageUrl, setImageUrl] = useState('');
 
 
   const triggerReload = useSelector((state) => state.triggerReload);
@@ -84,14 +86,21 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
     }
   }, [data, open]);
 
-  const submitHandler = (data) => {
-    console.log(data);
-    dispatch(createAccessory(data));
+  const submitHandler = async (data) => {
+    const imglink = await handleUpdate()
+    setImageUrl(imglink);
+    const dataNew ={
+      ...data,
+      imageUrl: imglink
+    }
+    dispatch(createAccessory(dataNew));
   };
 
-  var handleReset = () => { };
+  var handleReset = () => {
+    setURL('')
+  };
 
-  const handleChangeImage = (e) => {
+  const handleChangeImage = async (e) => {
     const file = e.target.files[0];
     if (file) {
       const fileType = file['type'];
@@ -99,77 +108,44 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
       if (validImageTypes.includes(fileType)) {
         setErrorImage('');
         setImage(file);
-        setURL(file);
-        setImageUrl(file);
+        // setImageUrl(file);
+        setURL(URL.createObjectURL(file));
       } else {
         setErrorImage('Định dạng hình ảnh không hợp lệ! Hãy chọn lại!');
       }
     }
   };
 
-  const handleUpdate = () => {
-    if (image) {
-      const uploadTask = storage
-        .ref()
-        .child(`web_admin/accessories/${image.name}`)
-        .put(image);
+  const handleUpdate = async () => {
+    return new Promise((resolve, reject) => {
+      if (image) {
+        const uploadImgTask = storage.ref(`web_admin/accessories/${image.name}`).put(image)
 
-      uploadTask.on(
-        'state_change',
-        (snapshot) => {
-          const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-          setProgress(progress);
-        },
-        (error) => {
-          setErrorImage(error);
-        },
-        () => {
-          storage
-            .ref('web_admin/accessories')
-            .child(image.name)
-            .getDownloadURL()
-            .then((url) => {
-              setURL(url);
-              setImageUrl(url);
-              setProgress(0);
-            });
-        }
-      );
-    } else {
-      setErrorImage('Hình ảnh không được bỏ trống!');
-    }
-  };
+        uploadImgTask.on(
+          'state_changed',
+          (snapshot) => { },
+          (error) => {
+            console.log(error),
+              reject('Hình ảnh không lưu được trên firebase: ' + error)
+          },
+          () => {
+            storage
+              .ref('web_admin/accessories')
+              .child(`${image.name}`)
+              .getDownloadURL()
+              .then((urls) => { setImageUrl(urls), resolve(urls) })
+          }
+        )
+      } else {
+        setErrorImage('Hình ảnh không được bỏ trống!');
+      }
 
-  const handleUploadClick = (event) => {
-    console.log();
-    var file = event.target.files[0];
-    const reader = new FileReader();
-    var url = reader.readAsDataURL(file);
 
-    reader.onloadend = function (e) {
-      this.setState({
-        selectedFile: [reader.result]
-      });
-    }.bind(this);
-    console.log(url); // Would see a path?
 
-    this.setState({
-      mainState: 'uploaded',
-      selectedFile: event.target.files[0],
-      imageUploaded: 1
     });
-  };
+  }
 
-  const imageResetHandler = (event) => {
-    console.log('Click!');
-    this.setState({
-      mainState: 'initial',
-      selectedFile: null,
-      imageUploaded: 0
-    });
-  };
+
 
   return (
     <Formik
@@ -179,7 +155,8 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
         price: '',
         unit: '',
         type: '',
-        manufacturer: ''
+        manufacturer: '',
+        imageUrl: ''
       }}
       validationSchema={DisplayingErrorMessagesCreateAccessorySchema}
       validateOnChange
@@ -265,7 +242,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
                           fullWidth
                           error={!!errors.type}
                         >
-                          <InputLabel>Loai</InputLabel>
+                          <InputLabel>Loại</InputLabel>
                           <Select
                             name="type"
                             value={values.type}
@@ -306,47 +283,45 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
                         </FormControl>
                       </Grid>
                     </Grid>
-                    {/* <Card style={{ display: 'flex' }}>
+                    <Card style={{ display: 'flex' }}>
                       <CardContent style={{ flex: '1 0 auto' }}>
+                        <Typography variant="subtitle1" color="textSecondary">
+                          Hình ảnh
+                        </Typography>
                         <Grid container justify="center" alignItems="center">
                           <input
+                            id="contained-button-file"
                             type="file"
                             style={{ display: 'none' }}
-                            onChange={(e) => {
-                              handleChangeImage, handleUpdate;
-                            }}
+                            onChange={(e) => { handleChangeImage(e) }}
                           />
                           <label htmlFor="contained-button-file">
                             <AddPhotoAlternateIcon />
                           </label>
                         </Grid>
-                        <Typography variant="subtitle1" color="textSecondary">
+                        {/* <Typography variant="subtitle1" color="textSecondary">
                           <button onClick={handleUpdate}>UpLoad</button>
-                        </Typography>
+                        </Typography> */}
                       </CardContent>
 
-                      // {/* <div style={{ height: "10px" }}>
-                      //   {progress > 0 ? <progress value={progress} max="100" /> : ""}
-                      //   <p style={{ color: "red" }}>{errorImage}</p>
-                      // </div> */}
-                      {/* <CardMedia>
+                      <CardMedia style={{ width: '130px', height: '130px' }}>
                         {url ? (
                           <img
-                            style={{ width: '130', height: '130' }}
+                            style={{ width: '130px', height: '130px' }}
                             src={url}
                             className="App-logo"
                             alt="logo"
                           />
                         ) : (
                           <img
-                            style={{ width: '130', height: '130' }}
+                            style={{ width: '130px', height: '130px' }}
                             src={url}
                             className="App-logo"
-                            alt="logone"
+                          // alt="logone"
                           />
                         )}
                       </CardMedia>
-                    </Card> */}
+                    </Card>
                     {/* <Card>
            <CardContent>
             <Grid container justify="center" alignItems="center">
