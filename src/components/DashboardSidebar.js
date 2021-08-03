@@ -30,7 +30,7 @@ const userInfo = [];
 userInfo.push();
 console.log(localStorage.getItem('userInfo'));
 const user = {
- avatar: '/static/css_logo.png',
+ avatar: '/static/css_banner.png',
  jobTitle: userInfo.role
  // name: userInfo.profile.Fullname
 };
@@ -120,14 +120,10 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
      p: 2
     }}
    >
-    <Avatar
+    <img
      component={RouterLink}
      src={user.avatar}
-     sx={{
-      cursor: 'pointer',
-      width: 64,
-      height: 64
-     }}
+     style={{width:'10vw'}}
      to="/"
     />
     <Typography color="textPrimary" variant="h5">
