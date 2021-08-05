@@ -12,22 +12,16 @@ import Popup from '../Popup';
 import { useDispatch } from 'react-redux';
 import { customerHeader } from 'src/services/HeaderTitleTable';
 import LoadingBox from '../LoadingBox';
+import ButtonAction from '../ButtonAction';
+import { Close } from '@material-ui/icons';
 
 export default function CustomerListResults({ loading, customers }) {
  const [openPopup, setOpenPopup] = useState(false);
-
 
  // const employeeDelete = useSelector((state) => state.employeeDelete);
  // const { success } = employeeDelete;
 
  const dispatch = useDispatch();
-
- // const deleteHandler = (customer) => {
- //     if (window.confirm('Are you sure?')) {
- //         dispatch(deleteEmployee(customer.taiKhoan));
- //         dispatch(triggerReload({}));
- //     }
- // };
 
  const test = (customer) => {};
 
@@ -60,8 +54,22 @@ export default function CustomerListResults({ loading, customers }) {
           <TableCell>{customer.phoneNumber}</TableCell>
           <TableCell>{customer.address}</TableCell>
           <TableCell>{customer.accumulatedPoint}</TableCell>
-
-          <TableCell></TableCell>
+          <TableCell>
+           <ButtonAction
+            color="secondary"
+            onClick={() => {
+             setConfirmDialog({
+              isOpen: true,
+              title: 'Bạn có chắc muốn xóa?',
+              onConfirm: () => {
+               deleteHandler(customer), setConfirmDialog({ isOpen: false });
+              }
+             });
+            }}
+           >
+            <Close fontSize="small" color="secondary" />
+           </ButtonAction>
+          </TableCell>
          </TableRow>
         ))}
        </TableBody>

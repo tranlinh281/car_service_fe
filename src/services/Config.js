@@ -30,12 +30,17 @@ export const NAME = 'name=';
 export const NAME_SEARCH = 'nameSearch=';
 export const INSERT_MANUFACTURER = '?manufacturer=';
 export const FULLNAME_SEARCH = 'fullnameSearch=';
+export const isBANNED = '&isBanned=';
+export const BAN = 'ban';
 
 //Login
 export const LOGIN_URL = BASE_URL + USERS;
 
 //Customer
 export const GET_CUSTOMER_LIST_URL = BASE_URL + CUSTOMER;
+
+export const banCustomer = (username) =>
+ GET_CUSTOMER_LIST_URL + FORWARD_SLASH + BAN + USERNAME + username + isBANNED;
 
 export const GET_CUSTOMER_PAGING_URL =
  GET_CUSTOMER_LIST_URL + PAGING + PAGENUMBER + PAGESIZE + SEARCH_VALUE;

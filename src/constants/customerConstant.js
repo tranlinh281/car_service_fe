@@ -1,4 +1,9 @@
-/* Manufacturer list*/
+/* Customer list*/
 export const CUSTOMER_LIST_REQUEST = 'CUSTOMER_LIST_REQUEST';
 export const CUSTOMER_LIST_SUCCESS = 'CUSTOMER_LIST_SUCCESS';
 export const CUSTOMER_LIST_FAIL = 'CUSTOMER_LIST_FAIL';
+
+/* Manufacturer list*/
+export const CUSTOMER_BAN_REQUEST = 'CUSTOMER_BAN_REQUEST';
+export const CUSTOMER_BAN_SUCCESS = 'CUSTOMER_BAN_SUCCESS';
+export const CUSTOMER_BAN_FAIL = 'CUSTOMER_BAN_FAIL';

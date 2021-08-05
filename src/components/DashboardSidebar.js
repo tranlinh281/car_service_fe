@@ -70,18 +70,14 @@ const items = [
   href: '/app/manufacturer',
   icon: StopCircle,
   title: constants.MANUFACTURER_TITLE
- },
+ }
 
  // {
  //   href: '/app/settings',
  //   icon: SettingsIcon,
  //   title: constants.SETTING_TITLE
  // },
- {
-  href: '/app/report',
-  icon: BarChart2,
-  title: constants.REPORT_TITLE
- }
+
  // {
  //   href: '/register',
  //   icon: UserPlusIcon,
@@ -123,7 +119,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
     <img
      component={RouterLink}
      src={user.avatar}
-     style={{width:'10vw'}}
+     style={{ width: '10vw' }}
      to="/"
     />
     <Typography color="textPrimary" variant="h5">

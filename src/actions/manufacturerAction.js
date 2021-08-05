@@ -83,13 +83,14 @@ export const createManufacturer = (manufacturer) => async (dispatch) => {
  }
 };
 
-export const createModel = (manufacturerName, models) => async (dispatch) => {
+export const createModel = (modelsT) => async (dispatch) => {
  dispatch({
   type: CREATE_MODEL_REQUEST,
-  payload: { manufacturerName, models }
+  payload: { modelsT }
  });
+
  try {
-  const { data } = await Axios.post(POST_NEW_MODELS);
+  const { data } = await Axios.post(POST_NEW_MODELS, modelsT);
   dispatch({ type: CREATE_MODEL_SUCCESS, payload: data });
  } catch (error) {
   dispatch({

@@ -1,5 +1,8 @@
 import Axios from 'axios';
 import {
+ CUSTOMER_BAN_FAIL,
+ CUSTOMER_BAN_REQUEST,
+ CUSTOMER_BAN_SUCCESS,
  CUSTOMER_LIST_FAIL,
  CUSTOMER_LIST_REQUEST,
  CUSTOMER_LIST_SUCCESS
@@ -33,5 +36,19 @@ export const listCustomer = (keySearch, page) => async (dispatch) => {
     ? error.response.data.message
     : error.message;
   dispatch({ type: CUSTOMER_LIST_FAIL, payload: message });
+ }
+};
+export const banCustomer = (isBanned, username) => async (dispatch) => {
+ dispatch({ type: CUSTOMER_BAN_REQUEST });
+ try {
+  await Axios.get(banCustomer(username) + isBanned).then((respo) => {
+   dispatch({ type: CUSTOMER_BAN_SUCCESS, payload: respo.data });
+  });
+ } catch (error) {
+  const message =
+   error.response && error.response.data.message
+    ? error.response.data.message
+    : error.message;
+  dispatch({ type: CUSTOMER_BAN_FAIL, payload: message });
  }
 };

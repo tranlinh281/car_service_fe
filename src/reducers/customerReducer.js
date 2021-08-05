@@ -1,4 +1,7 @@
 import {
+ CUSTOMER_BAN_FAIL,
+ CUSTOMER_BAN_REQUEST,
+ CUSTOMER_BAN_SUCCESS,
  CUSTOMER_LIST_FAIL,
  CUSTOMER_LIST_REQUEST,
  CUSTOMER_LIST_SUCCESS
@@ -18,6 +21,19 @@ export const listCustomerReducer = (
     data: action.payload
    };
   case CUSTOMER_LIST_FAIL:
+   return { ...state, loading: false, error: action.payload };
+  default:
+   return state;
+ }
+};
+
+export const banCustomerReducer = (state = {}, action) => {
+ switch (action.type) {
+  case CUSTOMER_BAN_REQUEST:
+   return { ...state, loading: true };
+  case CUSTOMER_BAN_SUCCESS:
+   return { ...state, loading: false, success: action.payload };
+  case CUSTOMER_BAN_FAIL:
    return { ...state, loading: false, error: action.payload };
   default:
    return state;

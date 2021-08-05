@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import { Form, Formik } from 'formik';
+import { FieldArray, Form, Formik } from 'formik';
 import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -29,9 +29,9 @@ const CreateModelDialog = ({ open, onClose }) => {
  useEffect(() => {
   dispatch(listAllManufacturer());
  }, [listAllManufacturer]);
- const submitHandler = (data) => {
-  dispatch(createModel(data));
-  console.log(data, 'debug create model');
+ const submitHandler = (modelsT) => {
+  dispatch(createModel(modelsT));
+  console.log(modelsT, 'debug create model');
  };
 
  const handleReset = () => {};
@@ -40,9 +40,8 @@ const CreateModelDialog = ({ open, onClose }) => {
   <Formik
    initialValues={{
     manufacturerName: '',
-    models: []
+    models: [{ name }]
    }}
-   validationSchema={DisplayingErrorMessagesModelSchema}
    validateOnChange
    validateOnBlur
    onSubmit={submitHandler}
@@ -62,45 +61,30 @@ const CreateModelDialog = ({ open, onClose }) => {
       </DialogTitle>
 
       <DialogContent dividers>
-       {/* <DialogContentText> */}
+       <FieldArray
+        name="models"
+        render={(arrayHelpers) => {
+         const models = values.models;
+         return (
+          <div>
+           {models.map((item, index) => (
+            <TextField
+             fullWidth
+             label="Tên Loại xe"
+             margin="normal"
+             name={`models.${index}.name`}
+             variant="outlined"
+             value={models[`${index}`].name}
+             onBlur={handleBlur}
+             onChange={handleChange}
+            />
+           ))}
+          </div>
+         );
+        }}
+       />
        <Grid item>
-        {/* <Autocomplete
-         multiple
-         id="tags-filled"
-         freeSolo
-         renderTags={(value, getTagProps) =>
-          value.map((option, index) => (
-           <Chip
-            variant="outlined"
-            label={option}
-            {...getTagProps({ index })}
-           />
-          ))
-         }
-         renderInput={(params) => ( */}
-        <TextField
-         //    {...params}
-         fullWidth
-         label="Tên Loại xe"
-         error={!!errors.models}
-         helperText={errors.models}
-         margin="normal"
-         name="models"
-         variant="outlined"
-         value={values.models}
-         onBlur={handleBlur}
-         onChange={handleChange}
-        />
-
-        {/* }
-        /> */}
-
-        <FormControl
-         variant="outlined"
-         margin="normal"
-         fullWidth
-         error={!!errors.manufacturerName}
-        >
+        <FormControl variant="outlined" margin="normal" fullWidth>
          <InputLabel>Hãng</InputLabel>
          <Select
           name="manufacturerName"
@@ -114,12 +98,8 @@ const CreateModelDialog = ({ open, onClose }) => {
            </MenuItem>
           ))}
          </Select>
-
-         <FormHelperText>{errors.manufacturerName}</FormHelperText>
         </FormControl>
        </Grid>
-
-       {/* </DialogContentText> */}
       </DialogContent>
       <DialogActions>
        <Button type="submit" color="primary" left>
