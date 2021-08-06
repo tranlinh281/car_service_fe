@@ -7,7 +7,7 @@ import {
  CUSTOMER_LIST_REQUEST,
  CUSTOMER_LIST_SUCCESS
 } from 'src/constants/customerConstant';
-import { getCustomerPagingURL } from 'src/services/Config';
+import { banCustomer, getCustomerPagingURL } from 'src/services/Config';
 const headers = {
  'Content-Type': 'application/json',
  'Access-Control-Allow-Origin': '*',
@@ -38,7 +38,7 @@ export const listCustomer = (keySearch, page) => async (dispatch) => {
   dispatch({ type: CUSTOMER_LIST_FAIL, payload: message });
  }
 };
-export const banCustomer = (isBanned, username) => async (dispatch) => {
+export const banCust = (username, isBanned) => async (dispatch) => {
  dispatch({ type: CUSTOMER_BAN_REQUEST });
  try {
   await Axios.put(banCustomer(username) + isBanned).then((respo) => {

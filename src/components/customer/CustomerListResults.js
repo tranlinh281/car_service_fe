@@ -7,14 +7,18 @@ import {
  TableHead,
  TableRow
 } from '@material-ui/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Popup from '../Popup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { customerHeader } from 'src/services/HeaderTitleTable';
 import LoadingBox from '../LoadingBox';
 import ButtonAction from '../ButtonAction';
 import { Close } from '@material-ui/icons';
 import ConfirmDialog from '../dialog/dialogConfirm';
+import { toast } from 'react-toastify';
+import { CUSTOMER_BAN_SUCCESS } from 'src/constants/customerConstant';
+import { triggerReload } from 'src/actions/userAction';
+import { banCust } from 'src/actions/customerAction';
 
 export default function CustomerListResults({ loading, customers }) {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -24,16 +28,24 @@ export default function CustomerListResults({ loading, customers }) {
  });
  const [isBanned, setIsBanned] = useState(true);
  const [openPopup, setOpenPopup] = useState(false);
-
+ const { success: banSuccess } = useSelector((state) => state.banCus);
  // const employeeDelete = useSelector((state) => state.employeeDelete);
  // const { success } = employeeDelete;
+ useEffect(() => {
+  if (banSuccess) {
+   toast.success('Ban thành công!');
+   // Should create action creator for this
+   dispatch({ type: CUSTOMER_BAN_SUCCESS, payload: false });
+   dispatch(triggerReload({}));
+  }
+ }, [banSuccess]);
 
  const dispatch = useDispatch();
 
- const banHandler = (customer, isBanned) => {
+ const banHandler = (customer, iBanned) => {
   console.log(customer.username, 'debug cus');
   console.log(isBanned, 'debug cus boolean');
-  //   dispatch(banCustomer(customer.username, isBanned));
+  dispatch(banCust(customer.username, isBanned));
  };
 
  return (
@@ -67,9 +79,10 @@ export default function CustomerListResults({ loading, customers }) {
             onClick={() => {
              setConfirmDialog({
               isOpen: true,
-              title: 'Bạn có chắc muốn xóa?',
+              title: 'Bạn có chắc muốn Ban khách hàng này?',
               onConfirm: () => {
-               banHandler(customer, isBanned), setConfirmDialog({ isOpen: false });
+               banHandler(customer, isBanned),
+                setConfirmDialog({ isOpen: false });
               }
              });
             }}

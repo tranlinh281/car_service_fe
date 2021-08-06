@@ -14,7 +14,6 @@ import {
 } from 'src/constants/ManufacturerConstant';
 import {
  getManufacturerPagingURL,
- GET_MANUFACTURER_BY_NAME_URL,
  GET_MANUFACTURER_LIST_URL,
  POST_NEW_MANUFACTURER,
  POST_NEW_MODELS
@@ -70,6 +69,7 @@ export const createManufacturer = (manufacturerModels) => async (dispatch) => {
   payload: { manufacturerModels }
  });
  try {
+  console.log(manufacturerModels, 'debugaction manufacturer');
   const { data } = await Axios.post(POST_NEW_MANUFACTURER, manufacturerModels);
   dispatch({ type: CREATE_MANUFACTURER_SUCCESS, payload: data });
  } catch (error) {

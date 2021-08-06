@@ -31,7 +31,7 @@ export const NAME_SEARCH = 'nameSearch=';
 export const INSERT_MANUFACTURER = '?manufacturer=';
 export const FULLNAME_SEARCH = 'fullnameSearch=';
 export const isBANNED = '&isBanned=';
-export const BAN = 'ban';
+export const BAN = 'ban?';
 
 //Login
 export const LOGIN_URL = BASE_URL + USERS;

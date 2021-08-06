@@ -25,7 +25,7 @@ import { createManufacturer } from 'src/actions/manufacturerAction';
 import { storage } from '../../firebase/index';
 import { DisplayingErrorMessagesManufacturerSchema } from 'src/services/ValidConstants';
 
-const CreateManufacturerDialog = ({ open, onClose }) => {
+const CreateManufacturerDialog = ({ data, open, onClose }) => {
  const dispatch = useDispatch();
 
  const [name, setName] = useState();
@@ -50,6 +50,12 @@ const CreateManufacturerDialog = ({ open, onClose }) => {
    imageUrl
   }));
  }, [name, imageUrl, triggerReload]);
+ useEffect(() => {
+  if (data && open) {
+   setForm(data);
+   setManufacturerModels(data);
+  }
+ }, [data, open]);
  const submitHandler = async (data) => {
   const imglink = await handleUpdate();
   setImageUrl(imglink);
@@ -58,7 +64,7 @@ const CreateManufacturerDialog = ({ open, onClose }) => {
    imageUrl: imglink
   };
   console.log(dataNew, 'debug manu create');
-  dispatch(createManufacturer(data));
+  dispatch(createManufacturer(dataNew));
  };
 
  const handleReset = () => {};
@@ -111,7 +117,8 @@ const CreateManufacturerDialog = ({ open, onClose }) => {
  return (
   <Formik
    initialValues={{
-    manufacturer: ''
+    name: '',
+    imageUrl: ''
    }}
    validationSchema={DisplayingErrorMessagesManufacturerSchema}
    validateOnChange
