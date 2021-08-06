@@ -69,7 +69,7 @@ export default function CustomerListResults({ loading, customers }) {
               isOpen: true,
               title: 'Bạn có chắc muốn xóa?',
               onConfirm: () => {
-               banHandler(customer), setConfirmDialog({ isOpen: false });
+               banHandler(customer, isBanned), setConfirmDialog({ isOpen: false });
               }
              });
             }}
