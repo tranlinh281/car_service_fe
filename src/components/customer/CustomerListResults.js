@@ -14,19 +14,28 @@ import { customerHeader } from 'src/services/HeaderTitleTable';
 import LoadingBox from '../LoadingBox';
 import ButtonAction from '../ButtonAction';
 import { Close } from '@material-ui/icons';
+import ConfirmDialog from '../dialog/dialogConfirm';
 
 export default function CustomerListResults({ loading, customers }) {
+ const [confirmDialog, setConfirmDialog] = useState({
+  isOpen: false,
+  title: '',
+  subTitle: ''
+ });
+ const [ban, setBanned] = useState(true);
  const [openPopup, setOpenPopup] = useState(false);
+ console.log(ban, 'setIsBanned');
 
  // const employeeDelete = useSelector((state) => state.employeeDelete);
  // const { success } = employeeDelete;
 
  const dispatch = useDispatch();
 
- const test = (customer) => {};
-
- const openInPopup = (customer) => {
-  setOpenPopup(true);
+ const banHandler = (customer, isBanned) => {
+  isBanned: 'true';
+  console.log(customer.username, 'debug cus');
+  console.log(isBanned, 'debug cus boolean');
+  //   dispatch(banCustomer(customer.username, isBanned));
  };
 
  return (
@@ -62,7 +71,7 @@ export default function CustomerListResults({ loading, customers }) {
               isOpen: true,
               title: 'Bạn có chắc muốn xóa?',
               onConfirm: () => {
-               deleteHandler(customer), setConfirmDialog({ isOpen: false });
+               banHandler(customer), setConfirmDialog({ isOpen: false });
               }
              });
             }}
@@ -77,11 +86,10 @@ export default function CustomerListResults({ loading, customers }) {
      </Box>
     </PerfectScrollbar>
    )}
-   <Popup
-    title="Thông tin nhân viên"
-    openPopup={openPopup}
-    setOpenPopup={setOpenPopup}
-   ></Popup>
+   <ConfirmDialog
+    confirmDialog={confirmDialog}
+    setConfirmDialog={setConfirmDialog}
+   />
   </>
  );
 }

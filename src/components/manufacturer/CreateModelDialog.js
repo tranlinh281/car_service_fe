@@ -52,7 +52,7 @@ const CreateModelDialog = ({ open, onClose }) => {
      onClose={onClose}
      aria-describedby="scroll-dialog-description"
      open={open}
-     maxWidth={'xs'}
+     maxWidth={'md'}
      fullWidth={true}
     >
      <Form>
@@ -61,45 +61,48 @@ const CreateModelDialog = ({ open, onClose }) => {
       </DialogTitle>
 
       <DialogContent dividers>
-       <FieldArray
-        name="models"
-        render={(arrayHelpers) => {
-         const models = values.models;
-         return (
-          <div>
-           {models.map((item, index) => (
-            <TextField
-             fullWidth
-             label="Tên Loại xe"
-             margin="normal"
-             name={`models.${index}.name`}
-             variant="outlined"
-             value={models[`${index}`].name}
-             onBlur={handleBlur}
-             onChange={handleChange}
-            />
+       <Grid item xs={6} sm={6}>
+        <FieldArray
+         name="models"
+         render={(arrayHelpers) => {
+          const models = values.models;
+          return (
+           <div>
+            {models.map((item, index) => (
+             <TextField
+              fullWidth
+              label="Tên Loại xe"
+              margin="normal"
+              name={`models.${index}.name`}
+              variant="outlined"
+              value={models[`${index}`].name}
+              onBlur={handleBlur}
+              onChange={handleChange}
+             />
+            ))}
+           </div>
+          );
+         }}
+        />
+        <Grid item>
+         <FormControl variant="outlined" margin="normal" fullWidth>
+          <InputLabel>Hãng</InputLabel>
+          <Select
+           name="manufacturerName"
+           value={values.manufacturerName}
+           onChange={handleChange}
+           label="Hãng"
+          >
+           {manufacturers?.map((manufacturerName) => (
+            <MenuItem value={manufacturerName.name}>
+             {manufacturerName.name}
+            </MenuItem>
            ))}
-          </div>
-         );
-        }}
-       />
-       <Grid item>
-        <FormControl variant="outlined" margin="normal" fullWidth>
-         <InputLabel>Hãng</InputLabel>
-         <Select
-          name="manufacturerName"
-          value={values.manufacturerName}
-          onChange={handleChange}
-          label="Hãng"
-         >
-          {manufacturers?.map((manufacturerName) => (
-           <MenuItem value={manufacturerName.name}>
-            {manufacturerName.name}
-           </MenuItem>
-          ))}
-         </Select>
-        </FormControl>
+          </Select>
+         </FormControl>
+        </Grid>
        </Grid>
+       <Grid item xs={6} sm={6}></Grid>
       </DialogContent>
       <DialogActions>
        <Button type="submit" color="primary" left>

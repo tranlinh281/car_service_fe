@@ -41,7 +41,7 @@ export const listCustomer = (keySearch, page) => async (dispatch) => {
 export const banCustomer = (isBanned, username) => async (dispatch) => {
  dispatch({ type: CUSTOMER_BAN_REQUEST });
  try {
-  await Axios.get(banCustomer(username) + isBanned).then((respo) => {
+  await Axios.put(banCustomer(username) + isBanned).then((respo) => {
    dispatch({ type: CUSTOMER_BAN_SUCCESS, payload: respo.data });
   });
  } catch (error) {
