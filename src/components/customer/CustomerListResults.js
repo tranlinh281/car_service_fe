@@ -22,9 +22,8 @@ export default function CustomerListResults({ loading, customers }) {
   title: '',
   subTitle: ''
  });
- const [ban, setBanned] = useState(true);
+ const [isBanned, setIsBanned] = useState(true);
  const [openPopup, setOpenPopup] = useState(false);
- console.log(ban, 'setIsBanned');
 
  // const employeeDelete = useSelector((state) => state.employeeDelete);
  // const { success } = employeeDelete;
@@ -32,7 +31,6 @@ export default function CustomerListResults({ loading, customers }) {
  const dispatch = useDispatch();
 
  const banHandler = (customer, isBanned) => {
-  isBanned: 'true';
   console.log(customer.username, 'debug cus');
   console.log(isBanned, 'debug cus boolean');
   //   dispatch(banCustomer(customer.username, isBanned));

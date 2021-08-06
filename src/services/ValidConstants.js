@@ -78,7 +78,7 @@ export const DisplayingErrorMessagesPackageSchema = Yup.object().shape({
 });
 
 export const DisplayingErrorMessagesManufacturerSchema = Yup.object().shape({
- manufacturer: Yup.string()
+ name: Yup.string()
   .min(3, 'Tên hãng xe phải trên 3 ký tự')
   .max(50, 'Tên hãng xe phải dưới 50 ký tự!')
   .required('Không được bỏ trống tên của hãng xe')

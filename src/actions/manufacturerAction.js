@@ -64,13 +64,13 @@ export const listAllManufacturer = () => async (dispatch) => {
  }
 };
 
-export const createManufacturer = (manufacturer) => async (dispatch) => {
+export const createManufacturer = (manufacturerModels) => async (dispatch) => {
  dispatch({
   type: CREATE_MANUFACTURER_REQUEST,
-  payload: { manufacturer }
+  payload: { manufacturerModels }
  });
  try {
-  const { data } = await Axios.post(POST_NEW_MANUFACTURER + manufacturer);
+  const { data } = await Axios.post(POST_NEW_MANUFACTURER, manufacturerModels);
   dispatch({ type: CREATE_MANUFACTURER_SUCCESS, payload: data });
  } catch (error) {
   dispatch({

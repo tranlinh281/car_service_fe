@@ -22,6 +22,7 @@ import { Form, Formik } from 'formik';
 import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createManufacturer } from 'src/actions/manufacturerAction';
+import { storage } from '../../firebase/index';
 import { DisplayingErrorMessagesManufacturerSchema } from 'src/services/ValidConstants';
 
 const CreateManufacturerDialog = ({ open, onClose }) => {
@@ -57,7 +58,7 @@ const CreateManufacturerDialog = ({ open, onClose }) => {
    imageUrl: imglink
   };
   console.log(dataNew, 'debug manu create');
-  //   dispatch(createManufacturer(data));
+  dispatch(createManufacturer(data));
  };
 
  const handleReset = () => {};
@@ -93,7 +94,7 @@ const CreateManufacturerDialog = ({ open, onClose }) => {
      },
      () => {
       storage
-       .ref('web_admin/accessories')
+       .ref('web_admin/manufacturers')
        .child(`${image.name}`)
        .getDownloadURL()
        .then((urls) => {
@@ -137,12 +138,12 @@ const CreateManufacturerDialog = ({ open, onClose }) => {
         <TextField
          fullWidth
          label="Tên Hãng"
-         error={!!errors.manufacturer}
-         helperText={errors.manufacturer}
+         error={!!errors.name}
+         helperText={errors.name}
          margin="normal"
-         name="manufacturer"
+         name="name"
          variant="outlined"
-         value={values.manufacturer}
+         value={values.name}
          onBlur={handleBlur}
          onChange={handleChange}
         />
