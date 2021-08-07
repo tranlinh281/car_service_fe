@@ -2,6 +2,7 @@ import { memo, useContext } from 'react';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import CreateManufacturerDialog from '../manufacturer/CreateManufacturerDialog';
 import CreateModelDialog from '../manufacturer/CreateModelDialog';
+import EditManufacturerDialog from '../manufacturer/EditManufacturerDialog';
 
 const ManufacturerDialogHOC = ({ children }) => {
  const {
@@ -17,11 +18,11 @@ const ManufacturerDialogHOC = ({ children }) => {
  return (
   <>
    {children}
-   {/* <EditManufacturerDialog
+   <EditManufacturerDialog
     data={updateManufacturerDefaultValue}
     open={shouldUpdateManufacturerDialogOpen}
     onClose={() => setShouldUpdateManufacturerDialogOpen(false)}
-   /> */}
+   />
    <CreateManufacturerDialog
     open={shouldCreateManufacturerDialogOpen}
     onClose={() => setShouldCreateManufacturerDialogOpen(false)}

@@ -111,6 +111,21 @@ const DialogContextProvider = ({ children }) => {
   setUpdatePackageDefaultValue
  };
 
+ // -------------------------------------------------------------------------------
+ // Context State of update Manufacturer dialog
+ const [
+  shouldUpdateManufacturerDialogOpen,
+  setShouldUpdateManufacturerDialogOpen
+ ] = useState(false);
+ const [updateManufacturerDefaultValue, setUpdateManufacturerDefaultValue] =
+  useState({});
+
+ const updateDialogManufacturerState = {
+  shouldUpdateManufacturerDialogOpen,
+  setShouldUpdateManufacturerDialogOpen,
+  updateManufacturerDefaultValue,
+  setUpdateManufacturerDefaultValue
+ };
  const defaultProviderValue = {
   ...updateDialogAccessoryState,
   ...createDialogAccessoryState,
@@ -121,7 +136,8 @@ const DialogContextProvider = ({ children }) => {
   ...createDialogPackageState,
   ...createDialogManufacturerState,
   ...createDialogModelState,
-  ...updateDialogPackageState
+  ...updateDialogPackageState,
+  ...updateDialogManufacturerState
  };
 
  return (

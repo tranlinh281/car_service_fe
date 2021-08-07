@@ -8,14 +8,25 @@ import {
  Grid
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { memo } from 'react';
+import { memo, useContext } from 'react';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { manufacturerHeader } from 'src/services/HeaderTitleTable';
+import ButtonAction from '../ButtonAction';
+import { Edit } from '@material-ui/icons';
+import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 
 const ManufacturerCard = (props) => {
  const { manufacturer } = props;
- console.log(manufacturer);
+
+ const {
+  setShouldUpdateManufacturerDialogOpen,
+  setUpdateManufacturerDefaultValue
+ } = useContext(DialogContext);
+ const handleOpenEditDialog = (editData) => {
+  setShouldUpdateManufacturerDialogOpen(true);
+  setUpdateManufacturerDefaultValue(editData);
+ };
  return (
   <Card
    sx={{
@@ -25,6 +36,13 @@ const ManufacturerCard = (props) => {
    }}
   >
    <CardContent>
+    <ButtonAction
+     variant="contained"
+     color="primary"
+     onClick={() => handleOpenEditDialog(manufacturer)}
+    >
+     <Edit fontSize="small" color="primary" justifyContent="left" />
+    </ButtonAction>
     <Box
      sx={{
       display: 'flex',

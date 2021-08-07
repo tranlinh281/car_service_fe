@@ -13,7 +13,8 @@ import LoadingBox from '../LoadingBox';
 import ManufacturerCard from './ManufacturerCard';
 import {
  CREATE_MANUFACTURER_SUCCESS,
- CREATE_MODEL_SUCCESS
+ CREATE_MODEL_SUCCESS,
+ EDIT_MANUFACTURER_SUCCESS
 } from 'src/constants/ManufacturerConstant';
 import { useContext, useEffect } from 'react';
 import { toast } from 'react-toastify';
@@ -27,9 +28,13 @@ export default function ManufacturerListResults({ loading, manufacturers }) {
  const { success: createModelSuccess } = useSelector(
   (state) => state.createModel
  );
+ const { success: editManufacturer } = useSelector(
+  (state) => state.editManufacturer
+ );
  const {
   setShouldCreateModelDialogOpen,
-  setShouldCreateManufacturerDialogOpen
+  setShouldCreateManufacturerDialogOpen,
+  setShouldUpdateManufacturerDialogOpen
  } = useContext(DialogContext);
  const dispatch = useDispatch();
  useEffect(() => {
@@ -49,7 +54,15 @@ export default function ManufacturerListResults({ loading, manufacturers }) {
 
    setShouldCreateModelDialogOpen(false);
   }
- }, [createSuccess, createModelSuccess]);
+  if (editManufacturer) {
+   toast.success('Chỉnh sửa thành công!');
+   // Should create action creator for this
+   dispatch({ type: EDIT_MANUFACTURER_SUCCESS, payload: false });
+   dispatch(triggerReload({}));
+
+   setShouldUpdateManufacturerDialogOpen(false);
+  }
+ }, [createSuccess, createModelSuccess, editManufacturer]);
  return (
   <>
    {loading ? (

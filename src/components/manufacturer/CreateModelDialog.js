@@ -51,7 +51,6 @@ const CreateModelDialog = ({ open, onClose }) => {
    ...modelsT,
    models: [{ name, imageUrl: imglink }]
   };
-
   console.log(dataNew, 'debug create model');
   //dispatch(createModel(dataNew));
  };

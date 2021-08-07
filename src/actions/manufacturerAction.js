@@ -5,6 +5,9 @@ import {
  CREATE_MODEL_FAIL,
  CREATE_MODEL_REQUEST,
  CREATE_MODEL_SUCCESS,
+ EDIT_MANUFACTURER_FAIL,
+ EDIT_MANUFACTURER_REQUEST,
+ EDIT_MANUFACTURER_SUCCESS,
  MANUFACTURER_LIST_ALL_FAIL,
  MANUFACTURER_LIST_ALL_REQUEST,
  MANUFACTURER_LIST_ALL_SUCCESS,
@@ -16,7 +19,8 @@ import {
  getManufacturerPagingURL,
  GET_MANUFACTURER_LIST_URL,
  POST_NEW_MANUFACTURER,
- POST_NEW_MODELS
+ POST_NEW_MODELS,
+ UPDATE_MANUFACTURER_URL
 } from 'src/services/Config';
 import Axios from 'axios';
 
@@ -100,5 +104,24 @@ export const createModel = (modelsT) => async (dispatch) => {
      ? error.response.data.message
      : error.message
   });
+ }
+};
+
+export const updateManufacturer = (manufacturerModels) => async (dispatch) => {
+ dispatch({
+  type: EDIT_MANUFACTURER_REQUEST,
+  payload: { manufacturerModels }
+ });
+
+ try {
+  const { data } = await Axios.put(UPDATE_MANUFACTURER_URL, manufacturerModels);
+  dispatch({ type: EDIT_MANUFACTURER_SUCCESS, payload: data });
+  dispatch(triggerReload({}));
+ } catch (error) {
+  const message =
+   error.response && error.response.data.message
+    ? error.response.data.message
+    : error.message;
+  dispatch({ type: EDIT_MANUFACTURER_FAIL, payload: message });
  }
 };
