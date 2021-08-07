@@ -42,11 +42,14 @@ const CreateModelDialog = ({ open, onClose }) => {
  }, [listAllManufacturer]);
 
  const submitHandler = async (modelsT) => {
+  console.log(modelsT);
+  const name = modelsT.models.map((model) => model.name);
+  console.log(name, 'debug xumm');
   const imglink = await handleUpdate();
   setImageUrl(imglink);
   const dataNew = {
    ...modelsT,
-   imageUrl: imglink
+   models: [{ name, imageUrl: imglink }]
   };
 
   console.log(dataNew, 'debug create model');
