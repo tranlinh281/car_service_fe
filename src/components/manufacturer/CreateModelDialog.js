@@ -35,6 +35,9 @@ const CreateModelDialog = ({ open, onClose }) => {
  const [progress, setProgress] = useState(0);
  const [errorImage, setErrorImage] = useState('');
  const [imageUrl, setImageUrl] = useState('');
+ const [nameModel, setNameModel] = useState('');
+ const [imageShow, setImageShow] = useState();
+
  const dispatch = useDispatch();
 
  useEffect(() => {
@@ -43,19 +46,23 @@ const CreateModelDialog = ({ open, onClose }) => {
 
  const submitHandler = async (modelsT) => {
   console.log(modelsT);
-  const name = modelsT.models.map((model) => model.name);
   console.log(name, 'debug xumm');
+
   const imglink = await handleUpdate();
   setImageUrl(imglink);
+  modelsT.models.map((model) => setNameModel(model.name));
+
   const dataNew = {
    ...modelsT,
-   models: [{ name, imageUrl: imglink }]
+   models: [{ name: modelsT.models[0].name, imageUrl: imglink }]
   };
   console.log(dataNew, 'debug create model');
   //dispatch(createModel(dataNew));
  };
 
- const handleReset = () => {};
+ const handleReset = () => {
+   setImageShow('')
+ };
  const handleChangeImage = async (e) => {
   const file = e.target.files[0];
   if (file) {
@@ -194,7 +201,7 @@ const CreateModelDialog = ({ open, onClose }) => {
                  ) : (
                   <img
                    style={{ width: '130px', height: '130px' }}
-                   src={url}
+                   src={imageShow}
                    className="App-logo"
                    // alt="logone"
                   />
