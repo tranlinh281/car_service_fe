@@ -50,8 +50,8 @@ export const DisplayingErrorMessagesCreateAccessorySchema = Yup.object().shape({
 
 export const DisplayingErrorMessagesCreateTypeSchema = Yup.object().shape({
  type: Yup.string()
-  .min(3, 'Loại phải trên 3 ký tự!')
-  .max(30, 'Loại phải dưới 30 ký tự!')
+  .min(3, 'Phân Loại phải trên 3 ký tự!')
+  .max(30, 'Phân Loại phải dưới 30 ký tự!')
   .required('Không được bỏ trống')
 });
 export const DisplayingErrorMessagesCreateServiceSchema = Yup.object().shape({
@@ -62,7 +62,7 @@ export const DisplayingErrorMessagesCreateServiceSchema = Yup.object().shape({
  price: Yup.string()
   .required('Không được bỏ trống giá của dịch vụ')
   .min(3, 'Giá dịch vụ phải trên 3 ký tự!'),
- type: Yup.string().required('Không được bỏ trống loại của dịch vụ')
+ type: Yup.string().required('Không được bỏ trống Phân loại của dịch vụ')
 });
 export const DisplayingErrorMessagesPackageSchema = Yup.object().shape({
  name: Yup.string()
@@ -87,7 +87,7 @@ export const DisplayingErrorMessagesManufacturerSchema = Yup.object().shape({
 export const DisplayingErrorMessagesModelSchema = Yup.object().shape({
  manufacturerName: Yup.string().required('Không được bỏ trống tên của hãng xe'),
  name: Yup.string()
-  .min(3, 'Tên loại  xe phải trên 3 ký tự')
+  .min(3, 'Tên  loại  xe phải trên 3 ký tự')
   .max(50, 'Tên loại xe phải dưới 50 ký tự!')
   .required('Không được bỏ trống tên của loại xe')
 });

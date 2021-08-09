@@ -95,12 +95,12 @@ const DialogUpdateService = ({ data, open, onClose }) => {
        }}
       />
       <FormControl variant="outlined" margin="normal" fullWidth>
-       <InputLabel>Loại</InputLabel>
+       <InputLabel>Phân Loại</InputLabel>
 
        <Select
         defaultValue={data.type}
         onChange={(e) => setType(e.target.value)}
-        label="Loại"
+        label="Phân Loại"
        >
         {types?.map((type) => (
          <MenuItem value={type.name}>{type.name}</MenuItem>

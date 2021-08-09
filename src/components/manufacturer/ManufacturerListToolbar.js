@@ -33,14 +33,6 @@ export default function ManufacturerListToolbar({ setPage, setKeySearch }) {
     >
      Thêm hãng xe
     </Button>
-    <Button
-     variant="contained"
-     color="primary"
-     onClick={handleOpenCreateModelDialog}
-     sx={{ margin: '0 5px' }}
-    >
-     Thêm loại xe
-    </Button>
    </Box>
 
    <Box sx={{ mt: 3 }}>

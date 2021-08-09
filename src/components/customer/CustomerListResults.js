@@ -8,7 +8,7 @@ import {
  TableRow
 } from '@material-ui/core';
 import { useEffect, useState } from 'react';
-import Popup from '../Popup';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { customerHeader } from 'src/services/HeaderTitleTable';
 import LoadingBox from '../LoadingBox';

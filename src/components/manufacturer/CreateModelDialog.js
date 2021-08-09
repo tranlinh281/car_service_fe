@@ -28,7 +28,7 @@ import {
 } from 'src/actions/manufacturerAction';
 import { DisplayingErrorMessagesModelSchema } from 'src/services/ValidConstants';
 
-const CreateModelDialog = ({ open, onClose }) => {
+const CreateModelDialog = ({ data, open, onClose }) => {
  const { manufacturers } = useSelector((state) => state.manufacturerListAll);
  const [image, setImage] = useState(null);
  const [url, setURL] = useState('');
@@ -44,24 +44,23 @@ const CreateModelDialog = ({ open, onClose }) => {
   dispatch(listAllManufacturer());
  }, [listAllManufacturer]);
 
- const submitHandler = async (modelsT) => {
+ const submitHandler = async (modelsT, name) => {
   console.log(modelsT);
-  console.log(name, 'debug xumm');
-
   const imglink = await handleUpdate();
   setImageUrl(imglink);
   modelsT.models.map((model) => setNameModel(model.name));
 
   const dataNew = {
    ...modelsT,
+   manufacturerName: name,
    models: [{ name: modelsT.models[0].name, imageUrl: imglink }]
   };
   console.log(dataNew, 'debug create model');
-  //dispatch(createModel(dataNew));
+  // dispatch(createModel(dataNew));
  };
 
  const handleReset = () => {
-   setImageShow('')
+  setImageShow('');
  };
  const handleChangeImage = async (e) => {
   const file = e.target.files[0];
@@ -108,11 +107,12 @@ const CreateModelDialog = ({ open, onClose }) => {
    }
   });
  };
+ console.log(data, 'debug create');
 
  return (
   <Formik
    initialValues={{
-    manufacturerName: '',
+    manufacturerName: { data },
     models: [{ name, imageUrl }]
    }}
    validateOnChange
@@ -120,114 +120,117 @@ const CreateModelDialog = ({ open, onClose }) => {
    onSubmit={submitHandler}
    onReset={handleReset}
   >
-   {({ errors, handleBlur, handleChange, values }) => (
-    <Dialog
-     onClose={onClose}
-     aria-describedby="scroll-dialog-description"
-     open={open}
-     maxWidth={'xs'}
-     fullWidth={true}
-    >
-     <Form>
-      <DialogTitle id="customized-dialog-title" onClose={onClose}>
-       Thêm mới Loại xe
-      </DialogTitle>
+   {({ values, resetForm, ...props }) => {
+    useEffect(() => {
+     if (open) {
+      resetForm();
+     }
+    }, [open]);
+    return (
+     <Dialog
+      onClose={onClose}
+      aria-describedby="scroll-dialog-description"
+      open={open}
+      maxWidth={'xs'}
+      fullWidth={true}
+     >
+      <Form>
+       <DialogTitle id="customized-dialog-title" onClose={onClose}>
+        Thêm mới Loại xe
+       </DialogTitle>
 
-      <DialogContent dividers>
-       <Grid>
-        <FormControl variant="outlined" margin="normal" fullWidth>
-         <InputLabel>Hãng</InputLabel>
-         <Select
+       <DialogContent dividers>
+        <Grid>
+         <TextField
+          fullWidth
+          label="Tên Hãng"
+          margin="normal"
           name="manufacturerName"
+          variant="outlined"
           value={values.manufacturerName}
-          onChange={handleChange}
-          label="Hãng"
-         >
-          {manufacturers?.map((manufacturerName) => (
-           <MenuItem value={manufacturerName.name}>
-            {manufacturerName.name}
-           </MenuItem>
-          ))}
-         </Select>
-        </FormControl>
-
-        <Grid item>
-         <FieldArray
-          name="models"
-          render={(arrayHelpers) => {
-           const models = values.models;
-           return (
-            <div>
-             {models.map((item, index) => (
-              <Grid>
-               <TextField
-                fullWidth
-                label="Tên Loại xe"
-                margin="normal"
-                name={`models.${index}.name`}
-                variant="outlined"
-                value={models[`${index}`].name}
-                onBlur={handleBlur}
-                onChange={handleChange}
-               />
-               <Card style={{ display: 'flex' }}>
-                <CardContent style={{ flex: '1 0 auto' }}>
-                 <Typography variant="subtitle1" color="textSecondary">
-                  Hình ảnh
-                 </Typography>
-                 <Grid container justify="center" alignItems="center">
-                  <input
-                   id="contained-button-file"
-                   type="file"
-                   style={{ display: 'none' }}
-                   onChange={(e) => {
-                    handleChangeImage(e);
-                   }}
-                  />
-                  <label htmlFor="contained-button-file">
-                   <AddPhotoAlternateIcon />
-                  </label>
-                 </Grid>
-                </CardContent>
-
-                <CardMedia style={{ width: '130px', height: '130px' }}>
-                 {url ? (
-                  <img
-                   style={{ width: '130px', height: '130px' }}
-                   src={url}
-                   className="App-logo"
-                   alt="logo"
-                  />
-                 ) : (
-                  <img
-                   style={{ width: '130px', height: '130px' }}
-                   src={imageShow}
-                   className="App-logo"
-                   // alt="logone"
-                  />
-                 )}
-                </CardMedia>
-               </Card>
-              </Grid>
-             ))}
-            </div>
-           );
-          }}
+          disable
+          onBlur={props.handleBlur}
+          onChange={props.handleChange}
          />
+
+         <Grid item>
+          <FieldArray
+           name="models"
+           render={(arrayHelpers) => {
+            const models = values.models;
+            return (
+             <div>
+              {models.map((item, index) => (
+               <Grid>
+                <TextField
+                 fullWidth
+                 label="Tên Loại xe"
+                 margin="normal"
+                 name={`models.${index}.name`}
+                 variant="outlined"
+                 value={models[`${index}`].name}
+                 onBlur={props.handleBlur}
+                 onChange={props.handleChange}
+                />
+                <Card style={{ display: 'flex' }}>
+                 <CardContent style={{ flex: '1 0 auto' }}>
+                  <Typography variant="subtitle1" color="textSecondary">
+                   Hình ảnh
+                  </Typography>
+                  <Grid container justify="center" alignItems="center">
+                   <input
+                    id="contained-button-file"
+                    type="file"
+                    style={{ display: 'none' }}
+                    onChange={(e) => {
+                     handleChangeImage(e);
+                    }}
+                   />
+                   <label htmlFor="contained-button-file">
+                    <AddPhotoAlternateIcon />
+                   </label>
+                  </Grid>
+                 </CardContent>
+
+                 <CardMedia style={{ width: '130px', height: '130px' }}>
+                  {url ? (
+                   <img
+                    style={{ width: '130px', height: '130px' }}
+                    src={url}
+                    className="App-logo"
+                    alt="logo"
+                   />
+                  ) : (
+                   <img
+                    style={{ width: '130px', height: '130px' }}
+                    src={imageShow}
+                    className="App-logo"
+                    // alt="logone"
+                   />
+                  )}
+                 </CardMedia>
+                </Card>
+               </Grid>
+              ))}
+             </div>
+            );
+           }}
+          />
+         </Grid>
         </Grid>
-       </Grid>
-      </DialogContent>
-      <DialogActions>
-       <Button type="submit" color="primary" left>
-        Lưu
-       </Button>
-       <Button onClick={onClose} type="reset" color="secondary">
-        Hủy
-       </Button>
-      </DialogActions>
-     </Form>
-    </Dialog>
-   )}
+       </DialogContent>
+       <DialogActions>
+        <Button type="submit" color="primary" left>
+         Lưu
+        </Button>
+        <Button onClick={onClose} type="reset" color="secondary">
+         Hủy
+        </Button>
+       </DialogActions>
+      </Form>
+     </Dialog>
+    );
+   }}
   </Formik>
  );
 };

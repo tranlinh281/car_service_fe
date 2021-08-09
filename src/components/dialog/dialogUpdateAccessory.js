@@ -217,13 +217,13 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
           <Grid item container spacing={2}>
            <Grid item xs={6} sm={6}>
             <FormControl variant="outlined" margin="normal" fullWidth>
-             <InputLabel>Loại</InputLabel>
+             <InputLabel>Phân Loại</InputLabel>
              <Select
               name="type"
               value={props.values.type}
               onChange={props.handleChange}
               defaultValue={data.type}
-              label="Loại"
+              label="Phân Loại"
              >
               {types?.map((type) => (
                <MenuItem value={type.name}>{type.name}</MenuItem>

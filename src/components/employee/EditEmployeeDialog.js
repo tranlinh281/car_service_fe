@@ -142,7 +142,7 @@ const DialogUpdateEmployee = ({ data, open, onClose }) => {
         <Select
          defaultValue={data.role}
          onChange={(e) => setRole(e.target.value)}
-         label="Loại"
+         label="Vị Trí"
         >
          <MenuItem value="manager">Quản lý</MenuItem>
          <MenuItem value="staff">Kỹ thuật viên</MenuItem>

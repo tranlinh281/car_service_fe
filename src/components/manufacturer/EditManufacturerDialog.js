@@ -30,7 +30,7 @@ import { DisplayingErrorMessagesManufacturerSchema } from 'src/services/ValidCon
 
 const EditManufacturerDialog = ({ data, open, onClose }) => {
  const dispatch = useDispatch();
- console.log(data, 'debug edit manu');
+
  const [initialFormikValues, setInitialFormikValues] = useState({});
 
  const [image, setImage] = useState(null);
@@ -50,7 +50,6 @@ const EditManufacturerDialog = ({ data, open, onClose }) => {
   if (changeImg == false) {
    const parsedData = {
     ...data,
-
     imageUrl: data.imageUrl
    };
    dispatch(updateManufacturer(parsedData));

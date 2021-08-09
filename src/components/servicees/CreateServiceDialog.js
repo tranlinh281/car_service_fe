@@ -130,7 +130,7 @@ export default function CreateServiceDialog({ data, open, onClose }) {
            fullWidth
            error={!!errors.type}
           >
-           <InputLabel>Loại</InputLabel>
+           <InputLabel>Phân Loại</InputLabel>
            <Select
             name="type"
             error={!!errors.type}
@@ -139,7 +139,7 @@ export default function CreateServiceDialog({ data, open, onClose }) {
             onBlur={handleBlur}
             onChange={handleChange}
             required
-            label="Loại"
+            label="Phân Loại"
            >
             {types?.map((type) => (
              <MenuItem value={type.name}>{type.name}</MenuItem>

@@ -28,6 +28,7 @@ const ManufacturerDialogHOC = ({ children }) => {
     onClose={() => setShouldCreateManufacturerDialogOpen(false)}
    />
    <CreateModelDialog
+    data={updateManufacturerDefaultValue}
     open={shouldCreateModelDialogOpen}
     onClose={() => setShouldCreateModelDialogOpen(false)}
    />

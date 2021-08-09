@@ -2,9 +2,8 @@ export const employeeHeader = [
  { id: 1, title: 'Tài khoản' },
  { id: 2, title: 'Họ tên' },
  { id: 3, title: 'Điện thoại' },
- { id: 4, title: 'Vị trí' },
+ { id: 4, title: 'Vị trí' }
  // {id: 5, title: "Trạng thái"},
- { id: 5, title: 'Chỉnh sửa' }
 ];
 
 export const customerHeader = [
@@ -19,8 +18,7 @@ export const customerHeader = [
 export const serviceHeader = [
  { id: 1, title: 'Tên dịch vụ' },
  { id: 2, title: 'Giá' },
- { id: 3, title: 'Phân Loại' },
- { id: 4, title: 'Chỉnh sửa' }
+ { id: 3, title: 'Phân Loại' }
 ];
 
 export const accessoryHeader = [
@@ -30,8 +28,7 @@ export const accessoryHeader = [
  { id: 4, title: 'Đơn giá' },
  { id: 5, title: 'Đơn vị tính' },
  { id: 6, title: 'Phân Loại' },
- { id: 7, title: 'Hãng' },
- { id: 8, title: 'Chỉnh sửa' }
+ { id: 7, title: 'Hãng' }
 ];
 export const manufacturerHeader = [
  { id: 1, title: 'Hãng' },
@@ -40,6 +37,5 @@ export const manufacturerHeader = [
 export const packageHeader = [
  { id: 1, title: 'Tên gói dịch vụ' },
  { id: 2, title: 'Mô tả' },
- { id: 3, title: 'Giá' },
- { id: 4, title: 'Chỉnh sửa' }
+ { id: 3, title: 'Giá' }
 ];

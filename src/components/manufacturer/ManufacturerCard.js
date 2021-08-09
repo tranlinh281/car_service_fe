@@ -13,7 +13,7 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { manufacturerHeader } from 'src/services/HeaderTitleTable';
 import ButtonAction from '../ButtonAction';
-import { Edit } from '@material-ui/icons';
+import { Add, Edit } from '@material-ui/icons';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 
 const ManufacturerCard = (props) => {
@@ -21,8 +21,13 @@ const ManufacturerCard = (props) => {
 
  const {
   setShouldUpdateManufacturerDialogOpen,
+  setShouldCreateModelDialogOpen,
   setUpdateManufacturerDefaultValue
  } = useContext(DialogContext);
+ const handleOpenAddDialog = (editData) => {
+  setShouldCreateModelDialogOpen(true);
+  setUpdateManufacturerDefaultValue(editData);
+ };
  const handleOpenEditDialog = (editData) => {
   setShouldUpdateManufacturerDialogOpen(true);
   setUpdateManufacturerDefaultValue(editData);
@@ -42,6 +47,13 @@ const ManufacturerCard = (props) => {
      onClick={() => handleOpenEditDialog(manufacturer)}
     >
      <Edit fontSize="small" color="primary" justifyContent="left" />
+    </ButtonAction>
+    <ButtonAction
+     variant="contained"
+     color="primary"
+     onClick={() => handleOpenAddDialog(manufacturer.name)}
+    >
+     <Add fontSize="small" color="primary" justifyContent="left" />
     </ButtonAction>
     <Box
      sx={{

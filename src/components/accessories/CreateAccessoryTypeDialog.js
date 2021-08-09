@@ -52,11 +52,7 @@ export default function CreateAccessoryTypeDialog() {
      display: 'flex',
      justifyContent: 'flex-end'
     }}
-   >
-    <Button variant="contained" color="primary" onClick={handleClickOpen}>
-     Thêm loại Phụ Tùng
-    </Button>
-   </Box>
+   ></Box>
    <Dialog
     onClose={handleClose}
     aria-describedby="scroll-dialog-description"
@@ -64,13 +60,15 @@ export default function CreateAccessoryTypeDialog() {
     maxWidth={'md'}
     fullWidth={true}
    >
-    <DialogTitle id="customized-dialog-title">Thêm Loại Phụ tùng</DialogTitle>
+    <DialogTitle id="customized-dialog-title">
+     Thêm Phân Loại Phụ tùng
+    </DialogTitle>
     <DialogContent dividers>
      <DialogContentText>
       <Grid container spacing={3}>
        <TextField
         fullWidth
-        label="Tên Loại phụ tùng"
+        label="Tên Phân Loại phụ tùng"
         margin="normal"
         name="name"
         variant="outlined"

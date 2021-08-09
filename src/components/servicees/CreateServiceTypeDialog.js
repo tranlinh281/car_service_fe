@@ -54,7 +54,7 @@ const CreateServiceTypeDialog = () => {
     }}
    >
     <Button variant="contained" color="primary" onClick={handleClickOpen}>
-     Thêm loại Dịch vụ
+     Thêm Phân loại Dịch vụ
     </Button>
    </Box>
    <Dialog
@@ -64,13 +64,15 @@ const CreateServiceTypeDialog = () => {
     fullWidth={true}
     maxWidth={'xs'}
    >
-    <DialogTitle id="customized-dialog-title">Thêm Loại Dịch vụ</DialogTitle>
+    <DialogTitle id="customized-dialog-title">
+     Thêm Phân Loại Dịch vụ
+    </DialogTitle>
     <DialogContent dividers>
      <DialogContentText>
       <Grid container spacing={3}>
        <TextField
         fullWidth
-        label="Tên Loại Dịch vụ"
+        label="Tên Phân Loại Dịch vụ"
         margin="normal"
         name="name"
         variant="outlined"

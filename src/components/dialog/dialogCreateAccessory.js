@@ -258,12 +258,12 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
              fullWidth
              error={!!errors.type}
             >
-             <InputLabel>Loại</InputLabel>
+             <InputLabel>Phân Loại</InputLabel>
              <Select
               name="type"
               value={values.type}
               onChange={handleChange}
-              label="Loại"
+              label="Phân Loại"
              >
               {types?.map((type) => (
                <MenuItem value={type.name}>{type.name}</MenuItem>
