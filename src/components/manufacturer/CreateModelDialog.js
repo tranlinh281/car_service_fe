@@ -37,6 +37,8 @@ const CreateModelDialog = ({ data, open, onClose }) => {
  const [imageUrl, setImageUrl] = useState('');
  const [nameModel, setNameModel] = useState('');
  const [imageShow, setImageShow] = useState();
+ const [manufacturerName, setManufacturerName] = useState(data);
+
 
  const dispatch = useDispatch();
 
@@ -44,15 +46,16 @@ const CreateModelDialog = ({ data, open, onClose }) => {
   dispatch(listAllManufacturer());
  }, [listAllManufacturer]);
 
- const submitHandler = async (modelsT, name) => {
+ const submitHandler = async (modelsT, manufacturerName) => {
+   console.log(manufacturerName)
   console.log(modelsT);
   const imglink = await handleUpdate();
   setImageUrl(imglink);
   modelsT.models.map((model) => setNameModel(model.name));
 
   const dataNew = {
-   ...modelsT,
-   manufacturerName: name,
+  //  ...modelsT,
+   manufacturerName: modelsT.manufacturerName,
    models: [{ name: modelsT.models[0].name, imageUrl: imglink }]
   };
   console.log(dataNew, 'debug create model');
@@ -112,7 +115,7 @@ const CreateModelDialog = ({ data, open, onClose }) => {
  return (
   <Formik
    initialValues={{
-    manufacturerName: { data },
+    manufacturerName: manufacturerName,
     models: [{ name, imageUrl }]
    }}
    validateOnChange
@@ -147,10 +150,11 @@ const CreateModelDialog = ({ data, open, onClose }) => {
           margin="normal"
           name="manufacturerName"
           variant="outlined"
-          value={values.manufacturerName}
+          value={data}
+          // defaultValue={data.manufacturerName}
           disable
           onBlur={props.handleBlur}
-          onChange={props.handleChange}
+          // onChange={props.handleChange}
          />
 
          <Grid item>
