@@ -29,11 +29,11 @@ import { Build } from '@material-ui/icons';
 const userInfo = [];
 userInfo.push();
 console.log(localStorage.getItem('userInfo'));
-const user = {
- avatar: '/static/css_banner.png',
- jobTitle: userInfo.role
- // name: userInfo.profile.Fullname
-};
+// const user = {
+//  avatar: '/static/css_banner.png',
+//  jobTitle: userInfo.role
+//  // name: userInfo.profile.Fullname
+// };
 
 const items = [
  {
@@ -108,7 +108,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
     height: '100%'
    }}
   >
-   <Box
+   {/* <Box
     sx={{
      alignItems: 'center',
      display: 'flex',
@@ -128,7 +128,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
     <Typography color="textSecondary" variant="body2">
      {user.jobTitle}
     </Typography>
-   </Box>
+   </Box> */}
    <Divider />
    <Box sx={{ p: 2 }}>
     <List>

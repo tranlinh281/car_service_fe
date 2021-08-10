@@ -13,6 +13,8 @@ import PropTypes from 'prop-types';
 const TotalProfit = ({
   title,
   number,
+  colorCar,
+  colorBack,
   icon,
   ...rest
 }) => (
@@ -38,10 +40,11 @@ const TotalProfit = ({
             {number}
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item >
           <Avatar
+          color="blue"
             sx={{
-              backgroundColor: indigo[600],
+              backgroundColor: colorBack,
               height: 56,
               width: 56
             }}
