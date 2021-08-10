@@ -107,12 +107,11 @@ const CreateModelDialog = ({ data, open, onClose }) => {
    }
   });
  };
- console.log(data, 'debug create');
 
  return (
   <Formik
    initialValues={{
-    manufacturerName: { data },
+    manufacturerName: '',
     models: [{ name, imageUrl }]
    }}
    validateOnChange
@@ -120,7 +119,7 @@ const CreateModelDialog = ({ data, open, onClose }) => {
    onSubmit={submitHandler}
    onReset={handleReset}
   >
-   {({ values, resetForm, ...props }) => {
+   {({ resetForm, ...props }) => {
     useEffect(() => {
      if (open) {
       resetForm();
@@ -147,7 +146,7 @@ const CreateModelDialog = ({ data, open, onClose }) => {
           margin="normal"
           name="manufacturerName"
           variant="outlined"
-          value={values.manufacturerName}
+          value={data.name || props.setValues.name}
           disable
           onBlur={props.handleBlur}
           onChange={props.handleChange}
@@ -157,7 +156,7 @@ const CreateModelDialog = ({ data, open, onClose }) => {
           <FieldArray
            name="models"
            render={(arrayHelpers) => {
-            const models = values.models;
+            const models = props.values.models;
             return (
              <div>
               {models.map((item, index) => (

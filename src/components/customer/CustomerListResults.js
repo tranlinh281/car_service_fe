@@ -13,12 +13,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { customerHeader } from 'src/services/HeaderTitleTable';
 import LoadingBox from '../LoadingBox';
 import ButtonAction from '../ButtonAction';
-import { Close } from '@material-ui/icons';
+import { Close, LockOpen } from '@material-ui/icons';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import { toast } from 'react-toastify';
 import { CUSTOMER_BAN_SUCCESS } from 'src/constants/customerConstant';
 import { triggerReload } from 'src/actions/userAction';
 import { banCust } from 'src/actions/customerAction';
+import { Lock } from 'react-feather';
 
 export default function CustomerListResults({ loading, customers }) {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -26,7 +27,8 @@ export default function CustomerListResults({ loading, customers }) {
   title: '',
   subTitle: ''
  });
- const [isBanned, setIsBanned] = useState(true);
+ console.log(customers.isBanned, 'debug thử xem');
+ const [isBanned, setIsBanned] = useState();
  const [openPopup, setOpenPopup] = useState(false);
  const { success: banSuccess } = useSelector((state) => state.banCus);
  // const employeeDelete = useSelector((state) => state.employeeDelete);
@@ -42,10 +44,17 @@ export default function CustomerListResults({ loading, customers }) {
 
  const dispatch = useDispatch();
 
- const banHandler = (customer, iBanned) => {
+ const banHandler = (customer, isBanned) => {
   console.log(customer.username, 'debug cus');
   console.log(isBanned, 'debug cus boolean');
-  dispatch(banCust(customer.username, isBanned));
+  //dispatch(banCust(customer.username, isBanned));
+ };
+ const showBan = (value) => {
+  if (value == '1') {
+   return 'Unban';
+  } else if (value == '0') {
+   return 'Ban';
+  }
  };
 
  return (
@@ -73,6 +82,7 @@ export default function CustomerListResults({ loading, customers }) {
           <TableCell>{customer.phoneNumber}</TableCell>
           <TableCell>{customer.address}</TableCell>
           <TableCell>{customer.accumulatedPoint}</TableCell>
+          <TableCell>{customer.isBanned}</TableCell>
           <TableCell>
            <ButtonAction
             color="secondary"
@@ -87,7 +97,9 @@ export default function CustomerListResults({ loading, customers }) {
              });
             }}
            >
-            <Close fontSize="small" color="secondary" />
+            {/* <Lock values="true" /> */}
+            <LockOpen value="false" IsBanned="false" />
+            {showBan(customer.isBanned)}
            </ButtonAction>
           </TableCell>
          </TableRow>
