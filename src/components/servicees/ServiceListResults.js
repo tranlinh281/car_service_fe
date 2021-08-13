@@ -6,7 +6,7 @@ import {
  TableHead,
  TableRow
 } from '@material-ui/core';
-import { Close, Edit } from '@material-ui/icons';
+import { Close, Edit, LocalOffer } from '@material-ui/icons';
 import { useContext, useEffect, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { deleteService } from 'src/actions/serviceAction';
 import { triggerReload } from 'src/actions/userAction';
 import {
+ CREATE_COUPON_SUCCESS,
  CREATE_SERVICE_SUCCESS,
  CREATE_SERVICE_TYPE_SUCCESS,
  DELETE_SERVICE_SUCCESS,
@@ -41,6 +42,9 @@ export default function ServiceListResults({ loading, services }) {
  const { success: createSuccess } = useSelector(
   (state) => state.createServices
  );
+ const { success: createCouponSuccess } = useSelector(
+  (state) => state.createCoupon
+ );
  const { success: createTypeSuccess } = useSelector(
   (state) => state.createServiceType
  );
@@ -54,7 +58,8 @@ export default function ServiceListResults({ loading, services }) {
  const {
   setShouldUpdateServiceDialogOpen,
   setUpdateServiceDefaultValue,
-  setShouldCreateServiceDialogOpen
+  setShouldCreateServiceDialogOpen,
+  setShouldCreateCouponDialogOpen
  } = useContext(DialogContext);
 
  useEffect(() => {
@@ -81,16 +86,34 @@ export default function ServiceListResults({ loading, services }) {
    dispatch(triggerReload({}));
    setShouldCreateServiceDialogOpen(false);
   }
+  if (createCouponSuccess) {
+   toast.success('Thêm Khuyến mãi thành công!');
+   // Should create action creator for this
+   dispatch({ type: CREATE_COUPON_SUCCESS, payload: false });
+   dispatch(triggerReload({}));
+   setShouldCreateServiceDialogOpen(false);
+  }
   if (createTypeSuccess) {
    toast.success('Thêm mới thành công!');
    // Should create action creator for this
    dispatch({ type: CREATE_SERVICE_TYPE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
-   setShouldCreateServiceDialogOpen(false);
+   setShouldCreateCouponDialogOpen(false);
   }
- }, [deleteSuccess, updateSuccess, createSuccess, createTypeSuccess]);
+ }, [
+  deleteSuccess,
+  updateSuccess,
+  createSuccess,
+  createTypeSuccess,
+  createCouponSuccess
+ ]);
  const handleOpenEditDialog = (editData) => {
   setShouldUpdateServiceDialogOpen(true);
+  setUpdateServiceDefaultValue(editData);
+ };
+
+ const handleOpenCouponDialog = (editData) => {
+  setShouldCreateCouponDialogOpen(true);
   setUpdateServiceDefaultValue(editData);
  };
 
@@ -116,14 +139,22 @@ export default function ServiceListResults({ loading, services }) {
           <TableCell>{service.name}</TableCell>
           <TableCell>{service.price}</TableCell>
           <TableCell>{service.type}</TableCell>
-
+          <TableCell>
+           <ButtonAction>
+            <LocalOffer
+             variant="contained"
+             color="primary"
+             onClick={() => handleOpenCouponDialog(service.id)}
+            ></LocalOffer>
+           </ButtonAction>
+          </TableCell>
           <TableCell>
            <ButtonAction
             variant="contained"
             color="primary"
             onClick={() => handleOpenEditDialog(service)}
            >
-            <Edit fontSize="small" color="primary"/>
+            <Edit fontSize="small" color="primary" />
            </ButtonAction>
            <ButtonAction
             color="secondary"
@@ -137,7 +168,7 @@ export default function ServiceListResults({ loading, services }) {
              });
             }}
            >
-            <Close fontSize="small" color="secondary"/>
+            <Close fontSize="small" color="secondary" />
            </ButtonAction>
           </TableCell>
          </TableRow>

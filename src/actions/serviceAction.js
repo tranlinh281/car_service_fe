@@ -1,5 +1,8 @@
 import Axios from 'axios';
 import {
+  CREATE_COUPON_FAIL,
+ CREATE_COUPON_REQUEST,
+ CREATE_COUPON_SUCCESS,
  CREATE_SERVICE_FAIL,
  CREATE_SERVICE_REQUEST,
  CREATE_SERVICE_SUCCESS,
@@ -27,7 +30,8 @@ import {
  POST_NEW_SERVICE_TYPE,
  UPDATE_SERVICE_URL,
  GET_SERVICE_LIST_URL,
- GET_TYPE_LIST_URL
+ GET_TYPE_LIST_URL,
+ POST_NEW_COUPON
 } from 'src/services/Config';
 const headers = {
  'Content-Type': 'application/json',
@@ -168,5 +172,24 @@ export const listAllService = () => async (dispatch) => {
     ? error.response.data.message
     : error.message;
   dispatch({ type: SERVICE_LIST_FAIL, payload: message });
+ }
+};
+
+export const createCoupon = (couponModels) => async (dispatch) => {
+ dispatch({
+  type: CREATE_COUPON_REQUEST,
+  payload: { couponModels }
+ });
+ try {
+  const { data } = await Axios.post(POST_NEW_COUPON, couponModels);
+  dispatch({ type: CREATE_COUPON_SUCCESS, payload: data });
+ } catch (error) {
+  dispatch({
+   type: CREATE_COUPON_FAIL,
+   payload:
+    error.response && error.response.data.message
+     ? error.response.data.message
+     : error.message
+  });
  }
 };

@@ -1,6 +1,7 @@
 import { memo, useContext, useState } from 'react';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import DialogUpdateService from '../dialog/dialogUpdateService';
+import CreateCouponDialog from '../servicees/CreateCouponDialog';
 import CreateServiceDialog from '../servicees/CreateServiceDialog';
 
 const ServiceDialogHOC = ({ children }) => {
@@ -9,7 +10,9 @@ const ServiceDialogHOC = ({ children }) => {
   setShouldUpdateServiceDialogOpen,
   updateServiceDefaultValue,
   setShouldCreateServiceDialogOpen,
-  shouldCreateServiceDialogOpen
+  shouldCreateServiceDialogOpen,
+  shouldCreateCouponDialogOpen,
+  setShouldCreateCouponDialogOpen
  } = useContext(DialogContext);
 
  return (
@@ -23,6 +26,11 @@ const ServiceDialogHOC = ({ children }) => {
    <CreateServiceDialog
     open={shouldCreateServiceDialogOpen}
     onClose={() => setShouldCreateServiceDialogOpen(false)}
+   />
+   <CreateCouponDialog
+    data={updateServiceDefaultValue}
+    open={shouldCreateCouponDialogOpen}
+    onClose={() => setShouldCreateCouponDialogOpen(false)}
    />
   </>
  );

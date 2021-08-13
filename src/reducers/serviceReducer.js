@@ -1,4 +1,7 @@
 import {
+ CREATE_COUPON_FAIL,
+ CREATE_COUPON_REQUEST,
+ CREATE_COUPON_SUCCESS,
  CREATE_SERVICE_FAIL,
  CREATE_SERVICE_REQUEST,
  CREATE_SERVICE_SUCCESS,
@@ -118,6 +121,19 @@ export const listAllServiceReducer = (
     services: action.payload
    };
   case SERVICE_LIST_FAIL:
+   return { ...state, loading: false, error: action.payload };
+  default:
+   return state;
+ }
+};
+
+export const createCouponReducer = (state = {}, action) => {
+ switch (action.type) {
+  case CREATE_COUPON_REQUEST:
+   return { ...state, loading: true };
+  case CREATE_COUPON_SUCCESS:
+   return { ...state, loading: false, success: action.payload };
+  case CREATE_COUPON_FAIL:
    return { ...state, loading: false, error: action.payload };
   default:
    return state;

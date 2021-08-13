@@ -7,6 +7,7 @@ export const USERS = 'Users';
 export const USERNAME = 'username=';
 export const PACKAGEID = 'id=';
 export const CUSTOMER = 'Customers';
+export const COUPON = 'coupons';
 export const EMPLOYEE = 'employees';
 export const PACKAGES = 'packages';
 export const MANUFACTURER = 'manufacturers';
@@ -125,3 +126,7 @@ export const GET_PACKAGE_CONTENT =
 //Types
 export const GET_TYPE_LIST_URL = BASE_URL + TYPE;
 export const POST_NEW_SERVICE_TYPE = GET_TYPE_LIST_URL + QUESTION_MARK + NAME;
+
+//coupons
+export const GET_COUPON_LIST_URL = BASE_URL + COUPON;
+export const POST_NEW_COUPON = GET_COUPON_LIST_URL;

@@ -26,7 +26,7 @@ const ServiceList = () => {
   setPage(value);
   setKeySearch(keySearch);
  };
- console.log(keySearch, 'debug list');
+
 
  return (
   <>

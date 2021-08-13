@@ -20,6 +20,7 @@ import {
  updateManufacturerReducer
 } from './reducers/manufacturerReducer';
 import {
+ createCouponReducer,
  createServiceReducer,
  createServiceTypeReducer,
  deleteServiceReducer,
@@ -82,7 +83,8 @@ const reducer = combineReducers({
  editPackage: updatePackageReducer,
  packageID: PackageIDReducer,
  banCus: banCustomerReducer,
- editManufacturer: updateManufacturerReducer
+ editManufacturer: updateManufacturerReducer,
+ createCoupon: createCouponReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

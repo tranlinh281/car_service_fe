@@ -91,3 +91,15 @@ export const DisplayingErrorMessagesModelSchema = Yup.object().shape({
   .max(50, 'Tên loại xe phải dưới 50 ký tự!')
   .required('Không được bỏ trống tên của loại xe')
 });
+export const DisplayingErrorMessagesCreateCouponSchema = Yup.object().shape({
+ name: Yup.string()
+  .min(3, 'Tên khuyến mãi phải trên 3 ký tự!')
+  .max(50, 'Tên khuyến mãi phải dưới 50 ký tự!')
+  .required('Không được bỏ trống tên dịch vụ'),
+ description: Yup.string()
+  .required('Không được bỏ trống mô tả')
+  .min(3, 'Mô tả khuyến mãi phải trên 3 ký tự')
+  .max(200, 'Mô tả khuyến mãi phải dưới 200 ký tự!'),
+ value: Yup.string().required('Không được bỏ trống Phần trăm của khuyến mãi'),
+ pointRequired: Yup.string().required('Không được bỏ trống điểm của khuyến mãi')
+});

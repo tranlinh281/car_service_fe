@@ -63,7 +63,7 @@ export default function CreateServiceDialog({ data, open, onClose }) {
  useEffect(() => {
   if (data && open) {
    setForm(data);
-   setAccessoryModels(data);
+   setServiceModels(data);
   }
  }, [data, open]);
 
@@ -99,7 +99,7 @@ export default function CreateServiceDialog({ data, open, onClose }) {
          <Grid item>
           <TextField
            fullWidth
-           label="Tên Dịch Vụ"
+           label="Tên Khuyến mãi"
            error={!!errors.name}
            helperText={errors.name}
            value={values.name}
