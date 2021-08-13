@@ -27,7 +27,6 @@ export default function CustomerListResults({ loading, customers }) {
   title: '',
   subTitle: ''
  });
- console.log(customers.isBanned, 'debug thử xem');
  const [isBanned, setIsBanned] = useState();
  const [openPopup, setOpenPopup] = useState(false);
  const { success: banSuccess } = useSelector((state) => state.banCus);
@@ -35,7 +34,6 @@ export default function CustomerListResults({ loading, customers }) {
  // const { success } = employeeDelete;
  useEffect(() => {
   if (banSuccess) {
-   toast.success('Ban thành công!');
    // Should create action creator for this
    dispatch({ type: CUSTOMER_BAN_SUCCESS, payload: false });
    dispatch(triggerReload({}));
@@ -45,18 +43,15 @@ export default function CustomerListResults({ loading, customers }) {
  const dispatch = useDispatch();
 
  const banHandler = (customer, isBanned) => {
-  console.log(customer.username, 'debug cus');
   console.log(isBanned, 'debug cus boolean');
-  //dispatch(banCust(customer.username, isBanned));
+  dispatch(banCust(customer.username, isBanned));
+  toast.success('Ban thành công!');
  };
- const showBan = (value) => {
-  if (value == '1') {
-   return 'Unban';
-  } else if (value == '0') {
-   return 'Ban';
-  }
+ const unBan = (customer, isBanned) => {
+  console.log(isBanned, 'debug cus boolean');
+  dispatch(banCust(customer.username, isBanned));
+  toast.success('unBan thành công!');
  };
-
  return (
   <>
    {loading ? (
@@ -84,23 +79,42 @@ export default function CustomerListResults({ loading, customers }) {
           <TableCell>{customer.accumulatedPoint}</TableCell>
           <TableCell>{customer.isBanned}</TableCell>
           <TableCell>
-           <ButtonAction
-            color="secondary"
-            onClick={() => {
-             setConfirmDialog({
-              isOpen: true,
-              title: 'Bạn có chắc muốn Ban khách hàng này?',
-              onConfirm: () => {
-               banHandler(customer, isBanned),
-                setConfirmDialog({ isOpen: false });
-              }
-             });
-            }}
-           >
-            {/* <Lock values="true" /> */}
-            <LockOpen value="false" IsBanned="false" />
-            {showBan(customer.isBanned)}
-           </ButtonAction>
+           {customer.isBanned == 0 && (
+            <ButtonAction
+             color="secondary"
+             value="true"
+             name="isBanned"
+             onClick={() => {
+              setConfirmDialog({
+               isOpen: true,
+               title: 'Bạn có chắc muốn Ban khách hàng này?',
+               onConfirm: () => {
+                banHandler(customer, true), setConfirmDialog({ isOpen: false });
+               }
+              });
+             }}
+            >
+             <LockOpen color="error" />
+            </ButtonAction>
+           )}
+           {customer.isBanned == 1 && (
+            <ButtonAction
+             color="secondary"
+             value="false"
+             name="isBanned"
+             onClick={() => {
+              setConfirmDialog({
+               isOpen: true,
+               title: 'Bạn có chắc muốn unBan khách hàng này?',
+               onConfirm: () => {
+                unBan(customer, false), setConfirmDialog({ isOpen: false });
+               }
+              });
+             }}
+            >
+             <Lock />
+            </ButtonAction>
+           )}
           </TableCell>
          </TableRow>
         ))}
