@@ -27,7 +27,7 @@ import {
 } from 'src/services/HeaderTitleTable';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
-import LoadingBox from 'src/components/LoadingBox';
+import LoadingTable from 'src/components/LoadingTable';
 
 export default function AccessoryListResults({ loading, accessories }) {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -100,7 +100,7 @@ export default function AccessoryListResults({ loading, accessories }) {
  return (
   <>
    {loading ? (
-    <LoadingBox></LoadingBox>
+    <LoadingTable></LoadingTable>
    ) : (
     <PerfectScrollbar>
      <Box sx={{ minWidth: 1050 }}>

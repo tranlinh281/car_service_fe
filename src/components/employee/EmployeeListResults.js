@@ -19,7 +19,7 @@ import {
 } from 'src/constants/userConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import { employeeHeader } from 'src/services/HeaderTitleTable';
-import LoadingBox from 'src/components/LoadingBox';
+import LoadingTable from 'src/components/LoadingTable';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
 
@@ -89,7 +89,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
  return (
   <>
    {loading ? (
-    <LoadingBox></LoadingBox>
+    <LoadingTable></LoadingTable>
    ) : (
     <PerfectScrollbar>
      <Box sx={{ minWidth: 1050 }}>
@@ -97,7 +97,9 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
        <TableHead>
         <TableRow>
          {employeeHeader.map((headCell) => (
-          <TableCell key={headCell.id} style={{justifyContent: 'center'}}>{headCell.title}</TableCell>
+          <TableCell key={headCell.id} style={{ justifyContent: 'center' }}>
+           {headCell.title}
+          </TableCell>
          ))}
         </TableRow>
        </TableHead>
@@ -115,7 +117,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
              color="primary"
              onClick={() => handleOpenEditDialog(employee)}
             >
-             <Edit fontSize="small" color="primary" justifyContent="left"/>
+             <Edit fontSize="small" color="primary" justifyContent="left" />
             </ButtonAction>
             <ButtonAction
              color="secondary"
@@ -129,7 +131,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
               });
              }}
             >
-             <Close fontSize="small" color="secondary"/>
+             <Close fontSize="small" color="secondary" />
             </ButtonAction>
            </TableCell>
           </TableRow>

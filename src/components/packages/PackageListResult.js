@@ -15,7 +15,7 @@ import { triggerReload } from 'src/actions/userAction';
 import { EDIT_EMPLOYEE_SUCCESS } from 'src/constants/userConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import { packageHeader } from 'src/services/HeaderTitleTable';
-import LoadingBox from 'src/components/LoadingBox';
+import LoadingTable from 'src/components/LoadingTable';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import {
@@ -82,7 +82,7 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
  return (
   <>
    {loading ? (
-    <LoadingBox></LoadingBox>
+    <LoadingTable></LoadingTable>
    ) : (
     <PerfectScrollbar>
      <Box sx={{ minWidth: 1050 }}>

@@ -26,7 +26,7 @@ import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessory
 import { serviceHeader } from 'src/services/HeaderTitleTable';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
-import LoadingBox from '../LoadingBox';
+import LoadingTable from '../LoadingTable';
 
 export default function ServiceListResults({ loading, services }) {
  const serviceDelete = useSelector((state) => state.serviceDelete);
@@ -120,7 +120,7 @@ export default function ServiceListResults({ loading, services }) {
  return (
   <>
    {loading ? (
-    <LoadingBox></LoadingBox>
+    <LoadingTable></LoadingTable>
    ) : (
     <PerfectScrollbar>
      <Box sx={{ minWidth: 1050 }}>

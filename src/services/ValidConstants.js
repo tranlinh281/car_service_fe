@@ -4,7 +4,7 @@ export const DisplayingErrorMessagesLoginSchema = Yup.object().shape({
  username: Yup.string()
   .min(3, 'Tài khoản phải trên 3 ký tự!')
   .max(20, 'Tài khoản phải dưới 20 ký tự!')
-  .required('Không được bỏ trống'),
+  .required(' Tài khoản Không được bỏ trống'),
  password: Yup.string().required('Không được bỏ trống mật khẩu')
 });
 
@@ -39,7 +39,9 @@ export const DisplayingErrorMessagesCreateAccessorySchema = Yup.object().shape({
   .max(30, 'Tên phụ tùng phải dưới 30 ký tự!')
   .required('Không được bỏ trống tên phụ tùng'),
  quantity: Yup.string().required('Không được bỏ trống số lượng'),
- price: Yup.string().required('Không được bỏ trống giá của phụ tùng'),
+ price: Yup.string()
+  .required('Không được bỏ trống giá của phụ tùng')
+  .min(5, 'Giá phụ tùng phải trên 5 ký tự'),
  unit: Yup.string()
   .min(3, 'Đơn vị phải trên 3 ký tự!')
   .max(30, 'Đơn vị phải dưới 30 ký tự!')

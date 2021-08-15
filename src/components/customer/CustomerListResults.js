@@ -11,15 +11,14 @@ import { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { customerHeader } from 'src/services/HeaderTitleTable';
-import LoadingBox from '../LoadingBox';
+import LoadingTable from '../LoadingTable';
 import ButtonAction from '../ButtonAction';
-import { Close, LockOpen } from '@material-ui/icons';
+import { Close, LockOpen, Lock } from '@material-ui/icons';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import { toast } from 'react-toastify';
 import { CUSTOMER_BAN_SUCCESS } from 'src/constants/customerConstant';
 import { triggerReload } from 'src/actions/userAction';
 import { banCust } from 'src/actions/customerAction';
-import { Lock } from 'react-feather';
 
 export default function CustomerListResults({ loading, customers }) {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -55,7 +54,7 @@ export default function CustomerListResults({ loading, customers }) {
  return (
   <>
    {loading ? (
-    <LoadingBox></LoadingBox>
+    <LoadingTable></LoadingTable>
    ) : (
     <PerfectScrollbar>
      <Box sx={{ minWidth: 1050 }}>
@@ -94,7 +93,7 @@ export default function CustomerListResults({ loading, customers }) {
               });
              }}
             >
-             <LockOpen color="error" />
+             <LockOpen color="primary" />
             </ButtonAction>
            )}
            {customer.isBanned == 1 && (
@@ -112,7 +111,7 @@ export default function CustomerListResults({ loading, customers }) {
               });
              }}
             >
-             <Lock />
+             <Lock color="error" />
             </ButtonAction>
            )}
           </TableCell>

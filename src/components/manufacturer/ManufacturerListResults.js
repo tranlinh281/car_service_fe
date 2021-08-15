@@ -9,7 +9,7 @@ import {
  TableRow
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import LoadingBox from '../LoadingBox';
+import LoadingTable from '../LoadingTable';
 import ManufacturerCard from './ManufacturerCard';
 import {
  CREATE_MANUFACTURER_SUCCESS,
@@ -66,7 +66,7 @@ export default function ManufacturerListResults({ loading, manufacturers }) {
  return (
   <>
    {loading ? (
-    <LoadingBox></LoadingBox>
+    <LoadingTable></LoadingTable>
    ) : (
     <PerfectScrollbar>
      <Box sx={{ pt: 3 }}></Box>
