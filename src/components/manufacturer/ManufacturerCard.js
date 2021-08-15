@@ -51,7 +51,7 @@ const ManufacturerCard = (props) => {
     <ButtonAction
      variant="contained"
      color="primary"
-     onClick={() => handleOpenAddDialog(manufacturer.name)}
+     onClick={() => handleOpenAddDialog(manufacturer)}
     >
      <Add fontSize="small" color="primary" justifyContent="left" />
     </ButtonAction>

@@ -20,7 +20,9 @@ export const serviceHeader = [
  { id: 1, title: 'Tên dịch vụ' },
  { id: 2, title: 'Giá' },
  { id: 3, title: 'Phân Loại' },
- { id: 4, title: 'Khuyến mãi' }
+ { id: 4, title: 'Khuyến mãi' },
+ { id: 5, title: '' }
+
 ];
 
 export const accessoryHeader = [

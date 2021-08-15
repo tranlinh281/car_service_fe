@@ -28,8 +28,10 @@ import {
 } from 'src/actions/manufacturerAction';
 import { DisplayingErrorMessagesModelSchema } from 'src/services/ValidConstants';
 import { values } from 'lodash';
+import { manufacturerHeader } from 'src/services/HeaderTitleTable';
 
 const CreateModelDialog = ({ data, open, onClose }) => {
+  console.log(data.name);
  const { manufacturers } = useSelector((state) => state.manufacturerListAll);
  const [image, setImage] = useState(null);
  const [url, setURL] = useState('');
@@ -38,7 +40,7 @@ const CreateModelDialog = ({ data, open, onClose }) => {
  const [imageUrl, setImageUrl] = useState('');
  const [nameModel, setNameModel] = useState('');
  const [imageShow, setImageShow] = useState();
- const [manufacturerName, setManufacturerName] = useState(data);
+ const [manufacturerName, setManufacturerName] = useState(data.name);
 
  const dispatch = useDispatch();
 
@@ -47,13 +49,14 @@ const CreateModelDialog = ({ data, open, onClose }) => {
  }, [listAllManufacturer]);
 
  const submitHandler = async (modelsT) => {
+   setManufacturerName(data.name)
   const imglink = await handleUpdate();
   setImageUrl(imglink);
   modelsT.models.map((model) => setNameModel(model.name));
 
   const dataNew = {
    ...modelsT,
-   manufacturerName: manufacturerName,
+   manufacturerName: data.name,
    models: [{ name: modelsT.models[0].name, imageUrl: imglink }]
   };
   console.log(dataNew, 'debug create model');
@@ -147,7 +150,7 @@ const CreateModelDialog = ({ data, open, onClose }) => {
           margin="normal"
           name="manufacturerName"
           variant="outlined"
-          value={data}
+          value={data.name}
           disable
           onBlur={props.handleBlur}
           // onChange={props.handleChange}
