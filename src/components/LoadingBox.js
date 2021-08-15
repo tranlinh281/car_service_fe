@@ -6,7 +6,7 @@ export default function LoadingBox() {
   <div className="loading">
    <CircularProgress
     sx={{
-     position: 'center'
+     alignItems: 'center'
     }}
     disableShrink
    />

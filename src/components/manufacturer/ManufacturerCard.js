@@ -41,20 +41,24 @@ const ManufacturerCard = (props) => {
    }}
   >
    <CardContent>
-    <ButtonAction
-     variant="contained"
-     color="primary"
-     onClick={() => handleOpenEditDialog(manufacturer)}
-    >
-     <Edit fontSize="small" color="primary" justifyContent="left" />
-    </ButtonAction>
-    <ButtonAction
-     variant="contained"
-     color="primary"
-     onClick={() => handleOpenAddDialog(manufacturer.name)}
-    >
-     <Add fontSize="small" color="primary" justifyContent="left" />
-    </ButtonAction>
+    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+     <ButtonAction
+      variant="contained"
+      color="primary"
+      onClick={() => handleOpenEditDialog(manufacturer)}
+     >
+      <Edit fontSize="small" color="primary" justifyContent="left" />
+     </ButtonAction>
+    </Box>
+    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+     <ButtonAction
+      variant="contained"
+      color="primary"
+      onClick={() => handleOpenAddDialog(manufacturer.name)}
+     >
+      <Add fontSize="small" color="primary" justifyContent="left" />
+     </ButtonAction>
+    </Box>
     <Box
      sx={{
       display: 'flex',
