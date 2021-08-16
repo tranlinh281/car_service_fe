@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import {
-  CREATE_COUPON_FAIL,
+ CREATE_COUPON_FAIL,
  CREATE_COUPON_REQUEST,
  CREATE_COUPON_SUCCESS,
  CREATE_SERVICE_FAIL,
@@ -9,9 +9,15 @@ import {
  CREATE_SERVICE_TYPE_FAIL,
  CREATE_SERVICE_TYPE_REQUEST,
  CREATE_SERVICE_TYPE_SUCCESS,
+ DELETE_COUPON_FAIL,
+ DELETE_COUPON_REQUEST,
+ DELETE_COUPON_SUCCESS,
  DELETE_SERVICE_FAIL,
  DELETE_SERVICE_REQUEST,
  DELETE_SERVICE_SUCCESS,
+ EDIT_COUPON_FAIL,
+ EDIT_COUPON_REQUEST,
+ EDIT_COUPON_SUCCESS,
  EDIT_SERVICE_FAIL,
  EDIT_SERVICE_REQUEST,
  EDIT_SERVICE_SUCCESS,
@@ -31,7 +37,9 @@ import {
  UPDATE_SERVICE_URL,
  GET_SERVICE_LIST_URL,
  GET_TYPE_LIST_URL,
- POST_NEW_COUPON
+ POST_NEW_COUPON,
+ UPDATE_COUPON_URL,
+ DELETE_COUPON
 } from 'src/services/Config';
 const headers = {
  'Content-Type': 'application/json',
@@ -186,6 +194,46 @@ export const createCoupon = (couponModels) => async (dispatch) => {
  } catch (error) {
   dispatch({
    type: CREATE_COUPON_FAIL,
+   payload:
+    error.response && error.response.data.message
+     ? error.response.data.message
+     : error.message
+  });
+ }
+};
+
+export const updateCoupon = (couponModels) => async (dispatch) => {
+ dispatch({
+  type: EDIT_COUPON_REQUEST,
+  payload: { couponModels }
+ });
+
+ try {
+  const { data } = await Axios.put(UPDATE_COUPON_URL, couponModels);
+  dispatch({ type: EDIT_COUPON_SUCCESS, payload: data });
+  dispatch(triggerReload({}));
+ } catch (error) {
+  const message =
+   error.response && error.response.data.message
+    ? error.response.data.message
+    : error.message;
+  dispatch({ type: EDIT_COUPON_FAIL, payload: message });
+ }
+};
+
+export const deleteCoupon = (couponId) => async (dispatch) => {
+ dispatch({
+  type: DELETE_COUPON_REQUEST,
+  payload: { couponId }
+ });
+ try {
+  const { data } = await Axios.delete(DELETE_COUPON + couponId, {
+   headers: headers
+  });
+  dispatch({ type: DELETE_COUPON_SUCCESS, payload: data });
+ } catch (error) {
+  dispatch({
+   type: DELETE_COUPON_FAIL,
    payload:
     error.response && error.response.data.message
      ? error.response.data.message

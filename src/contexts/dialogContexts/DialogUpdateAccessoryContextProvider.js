@@ -135,6 +135,19 @@ const DialogContextProvider = ({ children }) => {
   setShouldCreateCouponDialogOpen
  };
 
+ // -------------------------------------------------------------------------------
+ // Context State of update package dialog
+ const [shouldUpdateCouponDialogOpen, setShouldUpdateCouponDialogOpen] =
+  useState(false);
+ const [updateCouponDefaultValue, setUpdateCouponDefaultValue] = useState({});
+
+ const updateDialogCouponState = {
+  shouldUpdateCouponDialogOpen,
+  setShouldUpdateCouponDialogOpen,
+  updateCouponDefaultValue,
+  setUpdateCouponDefaultValue
+ };
+
  const defaultProviderValue = {
   ...updateDialogAccessoryState,
   ...createDialogAccessoryState,
@@ -147,7 +160,8 @@ const DialogContextProvider = ({ children }) => {
   ...createDialogModelState,
   ...updateDialogPackageState,
   ...updateDialogManufacturerState,
-  ...createDialogCouponState
+  ...createDialogCouponState,
+  ...updateDialogCouponState
  };
 
  return (

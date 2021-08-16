@@ -28,6 +28,7 @@ export const QUESTION_MARK = '?';
 export const SEARCH_VALUE = '&searchValue=';
 export const MODELS = 'models';
 export const NAME = 'name=';
+export const COUPONID = 'couponId=';
 export const NAME_SEARCH = 'nameSearch=';
 export const INSERT_MANUFACTURER = '?manufacturer=';
 export const FULLNAME_SEARCH = 'fullnameSearch=';
@@ -130,3 +131,5 @@ export const POST_NEW_SERVICE_TYPE = GET_TYPE_LIST_URL + QUESTION_MARK + NAME;
 //coupons
 export const GET_COUPON_LIST_URL = BASE_URL + COUPON;
 export const POST_NEW_COUPON = GET_COUPON_LIST_URL;
+export const UPDATE_COUPON_URL = GET_COUPON_LIST_URL;
+export const DELETE_COUPON = GET_COUPON_LIST_URL + QUESTION_MARK + COUPONID;

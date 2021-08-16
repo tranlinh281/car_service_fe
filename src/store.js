@@ -23,10 +23,12 @@ import {
  createCouponReducer,
  createServiceReducer,
  createServiceTypeReducer,
+ deleteCouponReducer,
  deleteServiceReducer,
  listAllServiceReducer,
  listServiceReducer,
  listServiceTypeReducer,
+ updateCouponReducer,
  updateServiceReducer
 } from './reducers/serviceReducer';
 import {
@@ -84,7 +86,9 @@ const reducer = combineReducers({
  packageID: PackageIDReducer,
  banCus: banCustomerReducer,
  editManufacturer: updateManufacturerReducer,
- createCoupon: createCouponReducer
+ createCoupon: createCouponReducer,
+ editCoupon: updateCouponReducer,
+ couponDelete: deleteCouponReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

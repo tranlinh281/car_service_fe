@@ -62,7 +62,7 @@ export default function CreateCouponDialog({ data, open, onClose }) {
   <>
    <Formik
     initialValues={{
-     id: data,
+     serviceId: data,
      name: '',
      description: '',
      value: '',

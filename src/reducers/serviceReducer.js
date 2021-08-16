@@ -8,9 +8,15 @@ import {
  CREATE_SERVICE_TYPE_FAIL,
  CREATE_SERVICE_TYPE_REQUEST,
  CREATE_SERVICE_TYPE_SUCCESS,
+ DELETE_COUPON_FAIL,
+ DELETE_COUPON_REQUEST,
+ DELETE_COUPON_SUCCESS,
  DELETE_SERVICE_FAIL,
  DELETE_SERVICE_REQUEST,
  DELETE_SERVICE_SUCCESS,
+ EDIT_COUPON_FAIL,
+ EDIT_COUPON_REQUEST,
+ EDIT_COUPON_SUCCESS,
  EDIT_SERVICE_FAIL,
  EDIT_SERVICE_REQUEST,
  EDIT_SERVICE_SUCCESS,
@@ -134,6 +140,32 @@ export const createCouponReducer = (state = {}, action) => {
   case CREATE_COUPON_SUCCESS:
    return { ...state, loading: false, success: action.payload };
   case CREATE_COUPON_FAIL:
+   return { ...state, loading: false, error: action.payload };
+  default:
+   return state;
+ }
+};
+
+//coupon
+export const updateCouponReducer = (state = {}, action) => {
+ switch (action.type) {
+  case EDIT_COUPON_REQUEST:
+   return { ...state, loading: true };
+  case EDIT_COUPON_SUCCESS:
+   return { ...state, loading: false, success: action.payload };
+  case EDIT_COUPON_FAIL:
+   return { ...state, loading: false, error: action.payload };
+  default:
+   return state;
+ }
+};
+export const deleteCouponReducer = (state = {}, action) => {
+ switch (action.type) {
+  case DELETE_COUPON_REQUEST:
+   return { ...state, loading: true };
+  case DELETE_COUPON_SUCCESS:
+   return { ...state, loading: false, success: action.payload };
+  case DELETE_COUPON_FAIL:
    return { ...state, loading: false, error: action.payload };
   default:
    return state;
