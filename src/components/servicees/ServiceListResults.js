@@ -36,7 +36,6 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import React from 'react';
 
 export default function ServiceListResults({ loading, services }) {
- const [openPopup, setOpenPopup] = useState(false);
  const [confirmDialog, setConfirmDialog] = useState({
   isOpen: false,
   title: '',
@@ -76,6 +75,7 @@ export default function ServiceListResults({ loading, services }) {
   setShouldUpdateServiceDialogOpen,
   setUpdateServiceDefaultValue,
   setShouldCreateServiceDialogOpen,
+  setShouldCreateTypeDialogOpen,
   //coupon
   setShouldCreateCouponDialogOpen,
   setShouldUpdateCouponDialogOpen,
@@ -130,8 +130,7 @@ export default function ServiceListResults({ loading, services }) {
    // Should create action creator for this
    dispatch({ type: CREATE_SERVICE_TYPE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
-   setShouldCreateTypeDialogOpen(false);
-  }
+      }
  }, [
   deleteSuccess,
   updateSuccess,
@@ -164,6 +163,11 @@ export default function ServiceListResults({ loading, services }) {
  };
  const [open, setOpen] = React.useState(false);
 
+ const numberFormat = (value) =>
+  new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(
+   value
+  );
+
  return (
   <>
    {loading ? (
@@ -185,7 +189,7 @@ export default function ServiceListResults({ loading, services }) {
          <>
           <TableRow hover key={service.name}>
            <TableCell>{service.name}</TableCell>
-           <TableCell>{service.price}</TableCell>
+           <TableCell>{numberFormat(service.price)}</TableCell>
            <TableCell>{service.type}</TableCell>
            <TableCell>
             <ButtonAction>
@@ -246,7 +250,7 @@ export default function ServiceListResults({ loading, services }) {
                  <TableRow key={coupon.name}>
                   <TableCell>{coupon.name}</TableCell>
                   <TableCell>{coupon.description}</TableCell>
-                  <TableCell>{coupon.value}</TableCell>
+                  <TableCell>{coupon.value}%</TableCell>
                   <TableCell>{coupon.pointRequired}</TableCell>
                   <TableCell>
                    <ButtonAction
@@ -289,10 +293,6 @@ export default function ServiceListResults({ loading, services }) {
      </Box>
     </PerfectScrollbar>
    )}
-   <ConfirmDialog
-    confirmDialog={confirmDialog}
-    setConfirmDialog={setConfirmDialog}
-   />
   </>
  );
 }

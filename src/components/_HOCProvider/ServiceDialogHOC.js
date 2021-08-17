@@ -3,6 +3,7 @@ import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessory
 import DialogUpdateService from '../dialog/dialogUpdateService';
 import CreateCouponDialog from '../servicees/CreateCouponDialog';
 import CreateServiceDialog from '../servicees/CreateServiceDialog';
+import CreateServiceTypeDialog from '../servicees/CreateServiceTypeDialog';
 import DialogUpdateCoupon from '../servicees/dialogUpdateCoupon';
 
 const ServiceDialogHOC = ({ children }) => {
@@ -17,7 +18,10 @@ const ServiceDialogHOC = ({ children }) => {
   setShouldCreateCouponDialogOpen,
   shouldUpdateCouponDialogOpen,
   setShouldUpdateCouponDialogOpen,
-  updateCouponDefaultValue
+  updateCouponDefaultValue,
+  //type
+  shouldCreateTypeDialogOpen,
+  setShouldCreateTypeDialogOpen
  } = useContext(DialogContext);
 
  return (
@@ -31,6 +35,10 @@ const ServiceDialogHOC = ({ children }) => {
    <CreateServiceDialog
     open={shouldCreateServiceDialogOpen}
     onClose={() => setShouldCreateServiceDialogOpen(false)}
+   />
+   <CreateServiceTypeDialog
+    open={shouldCreateTypeDialogOpen}
+    onClose={() => setShouldCreateTypeDialogOpen(false)}
    />
    <CreateCouponDialog
     data={updateServiceDefaultValue}

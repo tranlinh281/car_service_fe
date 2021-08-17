@@ -147,6 +147,15 @@ const DialogContextProvider = ({ children }) => {
   updateCouponDefaultValue,
   setUpdateCouponDefaultValue
  };
+ // --------------------------------------
+ // Context State of create type  dialog
+ const [shouldCreateTypeDialogOpen, setShouldCreateTypeDialogOpen] =
+  useState(false);
+
+ const createDialogTypeState = {
+  shouldCreateTypeDialogOpen,
+  setShouldCreateTypeDialogOpen
+ };
 
  const defaultProviderValue = {
   ...updateDialogAccessoryState,
@@ -161,7 +170,8 @@ const DialogContextProvider = ({ children }) => {
   ...updateDialogPackageState,
   ...updateDialogManufacturerState,
   ...createDialogCouponState,
-  ...updateDialogCouponState
+  ...updateDialogCouponState,
+  ...createDialogTypeState
  };
 
  return (

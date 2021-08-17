@@ -13,7 +13,6 @@ import {
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { triggerReload } from 'src/actions/userAction';
-import { createTypeAccessory } from 'src/actions/accessoryAction';
 
 export default function CreateAccessoryTypeDialog() {
  const [open, setOpen] = useState(false);

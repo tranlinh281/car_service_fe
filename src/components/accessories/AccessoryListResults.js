@@ -96,6 +96,10 @@ export default function AccessoryListResults({ loading, accessories }) {
   setShouldUpdateAccessoryDialogOpen(true);
   setUpdateAccessoryDefaultValue(editData);
  };
+ const numberFormat = (value) =>
+  new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(
+   value
+  );
 
  return (
   <>
@@ -127,7 +131,7 @@ export default function AccessoryListResults({ loading, accessories }) {
           </TableCell>
           <TableCell>{accessory.name}</TableCell>
           <TableCell>{accessory.quantity}</TableCell>
-          <TableCell>{accessory.price}</TableCell>
+          <TableCell>{numberFormat(accessory.price)}</TableCell>
           <TableCell>{accessory.unit}</TableCell>
           <TableCell>{accessory.type}</TableCell>
           <TableCell>{accessory.manufacturer}</TableCell>

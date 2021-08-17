@@ -78,7 +78,10 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
  const deleteHandler = (packagee) => {
   dispatch(deletePackage(packagee.id));
  };
-
+ const numberFormat = (value) =>
+  new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(
+   value
+  );
  return (
   <>
    {loading ? (
@@ -100,7 +103,7 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
           <TableRow hover key={packagee.name}>
            <TableCell>{packagee.name}</TableCell>
            <TableCell>{packagee.description}</TableCell>
-           <TableCell>{packagee.price}</TableCell>
+           <TableCell>{numberFormat(packagee.price)}</TableCell>
            {/* <TableCell>{package.phoneNumber}</TableCell> */}
            <TableCell>
             <ButtonAction

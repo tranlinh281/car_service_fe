@@ -69,16 +69,18 @@ const CreateServiceTypeDialog = () => {
     </DialogTitle>
     <DialogContent dividers>
      <DialogContentText>
-      <Grid container spacing={3}>
-       <TextField
-        fullWidth
-        label="Tên Phân Loại Dịch vụ"
-        margin="normal"
-        name="name"
-        variant="outlined"
-        required
-        onChange={(e) => setName(e.target.value)}
-       />
+      <Grid container>
+       <>
+        <TextField
+         fullWidth
+         label="Tên Phân Loại Dịch vụ"
+         margin="normal"
+         name="name"
+         variant="outlined"
+         required
+         onChange={(e) => setName(e.target.value)}
+        />
+       </>
       </Grid>
      </DialogContentText>
     </DialogContent>
