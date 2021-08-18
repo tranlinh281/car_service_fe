@@ -130,7 +130,7 @@ export default function ServiceListResults({ loading, services }) {
    // Should create action creator for this
    dispatch({ type: CREATE_SERVICE_TYPE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
-      }
+  }
  }, [
   deleteSuccess,
   updateSuccess,
@@ -293,6 +293,10 @@ export default function ServiceListResults({ loading, services }) {
      </Box>
     </PerfectScrollbar>
    )}
+   <ConfirmDialog
+    confirmDialog={confirmDialog}
+    setConfirmDialog={setConfirmDialog}
+   />
   </>
  );
 }
