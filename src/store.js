@@ -46,6 +46,7 @@ import {
  deleteEmployeeReducer,
  updateEmployeeReducer
 } from './reducers/userReducer';
+import { listOrderReducer } from './reducers/orderReducer';
 
 const initialState = {
  userLogin: {
@@ -88,7 +89,8 @@ const reducer = combineReducers({
  editManufacturer: updateManufacturerReducer,
  createCoupon: createCouponReducer,
  editCoupon: updateCouponReducer,
- couponDelete: deleteCouponReducer
+ couponDelete: deleteCouponReducer,
+ ordersList: listOrderReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

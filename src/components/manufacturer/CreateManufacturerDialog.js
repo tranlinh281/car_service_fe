@@ -72,7 +72,12 @@ const CreateManufacturerDialog = ({ data, open, onClose }) => {
   const file = e.target.files[0];
   if (file) {
    const fileType = file['type'];
-   const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+   const validImageTypes = [
+    'image/gif',
+    'image/jpeg',
+    'image/png',
+    'image/jfif'
+   ];
    if (validImageTypes.includes(fileType)) {
     setErrorImage('');
     setImage(file);

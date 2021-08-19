@@ -134,7 +134,6 @@ export default function ServiceListResults({ loading, services }) {
   updateCouponSuccess,
   deleteCouponSuccess
  ]);
- 
 
  return (
   <>

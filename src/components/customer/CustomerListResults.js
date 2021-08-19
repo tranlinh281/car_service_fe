@@ -42,14 +42,12 @@ export default function CustomerListResults({ loading, customers }) {
  const dispatch = useDispatch();
 
  const banHandler = (customer, isBanned) => {
-  console.log(isBanned, 'debug cus boolean');
   dispatch(banCust(customer.username, isBanned));
-  toast.success('Ban thành công!');
+  toast.success('khóa thành công!');
  };
  const unBan = (customer, isBanned) => {
-  console.log(isBanned, 'debug cus boolean');
   dispatch(banCust(customer.username, isBanned));
-  toast.success('unBan thành công!');
+  toast.success('Mở khóa thành công!');
  };
  return (
   <>
@@ -86,7 +84,7 @@ export default function CustomerListResults({ loading, customers }) {
              onClick={() => {
               setConfirmDialog({
                isOpen: true,
-               title: 'Bạn có chắc muốn Ban khách hàng này?',
+               title: 'Bạn có chắc muốn khóa khách hàng này?',
                onConfirm: () => {
                 banHandler(customer, true), setConfirmDialog({ isOpen: false });
                }
@@ -104,7 +102,7 @@ export default function CustomerListResults({ loading, customers }) {
              onClick={() => {
               setConfirmDialog({
                isOpen: true,
-               title: 'Bạn có chắc muốn unBan khách hàng này?',
+               title: 'Bạn có chắc muốn mở khóa khách hàng này?',
                onConfirm: () => {
                 unBan(customer, false), setConfirmDialog({ isOpen: false });
                }

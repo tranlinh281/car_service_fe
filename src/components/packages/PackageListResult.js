@@ -46,14 +46,14 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
 
  useEffect(() => {
   if (deleteSuccess) {
-   toast.success('Xóa thành công!');
+   toast.success('Xóa gói dịch vụ thành công!');
    // Should create action creator for this
    dispatch({ type: DELETE_PACKAGE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
   }
 
   if (updateSuccess) {
-   toast.success('Cập nhật thành công!');
+   toast.success('Cập nhật gói dịch vụ thành công!');
    // Should create action creator for this
    dispatch({ type: EDIT_PACKAGE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
@@ -62,7 +62,7 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
   }
 
   if (createSuccess) {
-   toast.success('Thêm mới thành công!');
+   toast.success('Thêm mới gói dịch vụ thành công!');
    // Should create action creator for this
    dispatch({ type: CREATE_PACKAGE_SUCCESS, payload: false });
    dispatch(triggerReload({}));

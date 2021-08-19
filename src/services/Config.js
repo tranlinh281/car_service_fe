@@ -8,6 +8,7 @@ export const USERNAME = 'username=';
 export const PACKAGEID = 'id=';
 export const CUSTOMER = 'Customers';
 export const COUPON = 'coupons';
+export const ORDERS = 'orders';
 export const EMPLOYEE = 'employees';
 export const PACKAGES = 'packages';
 export const MANUFACTURER = 'manufacturers';
@@ -133,3 +134,6 @@ export const GET_COUPON_LIST_URL = BASE_URL + COUPON;
 export const POST_NEW_COUPON = GET_COUPON_LIST_URL;
 export const UPDATE_COUPON_URL = GET_COUPON_LIST_URL;
 export const DELETE_COUPON = GET_COUPON_LIST_URL + QUESTION_MARK + COUPONID;
+
+//order
+export const GET_ORDER_LIST_URL = BASE_URL + ORDERS;

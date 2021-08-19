@@ -60,14 +60,14 @@ export default function AccessoryListResults({ loading, accessories }) {
 
  useEffect(() => {
   if (deleteSuccess) {
-   toast.success('Xóa thành công!');
+   toast.success('Xóa phụ tùng thành công!');
    // Should create action creator for this
    dispatch({ type: DELETE_ACCESSORY_SUCCESS, payload: false });
    dispatch(triggerReload({}));
   }
 
   if (updateSuccess) {
-   toast.success('Cập nhật thành công!');
+   toast.success('Cập nhật phụ tùng thành công!');
    // Should create action creator for this
    dispatch({ type: EDIT_ACCESSORY_SUCCESS, payload: false });
    dispatch(triggerReload({}));
@@ -76,7 +76,7 @@ export default function AccessoryListResults({ loading, accessories }) {
   }
 
   if (createSuccess) {
-   toast.success('Thêm mới thành công!');
+   toast.success('Thêm mới phụ tùng thành công!');
    // Should create action creator for this
    dispatch({ type: CREATE_ACCESSORY_SUCCESS, payload: false });
    dispatch(triggerReload({}));
@@ -84,7 +84,7 @@ export default function AccessoryListResults({ loading, accessories }) {
    setShouldCreateAccessoryDialogOpen(false);
   }
   if (createTypeSuccess) {
-   toast.success('Thêm mới thành công!');
+   toast.success('Thêm mới phân loại thành công!');
    // Should create action creator for this
    dispatch({ type: CREATE_ACCESSORY_TYPE_SUCCESS, payload: false });
    dispatch(triggerReload({}));

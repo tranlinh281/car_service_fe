@@ -66,7 +66,16 @@ const ManufacturerCard = (props) => {
       pb: 3
      }}
     >
-     <Avatar alt="Product" src={manufacturer.imageUrl} variant="square" />
+     <Avatar
+      alt="Product"
+      sx={{
+       width: 100,
+       height: 100
+      }}
+      s
+      src={manufacturer.imageUrl}
+      variant="square"
+     />
     </Box>
     <Typography align="center" color="textPrimary" gutterBottom variant="h4">
      {manufacturer.name}

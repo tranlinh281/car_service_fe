@@ -48,14 +48,14 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
 
  useEffect(() => {
   if (deleteSuccess) {
-   toast.success('Xóa thành công!');
+   toast.success('Xóa nhân viên thành công!');
    // Should create action creator for this
    dispatch({ type: DELETE_EMPLOYEE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
   }
 
   if (updateSuccess) {
-   toast.success('Cập nhật thành công!');
+   toast.success('Cập nhật nhân viên thành công!');
    // Should create action creator for this
    dispatch({ type: EDIT_EMPLOYEE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
@@ -64,7 +64,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
   }
 
   if (createSuccess) {
-   toast.success('Thêm mới thành công!');
+   toast.success('Thêm mới nhân viên thành công!');
    // Should create action creator for this
    dispatch({ type: CREATE_EMPLOYEE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
