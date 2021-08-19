@@ -99,7 +99,7 @@ export default function CreateServiceDialog({ data, open, onClose }) {
          <Grid item>
           <TextField
            fullWidth
-           label="Tên Khuyến mãi"
+           label="Tên Dịch vụ"
            error={!!errors.name}
            helperText={errors.name}
            value={values.name}

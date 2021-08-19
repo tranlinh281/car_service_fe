@@ -27,7 +27,6 @@ const ServiceList = () => {
   setKeySearch(keySearch);
  };
 
-
  return (
   <>
    <ServiceDialogHOC>

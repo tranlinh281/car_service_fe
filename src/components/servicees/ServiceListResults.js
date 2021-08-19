@@ -1,14 +1,12 @@
 import {
  Box,
- IconButton,
  Table,
  TableBody,
  TableCell,
  TableHead,
  TableRow
 } from '@material-ui/core';
-import { Close, Edit, LocalOffer } from '@material-ui/icons';
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -26,14 +24,10 @@ import {
 } from 'src/constants/serviceConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 // import EditEmployeeDialog from './EditEmployeeDialog';
-import { couponHeader, serviceHeader } from 'src/services/HeaderTitleTable';
-import ButtonAction from '../ButtonAction';
+import { serviceHeader } from 'src/services/HeaderTitleTable';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import LoadingTable from '../LoadingTable';
-import Collapse from '@material-ui/core/Collapse';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import React from 'react';
+import CouponListResult from './CouponListResult';
 
 export default function ServiceListResults({ loading, services }) {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -140,33 +134,7 @@ export default function ServiceListResults({ loading, services }) {
   updateCouponSuccess,
   deleteCouponSuccess
  ]);
- //edit service
- const handleOpenEditDialog = (editData) => {
-  setShouldUpdateServiceDialogOpen(true);
-  setUpdateServiceDefaultValue(editData);
- };
-
- //coupon edit
- const handleOpenCouponEditDialog = (coupon, serviceId) => {
-  const dataNew = {
-   ...coupon,
-   serviceId
-  };
-  setShouldUpdateCouponDialogOpen(true);
-  console.log(dataNew, 'debug servielist result');
-  setUpdateCouponDefaultValue(dataNew);
- };
-
- const handleOpenCouponDialog = (editData) => {
-  setShouldCreateCouponDialogOpen(true);
-  setUpdateServiceDefaultValue(editData);
- };
- const [open, setOpen] = React.useState(false);
-
- const numberFormat = (value) =>
-  new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(
-   value
-  );
+ 
 
  return (
   <>
@@ -186,107 +154,7 @@ export default function ServiceListResults({ loading, services }) {
 
        <TableBody>
         {services?.map((service) => (
-         <>
-          <TableRow hover key={service.name}>
-           <TableCell>{service.name}</TableCell>
-           <TableCell>{numberFormat(service.price)}</TableCell>
-           <TableCell>{service.type}</TableCell>
-           <TableCell>
-            <ButtonAction>
-             <LocalOffer
-              variant="contained"
-              color="primary"
-              onClick={() => handleOpenCouponDialog(service.id)}
-             ></LocalOffer>
-            </ButtonAction>
-           </TableCell>
-           <TableCell>
-            <ButtonAction
-             variant="contained"
-             color="primary"
-             onClick={() => handleOpenEditDialog(service)}
-            >
-             <Edit fontSize="small" color="primary" />
-            </ButtonAction>
-            <ButtonAction
-             color="secondary"
-             onClick={() => {
-              setConfirmDialog({
-               isOpen: true,
-               title: 'Bạn có chắc muốn xóa?',
-               onConfirm: () => {
-                deleteHandler(service), setConfirmDialog({ isOpen: false });
-               }
-              });
-             }}
-            >
-             <Close fontSize="small" color="secondary" />
-            </ButtonAction>
-           </TableCell>
-           <TableCell>
-            <IconButton
-             aria-label="expand row"
-             size="small"
-             onClick={() => setOpen(!open)}
-            >
-             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-           </TableCell>
-          </TableRow>
-          <TableRow>
-           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-            <Collapse in={open} key={service.name} timeout="auto" unmountOnExit>
-             <Box margin={1}>
-              <Table size="small" aria-label="purchases">
-               <TableHead>
-                <TableRow>
-                 {couponHeader.map((headCell) => (
-                  <TableCell key={headCell.id}>{headCell.title}</TableCell>
-                 ))}
-                </TableRow>
-               </TableHead>
-               <TableBody>
-                {service.coupons?.map((coupon) => (
-                 <TableRow key={coupon.name}>
-                  <TableCell>{coupon.name}</TableCell>
-                  <TableCell>{coupon.description}</TableCell>
-                  <TableCell>{coupon.value}%</TableCell>
-                  <TableCell>{coupon.pointRequired}</TableCell>
-                  <TableCell>
-                   <ButtonAction
-                    variant="contained"
-                    color="primary"
-                    onClick={() =>
-                     handleOpenCouponEditDialog(coupon, service.id)
-                    }
-                   >
-                    <Edit fontSize="small" color="primary" />
-                   </ButtonAction>
-                   <ButtonAction
-                    color="secondary"
-                    onClick={() => {
-                     setConfirmDialog({
-                      isOpen: true,
-                      title: 'Bạn có chắc muốn xóa?',
-                      onConfirm: () => {
-                       deleteCouponHandler(coupon),
-                        setConfirmDialog({ isOpen: false });
-                      }
-                     });
-                    }}
-                   >
-                    <Close fontSize="small" color="secondary" />
-                   </ButtonAction>
-                  </TableCell>
-                 </TableRow>
-                ))}
-               </TableBody>
-              </Table>
-             </Box>
-            </Collapse>
-           </TableCell>
-          </TableRow>
-         </>
+         <CouponListResult service={service} />
         ))}
        </TableBody>
       </Table>
