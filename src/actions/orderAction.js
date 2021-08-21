@@ -31,11 +31,17 @@ export const listAllOrder = () => async (dispatch) => {
   );
 
   const accept = arrayStatus.reduce(
-   (total, x) => (x.stat === 'Đã xác nhận' ? total + 1 : total),
+   (total, x) =>
+    x.stat === 'Đã xác nhận' && x.dateTime === new Date().getDate()
+     ? total + 1
+     : total,
    0
   );
   const done = arrayStatus.reduce(
-   (total, x) => (x.stat === 'Hoàn thành' ? total + 1 : total),
+   (total, x) =>
+    x.stat === 'Hoàn thành' && x.dateTime === new Date().getDate()
+     ? total + 1
+     : total,
    0
   );
   const dateTimeCount = arrayStatus.reduce(

@@ -85,7 +85,11 @@ export default function CouponListResult({ service = {} }) {
   <>
    <TableRow hover key={service.name}>
     <TableCell>{service.name}</TableCell>
-    <TableCell>{numberFormat(service.price)}</TableCell>
+    {service.price === 0 ? (
+     <TableCell>N/A</TableCell>
+    ) : (
+     <TableCell>{numberFormat(service.price)}</TableCell>
+    )}
     <TableCell>{service.type}</TableCell>
     <TableCell>
      <ButtonAction>

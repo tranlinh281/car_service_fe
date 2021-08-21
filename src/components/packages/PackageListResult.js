@@ -103,7 +103,11 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
           <TableRow hover key={packagee.name}>
            <TableCell>{packagee.name}</TableCell>
            <TableCell>{packagee.description}</TableCell>
-           <TableCell>{numberFormat(packagee.price)}</TableCell>
+           {packagee.price === 0 ? (
+            <TableCell>N/A</TableCell>
+           ) : (
+            <TableCell>{numberFormat(packagee.price)}</TableCell>
+           )}
            {/* <TableCell>{package.phoneNumber}</TableCell> */}
            <TableCell>
             <ButtonAction
