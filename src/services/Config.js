@@ -41,6 +41,7 @@ export const LOGIN_URL = BASE_URL + USERS;
 
 //Customer
 export const GET_CUSTOMER_LIST_URL = BASE_URL + CUSTOMER;
+export const CUSTOMER_NOTIFICATION = BASE_URL + CUSTOMER;
 
 export const banCustomer = (username) =>
  GET_CUSTOMER_LIST_URL + FORWARD_SLASH + BAN + USERNAME + username + isBANNED;

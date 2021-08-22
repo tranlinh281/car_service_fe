@@ -1,29 +1,28 @@
 import {
- Box,
- Table,
- TableBody,
- TableCell,
- TableHead,
- TableRow
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow
 } from '@material-ui/core';
 import { Close, Edit } from '@material-ui/icons';
 import { memo, useContext, useEffect, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { deletePackage } from 'src/actions/packageAction';
 import { triggerReload } from 'src/actions/userAction';
-import { EDIT_EMPLOYEE_SUCCESS } from 'src/constants/userConstant';
+import LoadingTable from 'src/components/LoadingTable';
+import {
+  CREATE_PACKAGE_SUCCESS,
+  DELETE_PACKAGE_SUCCESS,
+  EDIT_PACKAGE_SUCCESS
+} from 'src/constants/packageConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import { packageHeader } from 'src/services/HeaderTitleTable';
-import LoadingTable from 'src/components/LoadingTable';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
-import {
- CREATE_PACKAGE_SUCCESS,
- DELETE_PACKAGE_SUCCESS,
- EDIT_PACKAGE_SUCCESS
-} from 'src/constants/packageConstant';
-import { deletePackage } from 'src/actions/packageAction';
 
 const PackageListResult = ({ loading, packages, errorMessage }) => {
  const [confirmDialog, setConfirmDialog] = useState({

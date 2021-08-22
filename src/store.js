@@ -10,6 +10,7 @@ import {
 } from './reducers/accessoryReducer';
 import {
  banCustomerReducer,
+ customerNotificationReducer,
  listCustomerReducer
 } from './reducers/customerReducer';
 import {
@@ -90,7 +91,8 @@ const reducer = combineReducers({
  createCoupon: createCouponReducer,
  editCoupon: updateCouponReducer,
  couponDelete: deleteCouponReducer,
- ordersList: listOrderReducer
+ ordersList: listOrderReducer,
+ customerNotification: customerNotificationReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

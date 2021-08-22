@@ -135,6 +135,17 @@ const DialogContextProvider = ({ children }) => {
   setShouldCreateCouponDialogOpen
  };
 
+ // Context State of send notification  dialog
+ const [
+  shouldCreateNotificationDialogOpen,
+  setShouldCreateNotificationDialogOpen
+ ] = useState(false);
+
+ const createDialogNotificationState = {
+  shouldCreateNotificationDialogOpen,
+  setShouldCreateNotificationDialogOpen
+ };
+
  // -------------------------------------------------------------------------------
  // Context State of update package dialog
  const [shouldUpdateCouponDialogOpen, setShouldUpdateCouponDialogOpen] =
@@ -171,7 +182,8 @@ const DialogContextProvider = ({ children }) => {
   ...updateDialogManufacturerState,
   ...createDialogCouponState,
   ...updateDialogCouponState,
-  ...createDialogTypeState
+  ...createDialogTypeState,
+  ...createDialogNotificationState
  };
 
  return (

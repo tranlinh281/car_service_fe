@@ -1,4 +1,4 @@
-import { memo, useContext, useState } from 'react';
+import { memo, useContext } from 'react';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import DialogUpdateService from '../dialog/dialogUpdateService';
 import CreateCouponDialog from '../servicees/CreateCouponDialog';

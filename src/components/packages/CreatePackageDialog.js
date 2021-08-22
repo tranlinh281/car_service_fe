@@ -54,7 +54,7 @@ const CreatePackageDialog = ({ open, onClose }) => {
     description: '',
     services: []
    }}
-   validationSchema={DisplayingErrorMessagesPackageSchema}
+   //validationSchema={DisplayingErrorMessagesPackageSchema}
    validateOnChange
    validateOnBlur
    onSubmit={submitHandler}

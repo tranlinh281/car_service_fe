@@ -1,9 +1,8 @@
-import { Box, Container, Grid } from '@material-ui/core';
+import { Box, Container, Grid, Typography } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 import ReportCard from 'src/components/dashboard/ReportCard';
 import * as constant from '../utils/Constants';
-import BarChartReport from './BarChartReport';
-
+import BarChartDashBoard from './BarChartDashBoard';
 
 const Dashboard = () => {
  return (
@@ -18,11 +17,14 @@ const Dashboard = () => {
      py: 3
     }}
    >
+    <h1>Đơn trong ngày</h1>
     <Container maxWidth={false}>
      <Grid container spacing={3}>
       <ReportCard />
-      <BarChartReport />
      </Grid>
+     <Box>
+      <BarChartDashBoard xs={3} />
+     </Box>
     </Container>
    </Box>
   </>

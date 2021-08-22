@@ -1,24 +1,23 @@
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
- Box,
- Table,
- TableBody,
- TableCell,
- TableHead,
- TableRow
+    Box,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow
 } from '@material-ui/core';
 import { useEffect, useState } from 'react';
-
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { customerHeader } from 'src/services/HeaderTitleTable';
-import LoadingTable from '../LoadingTable';
-import ButtonAction from '../ButtonAction';
-import { Close, LockOpen, Lock } from '@material-ui/icons';
-import ConfirmDialog from '../dialog/dialogConfirm';
 import { toast } from 'react-toastify';
-import { CUSTOMER_BAN_SUCCESS } from 'src/constants/customerConstant';
-import { triggerReload } from 'src/actions/userAction';
 import { banCust } from 'src/actions/customerAction';
+import { triggerReload } from 'src/actions/userAction';
+import { CUSTOMER_BAN_SUCCESS } from 'src/constants/customerConstant';
+import { customerHeader } from 'src/services/HeaderTitleTable';
+import ConfirmDialog from '../dialog/dialogConfirm';
+import LoadingTable from '../LoadingTable';
+import VehicleListResult from './VehicleListResult';
+
 
 export default function CustomerListResults({ loading, customers }) {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -67,53 +66,7 @@ export default function CustomerListResults({ loading, customers }) {
 
        <TableBody>
         {customers?.map((customer) => (
-         <TableRow hover key={customer.username}>
-          <TableCell>{customer.username}</TableCell>
-          <TableCell>{customer.email}</TableCell>
-          <TableCell>{customer.fullname}</TableCell>
-          <TableCell>{customer.phoneNumber}</TableCell>
-          <TableCell>{customer.address}</TableCell>
-          <TableCell>{customer.accumulatedPoint}</TableCell>
-          <TableCell>{customer.isBanned}</TableCell>
-          <TableCell>
-           {customer.isBanned == 0 && (
-            <ButtonAction
-             color="secondary"
-             value="true"
-             name="isBanned"
-             onClick={() => {
-              setConfirmDialog({
-               isOpen: true,
-               title: 'Bạn có chắc muốn khóa khách hàng này?',
-               onConfirm: () => {
-                banHandler(customer, true), setConfirmDialog({ isOpen: false });
-               }
-              });
-             }}
-            >
-             <LockOpen color="primary" />
-            </ButtonAction>
-           )}
-           {customer.isBanned == 1 && (
-            <ButtonAction
-             color="secondary"
-             value="false"
-             name="isBanned"
-             onClick={() => {
-              setConfirmDialog({
-               isOpen: true,
-               title: 'Bạn có chắc muốn mở khóa khách hàng này?',
-               onConfirm: () => {
-                unBan(customer, false), setConfirmDialog({ isOpen: false });
-               }
-              });
-             }}
-            >
-             <Lock color="error" />
-            </ButtonAction>
-           )}
-          </TableCell>
-         </TableRow>
+         <VehicleListResult customer={customer} />
         ))}
        </TableBody>
       </Table>

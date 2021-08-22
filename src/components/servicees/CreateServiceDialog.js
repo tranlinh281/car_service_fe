@@ -1,28 +1,20 @@
-import React from 'react';
+import {
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle, FormControl, FormHelperText, Grid, InputLabel,
+    MenuItem,
+    Select, TextField
+} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import {
- DialogActions,
- DialogContent,
- DialogContentText,
- DialogTitle,
- Grid,
- TextField,
- InputLabel,
- MenuItem,
- Select,
- FormHelperText,
- FormControl
-} from '@material-ui/core';
 import { Form, Formik } from 'formik';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { triggerReload } from 'src/actions/userAction';
-
+import 'react-toastify/dist/ReactToastify.css';
 import { createService, listServiceType } from 'src/actions/serviceAction';
 import { DisplayingErrorMessagesCreateServiceSchema } from 'src/services/ValidConstants';
+
 
 export default function CreateServiceDialog({ data, open, onClose }) {
  const { types } = useSelector((state) => state.typeList);

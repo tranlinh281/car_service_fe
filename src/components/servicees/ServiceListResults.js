@@ -1,10 +1,10 @@
 import {
- Box,
- Table,
- TableBody,
- TableCell,
- TableHead,
- TableRow
+    Box,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow
 } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -14,20 +14,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import { deleteCoupon, deleteService } from 'src/actions/serviceAction';
 import { triggerReload } from 'src/actions/userAction';
 import {
- CREATE_COUPON_SUCCESS,
- CREATE_SERVICE_SUCCESS,
- CREATE_SERVICE_TYPE_SUCCESS,
- DELETE_COUPON_SUCCESS,
- DELETE_SERVICE_SUCCESS,
- EDIT_COUPON_SUCCESS,
- EDIT_SERVICE_SUCCESS
+    CREATE_COUPON_SUCCESS,
+    CREATE_SERVICE_SUCCESS,
+    CREATE_SERVICE_TYPE_SUCCESS,
+    DELETE_COUPON_SUCCESS,
+    DELETE_SERVICE_SUCCESS,
+    EDIT_COUPON_SUCCESS,
+    EDIT_SERVICE_SUCCESS
 } from 'src/constants/serviceConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
-// import EditEmployeeDialog from './EditEmployeeDialog';
 import { serviceHeader } from 'src/services/HeaderTitleTable';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import LoadingTable from '../LoadingTable';
 import CouponListResult from './CouponListResult';
+
 
 export default function ServiceListResults({ loading, services }) {
  const [confirmDialog, setConfirmDialog] = useState({

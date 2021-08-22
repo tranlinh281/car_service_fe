@@ -55,8 +55,6 @@ export default function CouponListResult({ service = {} }) {
  const {
   setShouldUpdateServiceDialogOpen,
   setUpdateServiceDefaultValue,
-  setShouldCreateServiceDialogOpen,
-  setShouldCreateTypeDialogOpen,
   //coupon
   setShouldCreateCouponDialogOpen,
   setShouldUpdateCouponDialogOpen,

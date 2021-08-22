@@ -1,10 +1,10 @@
 import {
- Autocomplete,
- DialogActions,
- DialogContent,
- DialogTitle,
- Grid,
- TextField
+    Autocomplete,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Grid,
+    TextField
 } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -12,11 +12,8 @@ import { Form, Formik } from 'formik';
 import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
- createPackage,
- PackageID,
- updatePackage
+    updatePackage
 } from 'src/actions/packageAction';
-import { DisplayingErrorMessagesPackageSchema } from 'src/services/ValidConstants';
 import { listAllService } from './../../actions/serviceAction';
 
 const DialogUpdatePackage = ({ data, open, onClose }) => {

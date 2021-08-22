@@ -25,10 +25,16 @@ export const listAllOrder = () => async (dispatch) => {
    stat: order.status,
    dateTime: new Date(order.bookingTime).getDate()
   }));
-  const processing = arrayStatus.reduce(
+  const processingDate = arrayStatus.reduce(
+   (total, x) =>
+    x.stat === 'Đang tiến hành' && x.dateTime ? total + 1 : total,
+   0
+  );
+  const processingAll = arrayStatus.reduce(
    (total, x) => (x.stat === 'Đang tiến hành' ? total + 1 : total),
    0
   );
+  const allOrder = arrayStatus.reduce((total, x) => (x ? total + 1 : total), 0);
 
   const accept = arrayStatus.reduce(
    (total, x) =>
@@ -44,12 +50,24 @@ export const listAllOrder = () => async (dispatch) => {
      : total,
    0
   );
+  const doneAll = arrayStatus.reduce(
+   (total, x) => (x.stat === 'Hoàn thành' ? total + 1 : total),
+   0
+  );
   const dateTimeCount = arrayStatus.reduce(
    (total, x) => (x.dateTime === new Date().getDate() ? total + 1 : total),
    0
   );
 
-  const dataCount = { accept, processing, done, dateTimeCount };
+  const dataCount = {
+   accept,
+   processingDate,
+   processingAll,
+   done,
+   dateTimeCount,
+   doneAll,
+   allOrder
+  };
 
   dispatch({ type: ORDER_LIST_SUCCESS, payload: dataCount });
  } catch (error) {

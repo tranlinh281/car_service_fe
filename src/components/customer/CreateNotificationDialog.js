@@ -1,10 +1,10 @@
 import {
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    Grid,
-    TextField
+ DialogActions,
+ DialogContent,
+ DialogContentText,
+ DialogTitle,
+ Grid,
+ TextField
 } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { createCoupon } from 'src/actions/serviceAction';
 import { DisplayingErrorMessagesCreateCouponSchema } from 'src/services/ValidConstants';
 
-export default function CreateCouponDialog({ data, open, onClose }) {
+export default function CreateNotificationDialog({ data, open, onClose }) {
  const { types } = useSelector((state) => state.typeList);
 
  const [name, setName] = useState('');
@@ -84,15 +84,13 @@ export default function CreateCouponDialog({ data, open, onClose }) {
       fullWidth={true}
      >
       <Form>
-       <DialogTitle id="customized-dialog-title">
-        Thêm mới khuyến mãi
-       </DialogTitle>
+       <DialogTitle id="customized-dialog-title">Gửi thông báos</DialogTitle>
        <DialogContent dividers>
         <DialogContentText>
          <Grid item>
           <TextField
            fullWidth
-           label="Tên khuyến mãi"
+           label="Tiêu đề"
            error={!!errors.name}
            helperText={errors.name}
            value={values.name}
@@ -106,7 +104,7 @@ export default function CreateCouponDialog({ data, open, onClose }) {
           <TextField
            multiline
            fullWidth
-           label="Mô tả"
+           label="Nội dung"
            margin="normal"
            error={!!errors.description}
            helperText={errors.description}
@@ -116,34 +114,8 @@ export default function CreateCouponDialog({ data, open, onClose }) {
            variant="outlined"
            value={values.description}
           />
-          <TextField
-           fullWidth
-           label="Phần trăm"
-           error={!!errors.value}
-           helperText={errors.value}
-           value={values.value}
-           onBlur={handleBlur}
-           onChange={handleChange}
-           margin="normal"
-           name="value"
-           type="number"
-           required
-           variant="outlined"
-          />
-          <TextField
-           fullWidth
-           label="Điểm"
-           error={!!errors.pointRequired}
-           helperText={errors.pointRequired}
-           value={values.pointRequired}
-           onBlur={handleBlur}
-           onChange={handleChange}
-           margin="normal"
-           name="pointRequired"
-           type="number"
-           required
-           variant="outlined"
-          />
+         
+         
          </Grid>
         </DialogContentText>
        </DialogContent>

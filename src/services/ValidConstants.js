@@ -25,7 +25,7 @@ export const DisplayingErrorMessagesCreateEmployeeSchema = Yup.object().shape({
  phoneNumber: Yup.string()
   .matches(/[0-9]+/, 'Must only be number')
   .min(10, 'Số điện thoại phải ít nhất 10 ký tự!')
-  .max(11, 'Số điện thoại phải dưới 11 ký tự!')
+  .max(10, 'Số điện thoại không được trên 10 ký tự!')
   .required('Không được bỏ trống số điện thoại'),
  role: Yup.string().required('Không được bỏ trống chức vụ'),
  dateOfBirth: Yup.string()

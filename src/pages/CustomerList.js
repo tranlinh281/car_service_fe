@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listCustomer } from 'src/actions/customerAction';
 import CustomerListToolbar from 'src/components/customer/CustomerListToolbar';
 import CustomerListResults from 'src/components/customer/CustomerListResults';
+import CustomerDialogHOC from 'src/components/_HOCProvider/CustomerDialogHOC';
 
 const CustomerList = () => {
  const { data, error, loading } = useSelector((state) => state.customerList);
@@ -28,44 +29,46 @@ const CustomerList = () => {
 
  return (
   <>
-   <Helmet>
-    <title>{constant.CUS_TITLE}</title>
-   </Helmet>
-   <Box
-    sx={{
-     backgroundColor: 'background.default',
-     minHeight: '100%',
-     py: 3
-    }}
-   >
-    <Container maxWidth={false}>
-     <CustomerListToolbar setPage={setPage} setKeySearch={setKeySearch} />
-     <Box sx={{ pt: 3 }}>
-      <Card>
-       <CustomerListResults
-        totalPages={data.totalPages || 0}
-        customers={data.itemsList || []}
-        loading={loading}
-       />
-       <Box
-        sx={{
-         display: 'flex',
-         justifyContent: 'center',
-         pt: 2
-        }}
-       >
-        <Pagination
-         color="primary"
-         count={data.totalPages || 0}
-         size="medium"
-         onChange={handlePageChange}
-         page={page}
+   <CustomerDialogHOC>
+    <Helmet>
+     <title>{constant.CUS_TITLE}</title>
+    </Helmet>
+    <Box
+     sx={{
+      backgroundColor: 'background.default',
+      minHeight: '100%',
+      py: 3
+     }}
+    >
+     <Container maxWidth={false}>
+      <CustomerListToolbar setPage={setPage} setKeySearch={setKeySearch} />
+      <Box sx={{ pt: 3 }}>
+       <Card>
+        <CustomerListResults
+         totalPages={data.totalPages || 0}
+         customers={data.itemsList || []}
+         loading={loading}
         />
-       </Box>
-      </Card>
-     </Box>
-    </Container>
-   </Box>
+        <Box
+         sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          pt: 2
+         }}
+        >
+         <Pagination
+          color="primary"
+          count={data.totalPages || 0}
+          size="medium"
+          onChange={handlePageChange}
+          page={page}
+         />
+        </Box>
+       </Card>
+      </Box>
+     </Container>
+    </Box>
+   </CustomerDialogHOC>
   </>
  );
 };

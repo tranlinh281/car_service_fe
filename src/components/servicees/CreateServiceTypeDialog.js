@@ -1,19 +1,18 @@
-import React, { memo } from 'react';
+import {
+    Box,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    Grid,
+    TextField
+} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import {
- Box,
- DialogActions,
- DialogContent,
- DialogContentText,
- DialogTitle,
- Grid,
- TextField
-} from '@material-ui/core';
-import { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { triggerReload } from 'src/actions/userAction';
 import { createTypeService } from 'src/actions/serviceAction';
+import { triggerReload } from 'src/actions/userAction';
 
 const CreateServiceTypeDialog = () => {
  const [open, setOpen] = useState(false);

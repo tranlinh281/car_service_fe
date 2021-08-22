@@ -13,7 +13,8 @@ export const customerHeader = [
  { id: 4, title: 'Điện thoại' },
  { id: 5, title: 'Địa chỉ' },
  { id: 6, title: 'Số điểm' },
- { id: 7, title: '' },
+ { id: 7, title: 'Khóa/Mở khóa' },
+ { id: 8, title: '' },
  { id: 8, title: '' }
 ];
 export const serviceHeader = [
@@ -52,4 +53,12 @@ export const couponHeader = [
  { id: 3, title: 'Phần trăm' },
  { id: 4, title: 'Điểm' },
  { id: 5, title: '' }
+];
+export const vehicleHeader = [
+ { id: 1, title: 'Hãng xe' },
+ { id: 2, title: 'Loại xe' },
+ { id: 3, title: 'Biển số xe' },
+ { id: 4, title: 'Ngày cuối cùng sử dụng dịch vụ' },
+ { id: 5, title: 'Số km' },
+ { id: 6, title: '' }
 ];
