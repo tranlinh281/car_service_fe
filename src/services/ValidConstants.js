@@ -105,3 +105,14 @@ export const DisplayingErrorMessagesCreateCouponSchema = Yup.object().shape({
  value: Yup.string().required('Không được bỏ trống Phần trăm của khuyến mãi'),
  pointRequired: Yup.string().required('Không được bỏ trống điểm của khuyến mãi')
 });
+export const DisplayingErrorMessagesCreateNotificationSchema =
+ Yup.object().shape({
+  title: Yup.string()
+   .min(3, 'Tiêu đề phải trên 3 ký tự!')
+   .max(30, 'Tiêu đề phải dưới 30 ký tự!')
+   .required('Không được bỏ trống Tiêu đề'),
+  body: Yup.string()
+   .required('Không được bỏ trống mô tả thông báo')
+   .min(3, 'Mô tả thông báo phải trên 3 ký tự')
+   .max(200, 'Mô tả thông báo phải dưới 200 ký tự!')
+ });

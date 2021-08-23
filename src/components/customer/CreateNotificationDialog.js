@@ -9,13 +9,13 @@ import {
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import { Form, Formik } from 'formik';
-import React, { useContext, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createNotification } from 'src/actions/customerAction';
 import { CUSTOMER_NOTIFICATION_SUCCESS } from 'src/constants/customerConstant';
-import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
+import { DisplayingErrorMessagesCreateNotificationSchema } from 'src/services/ValidConstants';
 
 export default function CreateNotificationDialog({ data, open, onClose }) {
  const [title, setTitle] = useState('');
@@ -62,7 +62,7 @@ export default function CreateNotificationDialog({ data, open, onClose }) {
      title: '',
      body: ''
     }}
-    // validationSchema={DisplayingErrorMessagesCreateCouponSchema}
+    validationSchema={DisplayingErrorMessagesCreateNotificationSchema}
     validateOnChange
     validateOnBlur
     enableReinitialize

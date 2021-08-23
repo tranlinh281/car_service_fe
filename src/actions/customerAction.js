@@ -69,7 +69,6 @@ export const createNotification = (notification) => async (dispatch) => {
  try {
   const { data } = await Axios.post(CUSTOMER_NOTIFICATION, notification);
   dispatch({ type: CUSTOMER_NOTIFICATION_SUCCESS, payload: data });
-  console.log(response.status, 'debug action');
  } catch (error) {
   dispatch({
    type: CUSTOMER_NOTIFICATION_FAIL,
