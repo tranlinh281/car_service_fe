@@ -17,14 +17,11 @@ const Dashboard = () => {
      py: 3
     }}
    >
-    <h1>Đơn trong ngày</h1>
+    <Typography>Đơn trong ngày</Typography>
     <Container maxWidth={false}>
      <Grid container spacing={3}>
       <ReportCard />
      </Grid>
-     <Box>
-      <BarChartDashBoard xs={3} />
-     </Box>
     </Container>
    </Box>
   </>

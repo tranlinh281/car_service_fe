@@ -1,28 +1,26 @@
 import {
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow
+ Box,
+ Table,
+ TableBody,
+ TableCell,
+ TableHead,
+ TableRow
 } from '@material-ui/core';
-import { Close, Edit } from '@material-ui/icons';
 import { memo, useContext, useEffect, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { deletePackage } from 'src/actions/packageAction';
 import { triggerReload } from 'src/actions/userAction';
 import LoadingTable from 'src/components/LoadingTable';
 import {
-  CREATE_PACKAGE_SUCCESS,
-  DELETE_PACKAGE_SUCCESS,
-  EDIT_PACKAGE_SUCCESS
+ CREATE_PACKAGE_SUCCESS,
+ DELETE_PACKAGE_SUCCESS,
+ EDIT_PACKAGE_SUCCESS
 } from 'src/constants/packageConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import { packageHeader } from 'src/services/HeaderTitleTable';
-import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
+import ServicePackageListResult from './ServicePackageListResult';
 
 const PackageListResult = ({ loading, packages, errorMessage }) => {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -74,13 +72,6 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
   setUpdatePackageDefaultValue(editData);
  };
 
- const deleteHandler = (packagee) => {
-  dispatch(deletePackage(packagee.id));
- };
- const numberFormat = (value) =>
-  new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(
-   value
-  );
  return (
   <>
    {loading ? (
@@ -99,39 +90,7 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
        <TableBody>
         {(packages?.length &&
          packages?.map((packagee) => (
-          <TableRow hover key={packagee.name}>
-           <TableCell>{packagee.name}</TableCell>
-           <TableCell>{packagee.description}</TableCell>
-           {packagee.price === 0 ? (
-            <TableCell>N/A</TableCell>
-           ) : (
-            <TableCell>{numberFormat(packagee.price)}</TableCell>
-           )}
-           {/* <TableCell>{package.phoneNumber}</TableCell> */}
-           <TableCell>
-            <ButtonAction
-             variant="contained"
-             color="primary"
-             onClick={() => handleOpenEditDialog(packagee)}
-            >
-             <Edit fontSize="small" color="primary" />
-            </ButtonAction>
-            <ButtonAction
-             color="secondary"
-             onClick={() => {
-              setConfirmDialog({
-               isOpen: true,
-               title: 'Bạn có chắc muốn xóa?',
-               onConfirm: () => {
-                deleteHandler(packagee), setConfirmDialog({ isOpen: false });
-               }
-              });
-             }}
-            >
-             <Close fontSize="small" color="secondary" />
-            </ButtonAction>
-           </TableCell>
-          </TableRow>
+          <ServicePackageListResult packagee={packagee} />
          ))) ||
          errorMessage}
        </TableBody>

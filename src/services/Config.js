@@ -35,13 +35,14 @@ export const INSERT_MANUFACTURER = '?manufacturer=';
 export const FULLNAME_SEARCH = 'fullnameSearch=';
 export const isBANNED = '&isBanned=';
 export const BAN = 'ban?';
+export const NOTIFICATION = 'notifications';
 
 //Login
 export const LOGIN_URL = BASE_URL + USERS;
 
 //Customer
 export const GET_CUSTOMER_LIST_URL = BASE_URL + CUSTOMER;
-export const CUSTOMER_NOTIFICATION = BASE_URL + CUSTOMER;
+export const CUSTOMER_NOTIFICATION = BASE_URL + NOTIFICATION;
 
 export const banCustomer = (username) =>
  GET_CUSTOMER_LIST_URL + FORWARD_SLASH + BAN + USERNAME + username + isBANNED;

@@ -38,6 +38,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
  const { success: createSuccess } = useSelector(
   (state) => state.createEmployee
  );
+ console.log(updateSuccess, 'debug edit employyee');
 
  const dispatch = useDispatch();
  const {

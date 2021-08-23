@@ -35,7 +35,7 @@ export default function ReportCard() {
     <TotalProfit
      sx={{ height: '100%' }}
      title={constant.PROCESSING_TITLE}
-     number={orders.processing}
+     number={orders.processingDate}
      colorBack="#DE9230"
     />
    </Grid>

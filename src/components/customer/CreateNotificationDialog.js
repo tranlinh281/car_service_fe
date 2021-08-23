@@ -9,47 +9,43 @@ import {
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import { Form, Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { createCoupon } from 'src/actions/serviceAction';
-import { DisplayingErrorMessagesCreateCouponSchema } from 'src/services/ValidConstants';
+import { createNotification } from 'src/actions/customerAction';
+import { CUSTOMER_NOTIFICATION_SUCCESS } from 'src/constants/customerConstant';
+import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 
 export default function CreateNotificationDialog({ data, open, onClose }) {
- const { types } = useSelector((state) => state.typeList);
-
- const [name, setName] = useState('');
+ const [title, setTitle] = useState('');
  const [id, setId] = useState(data);
- const [value, setValue] = useState(0);
- const [description, setDescription] = useState();
- const [pointRequired, setPointRequired] = useState();
- const [couponModels, setCouponModels] = useState();
+ const [body, setBody] = useState(0);
 
- const setForm = ({ id, name, value, description, pointRequired }) => {
-  setName(name);
+ const [notificationModel, setNotificationModel] = useState();
+ const setForm = ({ id, title, body }) => {
+  setTitle(title);
   setId(id);
-  setDescription(description);
-  setValue(value);
-  setPointRequired(pointRequired);
+  setBody(body);
  };
 
  const dispatch = useDispatch();
 
- const submitHandler = (coupon) => {
-  console.log(coupon);
-  dispatch(createCoupon(coupon));
+ const submitHandler = (notification) => {
+  dispatch(createNotification(notification));
+  toast.success('Gửi thông báo thành công!');
+  dispatch({ type: CUSTOMER_NOTIFICATION_SUCCESS, payload: false });
+  dispatch(triggerReload({}));
  };
 
  useEffect(() => {
-  setCouponModels((prev) => ({
+  setNotificationModel((prev) => ({
    ...prev,
    id,
-   name,
-   value,
-   description,
-   pointRequired
+   title,
+   body
   }));
- }, [id, name, value, description, pointRequired]);
+ }, [id, title, body]);
  useEffect(() => {
   if (data && open) {
    setForm(data);
@@ -62,13 +58,11 @@ export default function CreateNotificationDialog({ data, open, onClose }) {
   <>
    <Formik
     initialValues={{
-     serviceId: data,
-     name: '',
-     description: '',
-     value: '',
-     pointRequired: ''
+     vehicleId: data,
+     title: '',
+     body: ''
     }}
-    validationSchema={DisplayingErrorMessagesCreateCouponSchema}
+    // validationSchema={DisplayingErrorMessagesCreateCouponSchema}
     validateOnChange
     validateOnBlur
     enableReinitialize
@@ -84,44 +78,42 @@ export default function CreateNotificationDialog({ data, open, onClose }) {
       fullWidth={true}
      >
       <Form>
-       <DialogTitle id="customized-dialog-title">Gửi thông báos</DialogTitle>
+       <DialogTitle id="customized-dialog-title">Gửi thông báo</DialogTitle>
        <DialogContent dividers>
         <DialogContentText>
          <Grid item>
           <TextField
            fullWidth
            label="Tiêu đề"
-           error={!!errors.name}
-           helperText={errors.name}
-           value={values.name}
+           error={!!errors.title}
+           helperText={errors.title}
+           value={values.title}
            onBlur={handleBlur}
            onChange={handleChange}
            margin="normal"
-           name="name"
+           name="title"
            variant="outlined"
            required
           />
           <TextField
            multiline
            fullWidth
-           label="Nội dung"
+           label="Nội dung thông báo"
            margin="normal"
-           error={!!errors.description}
-           helperText={errors.description}
+           error={!!errors.body}
+           helperText={errors.body}
            onBlur={handleBlur}
            onChange={handleChange}
-           name="description"
+           name="body"
            variant="outlined"
-           value={values.description}
+           value={values.body}
           />
-         
-         
          </Grid>
         </DialogContentText>
        </DialogContent>
        <DialogActions>
-        <Button autoFocus type="submit" color="primary" left>
-         Lưu
+        <Button autoFocus type="submit" color="primary" onClick={onClose} left>
+         Gửi
         </Button>
         <Button autoFocus type="reset" onClick={onClose} color="secondary">
          Hủy

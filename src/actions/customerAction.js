@@ -1,19 +1,19 @@
 import Axios from 'axios';
 import {
-  CUSTOMER_BAN_FAIL,
-  CUSTOMER_BAN_REQUEST,
-  CUSTOMER_BAN_SUCCESS,
-  CUSTOMER_LIST_FAIL,
-  CUSTOMER_LIST_REQUEST,
-  CUSTOMER_LIST_SUCCESS,
-  CUSTOMER_NOTIFICATION_FAIL,
-  CUSTOMER_NOTIFICATION_REQUEST,
-  CUSTOMER_NOTIFICATION_SUCCESS
+ CUSTOMER_BAN_FAIL,
+ CUSTOMER_BAN_REQUEST,
+ CUSTOMER_BAN_SUCCESS,
+ CUSTOMER_LIST_FAIL,
+ CUSTOMER_LIST_REQUEST,
+ CUSTOMER_LIST_SUCCESS,
+ CUSTOMER_NOTIFICATION_FAIL,
+ CUSTOMER_NOTIFICATION_REQUEST,
+ CUSTOMER_NOTIFICATION_SUCCESS
 } from 'src/constants/customerConstant';
 import {
-  banCustomer,
-  CUSTOMER_NOTIFICATION,
-  getCustomerPagingURL
+ banCustomer,
+ CUSTOMER_NOTIFICATION,
+ getCustomerPagingURL
 } from 'src/services/Config';
 const headers = {
  'Content-Type': 'application/json',
@@ -60,15 +60,16 @@ export const banCust = (username, isBanned) => async (dispatch) => {
  }
 };
 
-export const createNotification = (modelsT) => async (dispatch) => {
+export const createNotification = (notification) => async (dispatch) => {
  dispatch({
   type: CUSTOMER_NOTIFICATION_REQUEST,
-  payload: { modelsT }
+  payload: { notification }
  });
 
  try {
-  const { data } = await Axios.post(CUSTOMER_NOTIFICATION, modelsT);
+  const { data } = await Axios.post(CUSTOMER_NOTIFICATION, notification);
   dispatch({ type: CUSTOMER_NOTIFICATION_SUCCESS, payload: data });
+  console.log(response.status, 'debug action');
  } catch (error) {
   dispatch({
    type: CUSTOMER_NOTIFICATION_FAIL,

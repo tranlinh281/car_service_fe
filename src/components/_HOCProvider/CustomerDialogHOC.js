@@ -5,7 +5,8 @@ import CreateNotificationDialog from '../customer/CreateNotificationDialog';
 const CustomerDialogHOC = ({ children }) => {
  const {
   shouldCreateNotificationDialogOpen,
-  setShouldCreateNotificationDialogOpen
+  setShouldCreateNotificationDialogOpen,
+  customerNotificationDefaultValue
  } = useContext(DialogContext);
 
  return (
@@ -13,6 +14,7 @@ const CustomerDialogHOC = ({ children }) => {
    {children}
 
    <CreateNotificationDialog
+    data={customerNotificationDefaultValue}
     open={shouldCreateNotificationDialogOpen}
     onClose={() => setShouldCreateNotificationDialogOpen(false)}
    />

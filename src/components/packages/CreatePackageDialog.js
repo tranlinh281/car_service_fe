@@ -33,7 +33,7 @@ const CreatePackageDialog = ({ open, onClose }) => {
    serviceIdList: services.map((service) => service.id)
   };
   console.log(mappedData, 'debug ');
-  // dispatch(createPackage(mappedData));
+  dispatch(createPackage(mappedData));
   onClose();
  };
 

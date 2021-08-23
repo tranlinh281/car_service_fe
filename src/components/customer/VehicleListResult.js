@@ -39,13 +39,14 @@ export default function VehicleListResult({ customer = {} }) {
   toast.success('Mở khóa thành công!');
  };
 
- const { setShouldCreateNotificationDialogOpen } = useContext(DialogContext);
+ const {
+  setShouldCreateNotificationDialogOpen,
+  setCustomerNotificationDefaultValue
+ } = useContext(DialogContext);
 
- //edit service
-
- //coupon edit
- const handleOpenNotificationDialog = () => {
+ const handleOpenNotificationDialog = (vehicleId) => {
   setShouldCreateNotificationDialogOpen(true);
+  setCustomerNotificationDefaultValue(vehicleId);
  };
 
  return (
@@ -57,7 +58,6 @@ export default function VehicleListResult({ customer = {} }) {
     <TableCell>{customer.phoneNumber}</TableCell>
     <TableCell>{customer.address}</TableCell>
     <TableCell>{customer.accumulatedPoint}</TableCell>
-    <TableCell>{customer.isBanned}</TableCell>
     <TableCell>
      {customer.isBanned == 0 && (
       <ButtonAction
@@ -127,7 +127,9 @@ export default function VehicleListResult({ customer = {} }) {
            {vehicle.dateOfLastMaintenance === null ? (
             <TableCell>N/A</TableCell>
            ) : (
-            <TableCell>{vehicle.dateOfLastMaintenance}</TableCell>
+            <TableCell>
+             {vehicle.dateOfLastMaintenance?.split('T')[0]}
+            </TableCell>
            )}
            {vehicle.millageCount === 0 ? (
             <TableCell>N/A</TableCell>
@@ -138,7 +140,7 @@ export default function VehicleListResult({ customer = {} }) {
             <ButtonAction
              variant="contained"
              color="primary"
-             onClick={handleOpenNotificationDialog}
+             onClick={() => handleOpenNotificationDialog(vehicle.id)}
             >
              <NotificationsNoneIcon color="primary" />
             </ButtonAction>

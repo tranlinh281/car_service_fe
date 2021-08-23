@@ -14,7 +14,6 @@ export const customerHeader = [
  { id: 5, title: 'Địa chỉ' },
  { id: 6, title: 'Số điểm' },
  { id: 7, title: 'Khóa/Mở khóa' },
- { id: 8, title: '' },
  { id: 8, title: '' }
 ];
 export const serviceHeader = [
@@ -24,6 +23,11 @@ export const serviceHeader = [
  { id: 4, title: 'Khuyến mãi' },
  { id: 5, title: '' },
  { id: 6, title: '' }
+];
+export const servicePackageHeader = [
+ { id: 1, title: 'Tên dịch vụ' },
+ { id: 2, title: 'Giá' },
+ { id: 3, title: 'Phân Loại' }
 ];
 
 export const accessoryHeader = [
@@ -44,6 +48,7 @@ export const packageHeader = [
  { id: 1, title: 'Tên gói dịch vụ' },
  { id: 2, title: 'Mô tả' },
  { id: 3, title: 'Giá' },
+ { id: 4, title: '' },
  { id: 4, title: '' }
 ];
 

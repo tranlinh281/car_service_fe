@@ -1,23 +1,25 @@
 import {
-    Box,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow
+ Box,
+ Table,
+ TableBody,
+ TableCell,
+ TableHead,
+ TableRow
 } from '@material-ui/core';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { banCust } from 'src/actions/customerAction';
 import { triggerReload } from 'src/actions/userAction';
-import { CUSTOMER_BAN_SUCCESS } from 'src/constants/customerConstant';
+import {
+ CUSTOMER_BAN_SUCCESS,
+ CUSTOMER_NOTIFICATION_SUCCESS
+} from 'src/constants/customerConstant';
+import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import { customerHeader } from 'src/services/HeaderTitleTable';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import LoadingTable from '../LoadingTable';
 import VehicleListResult from './VehicleListResult';
-
 
 export default function CustomerListResults({ loading, customers }) {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -28,26 +30,27 @@ export default function CustomerListResults({ loading, customers }) {
  const [isBanned, setIsBanned] = useState();
  const [openPopup, setOpenPopup] = useState(false);
  const { success: banSuccess } = useSelector((state) => state.banCus);
- // const employeeDelete = useSelector((state) => state.employeeDelete);
- // const { success } = employeeDelete;
+ const { success: notificationSuccess } = useSelector(
+  (state) => state.customerNotification
+ );
+ console.log(notificationSuccess, 'debug noti');
+ const { setShouldCreateNotificationDialogOpen } = useContext(DialogContext);
  useEffect(() => {
   if (banSuccess) {
    // Should create action creator for this
    dispatch({ type: CUSTOMER_BAN_SUCCESS, payload: false });
    dispatch(triggerReload({}));
   }
- }, [banSuccess]);
+  if (notificationSuccess) {
+   toast.success('Gửi thông báo thành công!');
+   dispatch({ type: CUSTOMER_NOTIFICATION_SUCCESS, payload: false });
+   dispatch(triggerReload({}));
+   setShouldCreateNotificationDialogOpen(false);
+  }
+ }, [banSuccess, notificationSuccess]);
 
  const dispatch = useDispatch();
 
- const banHandler = (customer, isBanned) => {
-  dispatch(banCust(customer.username, isBanned));
-  toast.success('khóa thành công!');
- };
- const unBan = (customer, isBanned) => {
-  dispatch(banCust(customer.username, isBanned));
-  toast.success('Mở khóa thành công!');
- };
  return (
   <>
    {loading ? (

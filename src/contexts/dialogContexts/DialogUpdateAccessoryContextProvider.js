@@ -140,10 +140,14 @@ const DialogContextProvider = ({ children }) => {
   shouldCreateNotificationDialogOpen,
   setShouldCreateNotificationDialogOpen
  ] = useState(false);
+ const [customerNotificationDefaultValue, setCustomerNotificationDefaultValue] =
+  useState({});
 
  const createDialogNotificationState = {
   shouldCreateNotificationDialogOpen,
-  setShouldCreateNotificationDialogOpen
+  setShouldCreateNotificationDialogOpen,
+  customerNotificationDefaultValue,
+  setCustomerNotificationDefaultValue
  };
 
  // -------------------------------------------------------------------------------

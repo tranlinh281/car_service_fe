@@ -1,11 +1,11 @@
 import {
-    Box,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    Grid,
-    TextField
+ Box,
+ DialogActions,
+ DialogContent,
+ DialogContentText,
+ DialogTitle,
+ Grid,
+ TextField
 } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -52,7 +52,12 @@ const CreateServiceTypeDialog = () => {
      justifyContent: 'flex-end'
     }}
    >
-    <Button variant="contained" color="primary" onClick={handleClickOpen}>
+    <Button
+     variant="contained"
+     color="primary"
+     sx={{ margin: '0 5px' }}
+     onClick={handleClickOpen}
+    >
      Thêm Phân loại Dịch vụ
     </Button>
    </Box>
