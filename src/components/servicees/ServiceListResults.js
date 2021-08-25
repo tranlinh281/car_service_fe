@@ -123,6 +123,7 @@ export default function ServiceListResults({ loading, services }) {
    // Should create action creator for this
    dispatch({ type: CREATE_SERVICE_TYPE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
+   setShouldCreateTypeDialogOpen(false);
   }
  }, [
   deleteSuccess,

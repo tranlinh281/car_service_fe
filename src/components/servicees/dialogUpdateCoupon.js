@@ -1,10 +1,12 @@
 import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle, Grid, TextField
+ Button,
+ Dialog,
+ DialogActions,
+ DialogContent,
+ DialogContentText,
+ DialogTitle,
+ Grid,
+ TextField
 } from '@material-ui/core';
 import { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -122,11 +124,11 @@ const DialogUpdateCoupon = ({ data, open, onClose }) => {
     </DialogContentText>
    </DialogContent>
    <DialogActions color="red">
-    <Button autoFocus onClick={submitHandler} color="primary" left>
-     Lưu
-    </Button>
     <Button autoFocus onClick={onClose} color="secondary">
      Hủy
+    </Button>
+    <Button autoFocus onClick={submitHandler} color="primary" left>
+     Lưu
     </Button>
    </DialogActions>
   </Dialog>

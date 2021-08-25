@@ -1,5 +1,4 @@
 import {
- Box,
  DialogActions,
  DialogContent,
  DialogContentText,
@@ -9,95 +8,105 @@ import {
 } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import React, { memo, useEffect, useState } from 'react';
+import { Form, Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import 'react-toastify/dist/ReactToastify.css';
 import { createTypeService } from 'src/actions/serviceAction';
-import { triggerReload } from 'src/actions/userAction';
+import { DisplayingErrorMessagesCreateTypeSchema } from 'src/services/ValidConstants';
 
-const CreateServiceTypeDialog = () => {
- const [open, setOpen] = useState(false);
+export default function CreateServiceTypeDialog({ data, open, onClose }) {
+ const { types } = useSelector((state) => state.typeList);
 
  const [name, setName] = useState('');
+ const [id, setId] = useState('');
+ const [price, setPrice] = useState(0);
+ const [type, setType] = useState();
+ const [serviceModels, setServiceModels] = useState();
 
- const createServiceType = useSelector((state) => state.createServiceType);
- const { success, loading, error } = createServiceType;
+ const createServices = useSelector((state) => state.createServices);
+ const { success, loading, error } = createServices;
 
  const dispatch = useDispatch();
 
- const submitHandler = (e) => {
-  e.preventDefault();
-  console.log(name);
-  dispatch(createTypeService(name));
- };
-
- const handleClickOpen = () => {
-  setOpen(true);
- };
- const handleClose = () => {
-  setOpen(false);
+ const submitHandler = (data) => {
+  const dataNew = data.name;
+  console.log(dataNew);
+  dispatch(createTypeService(dataNew));
  };
 
  useEffect(() => {
-  if (success) {
-   setOpen(false);
-   dispatch(triggerReload({}));
+  setServiceModels((prev) => ({
+   ...prev,
+   id,
+   name,
+   price,
+   type
+  }));
+ }, [id, name, price, type]);
+ useEffect(() => {
+  if (data && open) {
+   setForm(data);
+   setServiceModels(data);
   }
- }, [success]);
+ }, [data, open]);
+
+ const handleReset = () => {};
 
  return (
   <>
-   <Box
-    sx={{
-     display: 'flex',
-     justifyContent: 'flex-end'
-    }}
+   <Formik
+    initialValues={{ name: '' }}
+    validationSchema={DisplayingErrorMessagesCreateTypeSchema}
+    validateOnChange
+    validateOnBlur
+    enableReinitialize
+    onSubmit={submitHandler}
+    onReset={handleReset}
    >
-    <Button
-     variant="contained"
-     color="primary"
-     sx={{ margin: '0 5px' }}
-     onClick={handleClickOpen}
-    >
-     Thêm Phân loại Dịch vụ
-    </Button>
-   </Box>
-   <Dialog
-    onClose={handleClose}
-    aria-describedby="scroll-dialog-description"
-    open={open}
-    fullWidth={true}
-    maxWidth={'xs'}
-   >
-    <DialogTitle id="customized-dialog-title">
-     Thêm Phân Loại Dịch vụ
-    </DialogTitle>
-    <DialogContent dividers>
-     <DialogContentText>
-      <Grid container>
-       <>
-        <TextField
-         fullWidth
-         label="Tên Phân Loại Dịch vụ"
-         margin="normal"
-         name="name"
-         variant="outlined"
-         required
-         onChange={(e) => setName(e.target.value)}
-        />
-       </>
-      </Grid>
-     </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-     <Button autoFocus onClick={submitHandler} color="primary">
-      Lưu
-     </Button>
-     <Button autoFocus onClick={handleClose} color="secondary">
-      Hủy
-     </Button>
-    </DialogActions>
-   </Dialog>
+    {({ errors, handleBlur, handleChange, values }) => (
+     <Dialog
+      onClose={onClose}
+      aria-describedby="scroll-dialog-description"
+      open={open}
+      maxWidth={'xs'}
+      fullWidth={true}
+     >
+      <Form>
+       <DialogTitle id="customized-dialog-title">
+        Thêm mới phân loại dịch vụ
+       </DialogTitle>
+       <DialogContent dividers>
+        <DialogContentText>
+         <Grid item>
+          <TextField
+           fullWidth
+           label="Tên Phân loại dịch vụ"
+           error={!!errors.name}
+           helperText={errors.name}
+           value={values.name}
+           onBlur={handleBlur}
+           onChange={handleChange}
+           margin="normal"
+           name="name"
+           variant="outlined"
+           required
+          />
+         </Grid>
+        </DialogContentText>
+       </DialogContent>
+       <DialogActions>
+        <Button autoFocus type="reset" onClick={onClose} color="secondary">
+         Hủy
+        </Button>
+        <Button autoFocus type="submit" color="primary" left>
+         Lưu
+        </Button>
+       </DialogActions>
+      </Form>
+     </Dialog>
+    )}
+   </Formik>
   </>
  );
-};
-export default memo(CreateServiceTypeDialog);
+}

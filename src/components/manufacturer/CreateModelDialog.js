@@ -31,7 +31,7 @@ import { values } from 'lodash';
 import { manufacturerHeader } from 'src/services/HeaderTitleTable';
 
 const CreateModelDialog = ({ data, open, onClose }) => {
-  console.log(data.name);
+ console.log(data.name);
  const { manufacturers } = useSelector((state) => state.manufacturerListAll);
  const [image, setImage] = useState(null);
  const [url, setURL] = useState('');
@@ -49,7 +49,7 @@ const CreateModelDialog = ({ data, open, onClose }) => {
  }, [listAllManufacturer]);
 
  const submitHandler = async (modelsT) => {
-   setManufacturerName(data.name)
+  setManufacturerName(data.name);
   const imglink = await handleUpdate();
   setImageUrl(imglink);
   modelsT.models.map((model) => setNameModel(model.name));
@@ -223,11 +223,11 @@ const CreateModelDialog = ({ data, open, onClose }) => {
         </Grid>
        </DialogContent>
        <DialogActions>
-        <Button type="submit" color="primary" left>
-         Lưu
-        </Button>
         <Button onClick={onClose} type="reset" color="secondary">
          Hủy
+        </Button>
+        <Button type="submit" color="primary" left>
+         Lưu
         </Button>
        </DialogActions>
       </Form>

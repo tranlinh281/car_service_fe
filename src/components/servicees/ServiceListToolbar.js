@@ -13,9 +13,13 @@ import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessory
 import CreateServiceTypeDialog from './CreateServiceTypeDialog';
 
 export default function ServiceListToolbar({ setPage, setKeySearch }) {
- const { setShouldCreateServiceDialogOpen } = useContext(DialogContext);
+ const { setShouldCreateServiceDialogOpen, setShouldCreateTypeDialogOpen } =
+  useContext(DialogContext);
  const handleOpenCreateDialog = () => {
   setShouldCreateServiceDialogOpen(true);
+ };
+ const handleOpenCreateTypeDialog = () => {
+  setShouldCreateTypeDialogOpen(true);
  };
  return (
   <Box>
@@ -28,7 +32,14 @@ export default function ServiceListToolbar({ setPage, setKeySearch }) {
     >
      Thêm Dịch vụ
     </Button>
-    <CreateServiceTypeDialog />
+    <Button
+     variant="contained"
+     color="primary"
+     onClick={handleOpenCreateTypeDialog}
+     sx={{ margin: '0 5px' }}
+    >
+     Thêm Phân loại dịch vụ
+    </Button>
    </Box>
 
    <Box sx={{ mt: 3 }}>
@@ -41,7 +52,7 @@ export default function ServiceListToolbar({ setPage, setKeySearch }) {
          startAdornment: (
           <InputAdornment position="start">
            <SvgIcon fontSize="small" color="action">
-        <SearchIcon />
+            <SearchIcon />
            </SvgIcon>
           </InputAdornment>
          )

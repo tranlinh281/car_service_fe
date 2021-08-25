@@ -1,19 +1,17 @@
 import {
-    Autocomplete,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    Grid,
-    TextField
+ Autocomplete,
+ DialogActions,
+ DialogContent,
+ DialogTitle,
+ Grid,
+ TextField
 } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import { Form, Formik } from 'formik';
 import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    updatePackage
-} from 'src/actions/packageAction';
+import { updatePackage } from 'src/actions/packageAction';
 import { listAllService } from './../../actions/serviceAction';
 
 const DialogUpdatePackage = ({ data, open, onClose }) => {
@@ -156,11 +154,11 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
         </Grid>
        </DialogContent>
        <DialogActions>
-        <Button type="submit" color="primary" left="true">
-         Lưu
-        </Button>
         <Button onClick={onClose} type="reset" color="secondary">
          Hủy
+        </Button>
+        <Button type="submit" color="primary" left="true">
+         Lưu
         </Button>
        </DialogActions>
       </Form>

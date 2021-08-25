@@ -290,11 +290,11 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
         </Grid>
        </DialogContent>
        <DialogActions color="red">
-        <Button autoFocus type="submit" color="primary" left>
-         Lưu
-        </Button>
         <Button autoFocus onClick={onClose} color="secondary">
          Hủy
+        </Button>
+        <Button autoFocus type="submit" color="primary" left>
+         Lưu
         </Button>
        </DialogActions>
       </Form>

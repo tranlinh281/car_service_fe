@@ -1,10 +1,15 @@
 import {
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle, FormControl, FormHelperText, Grid, InputLabel,
-    MenuItem,
-    Select, TextField
+ DialogActions,
+ DialogContent,
+ DialogContentText,
+ DialogTitle,
+ FormControl,
+ FormHelperText,
+ Grid,
+ InputLabel,
+ MenuItem,
+ Select,
+ TextField
 } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -14,7 +19,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import { createService, listServiceType } from 'src/actions/serviceAction';
 import { DisplayingErrorMessagesCreateServiceSchema } from 'src/services/ValidConstants';
-
 
 export default function CreateServiceDialog({ data, open, onClose }) {
  const { types } = useSelector((state) => state.typeList);
@@ -143,11 +147,11 @@ export default function CreateServiceDialog({ data, open, onClose }) {
         </DialogContentText>
        </DialogContent>
        <DialogActions>
-        <Button autoFocus type="submit" color="primary" left>
-         Lưu
-        </Button>
         <Button autoFocus type="reset" onClick={onClose} color="secondary">
          Hủy
+        </Button>
+        <Button autoFocus type="submit" color="primary" left>
+         Lưu
         </Button>
        </DialogActions>
       </Form>

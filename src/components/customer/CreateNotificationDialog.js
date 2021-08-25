@@ -112,11 +112,11 @@ export default function CreateNotificationDialog({ data, open, onClose }) {
         </DialogContentText>
        </DialogContent>
        <DialogActions>
-        <Button autoFocus type="submit" color="primary" onClick={onClose} left>
-         Gửi
-        </Button>
         <Button autoFocus type="reset" onClick={onClose} color="secondary">
          Hủy
+        </Button>
+        <Button autoFocus type="submit" color="primary" onClick={onClose} left>
+         Gửi
         </Button>
        </DialogActions>
       </Form>

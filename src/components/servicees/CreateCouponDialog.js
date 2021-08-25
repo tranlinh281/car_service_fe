@@ -1,10 +1,10 @@
 import {
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    Grid,
-    TextField
+ DialogActions,
+ DialogContent,
+ DialogContentText,
+ DialogTitle,
+ Grid,
+ TextField
 } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -148,11 +148,11 @@ export default function CreateCouponDialog({ data, open, onClose }) {
         </DialogContentText>
        </DialogContent>
        <DialogActions>
-        <Button autoFocus type="submit" color="primary" left>
-         Lưu
-        </Button>
         <Button autoFocus type="reset" onClick={onClose} color="secondary">
          Hủy
+        </Button>
+        <Button autoFocus type="submit" color="primary" left>
+         Lưu
         </Button>
        </DialogActions>
       </Form>

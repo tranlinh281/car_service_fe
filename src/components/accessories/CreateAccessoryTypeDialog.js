@@ -78,11 +78,11 @@ export default function CreateAccessoryTypeDialog() {
      </DialogContentText>
     </DialogContent>
     <DialogActions>
-     <Button autoFocus onClick={submitHandler} color="primary">
-      Lưu
-     </Button>
      <Button autoFocus onClick={handleClose} color="secondary">
       Hủy
+     </Button>
+     <Button autoFocus onClick={submitHandler} color="primary">
+      Lưu
      </Button>
     </DialogActions>
    </Dialog>

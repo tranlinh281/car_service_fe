@@ -51,10 +51,10 @@ export const DisplayingErrorMessagesCreateAccessorySchema = Yup.object().shape({
 });
 
 export const DisplayingErrorMessagesCreateTypeSchema = Yup.object().shape({
- type: Yup.string()
+ name: Yup.string()
   .min(3, 'Phân Loại phải trên 3 ký tự!')
   .max(30, 'Phân Loại phải dưới 30 ký tự!')
-  .required('Không được bỏ trống')
+  .required('Không được bỏ trống phân loại')
 });
 export const DisplayingErrorMessagesCreateServiceSchema = Yup.object().shape({
  name: Yup.string()

@@ -165,11 +165,11 @@ const CreateEmployeeDialog = ({ open, onClose }) => {
        {/* </DialogContentText> */}
       </DialogContent>
       <DialogActions>
-       <Button type="submit" color="primary" left>
-        Lưu
-       </Button>
        <Button onClick={onClose} type="reset" color="secondary">
         Hủy
+       </Button>
+       <Button type="submit" color="primary" left>
+        Lưu
        </Button>
       </DialogActions>
      </Form>

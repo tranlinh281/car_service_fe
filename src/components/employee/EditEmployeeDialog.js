@@ -153,11 +153,11 @@ const DialogUpdateEmployee = ({ data, open, onClose }) => {
     </Grid>
    </DialogContent>
    <DialogActions color="red">
-    <Button autoFocus onClick={submitHandler} color="primary" left>
-     Lưu
-    </Button>
     <Button autoFocus onClick={onClose} color="secondary">
      Hủy
+    </Button>
+    <Button autoFocus onClick={submitHandler} color="primary" left>
+     Lưu
     </Button>
    </DialogActions>
   </Dialog>
