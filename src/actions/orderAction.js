@@ -54,6 +54,10 @@ export const listAllOrder = () => async (dispatch) => {
    (total, x) => (x.stat === 'Hoàn thành' ? total + 1 : total),
    0
   );
+  const cancelDay = arrayStatus.reduce(
+   (total, x) => (x.stat === 'Đã hủy' ? total + 1 : total),
+   0
+  );
   const dateTimeCount = arrayStatus.reduce(
    (total, x) => (x.dateTime === new Date().getDate() ? total + 1 : total),
    0
@@ -66,7 +70,8 @@ export const listAllOrder = () => async (dispatch) => {
    done,
    dateTimeCount,
    doneAll,
-   allOrder
+   allOrder,
+   cancelDay
   };
 
   dispatch({ type: ORDER_LIST_SUCCESS, payload: dataCount });

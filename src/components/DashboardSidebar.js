@@ -1,30 +1,21 @@
-import { useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Box, Divider, Drawer, Hidden, List } from '@material-ui/core';
+import { Build, CalendarToday } from '@material-ui/icons';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import {
- Avatar,
- Box,
- Divider,
- Drawer,
- Hidden,
- List,
- Typography
-} from '@material-ui/core';
-import {
- // AlertCircle as AlertCircleIcon,
- BarChart as BarChartIcon,
- BarChart2,
- // Settings as SettingsIcon,
- ShoppingBag as ShoppingBagIcon,
- Package as PackageIcon,
- StopCircle,
- User as UserIcon,
- // UserPlus as UserPlusIcon,
- Users as UsersIcon
+    // AlertCircle as AlertCircleIcon,
+    BarChart as BarChartIcon,
+    Package as PackageIcon,
+    // Settings as SettingsIcon,
+    ShoppingBag as ShoppingBagIcon,
+    StopCircle,
+    User as UserIcon,
+    // UserPlus as UserPlusIcon,
+    Users as UsersIcon
 } from 'react-feather';
-import NavItem from './NavItem';
+import { useLocation } from 'react-router-dom';
 import * as constants from '../utils/Constants';
-import { Build } from '@material-ui/icons';
+import NavItem from './NavItem';
 
 const userInfo = [];
 userInfo.push();
@@ -45,6 +36,11 @@ const items = [
   href: '/app/employee',
   icon: UserIcon,
   title: constants.EMPLOYEE_TITLE
+ },
+ {
+  href: '/app/calender',
+  icon: CalendarToday,
+  title: constants.CALENDER_TITLE
  },
  {
   href: '/app/customers',
@@ -71,23 +67,6 @@ const items = [
   icon: StopCircle,
   title: constants.MANUFACTURER_TITLE
  }
-
- // {
- //   href: '/app/settings',
- //   icon: SettingsIcon,
- //   title: constants.SETTING_TITLE
- // },
-
- // {
- //   href: '/register',
- //   icon: UserPlusIcon,
- //   title: 'Register'
- // },
- // {
- //   href: '/404',
- //   icon: AlertCircleIcon,
- //   title: 'Error'
- // }
 ];
 
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {

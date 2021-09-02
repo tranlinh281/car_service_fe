@@ -67,3 +67,10 @@ export const vehicleHeader = [
  { id: 5, title: 'Số km' },
  { id: 6, title: '' }
 ];
+
+export const calenderHeader = [
+ { id: 1, title: 'Ngày' },
+ { id: 2, title: 'Tên nhân viên' },
+ { id: 3, title: 'Nội dung' },
+ { id: 4, title: '' }
+];

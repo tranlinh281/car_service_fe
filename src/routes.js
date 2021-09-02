@@ -11,8 +11,9 @@ import Settings from 'src/pages/Settings';
 import EmployeeList from 'src/pages/EmployeeList';
 import Manufacturer from './pages/ManufacturerList';
 import ServiceList from './pages/ServiceList';
-import Report from './pages/Report'
+import Report from './pages/Report';
 import PackageList from './pages/PackageList';
+import CalenderOfEmployee from './pages/CalenderOfEmployee';
 const routes = [
  {
   path: '/',
@@ -34,9 +35,10 @@ const routes = [
    { path: 'dashboard', element: <Dashboard /> },
    { path: 'accessories', element: <AccessoryList /> },
    { path: 'service', element: <ServiceList /> },
-   { path: 'packages', element: <PackageList/> },
+   { path: 'packages', element: <PackageList /> },
    { path: 'employee', element: <EmployeeList /> },
    { path: 'report', element: <Report /> },
+   { path: 'calender', element: <CalenderOfEmployee /> },
    { path: '*', element: <Navigate to="/404" /> }
   ]
  }
