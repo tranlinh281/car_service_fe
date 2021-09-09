@@ -14,6 +14,7 @@ import ServiceList from './pages/ServiceList';
 import Report from './pages/Report';
 import PackageList from './pages/PackageList';
 import CalenderOfEmployee from './pages/CalenderOfEmployee';
+import OrderPaymentList from './pages/OrderPaymentList';
 const routes = [
  {
   path: '/',
@@ -39,6 +40,7 @@ const routes = [
    { path: 'employee', element: <EmployeeList /> },
    { path: 'report', element: <Report /> },
    { path: 'calender', element: <CalenderOfEmployee /> },
+   { path: 'orders', element: <OrderPaymentList /> },
    { path: '*', element: <Navigate to="/404" /> }
   ]
  }

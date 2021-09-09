@@ -1,34 +1,31 @@
 import Axios from 'axios';
 import {
- ACCESSORY_LIST_FAIL,
- ACCESSORY_LIST_REQUEST,
- ACCESSORY_LIST_SUCCESS,
- ACCESSORY_TYPE_LIST_FAIL,
- ACCESSORY_TYPE_LIST_REQUEST,
- ACCESSORY_TYPE_LIST_SUCCESS,
- CREATE_ACCESSORY_FAIL,
- CREATE_ACCESSORY_REQUEST,
- CREATE_ACCESSORY_SUCCESS,
- CREATE_ACCESSORY_TYPE_FAIL,
- CREATE_ACCESSORY_TYPE_REQUEST,
- CREATE_ACCESSORY_TYPE_SUCCESS,
- DELETE_ACCESSORY_FAIL,
- DELETE_ACCESSORY_REQUEST,
- DELETE_ACCESSORY_SUCCESS,
- EDIT_ACCESSORY_FAIL,
- EDIT_ACCESSORY_REQUEST,
- EDIT_ACCESSORY_SUCCESS
+  ACCESSORY_LIST_FAIL,
+  ACCESSORY_LIST_REQUEST,
+  ACCESSORY_LIST_SUCCESS,
+  ACCESSORY_TYPE_LIST_FAIL,
+  ACCESSORY_TYPE_LIST_REQUEST,
+  ACCESSORY_TYPE_LIST_SUCCESS,
+  CREATE_ACCESSORY_FAIL,
+  CREATE_ACCESSORY_REQUEST,
+  CREATE_ACCESSORY_SUCCESS,
+  CREATE_ACCESSORY_TYPE_FAIL,
+  CREATE_ACCESSORY_TYPE_REQUEST,
+  CREATE_ACCESSORY_TYPE_SUCCESS,
+  DELETE_ACCESSORY_FAIL,
+  DELETE_ACCESSORY_REQUEST,
+  DELETE_ACCESSORY_SUCCESS,
+  EDIT_ACCESSORY_FAIL,
+  EDIT_ACCESSORY_REQUEST,
+  EDIT_ACCESSORY_SUCCESS
 } from 'src/constants/accessoryConstant';
 import {
- DELETE_ACCESSORY,
- getAccessoryPagingURL,
- GET_ACCESSORY_BY_USERNAME_URL,
- GET_ACCESSORY_LIST_URL,
- GET_ACCESSORY_TYPE_LIST_BY_USERNAME_URL,
- GET_ACCESSORY_TYPE_LIST_URL,
- POST_NEW_ACCESSORY,
- POST_NEW_ACCESSORY_TYPE,
- UPDATE_ACCESSORY_URL
+  DELETE_ACCESSORY,
+  getAccessoryPagingURL, GET_ACCESSORY_TYPE_LIST_BY_USERNAME_URL,
+  GET_ACCESSORY_TYPE_LIST_URL,
+  POST_NEW_ACCESSORY,
+  POST_NEW_ACCESSORY_TYPE,
+  UPDATE_ACCESSORY_URL
 } from 'src/services/Config';
 import { triggerReload } from './userAction';
 const headers = {
@@ -118,7 +115,7 @@ export const updateAccessory = (accessoryModels) => async (dispatch) => {
  }
 };
 
-export const  listTypeAccessory = (keySearch) => async (dispatch) => {
+export const listTypeAccessory = (keySearch) => async (dispatch) => {
  dispatch({ type: ACCESSORY_TYPE_LIST_REQUEST });
  try {
   if (keySearch == undefined || keySearch == '') {
@@ -126,11 +123,8 @@ export const  listTypeAccessory = (keySearch) => async (dispatch) => {
     dispatch({ type: ACCESSORY_TYPE_LIST_SUCCESS, payload: res.data });
    });
   } else {
-   // const arData = [];
    await Axios.get(GET_ACCESSORY_TYPE_LIST_BY_USERNAME_URL + keySearch).then(
     (respo) => {
-     // arData.push(respo.data)
-     // console.log(arData);
      dispatch({ type: ACCESSORY_TYPE_LIST_SUCCESS, payload: respo.data });
     }
    );

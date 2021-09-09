@@ -1,17 +1,17 @@
 import { Box, Divider, Drawer, Hidden, List } from '@material-ui/core';
-import { Build, CalendarToday } from '@material-ui/icons';
+import { Build, CalendarToday, LocalAtm } from '@material-ui/icons';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import {
-    // AlertCircle as AlertCircleIcon,
-    BarChart as BarChartIcon,
-    Package as PackageIcon,
-    // Settings as SettingsIcon,
-    ShoppingBag as ShoppingBagIcon,
-    StopCircle,
-    User as UserIcon,
-    // UserPlus as UserPlusIcon,
-    Users as UsersIcon
+ // AlertCircle as AlertCircleIcon,
+ BarChart as BarChartIcon,
+ Package as PackageIcon,
+ // Settings as SettingsIcon,
+ ShoppingBag as ShoppingBagIcon,
+ StopCircle,
+ User as UserIcon,
+ // UserPlus as UserPlusIcon,
+ Users as UsersIcon
 } from 'react-feather';
 import { useLocation } from 'react-router-dom';
 import * as constants from '../utils/Constants';
@@ -66,6 +66,11 @@ const items = [
   href: '/app/manufacturer',
   icon: StopCircle,
   title: constants.MANUFACTURER_TITLE
+ },
+ {
+  href: '/app/orders',
+  icon: LocalAtm,
+  title: constants.ORDER_PAYMENT_TITLE
  }
 ];
 

@@ -8,6 +8,9 @@ import {
  EDIT_EMPLOYEE_FAIL,
  EDIT_EMPLOYEE_REQUEST,
  EDIT_EMPLOYEE_SUCCESS,
+ EMPLOYEE_ABSENT_LIST_FAIL,
+ EMPLOYEE_ABSENT_LIST_REQUEST,
+ EMPLOYEE_ABSENT_LIST_SUCCESS,
  EMPLOYEE_LIST_FAIL,
  EMPLOYEE_LIST_REQUEST,
  EMPLOYEE_LIST_SUCCESS,
@@ -96,6 +99,26 @@ export const reloadReducer = (state = {}, action) => {
  switch (action.type) {
   case TRIGGER_RELOAD:
    return { ...state };
+  default:
+   return state;
+ }
+};
+
+export const listEmployeeAbsentReducer = (
+ state = { loading: true, data: [], error: '' },
+ action
+) => {
+ switch (action.type) {
+  case EMPLOYEE_ABSENT_LIST_REQUEST:
+   return { ...state, loading: true };
+  case EMPLOYEE_ABSENT_LIST_SUCCESS:
+   return {
+    ...state,
+    loading: false,
+    data: action.payload
+   };
+  case EMPLOYEE_ABSENT_LIST_FAIL:
+   return { ...state, loading: false, error: action.payload };
   default:
    return state;
  }

@@ -16,10 +16,14 @@ import {
  DELETE_EMPLOYEE_FAIL,
  EDIT_EMPLOYEE_REQUEST,
  EDIT_EMPLOYEE_SUCCESS,
- EDIT_EMPLOYEE_FAIL
+ EDIT_EMPLOYEE_FAIL,
+ EMPLOYEE_ABSENT_LIST_REQUEST,
+ EMPLOYEE_ABSENT_LIST_FAIL,
+ EMPLOYEE_ABSENT_LIST_SUCCESS
 } from 'src/constants/userConstant';
 import {
  DELETE_EMPLOYEE,
+ getEmployeeAbsentPagingURL,
  getEmployeePagingURL,
  GET_EMPLOYEE_BY_USERNAME_URL,
  GET_EMPLOYEE_LIST_URL,
@@ -138,5 +142,27 @@ export const updateEmployee = (employeeModels) => async (dispatch) => {
     ? error.response.data.message
     : error.message;
   dispatch({ type: EDIT_EMPLOYEE_FAIL, payload: message });
+ }
+};
+
+export const listEmployeeAbsent = (keySearch, page) => async (dispatch) => {
+ dispatch({ type: EMPLOYEE_ABSENT_LIST_REQUEST });
+ try {
+  if (keySearch == undefined || keySearch == '') {
+   const { data } = await Axios.get(getEmployeeAbsentPagingURL(page));
+   dispatch({ type: EMPLOYEE_ABSENT_LIST_SUCCESS, payload: data });
+   dispatch({ type: EMPLOYEE_ABSENT_LIST_FAIL, payload: '' });
+  } else {
+   const { data } = await Axios.get(
+    getEmployeeAbsentPagingURL(page) + keySearch
+   );
+   dispatch({ type: EMPLOYEE_ABSENT_LIST_FAIL, payload: data });
+  }
+ } catch (error) {
+  const message =
+   error.response && error.response.data.message
+    ? error.response.data.message
+    : error.message;
+  dispatch({ type: EMPLOYEE_ABSENT_LIST_FAIL, payload: message });
  }
 };

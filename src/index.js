@@ -4,14 +4,15 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
 import store from './store';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </Provider>,
-    document.getElementById('root')
+ <Provider store={store}>
+  <BrowserRouter>
+   <App />
+  </BrowserRouter>
+ </Provider>,
+ document.getElementById('root')
 );
 
 serviceWorker.unregister();

@@ -10,7 +10,10 @@ export const CUSTOMER = 'Customers';
 export const COUPON = 'coupons';
 export const ORDERS = 'orders';
 export const EMPLOYEE = 'employees';
+export const DETAILED = 'detailed';
 export const PACKAGES = 'packages';
+export const ABSENCE = 'absences';
+export const TRANSACTION = 'transactions';
 export const MANUFACTURER = 'manufacturers';
 export const ACCESSORY = 'Accessories';
 export const ACCESSORYID = 'accessoryId=';
@@ -58,6 +61,14 @@ export const GET_CUSTOMER_BY_USERNAME_URL =
 
 //Employee
 export const GET_EMPLOYEE_LIST_URL = BASE_URL + ADMIN;
+export const getEmployeeAbsentPagingURL = (page = 1) =>
+ GET_EMPLOYEE_LIST_URL +
+ FORWARD_SLASH +
+ ABSENCE +QUESTION_MARK+
+ PAGENUMBER +
+ page +
+ PAGESIZE +
+ SEARCH_VALUE;
 export const UPDATE_EMPLOYEE_URL = GET_EMPLOYEE_LIST_URL;
 
 export const getEmployeePagingURL = (page = 1) =>
@@ -139,3 +150,16 @@ export const DELETE_COUPON = GET_COUPON_LIST_URL + QUESTION_MARK + COUPONID;
 
 //order
 export const GET_ORDER_LIST_URL = BASE_URL + ORDERS;
+
+//transactions
+export const GET_ORDER_PAYMENT_LIST_URL = BASE_URL + TRANSACTION;
+
+export const GET_ORDER_PAYMENT_DETAILED_LIST_URL =
+ GET_ORDER_PAYMENT_LIST_URL + FORWARD_SLASH + DETAILED;
+
+export const getTransactionPagingURL = (page = 1) =>
+ GET_ORDER_PAYMENT_DETAILED_LIST_URL +
+ QUESTION_MARK +
+ PAGENUMBER +
+ page +
+ PAGESIZE;

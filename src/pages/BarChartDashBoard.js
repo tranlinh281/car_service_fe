@@ -1,4 +1,3 @@
-import { Bar } from 'react-chartjs-2';
 import {
  Box,
  Button,
@@ -6,12 +5,9 @@ import {
  CardContent,
  CardHeader,
  Divider,
- useTheme,
- colors,
- Typography
+ MenuItem,
+ Select
 } from '@material-ui/core';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
@@ -59,14 +55,27 @@ const BarChartDashBoard = (props) => {
    ]
   }
  };
+ const [dateTime, setDateTime] = React.useState('');
+ const handleChange = (event) => {
+  setDateTime(event.target.value);
+ };
+
  return (
   <>
    <Card {...props}>
     <CardHeader
      action={
-      <Button endIcon={<ArrowDropDownIcon />} size="small" variant="text">
-       Last 7 days
-      </Button>
+      <Select
+       labelId="demo-simple-select-label"
+       id="demo-simple-select"
+       value={dateTime}
+       onChange={handleChange}
+      >
+       <MenuItem value="date">Ngày</MenuItem>
+       <MenuItem value="week">Tuần</MenuItem>
+       <MenuItem value="month">Tháng</MenuItem>
+       <MenuItem value="year">Năm</MenuItem>
+      </Select>
      }
      title="Doanh thu"
     />
@@ -78,17 +87,12 @@ const BarChartDashBoard = (props) => {
        position: 'relative'
       }}
      >
-      <Line data={data} options={options} />
+      {(dateTime === 'date' || dateTime === '') && (
+       <Line data={data} options={options} />
+      )}
      </Box>
     </CardContent>
     <Divider />
-    <Box
-     sx={{
-      display: 'flex',
-      justifyContent: 'flex-end',
-      p: 2
-     }}
-    ></Box>
    </Card>
   </>
  );

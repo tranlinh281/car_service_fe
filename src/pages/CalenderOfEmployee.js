@@ -1,27 +1,87 @@
-import { Box, Card, Container, Pagination } from '@material-ui/core';
-import { useEffect, useState } from 'react';
+import {
+ Box,
+ Card,
+ CardContent,
+ CardHeader,
+ Container
+} from '@material-ui/core';
+import moment from 'moment';
+import React, { useEffect } from 'react';
+import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
-import { listAccessory } from 'src/actions/accessoryAction';
-import AccessoryListResults from 'src/components/accessories/AccessoryListResults';
-import AccessoryListToolbar from 'src/components/accessories/AccessoryListToolbar';
+import { listEmployeeAbsent } from 'src/actions/userAction';
 import AccessoryDialogHOC from 'src/components/_HOCProvider/AccessoryDialogHOC';
 import * as constant from '../utils/Constants';
 
-const CalenderOfEmployee = () => {
- const { data, error, loading } = useSelector((state) => state.accessoryList);
- const [page, setPage] = useState(1);
- const triggerReload = useSelector((state) => state.triggerReload);
- const [keySearch, setKeySearch] = useState('');
- const dispatch = useDispatch();
+const localizer = momentLocalizer(moment);
+let allViews = Object.keys(Views).map((k) => Views[k]);
 
+const CalenderOfEmployee = () => {
+ const { data, error, loading } = useSelector(
+  (state) => state.employeeAbsentList
+ );
+ const dispatch = useDispatch();
+ console.log(data, 'debug calender');
  useEffect(() => {
-  dispatch(listAccessory(keySearch, page));
- }, [dispatch, page, keySearch, triggerReload]);
- const handlePageChange = (_, value) => {
-  setPage(value);
-  setKeySearch(keySearch);
+  dispatch(listEmployeeAbsent());
+ }, [dispatch]);
+ const date1 = new Date();
+ date1.setHours(7);
+
+ const date2 = new Date();
+ date2.setHours(10);
+
+ const date3 = new Date();
+ date3.setDate(1);
+ const date4 = new Date();
+ date4.setDate(1);
+ date4.setHours(5);
+
+ const note = 'Sick as fuck';
+
+ const objectFromBe = {
+  date: new Date(),
+  employees: [
+   {
+    empEmail: '',
+    name: '',
+    status: 'accepted | pending',
+    startTime: '',
+    endTime: ''
+   }
+  ]
  };
+
+ const events = [
+  {
+   id: 0,
+   title: `
+   Phan Thong Thanh
+   Reason: ${note}
+   `,
+   allDay: true,
+   start: date1,
+   end: date2
+  },
+  {
+   id: 0,
+   title: `
+   Phan thong thinh
+   Reason: ${note}
+   `,
+   allDay: true,
+   start: date1,
+   end: date2
+  },
+  {
+   id: 1,
+   title: 'Nguyen Phuoc An',
+   allDay: false,
+   start: date3,
+   end: date4
+  }
+ ];
 
  return (
   <AccessoryDialogHOC>
@@ -30,36 +90,24 @@ const CalenderOfEmployee = () => {
    </Helmet>
    <Box
     sx={{
-     backgroundColor: 'background.default',
      minHeight: '100%',
      py: 3
     }}
    >
     <Container maxWidth={false}>
-     <Box sx={{ pt: 3 }}>
-      <Card>
-       <AccessoryListResults
-        totalPages={data.totalPages || 0}
-        accessories={data.itemsList || []}
-        loading={loading}
+     <Card>
+      <CardHeader title="nhung nguoi nghi" />
+
+      <CardContent>
+       <Calendar
+        events={events}
+        showMultiDayTimes
+        localizer={localizer}
+        views={['week', 'agenda']}
+        defaultView={'week'}
        />
-       <Box
-        sx={{
-         display: 'flex',
-         justifyContent: 'center',
-         pt: 2
-        }}
-       >
-        <Pagination
-         color="primary"
-         count={data.totalPages}
-         size="medium"
-         onChange={handlePageChange}
-         page={page}
-        />
-       </Box>
-      </Card>
-     </Box>
+      </CardContent>
+     </Card>
     </Container>
    </Box>
   </AccessoryDialogHOC>

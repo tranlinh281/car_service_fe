@@ -1,12 +1,12 @@
 import { Box, Container, Grid } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
+import CardOfProfit from 'src/components/dashboard/CardOfProfit';
 import ReportCard from 'src/components/dashboard/ReportCard';
-import TrafficByDevice from '../components/dashboard/TrafficByDevice';
 import BarChartDashBoard from './BarChartDashBoard';
 const Dashboard = () => (
  <>
   <Helmet>
-   <title>Dashboard | Material Kit</title>
+   <title>Tổng Quan</title>
   </Helmet>
   <Box
    sx={{
@@ -22,7 +22,7 @@ const Dashboard = () => (
       <BarChartDashBoard />
      </Grid>
      <Grid item lg={4} md={6} xl={3} xs={12}>
-      <TrafficByDevice sx={{ height: '100%' }} />
+      <CardOfProfit sx={{ height: '100%' }} />
      </Grid>
     </Grid>
    </Container>
