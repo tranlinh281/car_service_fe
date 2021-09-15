@@ -25,6 +25,7 @@ export const listAllOrder = () => async (dispatch) => {
    stat: order.status,
    dateTime: new Date(order.bookingTime).getDate()
   }));
+
   const processingDate = arrayStatus.reduce(
    (total, x) =>
     x.stat === 'Đang tiến hành' && x.dateTime ? total + 1 : total,
@@ -38,7 +39,7 @@ export const listAllOrder = () => async (dispatch) => {
 
   const accept = arrayStatus.reduce(
    (total, x) =>
-    x.stat === 'Đã xác nhận' && x.dateTime === new Date().getDate()
+    x.stat === 'Đã nhận xe' && x.dateTime === new Date().getDate()
      ? total + 1
      : total,
    0

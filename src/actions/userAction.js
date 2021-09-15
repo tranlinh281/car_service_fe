@@ -19,7 +19,10 @@ import {
  EDIT_EMPLOYEE_FAIL,
  EMPLOYEE_ABSENT_LIST_REQUEST,
  EMPLOYEE_ABSENT_LIST_FAIL,
- EMPLOYEE_ABSENT_LIST_SUCCESS
+ EMPLOYEE_ABSENT_LIST_SUCCESS,
+ EDIT_EMPLOYEE_ABSENT_SUCCESS,
+ EDIT_EMPLOYEE_ABSENT_REQUEST,
+ EDIT_EMPLOYEE_ABSENT_FAIL
 } from 'src/constants/userConstant';
 import {
  DELETE_EMPLOYEE,
@@ -29,6 +32,7 @@ import {
  GET_EMPLOYEE_LIST_URL,
  LOGIN_URL,
  POST_NEW_EMPLOYEE,
+ UPDATE_ABSENT_EMPLOYEE_URL,
  UPDATE_EMPLOYEE_URL
 } from 'src/services/Config';
 
@@ -164,5 +168,25 @@ export const listEmployeeAbsent = (keySearch, page) => async (dispatch) => {
     ? error.response.data.message
     : error.message;
   dispatch({ type: EMPLOYEE_ABSENT_LIST_FAIL, payload: message });
+ }
+};
+
+export const updateAbsenceEmployee = (dataNew) => async (dispatch) => {
+ console.log(dataNew, 'debug usser action');
+ dispatch({
+  type: EDIT_EMPLOYEE_ABSENT_REQUEST,
+  payload: { dataNew }
+ });
+
+ try {
+  const { data } = await Axios.put(UPDATE_ABSENT_EMPLOYEE_URL, dataNew);
+  dispatch({ type: EDIT_EMPLOYEE_ABSENT_SUCCESS, payload: data });
+  dispatch(triggerReload({}));
+ } catch (error) {
+  const message =
+   error.response && error.response.data.message
+    ? error.response.data.message
+    : error.message;
+  dispatch({ type: EDIT_EMPLOYEE_ABSENT_FAIL, payload: message });
  }
 };

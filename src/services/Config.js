@@ -26,6 +26,7 @@ export const PAGINGS = '/paging?';
 export const PAGENUMBER = 'pageNumber=';
 export const CONTENT = 'content';
 export const PAGESIZE = '&pageSize=10';
+export const PAGESIZEEMPABS = '&pageSize=300';
 export const PAGESIZEMAN = '&pageSize=9';
 export const FORWARD_SLASH = '/';
 export const QUESTION_MARK = '?';
@@ -61,13 +62,16 @@ export const GET_CUSTOMER_BY_USERNAME_URL =
 
 //Employee
 export const GET_EMPLOYEE_LIST_URL = BASE_URL + ADMIN;
+
+export const GET_EMPLOYEE_ABSENT_LIST_URL =
+ GET_EMPLOYEE_LIST_URL + FORWARD_SLASH + ABSENCE;
+export const UPDATE_ABSENT_EMPLOYEE_URL = GET_EMPLOYEE_ABSENT_LIST_URL;
 export const getEmployeeAbsentPagingURL = (page = 1) =>
- GET_EMPLOYEE_LIST_URL +
- FORWARD_SLASH +
- ABSENCE +QUESTION_MARK+
+ GET_EMPLOYEE_ABSENT_LIST_URL +
+ QUESTION_MARK +
  PAGENUMBER +
  page +
- PAGESIZE +
+ PAGESIZEEMPABS +
  SEARCH_VALUE;
 export const UPDATE_EMPLOYEE_URL = GET_EMPLOYEE_LIST_URL;
 

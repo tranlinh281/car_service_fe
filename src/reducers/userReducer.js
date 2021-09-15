@@ -5,6 +5,9 @@ import {
  DELETE_EMPLOYEE_FAIL,
  DELETE_EMPLOYEE_REQUEST,
  DELETE_EMPLOYEE_SUCCESS,
+ EDIT_EMPLOYEE_ABSENT_FAIL,
+ EDIT_EMPLOYEE_ABSENT_REQUEST,
+ EDIT_EMPLOYEE_ABSENT_SUCCESS,
  EDIT_EMPLOYEE_FAIL,
  EDIT_EMPLOYEE_REQUEST,
  EDIT_EMPLOYEE_SUCCESS,
@@ -118,6 +121,19 @@ export const listEmployeeAbsentReducer = (
     data: action.payload
    };
   case EMPLOYEE_ABSENT_LIST_FAIL:
+   return { ...state, loading: false, error: action.payload };
+  default:
+   return state;
+ }
+};
+
+export const updateEmployeeAbsentReducer = (state = {}, action) => {
+ switch (action.type) {
+  case EDIT_EMPLOYEE_ABSENT_REQUEST:
+   return { ...state, loading: true };
+  case EDIT_EMPLOYEE_ABSENT_SUCCESS:
+   return { ...state, loading: false, success: action.payload };
+  case EDIT_EMPLOYEE_ABSENT_FAIL:
    return { ...state, loading: false, error: action.payload };
   default:
    return state;

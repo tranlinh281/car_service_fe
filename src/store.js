@@ -46,10 +46,14 @@ import {
  reloadReducer,
  deleteEmployeeReducer,
  updateEmployeeReducer,
- listEmployeeAbsentReducer
+ listEmployeeAbsentReducer,
+ updateEmployeeAbsentReducer
 } from './reducers/userReducer';
 import { listOrderReducer } from './reducers/orderReducer';
-import { listTransactionReducer } from './reducers/transactionReducer';
+import {
+ listAllTransactionReducer,
+ listTransactionReducer
+} from './reducers/transactionReducer';
 
 const initialState = {
  userLogin: {
@@ -95,8 +99,10 @@ const reducer = combineReducers({
  couponDelete: deleteCouponReducer,
  ordersList: listOrderReducer,
  transactionList: listTransactionReducer,
+ transactionAllList: listAllTransactionReducer,
  customerNotification: customerNotificationReducer,
- employeeAbsentList: listEmployeeAbsentReducer 
+ employeeAbsentList: listEmployeeAbsentReducer,
+ updateAbsentEmployee: updateEmployeeAbsentReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
