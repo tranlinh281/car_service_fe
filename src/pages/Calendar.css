@@ -1,0 +1,13 @@
+.rbc-agenda-time-cell {
+ border-left: 1px solid #ddd;
+ background-color: white;
+ z-index: 10000000;
+}
+.rbc-agenda-date-cell {
+ background-color: white;
+ z-index: 10000000;
+}
+.rbc-agenda-event-cell {
+ background-color: white;
+ z-index: 10000000;
+}

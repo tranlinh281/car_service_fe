@@ -27,8 +27,6 @@ export default function CustomerListResults({ loading, customers }) {
   title: '',
   subTitle: ''
  });
- const [isBanned, setIsBanned] = useState();
- const [openPopup, setOpenPopup] = useState(false);
  const { success: banSuccess } = useSelector((state) => state.banCus);
  const { success: notificationSuccess } = useSelector(
   (state) => state.customerNotification

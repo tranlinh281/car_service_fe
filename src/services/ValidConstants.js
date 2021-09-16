@@ -116,3 +116,9 @@ export const DisplayingErrorMessagesCreateNotificationSchema =
    .min(3, 'Mô tả thông báo phải trên 3 ký tự')
    .max(200, 'Mô tả thông báo phải dưới 200 ký tự!')
  });
+export const DisplayingErrorMessagesNoteAdminSchema = Yup.object().shape({
+ noteAdmin: Yup.string()
+  .min(3, 'Nội dung từ chối phải trên 3 ký tự!')
+  .max(30, 'Nội dung từ chối phải dưới 30 ký tự!')
+  .required('Không được bỏ trống Nội dung từ chối')
+});

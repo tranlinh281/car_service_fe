@@ -172,6 +172,19 @@ const DialogContextProvider = ({ children }) => {
   setShouldCreateTypeDialogOpen
  };
 
+ // -------------------------------------------------------------------------------
+ // Context State of absent employee dialog
+ const [shouldUpdateAbsentDialogOpen, setShouldUpdateAbsentDialogOpen] =
+  useState(false);
+ const [updateAbsentDefaultValue, setUpdateAbsentDefaultValue] = useState({});
+
+ const updateDialogAbsentState = {
+  shouldUpdateAbsentDialogOpen,
+  setShouldUpdateAbsentDialogOpen,
+  updateAbsentDefaultValue,
+  setUpdateAbsentDefaultValue
+ };
+
  const defaultProviderValue = {
   ...updateDialogAccessoryState,
   ...createDialogAccessoryState,
@@ -187,7 +200,8 @@ const DialogContextProvider = ({ children }) => {
   ...createDialogCouponState,
   ...updateDialogCouponState,
   ...createDialogTypeState,
-  ...createDialogNotificationState
+  ...createDialogNotificationState,
+  ...updateDialogAbsentState
  };
 
  return (

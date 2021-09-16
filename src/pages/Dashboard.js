@@ -1,6 +1,7 @@
 import { Box, Container, Grid } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 import CardOfProfit from 'src/components/dashboard/CardOfProfit';
+import LatestOrders from 'src/components/dashboard/LatestOrders';
 import ReportCard from 'src/components/dashboard/ReportCard';
 import BarChartDashBoard from './BarChartDashBoard';
 const Dashboard = () => (
@@ -20,6 +21,7 @@ const Dashboard = () => (
      <ReportCard />
      <Grid item lg={8} md={12} xl={9} xs={12}>
       <BarChartDashBoard />
+      <LatestOrders />
      </Grid>
      <Grid item lg={4} md={6} xl={3} xs={12}>
       <CardOfProfit sx={{ height: '100%' }} />
