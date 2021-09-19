@@ -12,44 +12,59 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { triggerReload } from 'src/actions/userAction';
 import {
- CUSTOMER_BAN_SUCCESS,
- CUSTOMER_NOTIFICATION_SUCCESS
-} from 'src/constants/customerConstant';
+ ORDER_PAYMENT_SUCCESS,
+ ORDER_STATUS_ID_RESET
+} from 'src/constants/orderConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
-import { customerHeader } from 'src/services/HeaderTitleTable';
+import { paymentHeader } from 'src/services/HeaderTitleTable';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import LoadingTable from '../LoadingTable';
-import VehicleListResult from './VehicleListResult';
+import PaymentExpandListResult from './PaymentExpandListResult';
 
-export default function PaymentListResults({ loading, customers }) {
+export default function PaymentListResults({ loading, orders }) {
  const [confirmDialog, setConfirmDialog] = useState({
   isOpen: false,
   title: '',
   subTitle: ''
  });
- const [isBanned, setIsBanned] = useState();
- const [openPopup, setOpenPopup] = useState(false);
- const { success: banSuccess } = useSelector((state) => state.banCus);
- const { success: notificationSuccess } = useSelector(
-  (state) => state.customerNotification
- );
- console.log(notificationSuccess, 'debug noti');
- const { setShouldCreateNotificationDialogOpen } = useContext(DialogContext);
- useEffect(() => {
-  if (banSuccess) {
-   // Should create action creator for this
-   dispatch({ type: CUSTOMER_BAN_SUCCESS, payload: false });
-   dispatch(triggerReload({}));
-  }
-  if (notificationSuccess) {
-   toast.success('Gửi thông báo thành công!');
-   dispatch({ type: CUSTOMER_NOTIFICATION_SUCCESS, payload: false });
-   dispatch(triggerReload({}));
-   setShouldCreateNotificationDialogOpen(false);
-  }
- }, [banSuccess, notificationSuccess]);
+
+ let cust = [];
+ if (orders && orders.length) {
+  orders.map((item) => {
+   const dataNew = {
+    id: item.id,
+    name: item.customer.fullname,
+    address: item.customer.address,
+    email: item.customer.email,
+    phoneNumber: item.customer.phoneNumber,
+    licensePlate: item.vehicle.licensePlate,
+    manufacturer: item.vehicle.manufacturer
+   };
+   cust = [...cust, dataNew];
+  });
+ }
+ const { setShouldCreatePaymentDialogOpen, shouldCreatePaymentDialogOpen } =
+  useContext(DialogContext);
 
  const dispatch = useDispatch();
+ const { success: paymentSuccess } = useSelector((state) => state.paymentCash);
+
+ useEffect(() => {
+  if (paymentSuccess) {
+   toast.success('Thanh toán thành công!');
+
+   dispatch({ type: ORDER_PAYMENT_SUCCESS, payload: false });
+   dispatch(triggerReload({}));
+
+   setShouldCreatePaymentDialogOpen(false);
+  }
+ }, [paymentSuccess]);
+
+ useEffect(() => {
+  if (!shouldCreatePaymentDialogOpen) {
+   dispatch({ type: ORDER_STATUS_ID_RESET });
+  }
+ }, [shouldCreatePaymentDialogOpen]);
 
  return (
   <>
@@ -61,15 +76,15 @@ export default function PaymentListResults({ loading, customers }) {
       <Table>
        <TableHead>
         <TableRow>
-         {customerHeader.map((headCell) => (
+         {paymentHeader.map((headCell) => (
           <TableCell key={headCell.id}>{headCell.title}</TableCell>
          ))}
         </TableRow>
        </TableHead>
 
        <TableBody>
-        {customers?.map((customer) => (
-         <VehicleListResult customer={customer} />
+        {cust?.map((customer) => (
+         <PaymentExpandListResult customer={customer} />
         ))}
        </TableBody>
       </Table>

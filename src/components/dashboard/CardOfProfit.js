@@ -29,14 +29,14 @@ export default function CardOfProfit() {
      py: 7
     }}
    >
-    <Grid xs={12} justifyContent="space-around">
+    {/* <Grid xs={12} justifyContent="space-around">
      <TotalProfits
       sx={{ height: '150%' }}
       title={constant.TOTAL_PROFIT_WEEK}
       //   number={orders.accept}
       colorBack="#5664d2"
      />
-    </Grid>
+    </Grid> */}
    </Box>
    <Box
     sx={{

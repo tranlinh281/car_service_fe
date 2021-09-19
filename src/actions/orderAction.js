@@ -1,19 +1,52 @@
 import Axios from 'axios';
-import { useState } from 'react';
 import {
  ORDER_LIST_FAIL,
  ORDER_LIST_REQUEST,
- ORDER_LIST_SUCCESS
+ ORDER_LIST_SUCCESS,
+ ORDER_PAYMENT_FAIL,
+ ORDER_PAYMENT_REQUEST,
+ ORDER_PAYMENT_SUCCESS,
+ ORDER_STATUS_ID_FAIL,
+ ORDER_STATUS_ID_REQUEST,
+ ORDER_STATUS_ID_SUCCESS,
+ ORDER_STATUS_LIST_FAIL,
+ ORDER_STATUS_LIST_REQUEST,
+ ORDER_STATUS_LIST_SUCCESS
 } from 'src/constants/orderConstant';
-import { GET_ORDER_LIST_URL } from 'src/services/Config';
-import { triggerReload } from './userAction';
-const headers = {
- 'Content-Type': 'application/json',
- 'Access-Control-Allow-Origin': '*',
- Accept: 'application/json, text/plain, */*'
- // Authorization:
- //   'Bearer ' +
- //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMTExMTEyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiUXVhblRyaSIsIm5iZiI6MTYyMzA4MDI2MSwiZXhwIjoxNjIzMDgzODYxfQ.kJxGYbJzRjCCg4qy3OO0XjglTcuIOhoeY6ynmmxmwUo'
+import {
+ getOrderPagingURL,
+ GET_ORDER_LIST_BY_ID,
+ GET_ORDER_LIST_URL,
+ PAYMENT_CASH_BY_ADMIN
+} from 'src/services/Config';
+
+export const listAllOrderWithStatus = (page) => async (dispatch) => {
+ dispatch({ type: ORDER_STATUS_LIST_REQUEST });
+ try {
+  const { data } = await Axios.get(getOrderPagingURL(page));
+  dispatch({ type: ORDER_STATUS_LIST_SUCCESS, payload: data });
+ } catch (error) {
+  const message =
+   error.response && error.response.data.message
+    ? error.response.data.message
+    : error.message;
+  dispatch({ type: ORDER_STATUS_LIST_FAIL, payload: message });
+ }
+};
+
+export const listAllOrderWithID = (id) => async (dispatch) => {
+ dispatch({ type: ORDER_STATUS_ID_REQUEST });
+ try {
+  const { data } = await Axios.get(GET_ORDER_LIST_BY_ID + id);
+  console.log(data, 'debug action');
+  dispatch({ type: ORDER_STATUS_ID_SUCCESS, payload: data });
+ } catch (error) {
+  const message =
+   error.response && error.response.data.message
+    ? error.response.data.message
+    : error.message;
+  dispatch({ type: ORDER_STATUS_ID_FAIL, payload: message });
+ }
 };
 
 export const listAllOrder = () => async (dispatch) => {
@@ -82,5 +115,27 @@ export const listAllOrder = () => async (dispatch) => {
     ? error.response.data.message
     : error.message;
   dispatch({ type: ORDER_LIST_FAIL, payload: message });
+ }
+};
+
+export const paymentCashByAdmin = (dataNew) => async (dispatch) => {
+ dispatch({
+  type: ORDER_PAYMENT_REQUEST
+ });
+
+ try {
+  const { data } = await Axios.put(PAYMENT_CASH_BY_ADMIN, param);
+
+  console.log('debug paymentSuccess action', data);
+
+  dispatch({ type: ORDER_PAYMENT_SUCCESS, payload: true });
+
+  dispatch(triggerReload({}));
+ } catch (error) {
+  const message =
+   error.response && error.response.data.message
+    ? error.response.data.message
+    : error.message;
+  dispatch({ type: ORDER_PAYMENT_FAIL, payload: message });
  }
 };

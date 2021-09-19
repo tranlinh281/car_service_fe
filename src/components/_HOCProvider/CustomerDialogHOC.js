@@ -1,12 +1,16 @@
 import { memo, useContext } from 'react';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import CreateNotificationDialog from '../customer/CreateNotificationDialog';
+import PaymentCash from '../payment/PaymentCash';
 
 const CustomerDialogHOC = ({ children }) => {
  const {
   shouldCreateNotificationDialogOpen,
   setShouldCreateNotificationDialogOpen,
-  customerNotificationDefaultValue
+  customerNotificationDefaultValue,
+  //payment
+  shouldCreatePaymentDialogOpen,
+  setShouldCreatePaymentDialogOpen
  } = useContext(DialogContext);
 
  return (
@@ -17,6 +21,10 @@ const CustomerDialogHOC = ({ children }) => {
     data={customerNotificationDefaultValue}
     open={shouldCreateNotificationDialogOpen}
     onClose={() => setShouldCreateNotificationDialogOpen(false)}
+   />
+   <PaymentCash
+    open={shouldCreatePaymentDialogOpen}
+    onClose={() => setShouldCreatePaymentDialogOpen(false)}
    />
   </>
  );

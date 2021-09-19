@@ -31,7 +31,7 @@ export default function CustomerListResults({ loading, customers }) {
  const { success: notificationSuccess } = useSelector(
   (state) => state.customerNotification
  );
- console.log(notificationSuccess, 'debug noti');
+
  const { setShouldCreateNotificationDialogOpen } = useContext(DialogContext);
  useEffect(() => {
   if (banSuccess) {

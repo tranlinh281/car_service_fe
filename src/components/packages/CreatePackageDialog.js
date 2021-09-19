@@ -44,7 +44,7 @@ const CreatePackageDialog = ({ open, onClose }) => {
    return (accumulator += currentValue.price);
   }, 0);
 
-  setTotalPrice(total - total * 0.1);
+  setTotalPrice(total);
  };
 
  return (

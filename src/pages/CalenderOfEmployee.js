@@ -37,9 +37,13 @@ const useStyles = makeStyles({
  calendarContent: {
   '& > .rbc-time-view > .rbc-time-content': {
    display: 'none'
+  },
+  '& > .rbc-time-view > .rbc-time-header > .rbc-time-header-gutter': {
+   display: 'none'
   }
  }
 });
+
 function Event({ ...props }) {
  const approved = props.event.isApproved;
  const noteAdmin = props.event.noteAdmin;
@@ -74,6 +78,7 @@ function Event({ ...props }) {
   </>
  );
 }
+
 const EventAgenda = ({ ...props }) => {
  const dispatch = useDispatch();
  const [confirmDialog, setConfirmDialog] = useState({
@@ -108,7 +113,9 @@ const EventAgenda = ({ ...props }) => {
    </Box>
 
    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-    <Box sx={{ marginRight: 'auto' }}>Lý do: {props.event.noteEmp}</Box>
+    <Box sx={{ marginRight: 'auto' }}>
+     Lý do:<b> {props.event.noteEmp}</b>
+    </Box>
     <Box>
      {approved === null ? (
       <Box>
@@ -166,7 +173,7 @@ const CalenderOfEmployee = () => {
 
  const dispatch = useDispatch();
  const dataItem = data.itemsList;
-
+ console.log(dataItem, 'debug calenda');
  let eventList = [];
 
  if (dataItem && dataItem.length) {
@@ -220,13 +227,18 @@ const CalenderOfEmployee = () => {
         localizer={localizer}
         views={['week', 'agenda']}
         defaultView={'week'}
-        eventPropGetter={(eventList) => {
-         const backgroundColor =
-          eventList.isApproved === true
-           ? 'Green'
-           : eventList.isApproved === false
-           ? 'red'
-           : 'primary';
+        eventPropGetter={(event) => {
+         let backgroundColor = '#F7CB73';
+
+         switch (event.isApproved) {
+          case true:
+           backgroundColor = '#2BC38B';
+           break;
+          case false:
+           backgroundColor = '#D9512C';
+           break;
+         }
+
          return { style: { backgroundColor } };
         }}
        />

@@ -49,7 +49,12 @@ import {
  listEmployeeAbsentReducer,
  updateEmployeeAbsentReducer
 } from './reducers/userReducer';
-import { listOrderReducer } from './reducers/orderReducer';
+import {
+ listOrderByIDReducer,
+ listOrderReducer,
+ listOrderStatusReducer,
+ paymentCashReducer
+} from './reducers/orderReducer';
 import {
  listAllTransactionReducer,
  listTransactionReducer
@@ -102,7 +107,10 @@ const reducer = combineReducers({
  transactionAllList: listAllTransactionReducer,
  customerNotification: customerNotificationReducer,
  employeeAbsentList: listEmployeeAbsentReducer,
- updateAbsentEmployee: updateEmployeeAbsentReducer
+ updateAbsentEmployee: updateEmployeeAbsentReducer,
+ orderStatusList: listOrderStatusReducer,
+ orderStatusIdList: listOrderByIDReducer,
+ paymentCash: paymentCashReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

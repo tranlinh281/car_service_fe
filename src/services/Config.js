@@ -11,6 +11,8 @@ export const COUPON = 'coupons';
 export const ORDERS = 'orders';
 export const EMPLOYEE = 'employees';
 export const DETAILED = 'detailed';
+export const DETAILS = 'details';
+export const STATUS = 'status';
 export const PACKAGES = 'packages';
 export const ABSENCE = 'absences';
 export const TRANSACTION = 'transactions';
@@ -39,6 +41,7 @@ export const INSERT_MANUFACTURER = '?manufacturer=';
 export const FULLNAME_SEARCH = 'fullnameSearch=';
 export const isBANNED = '&isBanned=';
 export const BAN = 'ban?';
+export const STATU = '&status=Đợi thanh toán';
 export const NOTIFICATION = 'notifications';
 
 //Login
@@ -154,6 +157,10 @@ export const DELETE_COUPON = GET_COUPON_LIST_URL + QUESTION_MARK + COUPONID;
 
 //order
 export const GET_ORDER_LIST_URL = BASE_URL + ORDERS;
+export const GET_ORDER_LIST_BY_ID = GET_ORDER_LIST_URL + FORWARD_SLASH;
+export const PAYMENT_CASH_BY_ADMIN = GET_ORDER_LIST_BY_ID + STATUS;
+export const getOrderPagingURL = (page = 1) =>
+ GET_ORDER_LIST_URL + PAGING + PAGENUMBER + page + PAGESIZE + STATU;
 
 //transactions
 export const GET_ORDER_PAYMENT_LIST_URL = BASE_URL + TRANSACTION;

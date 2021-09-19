@@ -98,6 +98,16 @@ export default function UpdateAbsentDialog({ data, open, onClose }) {
           />
           <TextField
            fullWidth
+           label="Nội dung xin nghỉ"
+           margin="normal"
+           defaultValue={data.noteEmp}
+           variant="outlined"
+           InputProps={{
+            readOnly: true
+           }}
+          />
+          <TextField
+           fullWidth
            label="Ngày nghỉ"
            margin="normal"
            defaultValue={dateStart}
