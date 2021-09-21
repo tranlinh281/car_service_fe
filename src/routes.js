@@ -1,20 +1,18 @@
 import { Navigate } from 'react-router-dom';
 import DashboardLayout from 'src/components/DashboardLayout';
 import MainLayout from 'src/components/MainLayout';
-import Account from 'src/pages/Account';
+import AccessoryList from 'src/pages/AccessoryList';
 import CustomerList from 'src/pages/CustomerList';
 import Dashboard from 'src/pages/Dashboard';
+import EmployeeList from 'src/pages/EmployeeList';
 import Login from 'src/pages/Login';
 import NotFound from 'src/pages/NotFound';
-import AccessoryList from 'src/pages/AccessoryList';
-import Settings from 'src/pages/Settings';
-import EmployeeList from 'src/pages/EmployeeList';
-import Manufacturer from './pages/ManufacturerList';
-import ServiceList from './pages/ServiceList';
-import Report from './pages/Report';
-import PackageList from './pages/PackageList';
 import CalenderOfEmployee from './pages/CalenderOfEmployee';
+import Manufacturer from './pages/ManufacturerList';
 import OrderPaymentList from './pages/OrderPaymentList';
+import PackageList from './pages/PackageList';
+import Report from './pages/Report';
+import ServiceList from './pages/ServiceList';
 const routes = [
  {
   path: '/',
@@ -30,7 +28,6 @@ const routes = [
   path: 'app',
   element: <DashboardLayout />,
   children: [
-   { path: 'account', element: <Account /> },
    { path: 'customers', element: <CustomerList /> },
    { path: 'manufacturer', element: <Manufacturer /> },
    { path: 'dashboard', element: <Dashboard /> },

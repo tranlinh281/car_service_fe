@@ -74,6 +74,12 @@ export const calenderHeader = [
  { id: 3, title: 'Nội dung' },
  { id: 4, title: '' }
 ];
+export const receiptHeader = [
+ { id: 1, title: 'Tên gói dịch vụ' },
+ { id: 2, title: 'Tên dịch vụ' },
+ { id: 4, title: '' },
+ { id: 3, title: 'Giá tiền' }
+];
 export const paymentHeader = [
  { id: 1, title: 'Họ và tên' },
  { id: 2, title: 'Điện thoại' },

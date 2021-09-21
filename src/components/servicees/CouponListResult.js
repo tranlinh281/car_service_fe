@@ -8,27 +8,16 @@ import {
  TableHead,
  TableRow
 } from '@material-ui/core';
-import { Edit, Close, LocalOffer } from '@material-ui/icons';
+import { Close, Edit, LocalOffer } from '@material-ui/icons';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import React, { useContext, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteCoupon, deleteService } from 'src/actions/serviceAction';
+import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import { couponHeader } from 'src/services/HeaderTitleTable';
 import ButtonAction from '../ButtonAction';
-import React, { useContext, useEffect, useState } from 'react';
-import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import ConfirmDialog from '../dialog/dialogConfirm';
-import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
-import { deleteCoupon, deleteService } from 'src/actions/serviceAction';
-import {
- CREATE_COUPON_SUCCESS,
- CREATE_SERVICE_SUCCESS,
- CREATE_SERVICE_TYPE_SUCCESS,
- DELETE_COUPON_SUCCESS,
- DELETE_SERVICE_SUCCESS,
- EDIT_COUPON_SUCCESS,
- EDIT_SERVICE_SUCCESS
-} from 'src/constants/serviceConstant';
-import { triggerReload } from 'src/actions/userAction';
 
 const numberFormat = (value) =>
  new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(

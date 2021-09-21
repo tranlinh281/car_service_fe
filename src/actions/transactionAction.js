@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import moment from 'moment';
 import {
  TRANSACTION_ALL_LIST_FAIL,
  TRANSACTION_ALL_LIST_REQUEST,
@@ -45,54 +46,145 @@ export const listTransaction = (keySearch, page) => async (dispatch) => {
  }
 };
 
-export const listAllTransaction = () => async (dispatch) => {
+export const listAllDayTransaction = () => async (dispatch) => {
  dispatch({ type: TRANSACTION_ALL_LIST_REQUEST });
  try {
   const { data } = await Axios.get(GET_ORDER_PAYMENT_LIST_URL);
-
-  const arrayStatus = data?.map((order) => ({
-   stat: order.total,
-   dateTime: new Date(order.bookingTime)
+  console.log(data, 'debug data action transaction');
+  const arrayDate = data?.map((order) => ({
+   total: order.total,
+   dateTime: new Date(order.date).getDate()
   }));
-  const totalDate = arrayStatus.reduce(
-   (total, x) => (x.stat === x.dateTime.getDate() ? total + 1 : total),
-   0
-  );
-  const totalMonth = arrayStatus.reduce(
-   (total, x) => (x.stat === x.dateTime.getMonth() ? total + 1 : total),
-   0
-  );
-  const allOrder = arrayStatus.reduce((total, x) => (x ? total + 1 : total), 0);
+  const arrayMonth = data?.map((order) => ({
+   total: order.total,
+   dateTime: new Date(order.date).getMonth()
+  }));
 
-  const accept = arrayStatus.reduce(
+  const totalThisMonth = arrayMonth.reduce(
    (total, x) =>
-    x.stat === 'Đã xác nhận' && x.dateTime === new Date().getDate()
-     ? total + 1
-     : total,
+    x.dateTime === new Date().getMonth() ? total + x.total : total,
    0
   );
-  const done = arrayStatus.reduce(
+
+  const totalMonth = arrayMonth.reduce(
+   (total, x) => (x.dateTime === 0 ? total + x.total : total),
+   0
+  );
+
+  const totalMonth1 = arrayMonth.reduce(
+   (total, x) => (x.dateTime === 1 ? total + x.total : total),
+   0
+  );
+  const totalMonth2 = arrayMonth.reduce(
+   (total, x) => (x.dateTime === 2 ? total + x.total : total),
+   0
+  );
+  const totalMonth3 = arrayMonth.reduce(
+   (total, x) => (x.dateTime === 3 ? total + x.total : total),
+   0
+  );
+  const totalMonth4 = arrayMonth.reduce(
+   (total, x) => (x.dateTime === 4 ? total + x.total : total),
+   0
+  );
+  const totalMonth5 = arrayMonth.reduce(
+   (total, x) => (x.dateTime === 5 ? total + x.total : total),
+   0
+  );
+  const totalMonth6 = arrayMonth.reduce(
+   (total, x) => (x.dateTime === 6 ? total + x.total : total),
+   0
+  );
+  const totalMonth7 = arrayMonth.reduce(
+   (total, x) => (x.dateTime === 7 ? total + x.total : total),
+   0
+  );
+
+  const totalMonth8 = arrayMonth.reduce(
+   (total, x) => (x.dateTime === 8 ? total + x.total : total),
+   0
+  );
+  const totalMonth9 = arrayMonth.reduce(
+   (total, x) => (x.dateTime === 9 ? total + x.total : total),
+   0
+  );
+  const totalMonth10 = arrayMonth.reduce(
+   (total, x) => (x.dateTime === 10 ? total + x.total : total),
+   0
+  );
+  const totalMonth11 = arrayMonth.reduce(
+   (total, x) => (x.dateTime === 11 ? total + x.total : total),
+   0
+  );
+
+  const totalToday = arrayDate.reduce(
    (total, x) =>
-    x.stat === 'Hoàn thành' && x.dateTime === new Date().getDate()
-     ? total + 1
-     : total,
+    x.dateTime === new Date().getDate() ? total + x.total : total,
    0
   );
-  const doneAll = arrayStatus.reduce(
-   (total, x) => (x.stat === 'Hoàn thành' ? total + 1 : total),
+  const totalToPre = arrayDate.reduce(
+   (total, x) =>
+    x.dateTime === new Date().getDate() - 1 ? total + x.total : total,
    0
   );
-  const cancelDay = arrayStatus.reduce(
-   (total, x) => (x.stat === 'Đã hủy' ? total + 1 : total),
+  const totalToPre1 = arrayDate.reduce(
+   (total, x) =>
+    x.dateTime === new Date().getDate() - 2 ? total + x.total : total,
    0
   );
-  const dateTimeCount = arrayStatus.reduce(
-   (total, x) => (x.dateTime === new Date().getDate() ? total + 1 : total),
+  const totalToPre2 = arrayDate.reduce(
+   (total, x) =>
+    x.dateTime === new Date().getDate() - 3 ? total + x.total : total,
+   0
+  );
+  const totalToPre3 = arrayDate.reduce(
+   (total, x) =>
+    x.dateTime === new Date().getDate() - 4 ? total + x.total : total,
+   0
+  );
+  const totalToPre4 = arrayDate.reduce(
+   (total, x) =>
+    x.dateTime === new Date().getDate() - 5 ? total + x.total : total,
+   0
+  );
+  const totalToPre5 = arrayDate.reduce(
+   (total, x) =>
+    x.dateTime === new Date().getDate() - 6 ? total + x.total : total,
    0
   );
 
-  const dataCount = { totalDate, totalMonth };
+  const lineChartMonth = [
+   totalMonth,
+   totalMonth1,
+   totalMonth2,
+   totalMonth3,
+   totalMonth4,
+   totalMonth5,
+   totalMonth6,
+   totalMonth7,
+   totalMonth8,
+   totalMonth9,
+   totalMonth10,
+   totalMonth11
+  ];
+  const lineChartDate = [
+   totalToPre5,
+   totalToPre4,
+   totalToPre3,
+   totalToPre2,
+   totalToPre1,
+   totalToPre,
+   totalToday
+  ];
+  console.log(lineChartMonth, 'debug array month');
 
+  const dataCount = {
+   lineChartDate,
+   lineChartMonth,
+   totalToday,
+   totalThisMonth
+  };
+  console.log(dataCount, 'debug array');
   dispatch({ type: TRANSACTION_ALL_LIST_SUCCESS, payload: dataCount });
  } catch (error) {
   const message =

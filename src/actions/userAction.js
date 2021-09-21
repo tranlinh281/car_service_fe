@@ -183,7 +183,7 @@ export const updateAbsenceEmployee = (dataNew) => async (dispatch) => {
 
  try {
   const { data } = await Axios.put(UPDATE_ABSENT_EMPLOYEE_URL, arr);
-  console.log(data, 'debug usser action');
+
   dispatch({ type: EDIT_EMPLOYEE_ABSENT_SUCCESS, payload: data });
   dispatch(triggerReload({}));
  } catch (error) {

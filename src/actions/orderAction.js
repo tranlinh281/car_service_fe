@@ -38,7 +38,6 @@ export const listAllOrderWithID = (id) => async (dispatch) => {
  dispatch({ type: ORDER_STATUS_ID_REQUEST });
  try {
   const { data } = await Axios.get(GET_ORDER_LIST_BY_ID + id);
-  console.log(data, 'debug action');
   dispatch({ type: ORDER_STATUS_ID_SUCCESS, payload: data });
  } catch (error) {
   const message =
@@ -53,7 +52,6 @@ export const listAllOrder = () => async (dispatch) => {
  dispatch({ type: ORDER_LIST_REQUEST });
  try {
   const { data } = await Axios.get(GET_ORDER_LIST_URL);
-
   const arrayStatus = data?.map((order) => ({
    stat: order.status,
    dateTime: new Date(order.bookingTime).getDate()
@@ -124,7 +122,7 @@ export const paymentCashByAdmin = (dataNew) => async (dispatch) => {
  });
 
  try {
-  const { data } = await Axios.put(PAYMENT_CASH_BY_ADMIN, param);
+  const { data } = await Axios.put(PAYMENT_CASH_BY_ADMIN, dataNew);
 
   console.log('debug paymentSuccess action', data);
 

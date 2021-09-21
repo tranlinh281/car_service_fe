@@ -1,7 +1,7 @@
 import { Box, Grid } from '@material-ui/core';
 import { React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listAllTransaction } from 'src/actions/transactionAction';
+import { listAllDayTransaction } from 'src/actions/transactionAction';
 import * as constant from '../../utils/Constants';
 import TotalProfits from './TotalProfits';
 export default function CardOfProfit() {
@@ -10,7 +10,7 @@ export default function CardOfProfit() {
 
  console.log(data, 'debug card of profit');
  useEffect(() => {
-  dispatch(listAllTransaction());
+  dispatch(listAllDayTransaction());
  }, [dispatch]);
 
  return (
@@ -19,7 +19,7 @@ export default function CardOfProfit() {
     <TotalProfits
      sx={{ height: '100%' }}
      title={constant.TOTAL_PROFIT_TODAY}
-     number={data.totalDate}
+     number={data.totalToday}
      colorBack="#5664d2"
     />
    </Grid>
@@ -47,7 +47,7 @@ export default function CardOfProfit() {
      <TotalProfits
       sx={{ height: '100%' }}
       title={constant.TOTAL_PROFIT_MOTH}
-      number={data.totalMonth}
+      number={data.totalThisMonth}
       colorBack="#DE9230"
      />
     </Grid>

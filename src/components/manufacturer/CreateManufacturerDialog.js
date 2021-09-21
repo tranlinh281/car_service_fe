@@ -31,7 +31,6 @@ const CreateManufacturerDialog = ({ data, open, onClose }) => {
  const [name, setName] = useState();
  const [image, setImage] = useState(null);
  const [url, setURL] = useState('');
- const [progress, setProgress] = useState(0);
  const [errorImage, setErrorImage] = useState('');
  const [imageUrl, setImageUrl] = useState('');
  const [manufacturerModels, setManufacturerModels] = useState();

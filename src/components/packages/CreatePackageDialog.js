@@ -32,7 +32,7 @@ const CreatePackageDialog = ({ open, onClose }) => {
    price,
    serviceIdList: services.map((service) => service.id)
   };
-  console.log(mappedData, 'debug ');
+
   dispatch(createPackage(mappedData));
   onClose();
  };

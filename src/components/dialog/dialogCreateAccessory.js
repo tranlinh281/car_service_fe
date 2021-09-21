@@ -44,7 +44,6 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
  const [accessoryModels, setAccessoryModels] = useState();
  const [image, setImage] = useState(null);
  const [url, setURL] = useState('');
- const [progress, setProgress] = useState(0);
  const [errorImage, setErrorImage] = useState('');
  const [imageUrl, setImageUrl] = useState('');
 

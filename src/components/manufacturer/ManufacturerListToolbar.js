@@ -19,9 +19,7 @@ export default function ManufacturerListToolbar({ setPage, setKeySearch }) {
  const handleOpenCreateDialog = () => {
   setShouldCreateManufacturerDialogOpen(true);
  };
- const handleOpenCreateModelDialog = () => {
-  setShouldCreateModelDialogOpen(true);
- };
+ 
  return (
   <Box>
    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>

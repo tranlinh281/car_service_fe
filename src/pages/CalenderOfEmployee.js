@@ -49,15 +49,15 @@ function Event({ ...props }) {
  const noteAdmin = props.event.noteAdmin;
  let titelTool;
  if (noteAdmin === '' || noteAdmin === null) {
-  titelTool = 'Đã Từ chối';
+  titelTool = constant.TITLE_DENNY;
  } else {
-  titelTool = 'Đã Từ chối, Lý do: ' + noteAdmin;
+  titelTool = constant.TITLE_DENNY_WITH_COMMENT + noteAdmin;
  }
 
  return (
   <>
    {approved === true ? (
-    <Tooltip title="Đã duyệt">
+    <Tooltip title={constant.TITLE_ACCEPT}>
      <span>
       <strong>{props.title}</strong>
      </span>
@@ -69,7 +69,7 @@ function Event({ ...props }) {
      </span>
     </Tooltip>
    ) : (
-    <Tooltip title="Chưa duyệt">
+    <Tooltip title={constant.TITLE_PENDING}>
      <span>
       <strong>{props.title}</strong>
      </span>

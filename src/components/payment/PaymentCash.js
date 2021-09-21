@@ -15,6 +15,8 @@ import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { paymentCashByAdmin } from 'src/actions/orderAction';
 import LoadingBox from '../LoadingBox';
+import * as constant from '../../utils/Constants';
+import { receiptHeader } from 'src/services/HeaderTitleTable';
 
 const numberFormat = (value) =>
  new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(
@@ -28,11 +30,16 @@ const PaymentCash = ({ open, onClose }) => {
  let paymentDetail = null;
 
  if (order?.customer) {
-  const totalPrice = order.packages.reduce(
+  const totalPricePackage = order.packages.reduce(
    (total, item) => (item.price ? total + item.price : total),
    0
   );
-
+  const totalPriceOrder = order.orderDetails.reduce(
+   (total, item) => (item.price ? total + item.price : total),
+   0
+  );
+  const totalPrice = totalPricePackage + totalPriceOrder;
+  console.log(order, 'debug payment');
   paymentDetail = {
    id: order.id,
    fullname: order.customer.fullname,
@@ -43,6 +50,11 @@ const PaymentCash = ({ open, onClose }) => {
    manufacturer: order.vehicle.manufacturer,
    licensePlate: order.vehicle.licensePlate,
    totalPrice,
+   orderDetail: order.orderDetails?.map((item) => ({
+    packageName: constant.TITLE_ANOTHER,
+    name: item.name,
+    price: item.price
+   })),
    packages: order.packages?.map((item) => ({
     name: item.name,
     price: item.price,
@@ -54,9 +66,8 @@ const PaymentCash = ({ open, onClose }) => {
  const paymentByCash = (id) => {
   const dataNew = {
    id,
-   status: 'Hoàn thành'
+   status: constant.STATUS_DONE
   };
-  console.log('debug data new cash', dataNew);
   dispatch(paymentCashByAdmin(dataNew));
  };
 
@@ -76,55 +87,70 @@ const PaymentCash = ({ open, onClose }) => {
      </Grid>
      <Grid container justifyContent="flex-end" px={2}>
       <Typography variant="body1">
-       Ngày: {paymentDetail?.checkinTime}
+       <b>Ngày:</b> {paymentDetail?.checkinTime}
       </Typography>
      </Grid>
      <Grid container px={2}>
       <Typography variant="body1">
-       Khách hàng: {paymentDetail?.fullname}
-      </Typography>
-     </Grid>
-     <Grid container px={2}>
-      <Typography variant="body1">Địa chỉ: {paymentDetail?.address}</Typography>
-     </Grid>
-     <Grid container px={2}>
-      <Typography variant="body1">
-       Số điện thoại: {paymentDetail?.phoneNumber}
-      </Typography>
-     </Grid>
-     <Grid container px={2}>
-      <Typography variant="body1">Email: {paymentDetail?.email}</Typography>
-     </Grid>
-     <Grid container px={2}>
-      <Typography variant="body1">
-       Hãng: {paymentDetail?.manufacturer}
+       <b>Khách hàng: </b> {paymentDetail?.fullname}
       </Typography>
      </Grid>
      <Grid container px={2}>
       <Typography variant="body1">
-       Biển kiểm soát: {paymentDetail?.licensePlate}
+       <b>Địa chỉ: </b>
+       {paymentDetail?.address}
+      </Typography>
+     </Grid>
+     <Grid container px={2}>
+      <Typography variant="body1">
+       <b>Số điện thoại: </b> {paymentDetail?.phoneNumber}
+      </Typography>
+     </Grid>
+     <Grid container px={2}>
+      <Typography variant="body1">
+       <b>Email: </b> {paymentDetail?.email}
+      </Typography>
+     </Grid>
+     <Grid container px={2}>
+      <Typography variant="body1">
+       <b>Hãng: </b> {paymentDetail?.manufacturer}
+      </Typography>
+     </Grid>
+     <Grid container px={2}>
+      <Typography variant="body1">
+       <b>Biển kiểm soát:</b> {paymentDetail?.licensePlate}
       </Typography>
      </Grid>
      <Grid container py={2}>
       <Table>
        <TableHead>
         <TableRow>
-         <TableCell>Tên gói dịch vụ</TableCell>
-         <TableCell>Tên dịch vụ</TableCell>
-         <TableCell></TableCell>
-         <TableCell>Giá Tiền</TableCell>
+         {receiptHeader.map((headCell) => (
+          <TableCell key={headCell.id}>{headCell.title}</TableCell>
+         ))}
         </TableRow>
        </TableHead>
        <TableBody>
-        {/* {JSON.stringify(paymentDetail.packages)} */}
         {paymentDetail?.packages?.map((item) => (
          <TableRow>
           <TableCell>{item.name}</TableCell>
-          <TableCell>{item.orderDetails.join(', ')}</TableCell>
+          <TableCell>{item.orderDetails.join(', ')}</TableCell>;
+          <TableCell>{numberFormat(item.price)}</TableCell>
+         </TableRow>
+        ))}
+        {paymentDetail?.orderDetail?.map((item) => (
+         <TableRow>
+          <TableCell>
+           <b>{item.packageName}</b>
+          </TableCell>
+          <TableCell>{item.name}</TableCell>
           <TableCell></TableCell>
           <TableCell>{numberFormat(item.price)}</TableCell>
          </TableRow>
         ))}
+       </TableBody>
+       <TableBody>
+        <TableRow></TableRow>
         <TableRow>
          <TableCell></TableCell>
          <TableCell></TableCell>
