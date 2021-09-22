@@ -1,5 +1,4 @@
 import moment from 'moment';
-import { useSelector } from 'react-redux';
 
 export const arrMonth = [
  'January',
@@ -15,6 +14,7 @@ export const arrMonth = [
  'November',
  'February'
 ];
+
 const dateTimes = moment(new Date()).format('dddd');
 const dateMinus1 = moment(new Date()).subtract(1, 'day').format('dddd');
 const dateMinus2 = moment(new Date()).subtract(2, 'day').format('dddd');

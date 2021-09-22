@@ -1,5 +1,5 @@
 import { Box, Divider, Drawer, Hidden, List } from '@material-ui/core';
-import { Build, CalendarToday, LocalAtm } from '@material-ui/icons';
+import { Build, CalendarToday, HistoryEdu, LocalAtm } from '@material-ui/icons';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import {
@@ -71,6 +71,11 @@ const items = [
   href: '/app/orders',
   icon: LocalAtm,
   title: constants.ORDER_PAYMENT_TITLE
+ },
+ {
+  href: '/app/history',
+  icon: HistoryEdu,
+  title: constants.ORDER_HISTORY_TITLE
  }
 ];
 

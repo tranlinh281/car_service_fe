@@ -11,21 +11,19 @@ import {
  TableRow,
  Typography
 } from '@material-ui/core';
+import { Close } from '@material-ui/icons';
 import { memo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { paymentCashByAdmin } from 'src/actions/orderAction';
-import LoadingBox from '../LoadingBox';
-import * as constant from '../../utils/Constants';
+import { useSelector } from 'react-redux';
 import { receiptHeader } from 'src/services/HeaderTitleTable';
+import * as constant from '../../utils/Constants';
+import LoadingBox from '../LoadingBox';
 
 const numberFormat = (value) =>
  new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(
   value
  );
-const PaymentCash = ({ open, onClose }) => {
- const dispatch = useDispatch();
+const HistoryCash = ({ open, onClose }) => {
  const { order } = useSelector((state) => state.orderStatusIdList);
- const { loading: paymentLoading } = useSelector((state) => state.paymentCash);
 
  let paymentDetail = null;
  console.log(order, 'debug data payment');
@@ -62,14 +60,6 @@ const PaymentCash = ({ open, onClose }) => {
   };
  }
 
- const paymentByCash = (id) => {
-  const dataNew = {
-   id,
-   status: constant.STATUS_DONE
-  };
-  dispatch(paymentCashByAdmin(dataNew));
- };
-
  return (
   <Dialog
    onClose={onClose}
@@ -79,9 +69,16 @@ const PaymentCash = ({ open, onClose }) => {
   >
    {order ? (
     <Box minWidth="768px">
+     <DialogActions>
+      <Button type="reset" onClick={onClose} color="secondary">
+       <Close fontSize="small" color="secondary" />
+      </Button>
+     </DialogActions>
+
      <Grid container px={2} py={4}>
       <Typography variant="h2" color="primary">
        {constant.TITLE_RECEIPT}
+       {constant.TITLE_DONE}
       </Typography>
      </Grid>
      <Grid container justifyContent="flex-end" px={2}>
@@ -159,20 +156,6 @@ const PaymentCash = ({ open, onClose }) => {
        </TableBody>
       </Table>
      </Grid>
-     <DialogActions>
-      <Button autoFocus type="reset" onClick={onClose} color="secondary">
-       {constant.TITLE_CANCEL}
-      </Button>
-      <Button
-       autoFocus
-       type="submit"
-       color="primary"
-       onClick={() => paymentByCash(paymentDetail.id)}
-       left
-      >
-       {constant.TITLE_PAID}
-      </Button>
-     </DialogActions>
     </Box>
    ) : (
     <Box
@@ -189,4 +172,4 @@ const PaymentCash = ({ open, onClose }) => {
  );
 };
 
-export default memo(PaymentCash);
+export default memo(HistoryCash);

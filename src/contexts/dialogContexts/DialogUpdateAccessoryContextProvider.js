@@ -193,6 +193,15 @@ const DialogContextProvider = ({ children }) => {
   shouldCreatePaymentDialogOpen,
   setShouldCreatePaymentDialogOpen
  };
+ // --------------------------------------
+ // Context State of view order  dialog
+ const [shouldViewPaymentDialogOpen, setShouldViewPaymentDialogOpen] =
+  useState(false);
+
+ const viewDialogPaymentState = {
+  shouldViewPaymentDialogOpen,
+  setShouldViewPaymentDialogOpen
+ };
 
  const defaultProviderValue = {
   ...updateDialogAccessoryState,
@@ -211,7 +220,8 @@ const DialogContextProvider = ({ children }) => {
   ...createDialogTypeState,
   ...createDialogNotificationState,
   ...updateDialogAbsentState,
-  ...createDialogPaymentState
+  ...createDialogPaymentState,
+  ...viewDialogPaymentState
  };
 
  return (

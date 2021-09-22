@@ -51,6 +51,7 @@ import {
 } from './reducers/userReducer';
 import {
  listOrderByIDReducer,
+ listOrderDoneReducer,
  listOrderReducer,
  listOrderStatusReducer,
  paymentCashReducer
@@ -110,6 +111,7 @@ const reducer = combineReducers({
  updateAbsentEmployee: updateEmployeeAbsentReducer,
  orderStatusList: listOrderStatusReducer,
  orderStatusIdList: listOrderByIDReducer,
+ orderStatusDoneList: listOrderDoneReducer,
  paymentCash: paymentCashReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

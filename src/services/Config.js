@@ -41,7 +41,7 @@ export const INSERT_MANUFACTURER = '?manufacturer=';
 export const FULLNAME_SEARCH = 'fullnameSearch=';
 export const isBANNED = '&isBanned=';
 export const BAN = 'ban?';
-export const STATU = '&status=Đợi thanh toán';
+export const STATU = '&status=';
 export const NOTIFICATION = 'notifications';
 
 //Login

@@ -173,7 +173,7 @@ const CalenderOfEmployee = () => {
 
  const dispatch = useDispatch();
  const dataItem = data.itemsList;
- console.log(dataItem, 'debug calenda');
+
  let eventList = [];
 
  if (dataItem && dataItem.length) {
