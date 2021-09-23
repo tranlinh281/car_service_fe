@@ -20,6 +20,7 @@ import { useContext, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { triggerReload } from 'src/actions/userAction';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
+import * as constant from 'src/utils/Constants';
 
 export default function ManufacturerListResults({ loading, manufacturers }) {
  const { success: createSuccess } = useSelector(
@@ -39,7 +40,7 @@ export default function ManufacturerListResults({ loading, manufacturers }) {
  const dispatch = useDispatch();
  useEffect(() => {
   if (createSuccess) {
-   toast.success('Thêm mới hãng xe thành công!');
+   toast.success(constant.POPUP_ADD_PACKAGE);
    // Should create action creator for this
    dispatch({ type: CREATE_MANUFACTURER_SUCCESS, payload: false });
    dispatch(triggerReload({}));
@@ -47,7 +48,7 @@ export default function ManufacturerListResults({ loading, manufacturers }) {
    setShouldCreateManufacturerDialogOpen(false);
   }
   if (createModelSuccess) {
-   toast.success('Thêm mới đời xe thành công!');
+   toast.success(constant.POPUP_ADD_MODEL);
    // Should create action creator for this
    dispatch({ type: CREATE_MODEL_SUCCESS, payload: false });
    dispatch(triggerReload({}));
@@ -55,7 +56,7 @@ export default function ManufacturerListResults({ loading, manufacturers }) {
    setShouldCreateModelDialogOpen(false);
   }
   if (editManufacturer) {
-   toast.success('Chỉnh sửa hãng xe thành công!');
+   toast.success(constant.POPUP_UPDATE_MANUFACTUER);
    // Should create action creator for this
    dispatch({ type: EDIT_MANUFACTURER_SUCCESS, payload: false });
    dispatch(triggerReload({}));

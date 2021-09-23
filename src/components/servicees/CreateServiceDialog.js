@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import { createService, listServiceType } from 'src/actions/serviceAction';
 import { DisplayingErrorMessagesCreateServiceSchema } from 'src/services/ValidConstants';
+import * as constant from 'src/utils/Constants';
 
 export default function CreateServiceDialog({ data, open, onClose }) {
  const { types } = useSelector((state) => state.typeList);
@@ -89,13 +90,15 @@ export default function CreateServiceDialog({ data, open, onClose }) {
       fullWidth={true}
      >
       <Form>
-       <DialogTitle id="customized-dialog-title">Thêm mới dịch vụ</DialogTitle>
+       <DialogTitle id="customized-dialog-title">
+        {constant.TITLE_ADD_SERVICE}
+       </DialogTitle>
        <DialogContent dividers>
         <DialogContentText>
          <Grid item>
           <TextField
            fullWidth
-           label="Tên Dịch vụ"
+           label={constant.LABEL_NAME_SERVICE}
            error={!!errors.name}
            helperText={errors.name}
            value={values.name}
@@ -108,7 +111,7 @@ export default function CreateServiceDialog({ data, open, onClose }) {
           />
           <TextField
            fullWidth
-           label="Giá "
+           label={constant.LABEL_PRICE_SERVICE}
            error={!!errors.price}
            helperText={errors.price}
            value={values.price}
@@ -126,7 +129,7 @@ export default function CreateServiceDialog({ data, open, onClose }) {
            fullWidth
            error={!!errors.type}
           >
-           <InputLabel>Phân Loại</InputLabel>
+           <InputLabel>{constant.LABEL_TYPE_SERVICE}</InputLabel>
            <Select
             name="type"
             error={!!errors.type}
@@ -135,7 +138,7 @@ export default function CreateServiceDialog({ data, open, onClose }) {
             onBlur={handleBlur}
             onChange={handleChange}
             required
-            label="Phân Loại"
+            label={constant.LABEL_TYPE_SERVICE}
            >
             {types?.map((type) => (
              <MenuItem value={type.name}>{type.name}</MenuItem>
@@ -148,10 +151,10 @@ export default function CreateServiceDialog({ data, open, onClose }) {
        </DialogContent>
        <DialogActions>
         <Button autoFocus type="reset" onClick={onClose} color="secondary">
-         Hủy
+         {constant.TITLE_CANCEL}
         </Button>
         <Button autoFocus type="submit" color="primary" left>
-         Lưu
+         {constant.TITLE_SAVE}
         </Button>
        </DialogActions>
       </Form>

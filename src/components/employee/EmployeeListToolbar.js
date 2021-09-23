@@ -10,6 +10,7 @@ import {
 import { useContext } from 'react';
 import { Search as SearchIcon } from 'react-feather';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
+import * as constant from 'src/utils/Constants';
 
 export default function EmployeeListToolbar({ setPage, setKeySearch }) {
  const { setShouldCreateEmployeeDialogOpen } = useContext(DialogContext);
@@ -29,7 +30,7 @@ export default function EmployeeListToolbar({ setPage, setKeySearch }) {
      color="primary"
      onClick={handleOpenCreateDialog}
     >
-     Thêm Nhân viên
+     {constant.TITLE_ADD_EMPLOYEE}
     </Button>
    </Box>
    <Box sx={{ mt: 3 }}>
@@ -52,7 +53,7 @@ export default function EmployeeListToolbar({ setPage, setKeySearch }) {
          setKeySearch(e.target.value);
          setPage(1);
         }}
-        placeholder="Tìm kiếm nhân viên"
+        placeholder={constant.TITLE_SEARCHING_EMPLOYEE}
         variant="outlined"
        />
       </Box>

@@ -1,17 +1,16 @@
 import {
  Box,
+ Button,
  Card,
  CardContent,
- TextField,
  InputAdornment,
  SvgIcon,
- Button
+ TextField
 } from '@material-ui/core';
 import { useContext } from 'react';
 import { Search as SearchIcon } from 'react-feather';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
-import CreateServiceTypeDialog from './CreateServiceTypeDialog';
-
+import * as constant from 'src/utils/Constants';
 export default function ServiceListToolbar({ setPage, setKeySearch }) {
  const { setShouldCreateServiceDialogOpen, setShouldCreateTypeDialogOpen } =
   useContext(DialogContext);
@@ -30,7 +29,7 @@ export default function ServiceListToolbar({ setPage, setKeySearch }) {
      onClick={handleOpenCreateDialog}
      sx={{ margin: '0 5px' }}
     >
-     Thêm Dịch vụ
+     {constant.TITLE_ADD_SERVICE}
     </Button>
     <Button
      variant="contained"
@@ -38,7 +37,7 @@ export default function ServiceListToolbar({ setPage, setKeySearch }) {
      onClick={handleOpenCreateTypeDialog}
      sx={{ margin: '0 5px' }}
     >
-     Thêm Phân loại dịch vụ
+     {constant.TITLE_ADD_TYPE_SERVICE}
     </Button>
    </Box>
 
@@ -62,7 +61,7 @@ export default function ServiceListToolbar({ setPage, setKeySearch }) {
          setKeySearch(e.target.value);
          setPage(1);
         }}
-        placeholder="Tìm kiếm Dịch vụ"
+        placeholder={constant.TITLE_SEARCHING_SERVICE}
         variant="outlined"
        />
       </Box>

@@ -2,7 +2,7 @@ import { Box, Card, Container, Pagination } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
-import { listAllOrderWithStatusDone } from 'src/actions/orderAction';
+import { listAllOrderWithStatus } from 'src/actions/orderAction';
 import HistoryListResults from 'src/components/history/HistoryListResults';
 import CustomerDialogHOC from 'src/components/_HOCProvider/CustomerDialogHOC';
 import * as constant from '../utils/Constants';
@@ -14,9 +14,9 @@ const OrderHistoryList = () => {
  const [page, setPage] = useState(1);
  const triggerReload = useSelector((state) => state.triggerReload);
  const dispatch = useDispatch();
-
+ const keyword = constant.TITLE_ORDER_PAID;
  useEffect(() => {
-  dispatch(listAllOrderWithStatusDone(page));
+  dispatch(listAllOrderWithStatus(page, keyword));
  }, [dispatch, page, triggerReload]);
 
  const handlePageChange = (_, page) => {

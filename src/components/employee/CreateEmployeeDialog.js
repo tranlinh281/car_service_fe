@@ -18,6 +18,7 @@ import React, { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { createEmployee } from 'src/actions/userAction';
 import { DisplayingErrorMessagesCreateEmployeeSchema } from 'src/services/ValidConstants';
+import * as constant from 'src/utils/Constants';
 
 const CreateEmployeeDialog = ({ open, onClose }) => {
  const dispatch = useDispatch();
@@ -54,7 +55,7 @@ const CreateEmployeeDialog = ({ open, onClose }) => {
     >
      <Form>
       <DialogTitle id="customized-dialog-title" onClose={onClose}>
-       Thêm mới Nhân viên
+       {constant.TITLE_ADD_EMPLOYEE}
       </DialogTitle>
 
       <DialogContent dividers>
@@ -62,7 +63,7 @@ const CreateEmployeeDialog = ({ open, onClose }) => {
        <Grid item>
         <TextField
          fullWidth
-         label="Họ tên"
+         label={constant.TITLE_FULLNAME}
          error={!!errors.fullname}
          helperText={errors.fullname}
          margin="normal"
@@ -76,7 +77,7 @@ const CreateEmployeeDialog = ({ open, onClose }) => {
        <Grid item>
         <TextField
          fullWidth
-         label="Email"
+         label={constant.TITLE_EMAIL}
          margin="normal"
          error={!!errors.email}
          helperText={errors.email}
@@ -91,7 +92,7 @@ const CreateEmployeeDialog = ({ open, onClose }) => {
        <Grid item>
         <TextField
          fullWidth
-         label="Địa chỉ"
+         label={constant.ADDRESS_TITLE}
          error={!!errors.address}
          helperText={errors.address}
          onBlur={handleBlur}
@@ -105,7 +106,7 @@ const CreateEmployeeDialog = ({ open, onClose }) => {
        <Grid item>
         <TextField
          fullWidth
-         label="Số điện thoại"
+         label={constant.TITLE_PHONE}
          error={!!errors.phoneNumber}
          helperText={errors.phoneNumber}
          onBlur={handleBlur}
@@ -123,7 +124,7 @@ const CreateEmployeeDialog = ({ open, onClose }) => {
          <TextField
           id="date"
           name="dateOfBirth"
-          label="Ngày sinh"
+          label={constant.TITLE_DATE_OF_BIRTH}
           type="date"
           InputLabelProps={{
            shrink: true
@@ -143,7 +144,7 @@ const CreateEmployeeDialog = ({ open, onClose }) => {
           fullWidth
           error={!!errors.role}
          >
-          <InputLabel>Vị trí</InputLabel>
+          <InputLabel>{constant.LABEL_ROLE}</InputLabel>
           <Select
            name="role"
            value={values.role}
@@ -153,10 +154,14 @@ const CreateEmployeeDialog = ({ open, onClose }) => {
            InputLabelProps={{
             shrink: true
            }}
-           label="Vị trí"
+           label={constant.LABEL_ROLE}
           >
-           <MenuItem value="manager">Quản lý</MenuItem>
-           <MenuItem value="staff">Kỹ thuật viên</MenuItem>
+           <MenuItem value={constant.VALUE_MANAGER_ENG}>
+            {constant.VALUE_MANAGER_VIE}
+           </MenuItem>
+           <MenuItem value={constant.VALUE_STAFF_ENG}>
+            {constant.VALUE_STAFF_VIE}
+           </MenuItem>
           </Select>
           <FormHelperText>{errors.role}</FormHelperText>
          </FormControl>
@@ -166,10 +171,10 @@ const CreateEmployeeDialog = ({ open, onClose }) => {
       </DialogContent>
       <DialogActions>
        <Button onClick={onClose} type="reset" color="secondary">
-        Hủy
+        {constant.TITLE_CANCEL}
        </Button>
        <Button type="submit" color="primary" left>
-        Lưu
+        {constant.TITLE_SAVE}
        </Button>
       </DialogActions>
      </Form>

@@ -22,6 +22,7 @@ import {
 } from 'src/actions/userAction';
 import ButtonAction from 'src/components/ButtonAction';
 import ConfirmDialog from 'src/components/dialog/dialogConfirm';
+import LoadingTable from 'src/components/LoadingTable';
 import EmployeeDialogHOC from 'src/components/_HOCProvider/EmployeeDialogHOC';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import * as constant from '../utils/Constants';
@@ -29,9 +30,6 @@ import './Calendar.css';
 
 const localizer = momentLocalizer(moment);
 let allViews = Object.keys(Views).map((k) => Views[k]);
-const IconStyle = {
- cursor: 'pointer'
-};
 
 const useStyles = makeStyles({
  calendarContent: {
@@ -95,7 +93,7 @@ const EventAgenda = ({ ...props }) => {
    isApproved
   };
   dispatch(updateAbsenceEmployee(dataNew));
-  toast.success('Đồng ý ngày nghỉ thành công!');
+  toast.success(constant.TITLE_ACCEPT_DAY_OFF);
  };
 
  const handleOpenDennyAbsentDialog = (id) => {
@@ -124,7 +122,7 @@ const EventAgenda = ({ ...props }) => {
         onClick={() => {
          setConfirmDialog({
           isOpen: true,
-          title: 'Bạn có chắc muốn duyệt ngày nghỉ này?',
+          title: constant.TITLE_CONFIRM_DAY_OFF,
           onConfirm: () => {
            acceptAbsentEmployee(props, true),
             setConfirmDialog({ isOpen: false });
@@ -143,10 +141,10 @@ const EventAgenda = ({ ...props }) => {
        </ButtonAction>
       </Box>
      ) : approved === true ? (
-      <div>Đã duyệt</div>
+      <div>{constant.TITLE_ACCEPT}</div>
      ) : (
       <div>
-       Lý do từ chối: <b>{noteAd}</b>
+       {constant.TITLE_CONFIRM_DENNY}: <b>{noteAd}</b>
       </div>
      )}
     </Box>
@@ -201,51 +199,58 @@ const CalenderOfEmployee = () => {
 
  return (
   <EmployeeDialogHOC>
-   <Helmet>
-    <title>{constant.CALENDER_TITLE}</title>
-   </Helmet>
-   <Box
-    sx={{
-     minHeight: '100%',
-     py: 3
-    }}
-   >
-    <Container maxWidth={false}>
-     <Card>
-      <CardHeader title="Lịch nghỉ của nhân viên" />
-      <CardContent>
-       <Calendar
-        className={classNames.calendarContent}
-        components={{
-         event: Event,
-         agenda: {
-          event: EventAgenda
-         }
-        }}
-        events={eventList}
-        showMultiDayTimes={false}
-        localizer={localizer}
-        views={['week', 'agenda']}
-        defaultView={'week'}
-        eventPropGetter={(event) => {
-         let backgroundColor = '#F7CB73';
+   <>
+    <Helmet>
+     <title>{constant.CALENDER_TITLE}</title>
+    </Helmet>{' '}
+    <Box
+     sx={{
+      minHeight: '100%',
+      py: 3
+     }}
+    >
+     <Container maxWidth={false}>
+      <Card>
+       <CardHeader title={constant.TITLE_DAY_OFF_CALENDA} />
+       <CardContent>
+        {' '}
+        {loading ? (
+         <LoadingTable></LoadingTable>
+        ) : (
+         <Calendar
+          className={classNames.calendarContent}
+          components={{
+           event: Event,
+           agenda: {
+            event: EventAgenda
+           }
+          }}
+          events={eventList}
+          showMultiDayTimes={false}
+          localizer={localizer}
+          views={['week', 'agenda']}
+          defaultView={'week'}
+          eventPropGetter={(event) => {
+           let backgroundColor = '#F7CB73';
 
-         switch (event.isApproved) {
-          case true:
-           backgroundColor = '#2BC38B';
-           break;
-          case false:
-           backgroundColor = '#D9512C';
-           break;
-         }
+           switch (event.isApproved) {
+            case true:
+             backgroundColor = '#2BC38B';
+             break;
+            case false:
+             backgroundColor = '#D9512C';
+             break;
+           }
 
-         return { style: { backgroundColor } };
-        }}
-       />
-      </CardContent>
-     </Card>
-    </Container>
-   </Box>
+           return { style: { backgroundColor } };
+          }}
+         />
+        )}
+       </CardContent>
+      </Card>
+     </Container>
+    </Box>
+   </>
   </EmployeeDialogHOC>
  );
 };

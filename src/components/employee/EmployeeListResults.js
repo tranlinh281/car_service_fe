@@ -22,6 +22,7 @@ import { employeeHeader } from 'src/services/HeaderTitleTable';
 import LoadingTable from 'src/components/LoadingTable';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
+import * as constant from 'src/utils/Constants';
 
 const EmployeeListResult = ({ loading, employees, errorMessage }) => {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -38,7 +39,6 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
  const { success: createSuccess } = useSelector(
   (state) => state.createEmployee
  );
- console.log(updateSuccess, 'debug edit employyee');
 
  const dispatch = useDispatch();
  const {
@@ -49,14 +49,14 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
 
  useEffect(() => {
   if (deleteSuccess) {
-   toast.success('Xóa nhân viên thành công!');
+   toast.success(constant.POPUP_DELETE_EMPLOYEE);
    // Should create action creator for this
    dispatch({ type: DELETE_EMPLOYEE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
   }
 
   if (updateSuccess) {
-   toast.success('Cập nhật nhân viên thành công!');
+   toast.success(constant.POPUP_UPDATE_EMPLOYEE);
    // Should create action creator for this
    dispatch({ type: EDIT_EMPLOYEE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
@@ -65,7 +65,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
   }
 
   if (createSuccess) {
-   toast.success('Thêm mới nhân viên thành công!');
+   toast.success(constant.POPUP_ADD_EMPLOYEE);
    // Should create action creator for this
    dispatch({ type: CREATE_EMPLOYEE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
@@ -79,9 +79,9 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
  };
 
  const showRole = (value) => {
-  if (value == 'staff') {
-   return 'Kỹ thuật viên';
-  } else return 'Quản lý';
+  if (value == constant.VALUE_STAFF_ENG) {
+   return constant.VALUE_STAFF_VIE;
+  } else return constant.VALUE_MANAGER_ENG;
  };
  const deleteHandler = (employee) => {
   dispatch(deleteEmployee(employee.username));
@@ -125,7 +125,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
              onClick={() => {
               setConfirmDialog({
                isOpen: true,
-               title: 'Bạn có chắc muốn xóa?',
+               title: constant.TITLE_CONFIRM_DELETE,
                onConfirm: () => {
                 deleteHandler(employee), setConfirmDialog({ isOpen: false });
                }

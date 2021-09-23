@@ -25,7 +25,7 @@ const ChartListDashBoard = (props) => {
   labels: constant.arrDate,
   datasets: [
    {
-    label: 'Doanh thu ngày',
+    label: constant.TITLE_REVENUE_DATE,
     data: data.lineChartDate,
     fill: false,
     borderColor: `rgb(${rand()}, ${rand()}, ${rand()})`,
@@ -38,7 +38,7 @@ const ChartListDashBoard = (props) => {
   labels: constant.arrMonth,
   datasets: [
    {
-    label: 'Doanh thu tháng',
+    label: constant.TITLE_REVENUE_MONTH,
     data: data.lineChartMonth,
     fill: false,
     borderColor: `rgb(${rand()}, ${rand()}, ${rand()})`,
@@ -50,7 +50,7 @@ const ChartListDashBoard = (props) => {
  return (
   <>
    <Card {...props}>
-    {dateTime === 'date' || dateTime === '' ? (
+    {dateTime === constant.TITLE_ORDER_DATE_WITH || dateTime === '' ? (
      <>
       {' '}
       <CardHeader
@@ -61,11 +61,15 @@ const ChartListDashBoard = (props) => {
          value={dateTime}
          onChange={handleChange}
         >
-         <MenuItem value="date">Ngày</MenuItem>
-         <MenuItem value="month">Tháng</MenuItem>
+         <MenuItem value={constant.TITLE_ORDER_DATE_WITH}>
+          {constant.TITLE_DATE}
+         </MenuItem>
+         <MenuItem value={constant.TITLE_REVENUE_MONTH_WITH_VALUE}>
+          {constant.TITLE_MONTN}
+         </MenuItem>
         </Select>
        }
-       title="Thống kê doanh thu 7 ngày gần đây"
+       title={constant.TITLE_REVENUE_LATE_7_DAY}
       />
      </>
     ) : (
@@ -77,11 +81,11 @@ const ChartListDashBoard = (props) => {
         value={dateTime}
         onChange={handleChange}
        >
-        <MenuItem value="date">Ngày</MenuItem>
-        <MenuItem value="month">Tháng</MenuItem>
+        <MenuItem value="date">{constant.TITLE_DATE}</MenuItem>
+        <MenuItem value="month">{constant.TITLE_MONTN}</MenuItem>
        </Select>
       }
-      title="Thống kê doanh thu tháng"
+      title={constant.TITLE_REVENUE_MONTH_WITH}
      />
     )}
 
@@ -93,7 +97,7 @@ const ChartListDashBoard = (props) => {
        position: 'relative'
       }}
      >
-      {dateTime === 'date' || dateTime === '' ? (
+      {dateTime === constant.TITLE_ORDER_DATE_WITH || dateTime === '' ? (
        <>
         <Line data={dataDate} options={constant.options} />
        </>

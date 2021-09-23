@@ -3,9 +3,6 @@ import {
  ORDER_LIST_FAIL,
  ORDER_LIST_REQUEST,
  ORDER_LIST_SUCCESS,
- ORDER_PAYMENT_DONE_FAIL,
- ORDER_PAYMENT_DONE_REQUEST,
- ORDER_PAYMENT_DONE_SUCCESS,
  ORDER_PAYMENT_FAIL,
  ORDER_PAYMENT_REQUEST,
  ORDER_PAYMENT_SUCCESS,
@@ -22,12 +19,10 @@ import {
  GET_ORDER_LIST_URL,
  PAYMENT_CASH_BY_ADMIN
 } from 'src/services/Config';
-import * as constant from '../utils/Constants';
 
 export const listAllOrderWithStatus = (page, keyword) => async (dispatch) => {
  dispatch({ type: ORDER_STATUS_LIST_REQUEST });
  try {
-  keyword = constant.TITLE_ORDER_PENDING_PAY;
   const { data } = await Axios.get(getOrderPagingURL(page) + keyword);
   dispatch({ type: ORDER_STATUS_LIST_SUCCESS, payload: data });
  } catch (error) {
@@ -38,21 +33,6 @@ export const listAllOrderWithStatus = (page, keyword) => async (dispatch) => {
   dispatch({ type: ORDER_STATUS_LIST_FAIL, payload: message });
  }
 };
-export const listAllOrderWithStatusDone =
- (page, keyword) => async (dispatch) => {
-  dispatch({ type: ORDER_PAYMENT_DONE_REQUEST });
-  try {
-   keyword = constant.TITLE_ORDER_PAID;
-   const { data } = await Axios.get(getOrderPagingURL(page) + keyword);
-   dispatch({ type: ORDER_PAYMENT_DONE_SUCCESS, payload: data });
-  } catch (error) {
-   const message =
-    error.response && error.response.data.message
-     ? error.response.data.message
-     : error.message;
-   dispatch({ type: ORDER_PAYMENT_DONE_FAIL, payload: message });
-  }
- };
 
 export const listAllOrderWithID = (id) => async (dispatch) => {
  dispatch({ type: ORDER_STATUS_ID_REQUEST });

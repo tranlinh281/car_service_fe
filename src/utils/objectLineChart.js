@@ -54,5 +54,11 @@ export const options = {
  }
 };
 
-// const { data } = useSelector((state) => state.transactionAllList);
-// console.log(data, 'debug line chart');
+export const TITLE_REVENUE_DATE = 'Doanh thu ngày';
+export const TITLE_REVENUE_MONTH = 'Doanh thu tháng';
+export const TITLE_REVENUE_LATE_7_DAY = 'Thống kê doanh thu 7 ngày gần đây';
+export const TITLE_REVENUE_MONTH_WITH = 'Thống kê doanh thu tháng';
+export const TITLE_REVENUE_MONTH_WITH_VALUE = 'month';
+export const TITLE_DATE = 'Ngày ';
+export const TITLE_MONTN = 'Tháng ';
+export const TITLE_ORDER_DATE_WITH = 'date';

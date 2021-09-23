@@ -10,6 +10,7 @@ import {
 import { useContext } from 'react';
 import { Search as SearchIcon } from 'react-feather';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
+import * as constant from 'src/utils/Constants';
 
 export default function ManufacturerListToolbar({ setPage, setKeySearch }) {
  const {
@@ -19,7 +20,7 @@ export default function ManufacturerListToolbar({ setPage, setKeySearch }) {
  const handleOpenCreateDialog = () => {
   setShouldCreateManufacturerDialogOpen(true);
  };
- 
+
  return (
   <Box>
    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -29,7 +30,7 @@ export default function ManufacturerListToolbar({ setPage, setKeySearch }) {
      onClick={handleOpenCreateDialog}
      sx={{ margin: '0 5px' }}
     >
-     Thêm hãng xe
+     {constant.TITLE_ADD_MANUFACTURER}
     </Button>
    </Box>
 
@@ -52,7 +53,7 @@ export default function ManufacturerListToolbar({ setPage, setKeySearch }) {
         onChange={(e) => {
          setKeySearch(e.target.value);
         }}
-        placeholder="Tìm kiếm Hãng xe"
+        placeholder={constant.TITLE_SEARCHING_MANUFACTURER}
         variant="outlined"
        />
       </Box>

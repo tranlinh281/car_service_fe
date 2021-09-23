@@ -20,6 +20,7 @@ import { customerHeader } from 'src/services/HeaderTitleTable';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import LoadingTable from '../LoadingTable';
 import VehicleListResult from './VehicleListResult';
+import * as constant from 'src/utils/Constants';
 
 export default function CustomerListResults({ loading, customers }) {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -40,7 +41,7 @@ export default function CustomerListResults({ loading, customers }) {
    dispatch(triggerReload({}));
   }
   if (notificationSuccess) {
-   toast.success('Gửi thông báo thành công!');
+   toast.success(constant.POPUP_CONFIRM_NOTIFICATION);
    dispatch({ type: CUSTOMER_NOTIFICATION_SUCCESS, payload: false });
    dispatch(triggerReload({}));
    setShouldCreateNotificationDialogOpen(false);

@@ -20,6 +20,7 @@ import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessory
 import { vehicleHeader } from 'src/services/HeaderTitleTable';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
+import * as constant from 'src/utils/Constants';
 
 export default function VehicleListResult({ customer = {} }) {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -32,11 +33,11 @@ export default function VehicleListResult({ customer = {} }) {
 
  const banHandler = (customer, isBanned) => {
   dispatch(banCust(customer.username, isBanned));
-  toast.success('khóa thành công!');
+  toast.success(constant.POPUP_BAN);
  };
  const unBan = (customer, isBanned) => {
   dispatch(banCust(customer.username, isBanned));
-  toast.success('Mở khóa thành công!');
+  toast.success(constant.POPUP_UNBAN);
  };
 
  const {
@@ -67,7 +68,7 @@ export default function VehicleListResult({ customer = {} }) {
        onClick={() => {
         setConfirmDialog({
          isOpen: true,
-         title: 'Bạn có chắc muốn khóa khách hàng này?',
+         title: constant.TITLE_CONFIRM_BAN,
          onConfirm: () => {
           banHandler(customer, true), setConfirmDialog({ isOpen: false });
          }
@@ -85,7 +86,7 @@ export default function VehicleListResult({ customer = {} }) {
        onClick={() => {
         setConfirmDialog({
          isOpen: true,
-         title: 'Bạn có chắc muốn mở khóa khách hàng này?',
+         title: constant.TITLE_CONFIRM_UNBAN,
          onConfirm: () => {
           unBan(customer, false), setConfirmDialog({ isOpen: false });
          }

@@ -1,8 +1,6 @@
 import { Helmet } from 'react-helmet';
 import { Box, Container, Card, Pagination } from '@material-ui/core';
-
 import * as constant from '../utils/Constants';
-
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listService } from 'src/actions/serviceAction';

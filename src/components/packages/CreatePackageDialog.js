@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createPackage } from 'src/actions/packageAction';
 import { DisplayingErrorMessagesPackageSchema } from 'src/services/ValidConstants';
 import { listAllService } from './../../actions/serviceAction';
+import * as constant from 'src/utils/Constants';
 
 const CreatePackageDialog = ({ open, onClose }) => {
  const [totalPrice, setTotalPrice] = useState(0);
@@ -75,14 +76,14 @@ const CreatePackageDialog = ({ open, onClose }) => {
      >
       <Form>
        <DialogTitle id="customized-dialog-title" onClose={onClose}>
-        Thêm mới Gói dịch vụ
+        {constant.TITLE_ADD_PACKAGE}
        </DialogTitle>
 
        <DialogContent dividers>
         <Grid item>
          <TextField
           fullWidth
-          label="Tên gói dịch vụ"
+          label={constant.LABEL_NAME_PACKAGE}
           error={!!errors.name}
           helperText={errors.name}
           margin="normal"
@@ -97,7 +98,7 @@ const CreatePackageDialog = ({ open, onClose }) => {
          <TextField
           multiline
           fullWidth
-          label="Mô tả"
+          label={constant.LABEL_DESCRIPTION}
           margin="normal"
           error={!!errors.description}
           helperText={errors.description}
@@ -123,7 +124,7 @@ const CreatePackageDialog = ({ open, onClose }) => {
            <TextField
             {...params}
             variant="outlined"
-            label="Dịch vụ"
+            label={constant.SERVICE_TITLE}
             name="services"
             error={!!errors.services}
             helperText={errors.services}
@@ -134,7 +135,7 @@ const CreatePackageDialog = ({ open, onClose }) => {
         <Grid item>
          <TextField
           fullWidth
-          label="Giá tiền"
+          label={constant.LABEL_PRICE_SERVICE}
           margin="normal"
           error={!!errors.price}
           helperText={errors.price}
@@ -151,10 +152,10 @@ const CreatePackageDialog = ({ open, onClose }) => {
        </DialogContent>
        <DialogActions>
         <Button onClick={onClose} type="reset" color="secondary">
-         Hủy
+         {constant.TITLE_CANCEL}
         </Button>
         <Button type="submit" color="primary" left="true">
-         Lưu
+         {constant.TITLE_SAVE}
         </Button>
        </DialogActions>
       </Form>

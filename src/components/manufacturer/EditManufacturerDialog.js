@@ -27,6 +27,7 @@ import {
 } from 'src/actions/manufacturerAction';
 import { storage } from '../../firebase/index';
 import { DisplayingErrorMessagesManufacturerSchema } from 'src/services/ValidConstants';
+import * as constant from 'src/utils/Constants';
 
 const EditManufacturerDialog = ({ data, open, onClose }) => {
  const dispatch = useDispatch();
@@ -138,7 +139,7 @@ const EditManufacturerDialog = ({ data, open, onClose }) => {
      >
       <Form>
        <DialogTitle id="customized-dialog-title" onClose={onClose}>
-        Thêm mới Hãng xe
+        {constant.TITLE_UPDATE_MANUFACTURER}
        </DialogTitle>
 
        <DialogContent dividers>
@@ -146,7 +147,7 @@ const EditManufacturerDialog = ({ data, open, onClose }) => {
         <Grid item>
          <TextField
           fullWidth
-          label="Tên Hãng"
+          label={constant.LABEL_NAME_MANUFACUTER}
           error={!!props.errors.name}
           helperText={props.errors.name}
           value={props.values.name}
@@ -160,7 +161,7 @@ const EditManufacturerDialog = ({ data, open, onClose }) => {
         <Card style={{ display: 'flex' }}>
          <CardContent style={{ flex: '1 0 auto' }}>
           <Typography variant="subtitle1" color="textSecondary">
-           Hình ảnh
+           {constant.LABEL_IMAGE}
           </Typography>
           <Grid container justify="center" alignItems="center">
            <input
@@ -196,10 +197,10 @@ const EditManufacturerDialog = ({ data, open, onClose }) => {
        </DialogContent>
        <DialogActions>
         <Button onClick={onClose} type="reset" color="secondary">
-         Hủy
+         {constant.TITLE_CANCEL}
         </Button>
         <Button type="submit" color="primary" left>
-         Lưu
+         {constant.TITLE_SAVE}
         </Button>
        </DialogActions>
       </Form>

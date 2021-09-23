@@ -13,7 +13,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePackage } from 'src/actions/packageAction';
 import { listAllService } from './../../actions/serviceAction';
-
+import * as constant from 'src/utils/Constants';
 const DialogUpdatePackage = ({ data, open, onClose }) => {
  const [totalPrice, setTotalPrice] = useState(data.price);
 
@@ -76,14 +76,14 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
      >
       <Form>
        <DialogTitle id="customized-dialog-title" onClose={onClose}>
-        Gói Dịch vụ: <span>{data.name}</span>
+        {constant.TITLE_UPDATE_PACKAGE}: <span>{data.name}</span>
        </DialogTitle>
 
        <DialogContent dividers>
         <Grid item>
          <TextField
           fullWidth
-          label="Tên gói dịch vụ"
+          label={constant.LABEL_NAME_PACKAGE}
           defaultValue={data.name}
           //   error={!!errors.name}
           //   helperText={errors.name}
@@ -98,7 +98,7 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
          <TextField
           multiline
           fullWidth
-          label="Mô tả"
+          label={constant.LABEL_PRICE_SERVICE}
           margin="normal"
           defaultValue={data.description}
           //   error={!!errors.description}
@@ -126,7 +126,7 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
            <TextField
             {...params}
             variant="outlined"
-            label="Dịch vụ"
+            label={constant.SERVICE_TITLE}
             name="services"
             // error={!!errors.services}
             // helperText={errors.services}
@@ -137,7 +137,7 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
         <Grid item>
          <TextField
           fullWidth
-          label="Giá tiền"
+          label={constant.LABEL_PRICE_SERVICE}
           margin="normal"
           //   error={!!errors.price}
           //   helperText={errors.price}
@@ -155,10 +155,10 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
        </DialogContent>
        <DialogActions>
         <Button onClick={onClose} type="reset" color="secondary">
-         Hủy
+         {constant.TITLE_CANCEL}
         </Button>
         <Button type="submit" color="primary" left="true">
-         Lưu
+         {constant.TITLE_SAVE}
         </Button>
        </DialogActions>
       </Form>

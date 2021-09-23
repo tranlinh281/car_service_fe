@@ -25,8 +25,8 @@ import { createAccessory } from 'src/actions/accessoryAction';
 import { listAllManufacturer } from 'src/actions/manufacturerAction';
 import { listServiceType } from 'src/actions/serviceAction';
 import { DisplayingErrorMessagesCreateAccessorySchema } from 'src/services/ValidConstants';
+import * as constant from 'src/utils/Constants';
 import { storage } from '../../firebase/index';
-import Resizer from 'react-image-file-resizer';
 
 const DialogCreateAccessory = ({ data, open, onClose }) => {
  const dispatch = useDispatch();
@@ -189,7 +189,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
      <Form>
       {' '}
       <DialogTitle id="customized-dialog-title" onClose={onClose}>
-       Thêm mới Phụ Tùng
+       {constant.TITLE_ADD_ACCESSORY}
       </DialogTitle>
       <DialogContent dividers>
        <DialogContentText>
@@ -199,7 +199,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
            fullWidth
            error={!!errors.name}
            helperText={errors.name}
-           label="Tên Phụ Tùng"
+           label={constant.LABEL_NAME_ACCESSORY}
            margin="normal"
            name="name"
            value={values.name}
@@ -210,7 +210,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
           />
           <TextField
            fullWidth
-           label="Số Lượng"
+           label={constant.LABEL_QUANTITY}
            error={!!errors.quantity}
            helperText={errors.quantity}
            margin="normal"
@@ -224,7 +224,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
           />
           <TextField
            fullWidth
-           label="Đơn Giá"
+           label={constant.LABEL_PRICE_ACCESSORY}
            error={!!errors.price}
            helperText={errors.price}
            margin="normal"
@@ -237,7 +237,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
           />
           <TextField
            fullWidth
-           label="Đơn vị tính"
+           label={constant.LABEL_UNIT}
            error={!!errors.unit}
            helperText={errors.unit}
            margin="normal"
@@ -257,12 +257,12 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
              fullWidth
              error={!!errors.type}
             >
-             <InputLabel>Phân Loại</InputLabel>
+             <InputLabel>{constant.LABEL_TYPE_SERVICE}</InputLabel>
              <Select
               name="type"
               value={values.type}
               onChange={handleChange}
-              label="Phân Loại"
+              label={constant.LABEL_TYPE_SERVICE}
              >
               {types?.map((type) => (
                <MenuItem value={type.name}>{type.name}</MenuItem>
@@ -280,12 +280,12 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
              fullWidth
              error={!!errors.manufacturer}
             >
-             <InputLabel>Hãng</InputLabel>
+             <InputLabel>{constant.TITLE_MANUFACTURER}</InputLabel>
              <Select
               name="manufacturer"
               value={values.manufacturer}
               onChange={handleChange}
-              label="Hãng"
+              label={constant.TITLE_MANUFACTURER}
              >
               {manufacturers?.map((manufacturer) => (
                <MenuItem value={manufacturer.name}>
@@ -301,7 +301,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
           <Card style={{ display: 'flex' }}>
            <CardContent style={{ flex: '1 0 auto' }}>
             <Typography variant="subtitle1" color="textSecondary">
-             Hình ảnh
+             {constant.LABEL_IMAGE}
             </Typography>
             <Grid container justify="center" alignItems="center">
              <input
@@ -362,10 +362,10 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
       </DialogContent>
       <DialogActions color="red">
        <Button autoFocus type="reset" onClick={onClose} color="secondary">
-        Hủy
+        {constant.TITLE_CANCEL}
        </Button>
        <Button autoFocus type="submit" color="primary" left>
-        Lưu
+        {constant.TITLE_SAVE}
        </Button>
       </DialogActions>
      </Form>

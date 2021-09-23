@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import { createTypeService } from 'src/actions/serviceAction';
 import { DisplayingErrorMessagesCreateTypeSchema } from 'src/services/ValidConstants';
+import * as constant from 'src/utils/Constants';
 
 export default function CreateServiceTypeDialog({ data, open, onClose }) {
  const { types } = useSelector((state) => state.typeList);
@@ -74,14 +75,14 @@ export default function CreateServiceTypeDialog({ data, open, onClose }) {
      >
       <Form>
        <DialogTitle id="customized-dialog-title">
-        Thêm mới phân loại dịch vụ
+        {constant.TITLE_ADD_TYPE_SERVICE}
        </DialogTitle>
        <DialogContent dividers>
         <DialogContentText>
          <Grid item>
           <TextField
            fullWidth
-           label="Tên Phân loại dịch vụ"
+           label={constant.LABEL_NAME_TYPE_SERVICE}
            error={!!errors.name}
            helperText={errors.name}
            value={values.name}
@@ -97,10 +98,10 @@ export default function CreateServiceTypeDialog({ data, open, onClose }) {
        </DialogContent>
        <DialogActions>
         <Button autoFocus type="reset" onClick={onClose} color="secondary">
-         Hủy
+         {constant.TITLE_CANCEL}
         </Button>
         <Button autoFocus type="submit" color="primary" left>
-         Lưu
+         {constant.TITLE_SAVE}
         </Button>
        </DialogActions>
       </Form>

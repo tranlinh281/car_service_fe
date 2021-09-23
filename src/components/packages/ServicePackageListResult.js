@@ -18,6 +18,7 @@ import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessory
 import { servicePackageHeader } from 'src/services/HeaderTitleTable';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
+import * as constant from 'src/utils/Constants';
 
 const numberFormat = (value) =>
  new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(
@@ -74,7 +75,7 @@ export default function ServicePackageListResult({ packagee = {} }) {
       onClick={() => {
        setConfirmDialog({
         isOpen: true,
-        title: 'Bạn có chắc muốn xóa?',
+        title: constant.TITLE_CONFIRM_DELETE,
         onConfirm: () => {
          deleteHandler(packagee), setConfirmDialog({ isOpen: false });
         }

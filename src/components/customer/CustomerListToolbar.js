@@ -7,6 +7,7 @@ import {
  SvgIcon
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
+import * as constant from 'src/utils/Constants';
 
 export default function CustomerListToolbar({ setPage, setKeySearch }) {
  return (
@@ -33,7 +34,7 @@ export default function CustomerListToolbar({ setPage, setKeySearch }) {
          setKeySearch(e.target.value);
          setPage(1);
         }}
-        placeholder="Tìm kiếm khách hàng"
+        placeholder={constant.TITLE_SEARCHING_CUSTOMER}
         variant="outlined"
        />
       </Box>

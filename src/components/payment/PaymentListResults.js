@@ -51,7 +51,7 @@ export default function PaymentListResults({ loading, orders }) {
 
  useEffect(() => {
   if (paymentSuccess) {
-   toast.success('Thanh toán thành công!');
+   toast.success(constant.TITLE_PAID);
 
    dispatch({ type: ORDER_PAYMENT_SUCCESS, payload: false });
    dispatch(triggerReload({}));

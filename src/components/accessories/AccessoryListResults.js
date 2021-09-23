@@ -28,6 +28,7 @@ import {
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import LoadingTable from 'src/components/LoadingTable';
+import * as constant from 'src/utils/Constants';
 
 export default function AccessoryListResults({ loading, accessories }) {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -148,7 +149,7 @@ export default function AccessoryListResults({ loading, accessories }) {
             onClick={() => {
              setConfirmDialog({
               isOpen: true,
-              title: 'Bạn có chắc muốn xóa?',
+              title: constant.TITLE_CONFIRM_DELETE,
               onConfirm: () => {
                deleteHandler(accessory), setConfirmDialog({ isOpen: false });
               }

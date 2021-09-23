@@ -21,6 +21,7 @@ import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessory
 import { packageHeader } from 'src/services/HeaderTitleTable';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import ServicePackageListResult from './ServicePackageListResult';
+import * as constant from 'src/utils/Constants';
 
 const PackageListResult = ({ loading, packages, errorMessage }) => {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -43,14 +44,14 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
 
  useEffect(() => {
   if (deleteSuccess) {
-   toast.success('Xóa gói dịch vụ thành công!');
+   toast.success(constant.POPUP_DELETE_PACKAGE);
    // Should create action creator for this
    dispatch({ type: DELETE_PACKAGE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
   }
 
   if (updateSuccess) {
-   toast.success('Cập nhật gói dịch vụ thành công!');
+   toast.success(constant.POPUP_UPDATE_PACKAGE);
    // Should create action creator for this
    dispatch({ type: EDIT_PACKAGE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
@@ -59,7 +60,7 @@ const PackageListResult = ({ loading, packages, errorMessage }) => {
   }
 
   if (createSuccess) {
-   toast.success('Thêm mới gói dịch vụ thành công!');
+   toast.success(constant.POPUP_ADD_PACKAGE);
    // Should create action creator for this
    dispatch({ type: CREATE_PACKAGE_SUCCESS, payload: false });
    dispatch(triggerReload({}));

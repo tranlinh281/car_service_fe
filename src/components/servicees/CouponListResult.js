@@ -18,6 +18,7 @@ import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessory
 import { couponHeader } from 'src/services/HeaderTitleTable';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
+import * as constant from 'src/utils/Constants';
 
 const numberFormat = (value) =>
  new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' }).format(
@@ -100,7 +101,7 @@ export default function CouponListResult({ service = {} }) {
       onClick={() => {
        setConfirmDialog({
         isOpen: true,
-        title: 'Bạn có chắc muốn xóa?',
+        title: constant.TITLE_CONFIRM_DELETE,
         onConfirm: () => {
          deleteHandler(service), setConfirmDialog({ isOpen: false });
         }
@@ -152,7 +153,7 @@ export default function CouponListResult({ service = {} }) {
              onClick={() => {
               setConfirmDialog({
                isOpen: true,
-               title: 'Bạn có chắc muốn xóa?',
+               title: constant.TITLE_CONFIRM_DELETE,
                onConfirm: () => {
                 deleteCouponHandler(coupon),
                  setConfirmDialog({ isOpen: false });

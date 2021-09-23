@@ -16,7 +16,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { updateAbsenceEmployee } from 'src/actions/userAction';
 import { EDIT_EMPLOYEE_ABSENT_SUCCESS } from 'src/constants/userConstant';
-
+import * as constant from 'src/utils/Constants';
 import { DisplayingErrorMessagesNoteAdminSchema } from 'src/services/ValidConstants';
 
 export default function UpdateAbsentDialog({ data, open, onClose }) {
@@ -36,7 +36,7 @@ export default function UpdateAbsentDialog({ data, open, onClose }) {
 
  const submitHandler = (dennyAbsent) => {
   dispatch(updateAbsenceEmployee(dennyAbsent));
-  toast.success('Gửi từ chối ngày nghỉ thành công!');
+  toast.success(constant.TITLE_DENNY_DAY_OFF);
   dispatch({ type: EDIT_EMPLOYEE_ABSENT_SUCCESS, payload: false });
   dispatch(triggerReload({}));
  };
@@ -81,13 +81,15 @@ export default function UpdateAbsentDialog({ data, open, onClose }) {
       fullWidth={true}
      >
       <Form>
-       <DialogTitle id="customized-dialog-title">Gửi thông báo</DialogTitle>
+       <DialogTitle id="customized-dialog-title">
+        {constant.TITLE_SEND_NOTIFICATION}
+       </DialogTitle>
        <DialogContent dividers>
         <DialogContentText>
          <Grid item>
           <TextField
            fullWidth
-           label="Tên Nhân viên"
+           label={constant.LABEL_NAME_EMPLOYEE}
            margin="normal"
            name="title"
            variant="outlined"
@@ -98,7 +100,7 @@ export default function UpdateAbsentDialog({ data, open, onClose }) {
           />
           <TextField
            fullWidth
-           label="Nội dung xin nghỉ"
+           label={constant.LABEL_DESCRIPTION_DAY_OFF}
            margin="normal"
            defaultValue={data.noteEmp}
            variant="outlined"
@@ -108,7 +110,7 @@ export default function UpdateAbsentDialog({ data, open, onClose }) {
           />
           <TextField
            fullWidth
-           label="Ngày nghỉ"
+           label={constant.LABEL_DAY_OFF}
            margin="normal"
            defaultValue={dateStart}
            variant="outlined"
@@ -119,7 +121,7 @@ export default function UpdateAbsentDialog({ data, open, onClose }) {
           <TextField
            multiline
            fullWidth
-           label="Nội dung từ chối"
+           label={constant.LABEL_DESCRIPTION_DENNY}
            margin="normal"
            error={!!errors.noteAdmin}
            helperText={errors.noteAdmin}
@@ -134,10 +136,10 @@ export default function UpdateAbsentDialog({ data, open, onClose }) {
        </DialogContent>
        <DialogActions>
         <Button autoFocus type="reset" onClick={onClose} color="secondary">
-         Hủy
+         {constant.TITLE_CANCEL}
         </Button>
         <Button autoFocus type="submit" color="primary" onClick={onClose} left>
-         Gửi
+         {constant.TITLE_SAVE}
         </Button>
        </DialogActions>
       </Form>

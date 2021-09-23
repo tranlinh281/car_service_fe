@@ -1,9 +1,11 @@
 import {
  Button,
+ Card,
+ CardContent,
+ CardMedia,
  Dialog,
  DialogActions,
  DialogContent,
- DialogContentText,
  DialogTitle,
  FormControl,
  Grid,
@@ -11,9 +13,6 @@ import {
  MenuItem,
  Select,
  TextField,
- Card,
- CardContent,
- CardMedia,
  Typography
 } from '@material-ui/core';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
@@ -23,6 +22,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateAccessory } from 'src/actions/accessoryAction';
 import { storage } from 'src/firebase';
 import { DisplayingErrorMessagesCreateAccessorySchema } from 'src/services/ValidConstants';
+import * as constant from 'src/utils/Constants';
 
 const DialogUpdateAccessory = ({ data, open, onClose }) => {
  const dispatch = useDispatch();
@@ -144,7 +144,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
      >
       <Form>
        <DialogTitle id="customized-dialog-title" onClose={onClose}>
-        Phụ Tùng
+        {constant.TITLE_HEADER_ACCESSORY}
         <span>
          <strong>{data.name || ''}</strong>
         </span>
@@ -154,7 +154,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
          <Grid item xs={6}>
           <TextField
            fullWidth
-           label="Tên Phụ Tùng"
+           label={constant.LABEL_NAME_ACCESSORY}
            margin="normal"
            error={!!props.errors.name}
            helperText={props.errors.name}
@@ -167,7 +167,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
 
           <TextField
            fullWidth
-           label="Số Lượng"
+           label={constant.LABEL_QUANTITY}
            margin="normal"
            error={!!props.errors.quantity}
            helperText={props.errors.quantity}
@@ -183,7 +183,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
 
           <TextField
            fullWidth
-           label="Đơn Giá"
+           label={constant.LABEL_PRICE_ACCESSORY}
            margin="normal"
            error={!!props.errors.price}
            helperText={props.errors.price}
@@ -198,7 +198,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
           />
           <TextField
            fullWidth
-           label="Đơn vị tính"
+           label={constant.LABEL_UNIT}
            margin="normal"
            error={!!props.errors.unit}
            helperText={props.errors.unit}
@@ -216,13 +216,13 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
           <Grid item container spacing={2}>
            <Grid item xs={6} sm={6}>
             <FormControl variant="outlined" margin="normal" fullWidth>
-             <InputLabel>Phân Loại</InputLabel>
+             <InputLabel>{constant.LABEL_TYPE_SERVICE}</InputLabel>
              <Select
               name="type"
               value={props.values.type}
               onChange={props.handleChange}
               defaultValue={data.type}
-              label="Phân Loại"
+              label={constant.LABEL_TYPE_SERVICE}
              >
               {types?.map((type) => (
                <MenuItem value={type.name}>{type.name}</MenuItem>
@@ -232,13 +232,13 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
            </Grid>
            <Grid item xs={6} sm={6}>
             <FormControl variant="outlined" margin="normal" fullWidth>
-             <InputLabel>Hãng</InputLabel>
+             <InputLabel>{constant.TITLE_MANUFACTURER}</InputLabel>
              <Select
               name="manufacturer"
               value={props.values.manufacturer}
               onChange={props.handleChange}
               defaultValue={data.manufacturer}
-              label="Hãng"
+              label={constant.TITLE_MANUFACTURER}
              >
               {manufacturers?.map((manufacturer) => (
                <MenuItem value={manufacturer.name}>
@@ -252,7 +252,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
           <Card style={{ display: 'flex' }}>
            <CardContent style={{ flex: '1 0 auto' }}>
             <Typography variant="subtitle1" color="textSecondary">
-             Hình ảnh
+             {constant.LABEL_IMAGE}
             </Typography>
             <Grid container justify="center" alignItems="center">
              <input
@@ -290,10 +290,10 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
        </DialogContent>
        <DialogActions color="red">
         <Button autoFocus onClick={onClose} color="secondary">
-         Hủy
+         {constant.TITLE_CANCEL}
         </Button>
         <Button autoFocus type="submit" color="primary" left>
-         Lưu
+         {constant.TITLE_SAVE}
         </Button>
        </DialogActions>
       </Form>

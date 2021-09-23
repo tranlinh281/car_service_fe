@@ -11,7 +11,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch } from 'react-redux';
 import { ORDER_STATUS_ID_RESET } from 'src/constants/orderConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
-import { paymentHeader } from 'src/services/HeaderTitleTable';
+import { historyHeader } from 'src/services/HeaderTitleTable';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import LoadingTable from '../LoadingTable';
 import HistoryExpandListResult from './HisotryExpandListResult';
@@ -58,7 +58,7 @@ export default function HistoryListResults({ loading, orders }) {
       <Table>
        <TableHead>
         <TableRow>
-         {paymentHeader.map((headCell) => (
+         {historyHeader.map((headCell) => (
           <TableCell key={headCell.id}>{headCell.title}</TableCell>
          ))}
         </TableRow>

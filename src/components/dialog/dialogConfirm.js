@@ -1,15 +1,13 @@
-import React from 'react';
 import {
+ Button,
  Dialog,
- DialogTitle,
- DialogContent,
  DialogActions,
- Typography,
+ DialogContent,
  makeStyles,
- Grid,
- Button
+ Typography
 } from '@material-ui/core';
-import NotListedLocationIcon from '@material-ui/icons/NotListedLocation';
+import React from 'react';
+import * as constant from 'src/utils/Constants';
 
 const useStyles = makeStyles((theme) => ({
  dialog: {
@@ -62,10 +60,10 @@ export default function ConfirmDialog(props) {
      color="secondary"
      onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}
     >
-     Hủy
+     {constant.TITLE_CANCEL}
     </Button>
     <Button className={classes.Button} onClick={confirmDialog.onConfirm}>
-     Đồng ý
+     {constant.TITLE_ACCEPTTED}
     </Button>
    </DialogActions>
   </Dialog>

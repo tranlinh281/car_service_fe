@@ -1,5 +1,5 @@
 import { TableCell, TableRow } from '@material-ui/core';
-import { Payments } from '@material-ui/icons';
+import { Details } from '@material-ui/icons';
 import React, { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { listAllOrderWithID } from 'src/actions/orderAction';
@@ -31,7 +31,8 @@ export default function HistoryExpandListResult({ customer = {} }) {
       color="primary"
       onClick={() => sendId(customer.id)}
      >
-      <Payments fontSize="small" color="primary" />
+         
+      <Details fontSize="small" color="primary" />
      </ButtonAction>
     </TableCell>
    </TableRow>

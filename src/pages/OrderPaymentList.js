@@ -14,9 +14,9 @@ const OrderPaymentList = () => {
  const [page, setPage] = useState(1);
  const triggerReload = useSelector((state) => state.triggerReload);
  const dispatch = useDispatch();
-
+ const keyword = constant.TITLE_ORDER_PENDING_PAY;
  useEffect(() => {
-  dispatch(listAllOrderWithStatus(page));
+  dispatch(listAllOrderWithStatus(page, keyword));
  }, [dispatch, page, triggerReload]);
 
  const handlePageChange = (_, page) => {

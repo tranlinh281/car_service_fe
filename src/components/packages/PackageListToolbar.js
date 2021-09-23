@@ -1,15 +1,16 @@
 import {
-    Box,
-    Button,
-    Card,
-    CardContent,
-    InputAdornment,
-    SvgIcon,
-    TextField
+ Box,
+ Button,
+ Card,
+ CardContent,
+ InputAdornment,
+ SvgIcon,
+ TextField
 } from '@material-ui/core';
 import { useContext } from 'react';
 import { Search as SearchIcon } from 'react-feather';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
+import * as constant from 'src/utils/Constants';
 
 export default function PackageListToolbar({ setPage, setKeySearch }) {
  const { setShouldCreatePackageDialogOpen } = useContext(DialogContext);
@@ -29,7 +30,7 @@ export default function PackageListToolbar({ setPage, setKeySearch }) {
      color="primary"
      onClick={handleOpenCreateDialog}
     >
-     Thêm Gói dịch vụ
+     {constant.TITLE_ADD_PACKAGE}
     </Button>
    </Box>
    <Box sx={{ mt: 3 }}>
@@ -52,7 +53,7 @@ export default function PackageListToolbar({ setPage, setKeySearch }) {
          setKeySearch(e.target.value);
          setPage(1);
         }}
-        placeholder="Tìm kiếm gói dịch vụ"
+        placeholder={constant.TITLE_SEARCHING_PACKAGE}
         variant="outlined"
        />
       </Box>

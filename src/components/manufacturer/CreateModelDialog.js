@@ -1,24 +1,17 @@
 import {
- DialogActions,
- DialogContent,
- Autocomplete,
- DialogTitle,
- FormControl,
- FormHelperText,
- Grid,
- InputLabel,
- MenuItem,
- Select,
- TextField,
  Card,
  CardContent,
- Typography,
- CardMedia
+ CardMedia,
+ DialogActions,
+ DialogContent,
+ DialogTitle,
+ Grid,
+ TextField,
+ Typography
 } from '@material-ui/core';
-import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
-import { storage } from '../../firebase/index';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
+import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import { FieldArray, Form, Formik } from 'formik';
 import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,9 +19,8 @@ import {
  createModel,
  listAllManufacturer
 } from 'src/actions/manufacturerAction';
-import { DisplayingErrorMessagesModelSchema } from 'src/services/ValidConstants';
-import { values } from 'lodash';
-import { manufacturerHeader } from 'src/services/HeaderTitleTable';
+import * as constant from 'src/utils/Constants';
+import { storage } from '../../firebase/index';
 
 const CreateModelDialog = ({ data, open, onClose }) => {
  console.log(data.name);
@@ -139,14 +131,14 @@ const CreateModelDialog = ({ data, open, onClose }) => {
      >
       <Form>
        <DialogTitle id="customized-dialog-title" onClose={onClose}>
-        Thêm mới Loại xe
+        {constant.TITLE_ADD_MODEL}
        </DialogTitle>
 
        <DialogContent dividers>
         <Grid>
          <TextField
           fullWidth
-          label="Tên Hãng"
+          label={constant.LABEL_NAME_MANUFACUTER}
           margin="normal"
           name="manufacturerName"
           variant="outlined"
@@ -167,7 +159,7 @@ const CreateModelDialog = ({ data, open, onClose }) => {
                <Grid>
                 <TextField
                  fullWidth
-                 label="Tên Loại xe"
+                 label={constant.LABEL_NAME_MODEL}
                  margin="normal"
                  name={`models.${index}.name`}
                  variant="outlined"
@@ -178,7 +170,7 @@ const CreateModelDialog = ({ data, open, onClose }) => {
                 <Card style={{ display: 'flex' }}>
                  <CardContent style={{ flex: '1 0 auto' }}>
                   <Typography variant="subtitle1" color="textSecondary">
-                   Hình ảnh
+                   {constant.LABEL_IMAGE}
                   </Typography>
                   <Grid container justify="center" alignItems="center">
                    <input

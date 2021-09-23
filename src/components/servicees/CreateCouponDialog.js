@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import { createCoupon } from 'src/actions/serviceAction';
 import { DisplayingErrorMessagesCreateCouponSchema } from 'src/services/ValidConstants';
+import * as constant from 'src/utils/Constants';
 
 export default function CreateCouponDialog({ data, open, onClose }) {
  const { types } = useSelector((state) => state.typeList);
@@ -85,14 +86,14 @@ export default function CreateCouponDialog({ data, open, onClose }) {
      >
       <Form>
        <DialogTitle id="customized-dialog-title">
-        Thêm mới khuyến mãi
+        {constant.TITLE_ADD_COUPON}
        </DialogTitle>
        <DialogContent dividers>
         <DialogContentText>
          <Grid item>
           <TextField
            fullWidth
-           label="Tên khuyến mãi"
+           label={constant.LABEL_NAME_COUPON}
            error={!!errors.name}
            helperText={errors.name}
            value={values.name}
@@ -106,7 +107,7 @@ export default function CreateCouponDialog({ data, open, onClose }) {
           <TextField
            multiline
            fullWidth
-           label="Mô tả"
+           label={constant.LABEL_DESCRIPTION}
            margin="normal"
            error={!!errors.description}
            helperText={errors.description}
@@ -118,7 +119,7 @@ export default function CreateCouponDialog({ data, open, onClose }) {
           />
           <TextField
            fullWidth
-           label="Phần trăm"
+           label={constant.LABEL_PERCENT}
            error={!!errors.value}
            helperText={errors.value}
            value={values.value}
@@ -132,7 +133,7 @@ export default function CreateCouponDialog({ data, open, onClose }) {
           />
           <TextField
            fullWidth
-           label="Điểm"
+           label={constant.LABEL_POINT}
            error={!!errors.pointRequired}
            helperText={errors.pointRequired}
            value={values.pointRequired}
@@ -149,10 +150,10 @@ export default function CreateCouponDialog({ data, open, onClose }) {
        </DialogContent>
        <DialogActions>
         <Button autoFocus type="reset" onClick={onClose} color="secondary">
-         Hủy
+         {constant.TITLE_CANCEL}
         </Button>
         <Button autoFocus type="submit" color="primary" left>
-         Lưu
+         {constant.TITLE_SAVE}
         </Button>
        </DialogActions>
       </Form>

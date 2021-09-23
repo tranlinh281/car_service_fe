@@ -15,6 +15,7 @@ import {
 import { memo, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateService } from 'src/actions/serviceAction';
+import * as constant from 'src/utils/Constants';
 
 const DialogUpdateService = ({ data, open, onClose }) => {
  const dispatch = useDispatch();
@@ -64,7 +65,7 @@ const DialogUpdateService = ({ data, open, onClose }) => {
    fullWidth={true}
   >
    <DialogTitle id="customized-dialog-title" onClose={onClose}>
-    Dịch vụ:
+    {constant.TITLE_HEADER_SERVICE}:
     <span>
      <strong>{data.name}</strong>
     </span>
@@ -74,7 +75,7 @@ const DialogUpdateService = ({ data, open, onClose }) => {
      <Grid item>
       <TextField
        fullWidth
-       label="Tên Dịch vụ"
+       label={constant.LABEL_NAME_SERVICE}
        margin="normal"
        defaultValue={data.name}
        onChange={(e) => setName(e.target.value)}
@@ -84,7 +85,7 @@ const DialogUpdateService = ({ data, open, onClose }) => {
 
       <TextField
        fullWidth
-       label="Đơn Giá"
+       label={constant.LABEL_PRICE_ACCESSORY}
        margin="normal"
        defaultValue={data.price}
        onChange={(e) => setPrice(parseFloat(e.target.value))}
@@ -95,12 +96,12 @@ const DialogUpdateService = ({ data, open, onClose }) => {
        }}
       />
       <FormControl variant="outlined" margin="normal" fullWidth>
-       <InputLabel>Phân Loại</InputLabel>
+       <InputLabel>{constant.LABEL_TYPE_SERVICE}</InputLabel>
 
        <Select
         defaultValue={data.type}
         onChange={(e) => setType(e.target.value)}
-        label="Phân Loại"
+        label={constant.LABEL_TYPE_SERVICE}
        >
         {types?.map((type) => (
          <MenuItem value={type.name}>{type.name}</MenuItem>
@@ -112,10 +113,10 @@ const DialogUpdateService = ({ data, open, onClose }) => {
    </DialogContent>
    <DialogActions color="red">
     <Button autoFocus onClick={onClose} color="secondary">
-     Hủy
+     {constant.TITLE_CANCEL}
     </Button>
     <Button autoFocus onClick={submitHandler} color="primary" left>
-     Lưu
+     {constant.TITLE_SAVE}
     </Button>
    </DialogActions>
   </Dialog>

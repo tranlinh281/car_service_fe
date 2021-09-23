@@ -27,6 +27,7 @@ import { serviceHeader } from 'src/services/HeaderTitleTable';
 import ConfirmDialog from '../dialog/dialogConfirm';
 import LoadingTable from '../LoadingTable';
 import CouponListResult from './CouponListResult';
+import * as constant from 'src/utils/Constants';
 
 export default function ServiceListResults({ loading, services }) {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -77,27 +78,27 @@ export default function ServiceListResults({ loading, services }) {
 
  useEffect(() => {
   if (deleteSuccess) {
-   toast.success('Xóa dịch vụ thành công!');
+   toast.success(constant.POPUP_DELETE_SERVICE);
    // Should create action creator for this
    dispatch({ type: DELETE_SERVICE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
   }
   if (deleteCouponSuccess) {
-   toast.success('Xóa Khuyến mãi thành công!');
+   toast.success(constant.POPUP_DELETE_COUPON);
    // Should create action creator for this
    dispatch({ type: DELETE_COUPON_SUCCESS, payload: false });
    dispatch(triggerReload({}));
   }
 
   if (updateSuccess) {
-   toast.success('Cập nhật dịch vụ thành công!');
+   toast.success(constant.POPUP_UPDATE_SERVICE);
    // Should create action creator for this
    dispatch({ type: EDIT_SERVICE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
    setShouldUpdateServiceDialogOpen(false);
   }
   if (updateCouponSuccess) {
-   toast.success('Cập nhật Khuyến mãi thành công!');
+   toast.success(constant.POPUP_UPDATE_COUPON);
    // Should create action creator for this
    dispatch({ type: EDIT_COUPON_SUCCESS, payload: false });
    dispatch(triggerReload({}));
@@ -105,21 +106,21 @@ export default function ServiceListResults({ loading, services }) {
   }
 
   if (createSuccess) {
-   toast.success('Thêm mới dịch vụ thành công!');
+   toast.success(constant.POPUP_ADD_SERIVCE);
    // Should create action creator for this
    dispatch({ type: CREATE_SERVICE_SUCCESS, payload: false });
    dispatch(triggerReload({}));
    setShouldCreateServiceDialogOpen(false);
   }
   if (createCouponSuccess) {
-   toast.success('Thêm Khuyến mãi thành công!');
+   toast.success(constant.POPUP_ADD_COUPON);
    // Should create action creator for this
    dispatch({ type: CREATE_COUPON_SUCCESS, payload: false });
    dispatch(triggerReload({}));
    setShouldCreateCouponDialogOpen(false);
   }
   if (createTypeSuccess) {
-   toast.success('Thêm mới Phân loại thành công!');
+   toast.success(constant.POPUP_ADD_TYPE);
    // Should create action creator for this
    dispatch({ type: CREATE_SERVICE_TYPE_SUCCESS, payload: false });
    dispatch(triggerReload({}));

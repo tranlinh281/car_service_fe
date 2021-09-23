@@ -1,20 +1,13 @@
 import {
- Card,
- CardContent,
- Typography,
- Avatar,
- Box,
- Divider,
- Grid
+    Avatar,
+    Box, Card,
+    CardContent, Divider,
+    Grid, Typography
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { memo, useContext } from 'react';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import { manufacturerHeader } from 'src/services/HeaderTitleTable';
-import ButtonAction from '../ButtonAction';
 import { Add, Edit } from '@material-ui/icons';
+import { memo, useContext } from 'react';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
+import ButtonAction from '../ButtonAction';
 
 const ManufacturerCard = (props) => {
  const { manufacturer } = props;

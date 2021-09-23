@@ -16,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { createNotification } from 'src/actions/customerAction';
 import { CUSTOMER_NOTIFICATION_SUCCESS } from 'src/constants/customerConstant';
 import { DisplayingErrorMessagesCreateNotificationSchema } from 'src/services/ValidConstants';
+import * as constant from 'src/utils/Constants';
 
 export default function CreateNotificationDialog({ data, open, onClose }) {
  const [title, setTitle] = useState('');
@@ -33,7 +34,7 @@ export default function CreateNotificationDialog({ data, open, onClose }) {
 
  const submitHandler = (notification) => {
   dispatch(createNotification(notification));
-  toast.success('Gửi thông báo thành công!');
+  toast.success(constant.POPUP_CONFIRM_NOTIFICATION);
   dispatch({ type: CUSTOMER_NOTIFICATION_SUCCESS, payload: false });
   dispatch(triggerReload({}));
  };
@@ -78,13 +79,15 @@ export default function CreateNotificationDialog({ data, open, onClose }) {
       fullWidth={true}
      >
       <Form>
-       <DialogTitle id="customized-dialog-title">Gửi thông báo</DialogTitle>
+       <DialogTitle id="customized-dialog-title">
+        {constant.TITLE_SEND_NOTIFICATION}
+       </DialogTitle>
        <DialogContent dividers>
         <DialogContentText>
          <Grid item>
           <TextField
            fullWidth
-           label="Tiêu đề"
+           label={constant.LABEL_TITLE}
            error={!!errors.title}
            helperText={errors.title}
            value={values.title}
@@ -98,7 +101,7 @@ export default function CreateNotificationDialog({ data, open, onClose }) {
           <TextField
            multiline
            fullWidth
-           label="Nội dung thông báo"
+           label={constant.LABEL_DESCRIPTION_NOTIFICATION}
            margin="normal"
            error={!!errors.body}
            helperText={errors.body}
@@ -113,10 +116,10 @@ export default function CreateNotificationDialog({ data, open, onClose }) {
        </DialogContent>
        <DialogActions>
         <Button autoFocus type="reset" onClick={onClose} color="secondary">
-         Hủy
+         {constant.TITLE_CANCEL}
         </Button>
         <Button autoFocus type="submit" color="primary" onClick={onClose} left>
-         Gửi
+         {constant.TITLE_SAVE}
         </Button>
        </DialogActions>
       </Form>

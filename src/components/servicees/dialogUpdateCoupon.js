@@ -11,6 +11,7 @@ import {
 import { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCoupon } from 'src/actions/serviceAction';
+import * as constant from 'src/utils/Constants';
 
 const DialogUpdateCoupon = ({ data, open, onClose }) => {
  const dispatch = useDispatch();
@@ -66,7 +67,7 @@ const DialogUpdateCoupon = ({ data, open, onClose }) => {
    fullWidth={true}
   >
    <DialogTitle id="customized-dialog-title" onClose={onClose}>
-    Khuyến mãi:
+    {constant.TITLE_COUPON}:
     <span>
      <strong>{data.name}</strong>
     </span>
@@ -76,7 +77,7 @@ const DialogUpdateCoupon = ({ data, open, onClose }) => {
      <Grid item>
       <TextField
        fullWidth
-       label="Tên Khuyến mãi"
+       label={constant.LABEL_NAME_COUPON}
        margin="normal"
        defaultValue={data.name}
        onChange={(e) => setName(e.target.value)}
@@ -86,7 +87,7 @@ const DialogUpdateCoupon = ({ data, open, onClose }) => {
 
       <TextField
        fullWidth
-       label="Mô tả"
+       label={constant.LABEL_DESCRIPTION}
        margin="normal"
        defaultValue={data.description}
        onChange={(e) => setDescription(e.target.value)}
@@ -98,7 +99,7 @@ const DialogUpdateCoupon = ({ data, open, onClose }) => {
       />
       <TextField
        fullWidth
-       label="Phần trăm"
+       label={constant.LABEL_PERCENT}
        margin="normal"
        defaultValue={data.value}
        onChange={(e) => setValue(parseFloat(e.target.value))}
@@ -110,7 +111,7 @@ const DialogUpdateCoupon = ({ data, open, onClose }) => {
       />
       <TextField
        fullWidth
-       label="Điểm"
+       label={constant.LABEL_POINT}
        margin="normal"
        defaultValue={data.pointRequired}
        onChange={(e) => setPointRequired(parseFloat(e.target.value))}
@@ -125,10 +126,10 @@ const DialogUpdateCoupon = ({ data, open, onClose }) => {
    </DialogContent>
    <DialogActions color="red">
     <Button autoFocus onClick={onClose} color="secondary">
-     Hủy
+     {constant.TITLE_CANCEL}
     </Button>
     <Button autoFocus onClick={submitHandler} color="primary" left>
-     Lưu
+     {constant.TITLE_SAVE}
     </Button>
    </DialogActions>
   </Dialog>

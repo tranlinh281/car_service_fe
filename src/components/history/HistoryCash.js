@@ -165,7 +165,7 @@ const HistoryCash = ({ open, onClose }) => {
      justifyContent="center"
      alignItems="center"
     >
-     <LoadingBox>Loading</LoadingBox>
+     <LoadingBox/>
     </Box>
    )}
   </Dialog>

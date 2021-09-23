@@ -89,3 +89,12 @@ export const paymentHeader = [
  { id: 6, title: 'Biển số xe' },
  { id: 7, title: 'Thanh toán' }
 ];
+export const historyHeader = [
+ { id: 1, title: 'Họ và tên' },
+ { id: 2, title: 'Điện thoại' },
+ { id: 3, title: 'Email' },
+ { id: 4, title: 'Địa chỉ' },
+ { id: 5, title: 'Hãng xe' },
+ { id: 6, title: 'Biển số xe' },
+ { id: 7, title: 'Chi tiết' }
+];

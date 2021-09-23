@@ -1,17 +1,11 @@
 import {
- Box,
- Card,
- CardContent,
- CardHeader,
- Divider,
- MenuItem,
- Select
+    Box,
+    Card,
+    CardContent, Divider
 } from '@material-ui/core';
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 import * as constant from '../utils/objectLineChart';
-import moment from 'moment';
-import { useSelector } from 'react-redux';
 
 const ChartListDashBoard = (props) => {
  const [dateTime, setDateTime] = React.useState('');

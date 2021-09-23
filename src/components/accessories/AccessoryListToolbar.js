@@ -1,16 +1,11 @@
 import {
- Box,
- Card,
- CardContent,
- TextField,
- InputAdornment,
- Button,
- SvgIcon
+    Box, Button, Card,
+    CardContent, InputAdornment, SvgIcon, TextField
 } from '@material-ui/core';
 import { useContext } from 'react';
 import { Search as SearchIcon } from 'react-feather';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
-import DialogCreateAccessory from '../dialog/dialogCreateAccessory';
+import * as constant from 'src/utils/Constants';
 import CreateAccessoryTypeDialog from './CreateAccessoryTypeDialog';
 
 export default function AccessoryListToolbar({ setPage, setKeySearch }) {
@@ -27,7 +22,7 @@ export default function AccessoryListToolbar({ setPage, setKeySearch }) {
      onClick={handleOpenCreateDialog}
      sx={{ margin: '0 5px' }}
     >
-     Thêm Phụ Tùng
+     {constant.TITLE_ADD_ACCESSORY}
     </Button>
     <CreateAccessoryTypeDialog />
    </Box>
@@ -53,7 +48,7 @@ export default function AccessoryListToolbar({ setPage, setKeySearch }) {
          setKeySearch(e.target.value);
          setPage(1);
         }}
-        placeholder="Tìm kiếm Phụ tùng"
+        placeholder={constant.TITLE_SEARCHING_ACCESSORY}
         variant="outlined"
        />
       </Box>

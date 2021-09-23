@@ -14,6 +14,7 @@ import {
 import { memo, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateEmployee } from 'src/actions/userAction';
+import * as constant from 'src/utils/Constants';
 
 const DialogUpdateEmployee = ({ data, open, onClose }) => {
  const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const DialogUpdateEmployee = ({ data, open, onClose }) => {
    fullWidth={true}
   >
    <DialogTitle id="customized-dialog-title" onClose={onClose}>
-    Nhân viên:
+    {constant.TITLE_HEADER_EMPLOYEE}:
     <span>
      <strong>{data.fullname}</strong>
     </span>
@@ -64,7 +65,7 @@ const DialogUpdateEmployee = ({ data, open, onClose }) => {
     <Grid item>
      <TextField
       fullWidth
-      label="Tên Nhân viên"
+      label={constant.LABEL_NAME_EMPLOYEE}
       margin="normal"
       defaultValue={data.fullname}
       name="name"
@@ -76,7 +77,7 @@ const DialogUpdateEmployee = ({ data, open, onClose }) => {
 
      <TextField
       fullWidth
-      label="Địa chỉ Email"
+      label={constant.TITLE_EMAIL}
       margin="normal"
       defaultValue={data.email}
       name="email"
@@ -90,7 +91,7 @@ const DialogUpdateEmployee = ({ data, open, onClose }) => {
      />
      <TextField
       fullWidth
-      label="Địa chỉ"
+      label={constant.TITLE_ADDRESS}
       margin="normal"
       defaultValue={data.address}
       InputProps={{
@@ -105,7 +106,7 @@ const DialogUpdateEmployee = ({ data, open, onClose }) => {
 
      <TextField
       fullWidth
-      label="Số điện thoại"
+      label={constant.TITLE_PHONE}
       margin="normal"
       defaultValue={data.phoneNumber}
       InputProps={{
@@ -121,7 +122,7 @@ const DialogUpdateEmployee = ({ data, open, onClose }) => {
       <Grid item xs={6} sm={6}>
        <TextField
         id="date"
-        label="Ngày sinh"
+        label={constant.TITLE_DATE_OF_BIRTH}
         type="date"
         value={data.dateOfBirth?.split('T')[0] || ''}
         InputProps={{
@@ -137,14 +138,18 @@ const DialogUpdateEmployee = ({ data, open, onClose }) => {
       </Grid>
       <Grid item xs={6} sm={6}>
        <FormControl variant="outlined" margin="normal" fullWidth>
-        <InputLabel>Vị Trí</InputLabel>
+        <InputLabel>{constant.LABEL_ROLE}</InputLabel>
         <Select
          defaultValue={data.role}
          onChange={(e) => setRole(e.target.value)}
-         label="Vị Trí"
+         label={constant.LABEL_ROLE}
         >
-         <MenuItem value="manager">Quản lý</MenuItem>
-         <MenuItem value="staff">Kỹ thuật viên</MenuItem>
+         <MenuItem value={constant.VALUE_MANAGER_ENG}>
+          {constant.VALUE_MANAGER_VIE}
+         </MenuItem>
+         <MenuItem value={constant.VALUE_STAFF_ENG}>
+          {constant.VALUE_STAFF_VIE}
+         </MenuItem>
         </Select>
        </FormControl>
       </Grid>
@@ -153,10 +158,10 @@ const DialogUpdateEmployee = ({ data, open, onClose }) => {
    </DialogContent>
    <DialogActions color="red">
     <Button autoFocus onClick={onClose} color="secondary">
-     Hủy
+     {constant.TITLE_CANCEL}
     </Button>
     <Button autoFocus onClick={submitHandler} color="primary" left>
-     Lưu
+     {constant.TITLE_SAVE}
     </Button>
    </DialogActions>
   </Dialog>
