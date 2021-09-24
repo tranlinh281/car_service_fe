@@ -32,36 +32,23 @@ export default function ManufacturerListResults({ loading, manufacturers }) {
  const { success: editManufacturer } = useSelector(
   (state) => state.editManufacturer
  );
- const {
-  setShouldCreateModelDialogOpen,
-  setShouldCreateManufacturerDialogOpen,
-  setShouldUpdateManufacturerDialogOpen
- } = useContext(DialogContext);
+ const { setShouldUpdateManufacturerDialogOpen } = useContext(DialogContext);
  const dispatch = useDispatch();
  useEffect(() => {
   if (createSuccess) {
-   toast.success(constant.POPUP_ADD_PACKAGE);
    // Should create action creator for this
    dispatch({ type: CREATE_MANUFACTURER_SUCCESS, payload: false });
    dispatch(triggerReload({}));
-
-   setShouldCreateManufacturerDialogOpen(false);
   }
   if (createModelSuccess) {
-   toast.success(constant.POPUP_ADD_MODEL);
    // Should create action creator for this
    dispatch({ type: CREATE_MODEL_SUCCESS, payload: false });
    dispatch(triggerReload({}));
-
-   setShouldCreateModelDialogOpen(false);
   }
   if (editManufacturer) {
-   toast.success(constant.POPUP_UPDATE_MANUFACTUER);
    // Should create action creator for this
    dispatch({ type: EDIT_MANUFACTURER_SUCCESS, payload: false });
    dispatch(triggerReload({}));
-
-   setShouldUpdateManufacturerDialogOpen(false);
   }
  }, [createSuccess, createModelSuccess, editManufacturer]);
  return (

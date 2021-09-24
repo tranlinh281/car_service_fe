@@ -34,6 +34,7 @@ export default function PaymentListResults({ loading, orders }) {
   orders.map((item) => {
    const dataNew = {
     id: item.id,
+    dateCom: item.completeTime?.split('T')[0] || '',
     name: item.customer.fullname,
     address: item.customer.address,
     email: item.customer.email,

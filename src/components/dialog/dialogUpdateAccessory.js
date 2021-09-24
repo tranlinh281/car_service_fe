@@ -17,9 +17,10 @@ import {
 } from '@material-ui/core';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import { Form, Formik } from 'formik';
-import { memo, useEffect, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateAccessory } from 'src/actions/accessoryAction';
+import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import { storage } from 'src/firebase';
 import { DisplayingErrorMessagesCreateAccessorySchema } from 'src/services/ValidConstants';
 import * as constant from 'src/utils/Constants';
@@ -44,7 +45,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
    setInitialFormikValues(data);
   }
  }, [data, open]);
-
+ const { setShouldUpdateAccessoryDialogOpen } = useContext(DialogContext);
  const submitHandler = async (data) => {
   if (changeImg == false) {
    const parsedData = {
@@ -55,6 +56,8 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
    };
    dispatch(updateAccessory(parsedData));
   } else {
+   await setShouldUpdateAccessoryDialogOpen(false);
+   await toast.success(constant.POPUP_UPDATE_ACCESSORY);
    const imglink = await handleUpdate();
    const parsedData = {
     ...data,
@@ -83,7 +86,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
     // setImageUrl(file);
     setURL(URL.createObjectURL(file));
    } else {
-    setErrorImage('Định dạng hình ảnh không hợp lệ! Hãy chọn lại!');
+    setErrorImage(constant.TITLE_ERROR_IMAGE_FORMAT);
    }
   }
  };
@@ -99,8 +102,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
      'state_changed',
      (snapshot) => {},
      (error) => {
-      console.log(error),
-       reject('Hình ảnh không lưu được trên firebase: ' + error);
+      console.log(error), reject(constant.TITLE_ERROR_IMAGE + error);
      },
      () => {
       storage
@@ -113,7 +115,7 @@ const DialogUpdateAccessory = ({ data, open, onClose }) => {
      }
     );
    } else {
-    setErrorImage('Hình ảnh không được bỏ trống!');
+    setErrorImage(constant.TITLE_ERROR_IMAGE);
    }
   });
  };

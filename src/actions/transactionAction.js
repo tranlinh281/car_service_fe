@@ -53,16 +53,21 @@ export const listAllDayTransaction = () => async (dispatch) => {
   console.log(data, 'debug data action transaction');
   const arrayDate = data?.map((order) => ({
    total: order.total,
+   count: order.count,
    dateTime: new Date(order.date).getDate()
   }));
   const arrayMonth = data?.map((order) => ({
    total: order.total,
    dateTime: new Date(order.date).getMonth()
   }));
-
   const totalThisMonth = arrayMonth.reduce(
    (total, x) =>
     x.dateTime === new Date().getMonth() ? total + x.total : total,
+   0
+  );
+  const totalCountDate = arrayDate.reduce(
+   (total, x) =>
+    x.dateTime === new Date().getDate() ? total + x.count : total,
    0
   );
 
@@ -182,7 +187,8 @@ export const listAllDayTransaction = () => async (dispatch) => {
    lineChartDate,
    lineChartMonth,
    totalToday,
-   totalThisMonth
+   totalThisMonth,
+   totalCountDate
   };
   console.log(dataCount, 'debug array');
   dispatch({ type: TRANSACTION_ALL_LIST_SUCCESS, payload: dataCount });

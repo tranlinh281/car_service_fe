@@ -4,16 +4,16 @@ import {
  TableBody,
  TableCell,
  TableHead,
- TableRow,
- Avatar
+ TableRow
 } from '@material-ui/core';
-import { Close, Edit, Image } from '@material-ui/icons';
+import { Close, Edit } from '@material-ui/icons';
 import { useContext, useEffect, useState } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { deleteAccessory } from 'src/actions/accessoryAction';
 import { triggerReload } from 'src/actions/userAction';
+import LoadingTable from 'src/components/LoadingTable';
 import {
  CREATE_ACCESSORY_SUCCESS,
  CREATE_ACCESSORY_TYPE_SUCCESS,
@@ -21,14 +21,10 @@ import {
  EDIT_ACCESSORY_SUCCESS
 } from 'src/constants/accessoryConstant';
 import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
-import {
- accessoryHeader,
- manufacturerHeader
-} from 'src/services/HeaderTitleTable';
+import { accessoryHeader } from 'src/services/HeaderTitleTable';
+import * as constant from 'src/utils/Constants';
 import ButtonAction from '../ButtonAction';
 import ConfirmDialog from '../dialog/dialogConfirm';
-import LoadingTable from 'src/components/LoadingTable';
-import * as constant from 'src/utils/Constants';
 
 export default function AccessoryListResults({ loading, accessories }) {
  const [confirmDialog, setConfirmDialog] = useState({
@@ -61,14 +57,13 @@ export default function AccessoryListResults({ loading, accessories }) {
 
  useEffect(() => {
   if (deleteSuccess) {
-   toast.success('Xóa phụ tùng thành công!');
+   toast.success(constant.POPUP_DELETE_ACCESSORY);
    // Should create action creator for this
    dispatch({ type: DELETE_ACCESSORY_SUCCESS, payload: false });
    dispatch(triggerReload({}));
   }
 
   if (updateSuccess) {
-   toast.success('Cập nhật phụ tùng thành công!');
    // Should create action creator for this
    dispatch({ type: EDIT_ACCESSORY_SUCCESS, payload: false });
    dispatch(triggerReload({}));
@@ -77,7 +72,6 @@ export default function AccessoryListResults({ loading, accessories }) {
   }
 
   if (createSuccess) {
-   toast.success('Thêm mới phụ tùng thành công!');
    // Should create action creator for this
    dispatch({ type: CREATE_ACCESSORY_SUCCESS, payload: false });
    dispatch(triggerReload({}));
@@ -85,7 +79,7 @@ export default function AccessoryListResults({ loading, accessories }) {
    setShouldCreateAccessoryDialogOpen(false);
   }
   if (createTypeSuccess) {
-   toast.success('Thêm mới phân loại thành công!');
+   toast.success(constant.POPUP_ADD_TYPE);
    // Should create action creator for this
    dispatch({ type: CREATE_ACCESSORY_TYPE_SUCCESS, payload: false });
    dispatch(triggerReload({}));

@@ -56,6 +56,7 @@ export const listAllOrder = () => async (dispatch) => {
    stat: order.status,
    dateTime: new Date(order.bookingTime).getDate()
   }));
+  console.log(data, 'debug array status');
 
   const processingDate = arrayStatus.reduce(
    (total, x) =>

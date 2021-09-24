@@ -19,11 +19,13 @@ import {
 } from '@material-ui/core';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import { Form, Formik } from 'formik';
-import { memo, useEffect, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { createAccessory } from 'src/actions/accessoryAction';
 import { listAllManufacturer } from 'src/actions/manufacturerAction';
 import { listServiceType } from 'src/actions/serviceAction';
+import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import { DisplayingErrorMessagesCreateAccessorySchema } from 'src/services/ValidConstants';
 import * as constant from 'src/utils/Constants';
 import { storage } from '../../firebase/index';
@@ -94,6 +96,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
   imageUrl,
   triggerReload
  ]);
+ const { setShouldCreateAccessoryDialogOpen } = useContext(DialogContext);
 
  useEffect(() => {
   if (data && open) {
@@ -103,6 +106,8 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
  }, [data, open]);
 
  const submitHandler = async (data) => {
+  await setShouldCreateAccessoryDialogOpen(false);
+  await toast.success(constant.POPUP_ADD_ACCESSORY);
   const imglink = await handleUpdate();
   setImageUrl(imglink);
   const dataNew = {
@@ -127,7 +132,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
     // setImageUrl(file);
     setURL(URL.createObjectURL(file));
    } else {
-    setErrorImage('Định dạng hình ảnh không hợp lệ! Hãy chọn lại!');
+    setErrorImage(constant.TITLE_ERROR_IMAGE_FORMAT);
    }
   }
  };
@@ -143,8 +148,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
      'state_changed',
      (snapshot) => {},
      (error) => {
-      console.log(error),
-       reject('Hình ảnh không lưu được trên firebase: ' + error);
+      console.log(error), reject(constant.TITLE_ERROR_IMAGE + error);
      },
      () => {
       storage
@@ -157,7 +161,7 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
      }
     );
    } else {
-    setErrorImage('Hình ảnh không được bỏ trống!');
+    setErrorImage(constant.TITLE_ERROR_IMAGE);
    }
   });
  };

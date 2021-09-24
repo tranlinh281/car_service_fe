@@ -19,7 +19,7 @@ import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import { Form, Formik } from 'formik';
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
  createManufacturer,
@@ -28,6 +28,8 @@ import {
 import { storage } from '../../firebase/index';
 import { DisplayingErrorMessagesManufacturerSchema } from 'src/services/ValidConstants';
 import * as constant from 'src/utils/Constants';
+import { toast } from 'react-toastify';
+import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 
 const EditManufacturerDialog = ({ data, open, onClose }) => {
  const dispatch = useDispatch();
@@ -40,13 +42,15 @@ const EditManufacturerDialog = ({ data, open, onClose }) => {
  const [imageUrl, setImageUrl] = useState('');
 
  const [changeImg, setChangeImg] = useState(false);
-
+ const { setShouldUpdateManufacturerDialogOpen } = useContext(DialogContext);
  useEffect(() => {
   if (open) {
    setInitialFormikValues(data);
   }
  }, [data, open]);
  const submitHandler = async (data) => {
+  await setShouldUpdateManufacturerDialogOpen(false);
+  await toast.success(constant.POPUP_UPDATE_MANUFACTUER);
   if (changeImg == false) {
    const parsedData = {
     ...data,
@@ -80,7 +84,7 @@ const EditManufacturerDialog = ({ data, open, onClose }) => {
     // setImageUrl(file);
     setURL(URL.createObjectURL(file));
    } else {
-    setErrorImage('Định dạng hình ảnh không hợp lệ! Hãy chọn lại!');
+    setErrorImage(constant.TITLE_ERROR_IMAGE_FORMAT);
    }
   }
  };
@@ -96,8 +100,7 @@ const EditManufacturerDialog = ({ data, open, onClose }) => {
      'state_changed',
      (snapshot) => {},
      (error) => {
-      console.log(error),
-       reject('Hình ảnh không lưu được trên firebase: ' + error);
+      console.log(error), reject(constant.TITLE_ERROR_IMAGE + error);
      },
      () => {
       storage
@@ -110,7 +113,7 @@ const EditManufacturerDialog = ({ data, open, onClose }) => {
      }
     );
    } else {
-    setErrorImage('Hình ảnh không được bỏ trống!');
+    setErrorImage(constant.TITLE_ERROR_IMAGE);
    }
   });
  };

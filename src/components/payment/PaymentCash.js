@@ -28,7 +28,6 @@ const PaymentCash = ({ open, onClose }) => {
  const { loading: paymentLoading } = useSelector((state) => state.paymentCash);
 
  let paymentDetail = null;
- console.log(order, 'debug data payment');
  if (order?.customer) {
   const totalPricePackage = order.packages.reduce(
    (total, item) => (item.price ? total + item.price : total),

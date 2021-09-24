@@ -4,13 +4,17 @@ import ReportCards from './ReportCards';
 import * as constant from '../../utils/Constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { listAllOrder } from 'src/actions/orderAction';
+import { listAllDayTransaction } from 'src/actions/transactionAction';
 
 export default function ReportCard() {
  const { orders } = useSelector((state) => state.ordersList);
+ const { data } = useSelector((state) => state.transactionAllList);
+ listAllDayTransaction;
  const dispatch = useDispatch();
 
  useEffect(() => {
   dispatch(listAllOrder());
+  dispatch(listAllDayTransaction());
  }, [dispatch]);
 
  return (
@@ -43,7 +47,7 @@ export default function ReportCard() {
     <ReportCards
      sx={{ height: '100%' }}
      title={constant.ORDERDONE_TITLE}
-     number={orders.done}
+     number={data.totalCountDate}
      colorBack="#31ED31"
     />
    </Grid>

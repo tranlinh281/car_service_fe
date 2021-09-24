@@ -110,6 +110,7 @@ export const LABEL_QUANTITY = 'Số Lượng';
 export const POPUP_DELETE_SERVICE = 'Xóa dịch vụ thành công!';
 export const POPUP_DELETE_PACKAGE = 'Xóa gói dịch vụ thành công!';
 export const POPUP_DELETE_EMPLOYEE = 'Xóa nhân viên thành công!';
+export const POPUP_DELETE_ACCESSORY = 'Xóa phụ tùng thành công!';
 
 export const POPUP_UPDATE_PACKAGE = 'Cập nhật gói dịch vụ thành công!';
 export const POPUP_UPDATE_EMPLOYEE = 'Cập nhật nhân viên thành công!';
@@ -117,10 +118,16 @@ export const POPUP_DELETE_COUPON = 'Xóa Khuyến mãi thành công!';
 export const POPUP_UPDATE_COUPON = 'Cập nhật Khuyến mãi thành công!';
 export const POPUP_UPDATE_SERVICE = 'Cập nhật dịch vụ thành công!';
 export const POPUP_UPDATE_MANUFACTUER = 'Chỉnh sửa hãng xe thành công!';
+export const POPUP_UPDATE_ACCESSORY = 'Cập nhật phụ tùng thành công!';
 export const TITLE_ACCEPT_DAY_OFF = 'Đồng ý ngày nghỉ thành công!';
 export const TITLE_DENNY_DAY_OFF = 'Gửi từ chối ngày nghỉ thành công!';
 
+export const TITLE_ERROR_IMAGE = 'Hình ảnh không được bỏ trống!';
+export const TITLE_ERROR_IMAGE_FORMAT = 'Định dạng hình ảnh không hợp lệ! Hãy chọn lại!';
+
+
 export const POPUP_ADD_PACKAGE = 'Thêm mới gói dịch vụ thành công!';
+export const POPUP_ADD_ACCESSORY = 'Thêm mới phụ tùng thành công!';
 export const POPUP_ADD_EMPLOYEE = 'Thêm mới nhân viên thành công!';
 export const POPUP_ADD_COUPON = 'Thêm Khuyến mãi thành công!';
 export const POPUP_ADD_SERIVCE = 'Thêm mới dịch vụ thành công!';

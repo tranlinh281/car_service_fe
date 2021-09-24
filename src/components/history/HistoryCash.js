@@ -43,7 +43,7 @@ const HistoryCash = ({ open, onClose }) => {
    phoneNumber: order.customer.phoneNumber,
    email: order.customer.email,
    address: order.customer.address,
-   checkinTime: order.completeTime?.split('T')[0] || '',
+   checkinTime: order.transactionTime?.split('T')[0] || '',
    manufacturer: order.vehicle.manufacturer,
    licensePlate: order.vehicle.licensePlate,
    totalPrice,

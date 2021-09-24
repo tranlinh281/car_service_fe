@@ -13,12 +13,14 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import { FieldArray, Form, Formik } from 'formik';
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import {
  createModel,
  listAllManufacturer
 } from 'src/actions/manufacturerAction';
+import { DialogContext } from 'src/contexts/dialogContexts/DialogUpdateAccessoryContextProvider';
 import * as constant from 'src/utils/Constants';
 import { storage } from '../../firebase/index';
 
@@ -39,9 +41,12 @@ const CreateModelDialog = ({ data, open, onClose }) => {
  useEffect(() => {
   dispatch(listAllManufacturer());
  }, [listAllManufacturer]);
+ const { setShouldCreateModelDialogOpen } = useContext(DialogContext);
 
  const submitHandler = async (modelsT) => {
   setManufacturerName(data.name);
+  await toast.success(constant.POPUP_ADD_MODEL);
+  await setShouldCreateModelDialogOpen(false);
   const imglink = await handleUpdate();
   setImageUrl(imglink);
   modelsT.models.map((model) => setNameModel(model.name));
@@ -69,7 +74,7 @@ const CreateModelDialog = ({ data, open, onClose }) => {
     // setImageUrl(file);
     setURL(URL.createObjectURL(file));
    } else {
-    setErrorImage('Định dạng hình ảnh không hợp lệ! Hãy chọn lại!');
+    setErrorImage(constant.TITLE_ERROR_IMAGE_FORMAT);
    }
   }
  };
@@ -85,8 +90,7 @@ const CreateModelDialog = ({ data, open, onClose }) => {
      'state_changed',
      (snapshot) => {},
      (error) => {
-      console.log(error),
-       reject('Hình ảnh không lưu được trên firebase: ' + error);
+      console.log(error), reject(constant.TITLE_ERROR_IMAGE + error);
      },
      () => {
       storage
@@ -99,7 +103,7 @@ const CreateModelDialog = ({ data, open, onClose }) => {
      }
     );
    } else {
-    setErrorImage('Hình ảnh không được bỏ trống!');
+    setErrorImage(constant.TITLE_ERROR_IMAGE);
    }
   });
  };
