@@ -28,6 +28,7 @@ export default function PaymentListResults({ loading, orders }) {
   title: '',
   subTitle: ''
  });
+ console.log(orders, 'debug payment');
 
  let cust = [];
  if (orders && orders.length) {

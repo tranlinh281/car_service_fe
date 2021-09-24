@@ -12,7 +12,7 @@ export const arrMonth = [
  'September',
  'October',
  'November',
- 'February'
+ 'December'
 ];
 
 const dateTimes = moment(new Date()).format('dddd');
