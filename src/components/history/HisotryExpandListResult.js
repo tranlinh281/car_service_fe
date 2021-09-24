@@ -15,10 +15,12 @@ export default function HistoryExpandListResult({ customer = {} }) {
   setShouldViewPaymentDialogOpen(true);
   dispatch(listAllOrderWithID(id));
  };
+ console.log(customer, 'debug data day');
 
  return (
   <>
    <TableRow hover key={customer.username}>
+    <TableCell>{customer.dateCom}</TableCell>
     <TableCell>{customer.name}</TableCell>
     <TableCell>{customer.phoneNumber}</TableCell>
     <TableCell>{customer.email}</TableCell>
@@ -31,7 +33,6 @@ export default function HistoryExpandListResult({ customer = {} }) {
       color="primary"
       onClick={() => sendId(customer.id)}
      >
-         
       <Details fontSize="small" color="primary" />
      </ButtonAction>
     </TableCell>

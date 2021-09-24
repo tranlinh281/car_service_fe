@@ -316,9 +316,6 @@ const DialogCreateAccessory = ({ data, open, onClose }) => {
               <AddPhotoAlternateIcon />
              </label>
             </Grid>
-            {/* <Typography variant="subtitle1" color="textSecondary">
-                          <button onClick={handleUpdate}>UpLoad</button>
-                        </Typography> */}
            </CardContent>
 
            <CardMedia style={{ width: '130px', height: '130px' }}>

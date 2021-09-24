@@ -81,7 +81,7 @@ const EmployeeListResult = ({ loading, employees, errorMessage }) => {
  const showRole = (value) => {
   if (value == constant.VALUE_STAFF_ENG) {
    return constant.VALUE_STAFF_VIE;
-  } else return constant.VALUE_MANAGER_ENG;
+  } else return constant.VALUE_MANAGER_VIE;
  };
  const deleteHandler = (employee) => {
   dispatch(deleteEmployee(employee.username));

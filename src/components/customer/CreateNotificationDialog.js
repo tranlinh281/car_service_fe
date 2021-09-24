@@ -119,7 +119,7 @@ export default function CreateNotificationDialog({ data, open, onClose }) {
          {constant.TITLE_CANCEL}
         </Button>
         <Button autoFocus type="submit" color="primary" onClick={onClose} left>
-         {constant.TITLE_SAVE}
+         {constant.TITLE_SEND_NOTI}
         </Button>
        </DialogActions>
       </Form>

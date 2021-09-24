@@ -15,7 +15,7 @@ import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { paymentCashByAdmin } from 'src/actions/orderAction';
 import LoadingBox from '../LoadingBox';
-import * as constant from '../../utils/Constants';
+import * as constant from 'src/utils/Constants';
 import { receiptHeader } from 'src/services/HeaderTitleTable';
 
 const numberFormat = (value) =>
@@ -45,7 +45,7 @@ const PaymentCash = ({ open, onClose }) => {
    phoneNumber: order.customer.phoneNumber,
    email: order.customer.email,
    address: order.customer.address,
-   checkinTime: order.createdTime?.split('T')[0] || '',
+   checkinTime: order.completeTime?.split('T')[0] || '',
    manufacturer: order.vehicle.manufacturer,
    licensePlate: order.vehicle.licensePlate,
    totalPrice,
@@ -134,7 +134,11 @@ const PaymentCash = ({ open, onClose }) => {
          <TableRow>
           <TableCell>{item.name}</TableCell>
           <TableCell>{item.orderDetails.join(', ')}</TableCell>;
-          <TableCell>{numberFormat(item.price)}</TableCell>
+          {item.price === 0 ? (
+           <TableCell>N/A</TableCell>
+          ) : (
+           <TableCell>{numberFormat(item.price)}</TableCell>
+          )}
          </TableRow>
         ))}
         {paymentDetail?.orderDetail?.map((item) => (
@@ -144,7 +148,11 @@ const PaymentCash = ({ open, onClose }) => {
           </TableCell>
           <TableCell>{item.name}</TableCell>
           <TableCell></TableCell>
-          <TableCell>{numberFormat(item.price)}</TableCell>
+          {item.price === 0 ? (
+           <TableCell>N/A</TableCell>
+          ) : (
+           <TableCell>{numberFormat(item.price)}</TableCell>
+          )}
          </TableRow>
         ))}
        </TableBody>

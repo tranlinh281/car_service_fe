@@ -46,13 +46,11 @@ export const TITLE_PAID = 'Đã thanh toán';
 export const TITLE_ORDER_PAID = 'Hoàn thành ';
 export const TITLE_ORDER_PENDING_PAY = 'Đợi thanh toán';
 
-
-
 export const TITLE_CONFIRM_DENNY = 'Lý do từ chối';
 export const TITLE_DAY_OFF_CALENDA = 'Lịch nghỉ của nhân viên';
 export const TITLE_HEADER_EMPLOYEE = 'Nhân viên';
-export const TITLE_HEADER_ACCESSORY= 'Phụ Tùng';
-export const TITLE_HEADER_SERVICE= 'Dịch vụ';
+export const TITLE_HEADER_ACCESSORY = 'Phụ Tùng';
+export const TITLE_HEADER_SERVICE = 'Dịch vụ';
 
 export const TITLE_ADD_ACCESSORY = 'Thêm mới Phụ Tùng';
 export const TITLE_ADD_COUPON = 'Thêm mới khuyến mãi';
@@ -68,6 +66,7 @@ export const TITLE_UPDATE_MANUFACTURER = 'Cập nhật hãng xe';
 export const TITLE_COUPON = 'Khuyến mãi';
 
 export const TITLE_SEND_NOTIFICATION = 'Gửi thông báo';
+export const TITLE_SEND_NOTI = 'Gửi';
 export const TITLE_CONFIRM_DAY_OFF = 'Bạn có chắc muốn duyệt ngày nghỉ này?';
 export const TITLE_CONFIRM_DELETE = 'Bạn có chắc muốn xóa?';
 export const TITLE_CONFIRM_BAN = 'Bạn có chắc muốn khóa khách hàng này?';
@@ -77,15 +76,15 @@ export const TITLE_SEARCHING_SERVICE = 'Tìm kiếm Dịch vụ';
 export const TITLE_SEARCHING_PACKAGE = 'Tìm kiếm gói dịch vụ';
 export const TITLE_SEARCHING_EMPLOYEE = 'Tìm kiếm nhân viên';
 export const TITLE_SEARCHING_MANUFACTURER = 'Tìm kiếm Hãng xe';
-export const TITLE_SEARCHING_CUSTOMER= 'Tìm kiếm khách hàng';
-export const TITLE_SEARCHING_ACCESSORY= 'Tìm kiếm Phụ tùng';
+export const TITLE_SEARCHING_CUSTOMER = 'Tìm kiếm khách hàng';
+export const TITLE_SEARCHING_ACCESSORY = 'Tìm kiếm Phụ tùng';
 
 export const LABEL_NAME_COUPON = 'Tên khuyến mãi';
 export const LABEL_NAME_EMPLOYEE = 'Tên Nhân viên';
 
 export const LABEL_DESCRIPTION_DAY_OFF = 'Nội dung xin nghỉ';
 export const LABEL_DESCRIPTION_DENNY = 'Nội dung từ chối';
-export const LABEL_DESCRIPTION_NOTIFICATION= 'Nội dung thông báo';
+export const LABEL_DESCRIPTION_NOTIFICATION = 'Nội dung thông báo';
 
 export const LABEL_NAME_PACKAGE = 'Tên gói dịch vụ';
 export const LABEL_NAME_ACCESSORY = 'Tên Phụ Tùng';
@@ -136,4 +135,4 @@ export const POPUP_UNBAN = 'Mở khóa thành công!';
 export const VALUE_STAFF_ENG = 'staff';
 export const VALUE_STAFF_VIE = 'Kỹ thuật viên';
 export const VALUE_MANAGER_VIE = 'Quản lý';
-export const VALUE_MANAGER_ENG = 'Quản lý';
+export const VALUE_MANAGER_ENG = 'manager';

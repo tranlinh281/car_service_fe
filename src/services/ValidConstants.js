@@ -61,9 +61,7 @@ export const DisplayingErrorMessagesCreateServiceSchema = Yup.object().shape({
   .min(3, 'Tên dịch vụ phải trên 3 ký tự!')
   .max(50, 'Tên dịch vụ phải dưới 50 ký tự!')
   .required('Không được bỏ trống tên dịch vụ'),
- price: Yup.string()
-  .required('Không được bỏ trống giá của dịch vụ')
-  .min(3, 'Giá dịch vụ phải trên 3 ký tự!'),
+ price: Yup.string().required('Không được bỏ trống giá của dịch vụ'),
  type: Yup.string().required('Không được bỏ trống Phân loại của dịch vụ')
 });
 export const DisplayingErrorMessagesPackageSchema = Yup.object().shape({

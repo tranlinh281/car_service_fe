@@ -45,7 +45,7 @@ export const listPackage = (keySearch, page) => async (dispatch) => {
    const { data } = await Axios.get(getPackagePagingURL(page) + keySearch);
    dispatch({ type: PACKAGE_LIST_SUCCESS, payload: data });
   }
-  console.log(keySearch, 'debug action');
+
  } catch (error) {
   const message =
    error.response && error.response.data.message
@@ -84,7 +84,7 @@ export const deletePackage = (id) => async (dispatch) => {
    headers: headers
   });
   dispatch({ type: DELETE_PACKAGE_SUCCESS, payload: data });
-  console.log(data);
+
  } catch (error) {
   dispatch({
    type: DELETE_PACKAGE_FAIL,
@@ -121,7 +121,7 @@ export const PackageID = (id) => async (dispatch) => {
   const { data } = await Axios.get(GET_PACKAGE_BY_ID + id);
   dispatch({ type: PACKAGE_ID_SUCCESS, payload: data });
 
-  console.log(data, 'debug action get packageID');
+
  } catch (error) {
   const message =
    error.response && error.response.data.message

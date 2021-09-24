@@ -101,7 +101,7 @@ export const listServiceType = (keySearch) => async (dispatch) => {
    });
   }
   localStorage.setItem('keySearch', keySearch);
-  console.log(data);
+
  } catch (error) {
   const message =
    error.response && error.response.data.message

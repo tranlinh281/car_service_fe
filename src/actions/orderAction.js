@@ -124,8 +124,6 @@ export const paymentCashByAdmin = (dataNew) => async (dispatch) => {
  try {
   const { data } = await Axios.put(PAYMENT_CASH_BY_ADMIN, dataNew);
 
-  console.log('debug paymentSuccess action', data);
-
   dispatch({ type: ORDER_PAYMENT_SUCCESS, payload: true });
 
   dispatch(triggerReload({}));

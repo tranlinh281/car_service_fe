@@ -43,7 +43,7 @@ const HistoryCash = ({ open, onClose }) => {
    phoneNumber: order.customer.phoneNumber,
    email: order.customer.email,
    address: order.customer.address,
-   checkinTime: order.createdTime?.split('T')[0] || '',
+   checkinTime: order.completeTime?.split('T')[0] || '',
    manufacturer: order.vehicle.manufacturer,
    licensePlate: order.vehicle.licensePlate,
    totalPrice,
@@ -131,7 +131,11 @@ const HistoryCash = ({ open, onClose }) => {
          <TableRow>
           <TableCell>{item.name}</TableCell>
           <TableCell>{item.orderDetails.join(', ')}</TableCell>;
-          <TableCell>{numberFormat(item.price)}</TableCell>
+          {item.price === 0 ? (
+           <TableCell>N/A</TableCell>
+          ) : (
+           <TableCell>{numberFormat(item.price)}</TableCell>
+          )}
          </TableRow>
         ))}
         {paymentDetail?.orderDetail?.map((item) => (
@@ -140,8 +144,12 @@ const HistoryCash = ({ open, onClose }) => {
            <b>{item.packageName}</b>
           </TableCell>
           <TableCell>{item.name}</TableCell>
-          <TableCell></TableCell>
-          <TableCell>{numberFormat(item.price)}</TableCell>
+          <TableCell></TableCell>{' '}
+          {item.price === 0 ? (
+           <TableCell>N/A</TableCell>
+          ) : (
+           <TableCell>{numberFormat(item.price)}</TableCell>
+          )}
          </TableRow>
         ))}
        </TableBody>
@@ -165,7 +173,7 @@ const HistoryCash = ({ open, onClose }) => {
      justifyContent="center"
      alignItems="center"
     >
-     <LoadingBox/>
+     <LoadingBox />
     </Box>
    )}
   </Dialog>
