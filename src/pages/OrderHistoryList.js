@@ -40,7 +40,7 @@ const OrderHistoryList = () => {
       <Box sx={{ pt: 3 }}>
        <Card>
         <HistoryListResults
-         //totalPages={data.totalPages || 0}
+         totalPages={orders.totalPages || 0}
          orders={orders.itemsList || []}
          loading={loading}
         />
@@ -53,7 +53,7 @@ const OrderHistoryList = () => {
         >
          <Pagination
           color="primary"
-          // count={data.totalPages || 0}
+          count={orders.totalPages || 0}
           size="medium"
           onChange={handlePageChange}
           page={page}

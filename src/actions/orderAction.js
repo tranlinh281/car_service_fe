@@ -56,7 +56,7 @@ export const listAllOrder = () => async (dispatch) => {
    stat: order.status,
    dateTime: new Date(order.bookingTime).getDate()
   }));
-  console.log(data, 'debug array status');
+  console.log(arrayStatus, 'debug array status');
 
   const processingDate = arrayStatus.reduce(
    (total, x) =>
@@ -92,7 +92,10 @@ export const listAllOrder = () => async (dispatch) => {
    0
   );
   const dateTimeCount = arrayStatus.reduce(
-   (total, x) => (x.dateTime === new Date().getDate() ? total + 1 : total),
+   (total, x) =>
+    x.stat === 'Đợi xác nhận' && x.dateTime === new Date().getDate()
+     ? total + 1
+     : total,
    0
   );
 

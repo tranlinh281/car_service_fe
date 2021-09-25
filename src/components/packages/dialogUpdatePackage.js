@@ -85,8 +85,6 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
           fullWidth
           label={constant.LABEL_NAME_PACKAGE}
           defaultValue={data.name}
-          //   error={!!errors.name}
-          //   helperText={errors.name}
           margin="normal"
           name="name"
           variant="outlined"
@@ -98,11 +96,9 @@ const DialogUpdatePackage = ({ data, open, onClose }) => {
          <TextField
           multiline
           fullWidth
-          label={constant.LABEL_PRICE_SERVICE}
+          label={constant.LABEL_DESCRIPTION}
           margin="normal"
           defaultValue={data.description}
-          //   error={!!errors.description}
-          //   helperText={errors.description}
           onBlur={handleBlur}
           onChange={handleChange}
           name="description"

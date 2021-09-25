@@ -37,6 +37,7 @@ const PaymentCash = ({ open, onClose }) => {
    (total, item) => (item.price ? total + item.price : total),
    0
   );
+
   const totalPrice = totalPricePackage + totalPriceOrder;
   paymentDetail = {
    id: order.id,
@@ -56,9 +57,12 @@ const PaymentCash = ({ open, onClose }) => {
    packages: order.packages?.map((item) => ({
     name: item.name,
     price: item.price,
-    orderDetails: item.orderDetails?.map((service) => service.name)
+    orderDetails: item.orderDetails?.map((service) => {
+     service.name, service.price;
+    })
    }))
   };
+  console.log(order.packages, 'debug price');
  }
 
  const paymentByCash = (id) => {
