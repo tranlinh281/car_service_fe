@@ -130,7 +130,7 @@ const HistoryCash = ({ open, onClose }) => {
         {paymentDetail?.packages?.map((item) => (
          <TableRow>
           <TableCell>{item.name}</TableCell>
-          <TableCell>{item.orderDetails.join(', ')}</TableCell>;
+          <TableCell>{item.orderDetails.join(', ')}</TableCell>
           {item.price === 0 ? (
            <TableCell>N/A</TableCell>
           ) : (

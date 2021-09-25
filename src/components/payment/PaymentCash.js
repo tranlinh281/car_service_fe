@@ -57,9 +57,7 @@ const PaymentCash = ({ open, onClose }) => {
    packages: order.packages?.map((item) => ({
     name: item.name,
     price: item.price,
-    orderDetails: item.orderDetails?.map((service) => {
-     service.name, service.price;
-    })
+    orderDetails: item.orderDetails?.map((service) => service.name)
    }))
   };
   console.log(order.packages, 'debug price');
@@ -136,7 +134,7 @@ const PaymentCash = ({ open, onClose }) => {
         {paymentDetail?.packages?.map((item) => (
          <TableRow>
           <TableCell>{item.name}</TableCell>
-          <TableCell>{item.orderDetails.join(', ')}</TableCell>;
+          <TableCell>{item.orderDetails.join(',')}</TableCell>
           {item.price === 0 ? (
            <TableCell>N/A</TableCell>
           ) : (
